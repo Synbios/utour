@@ -7,15 +7,15 @@ set :application, "utour"
 set :repository,  "git@github.com:Synbios/utour.git"
 
 # deploy path
-set :deploy_to, "/var/www/utour"
+set :deploy_to, "/home/utour/utour"
 
 # use git
 set :scm, :git
 set :branch, "master"
 
 # host information
-server "106.186.121.195", :app, :web, :db, :primary => true
-set :user, "deploy"
+server "23.92.27.216", :app, :web, :db, :primary => true
+set :user, "utour"
 # not required if use a RSA
 # set :scm_passphrase, "password"
 set :use_sudo, false
@@ -31,14 +31,7 @@ ssh_options[:forward_agent] = true
 default_run_options[:pty] = true # show password prompt in terminal if needed
 
 
-
-
-
-
 #set :rvm_type, :system
-
-
-
 
 
 namespace :deploy do
