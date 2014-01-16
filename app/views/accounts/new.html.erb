@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h2 style="text-align:center">提交个人信息</h2>
+
+      <%= form_for :account, url: accounts_path, :html => {:role => "form", :class => "form-horizontal"} do |f| %>      
+
+      <div class="form-group">
+        <%= f.label :name, '姓名'%>
+        <% if @account.present? && @account.errors[:name] %>
+          <% @account.errors[:name].each do |msg| %>
+            <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+          <% end %>
+        <% end %>
+        <%= f.text_field :name, :placeholder => "请务必填写真实姓名", :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :mobile, '手机' %>
+        <% if @account.present? && @account.errors[:mobile] %>
+          <% @account.errors[:mobile].each do |msg| %>
+            <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+          <% end %>
+        <% end %>
+        <%= f.text_field :mobile, :placeholder => "11位国内手机号码", :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, '电子邮箱' %>
+        <% if @account.present? && @account.errors[:email] %>
+          <% @account.errors[:email].each do |msg| %>
+            <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+          <% end %>
+        <% end %>
+        <%= f.text_field :email, :placeholder => "例如: 12345@qq.com", :type => "email", :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :wechat_id, '微信号码' %>
+        <% if @account.present? && @account.errors[:wechat_id] %>
+          <% @account.errors[:wechat_id].each do |msg| %>
+            <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+          <% end %>
+        <% end %>
+        <%= f.text_field :wechat_id, :placeholder => "微信号码", :class => "form-control" %>
+      </div>
+
+       <div class="form-group" >
+        <%= f.label :gender, '性别' %>
+        <%= f.check_box :gender, :checked => params[:account][:gender] == "0" ? false : true, :class => "switch", :"data-on-label" => "男", :"data-off-label" => "女", :"data-on" => "primary", :"data-off" => "danger", :"data-label-icon" => "glyphicon glyphicon-cog" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :password, '密码' %>
+        <% if @account.present? && @account.errors[:password] %>
+          <% @account.errors[:password].each do |msg| %>
+            <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+          <% end %>
+        <% end %>
+        <%= f.password_field :password, :class => "form-control", :placeholder => "至少6位" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, '确认密码' %>
+        <% if @account.present? && @account.errors[:password_confirmation] %>
+          <% @account.errors[:password_confirmation].each do |msg| %>
+            <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+          <% end %>
+        <% end %>
+        <%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "重复密码" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.submit "注册", :class => "btn btn-default btn-success full_width" %>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+  <%#= link_to 'Back', accounts_path %>
+</div>
+
+<script>
+$(function() {
+  $('.switch').bootstrapSwitch();
+});
+</script>

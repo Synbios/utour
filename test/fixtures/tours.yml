@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  identifier: MyString
+  name: MyString
+  content: MyString
+  departure_date: 2014-01-13
+  return_date: 2014-01-13
+  visa_mailing_date: 2014-01-13
+  ticket_issuing_date: 2014-01-13
+  trade_price: 9.99
+  retail_price: 9.99
+
+two:
+  identifier: MyString
+  name: MyString
+  content: MyString
+  departure_date: 2014-01-13
+  return_date: 2014-01-13
+  visa_mailing_date: 2014-01-13
+  ticket_issuing_date: 2014-01-13
+  trade_price: 9.99
+  retail_price: 9.99

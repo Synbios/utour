@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Identifier:</strong>
+  <%= @tour.identifier %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @tour.name %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @tour.content %>
+</p>
+
+<p>
+  <strong>Departure date:</strong>
+  <%= @tour.departure_date %>
+</p>
+
+<p>
+  <strong>Return date:</strong>
+  <%= @tour.return_date %>
+</p>
+
+<p>
+  <strong>Visa mailing date:</strong>
+  <%= @tour.visa_mailing_date %>
+</p>
+
+<p>
+  <strong>Ticket issuing date:</strong>
+  <%= @tour.ticket_issuing_date %>
+</p>
+
+<p>
+  <strong>Trade price:</strong>
+  <%= @tour.trade_price %>
+</p>
+
+<p>
+  <strong>Retail price:</strong>
+  <%= @tour.retail_price %>
+</p>
+
+<%= link_to 'Edit', edit_tour_path(@tour) %> |
+<%= link_to 'Back', tours_path %>

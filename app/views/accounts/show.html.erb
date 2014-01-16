@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @account.name %>
+</p>
+
+<p>
+  <strong>Mobile:</strong>
+  <%= @account.mobile %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @account.email %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @account.gender %>
+</p>
+
+<p>
+  <strong>Wechat:</strong>
+  <%= @account.wechat_id %>
+</p>
+
+<p>
+  <strong>User group:</strong>
+  <%= @account.user_group %>
+</p>
+
+<p>
+  <strong>Encrypted password:</strong>
+  <%= @account.encrypted_password %>
+</p>
+
+<p>
+  <strong>Salt:</strong>
+  <%= @account.salt %>
+</p>
+
+<p>
+  <strong>Memory token:</strong>
+  <%= @account.memory_token %>
+</p>
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>

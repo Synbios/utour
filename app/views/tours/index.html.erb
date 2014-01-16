@@ -1,0 +1,43 @@
+<h1>Listing tours</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Identifier</th>
+      <th>Name</th>
+      <th>Content</th>
+      <th>Departure date</th>
+      <th>Return date</th>
+      <th>Visa mailing date</th>
+      <th>Ticket issuing date</th>
+      <th>Trade price</th>
+      <th>Retail price</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tours.each do |tour| %>
+      <tr>
+        <td><%= tour.identifier %></td>
+        <td><%= tour.name %></td>
+        <td><%= tour.content %></td>
+        <td><%= tour.departure_date %></td>
+        <td><%= tour.return_date %></td>
+        <td><%= tour.visa_mailing_date %></td>
+        <td><%= tour.ticket_issuing_date %></td>
+        <td><%= tour.trade_price %></td>
+        <td><%= tour.retail_price %></td>
+        <td><%= link_to 'Show', tour %></td>
+        <td><%= link_to 'Edit', edit_tour_path(tour) %></td>
+        <td><%= link_to 'Destroy', tour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tour', new_tour_path %>

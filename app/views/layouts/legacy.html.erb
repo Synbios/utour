@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : "成都众信" %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="container container-full">
+    <div id="legacy-home-carousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#legacy-home-carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#legacy-home-carousel" data-slide-to="1"></li>
+        <li data-target="#legacy-home-carousel" data-slide-to="2"></li>
+        <li data-target="#legacy-home-carousel" data-slide-to="3"></li>
+        <li data-target="#legacy-home-carousel" data-slide-to="4"></li>
+        <li data-target="#legacy-home-carousel" data-slide-to="5"></li>
+        <li data-target="#legacy-home-carousel" data-slide-to="6"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <%= image_tag "legacy/carousel/le_0.jpg", alt: "picture" %>
+          <div class="carousel-caption">
+            <h3>新西兰自驾游</h3>
+          </div>
+        </div>
+
+        <div class="item">
+          <%= image_tag "legacy/carousel/le_1.jpg", alt: "picture" %>
+          <div class="carousel-caption">
+            <h3>新西兰自驾游</h3>
+          </div>
+        </div>
+
+        <div class="item">
+          <%= image_tag "legacy/carousel/le_2.jpg", alt: "picture" %>
+          <div class="carousel-caption">
+            <h3>新西兰自驾游</h3>
+          </div>
+        </div>
+
+        <div class="item">
+          <%= image_tag "legacy/carousel/le_3.jpg", alt: "picture" %>
+          <div class="carousel-caption">
+            <h3>新西兰自驾游</h3>
+          </div>
+        </div>
+
+        <div class="item">
+          <%= image_tag "legacy/carousel/le_4.jpg", alt: "picture" %>
+          <div class="carousel-caption">
+            <h3>新西兰自驾游</h3>
+          </div>
+        </div>
+
+        <div class="item">
+          <%= image_tag "legacy/carousel/le_5.jpg", alt: "picture" %>
+          <div class="carousel-caption">
+            <h3>新西兰自驾游</h3>
+          </div>
+        </div>
+
+        <div class="item">
+          <%= image_tag "legacy/carousel/le_6.jpg", alt: "picture" %>
+          <div class="carousel-caption">
+            <h3>新西兰自驾游</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#legacy-home-carousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#legacy-home-carousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+
+    <%= yield %>
+    <br/>
+    
+  </div>
+  <div class="copyright"  >出境旅游最佳品牌首选</div>
+
+
+</body>
+</html>

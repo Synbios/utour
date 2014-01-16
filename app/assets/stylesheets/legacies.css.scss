@@ -1,0 +1,272 @@
+// Place all the styles related to the legacies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  background-color: #F0EFEF;
+  overflow-x: hidden;
+}
+
+
+
+.carousel .item {
+  width: 100%; /*slider width*/
+  max-height: 600px; /*slider height*/
+}
+
+.carousel .item img {
+  width: 100%; /*img width*/
+}
+
+.legacy_tile {
+  .mainmenu {
+    padding:5px 5px 0 0;
+    ul, li, ol {
+      list-style: none outside none;
+      margin:0;
+      padding: 0;
+    }
+  }
+
+  .mainmenu ul{
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: box; 
+  }
+
+  .mainmenu li {
+    height: 100px;
+    position: relative;
+    margin: 0 0 5px 5px;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1; 
+  }
+
+  .mainmenu .menuimg {
+    position: absolute;
+    z-index: 9;
+    top: 15px;
+    left: 50%;
+    margin-left: -20px;
+    width: 60px;
+    height: 60px;
+    overflow:hidden; 
+  }
+
+  .mainmenu .menuimg  img{
+    width: 100%; 
+  }
+
+  .mainmenu li .menutitle{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    width: 40px;
+    font: 500 18px/1 hei;
+    color: #fff; 
+  }
+
+  .mainmenu ul:nth-child(8n+1) li:nth-child(1){ background-color:#36A1DB; }
+  .mainmenu ul:nth-child(8n+1) li:nth-child(2){ background-color:#81B637; }
+  .mainmenu ul:nth-child(8n+2) li:nth-child(1){ background-color:#E57E22; }
+  .mainmenu ul:nth-child(8n+2) li:nth-child(2){ background-color:#7E54DC; }
+  .mainmenu ul:nth-child(8n+3) li:nth-child(1){ background-color:#678FCF; }
+  .mainmenu ul:nth-child(8n+3) li:nth-child(2){ background-color:#E3B607; }
+
+  .mainmenu ul:nth-child(8n+4) li:nth-child(1){ background-color:#fd9e0c; }
+  .mainmenu ul:nth-child(8n+4) li:nth-child(2){ background-color:#00B699; }
+  .mainmenu ul:nth-child(8n+5) li:nth-child(1){ background-color:#034e78; }
+  .mainmenu ul:nth-child(8n+5) li:nth-child(2){ background-color:#d43316; }
+  .mainmenu ul:nth-child(8n+6) li:nth-child(1){ background-color:#2cb9b3; }
+  .mainmenu ul:nth-child(8n+6) li:nth-child(2){ background-color:#436773; }
+  .mainmenu ul:nth-child(8n+7) li:nth-child(1){ background-color:#037863; }
+  .mainmenu ul:nth-child(8n+7) li:nth-child(2){ background-color:#2bba67; }
+  .mainmenu ul:nth-child(8n+8) li:nth-child(1){ background-color:#B88E2C; }
+  .mainmenu ul:nth-child(8n+8) li:nth-child(2){ background-color:#844F00; }
+}
+
+.legacy_block {
+
+  .mainmenu {
+    display: block;
+    margin: 0 auto;
+    padding:0 0 5px 5px;
+    ul, li, ol {
+      list-style: none outside none;
+      margin:0;
+      padding: 0;
+    }
+
+  }
+  .mainmenu li {
+    width:50%;
+    float:left;
+    display: block;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+  }
+
+  .mainmenu li .menubtn {
+    display: block;
+    overflow: hidden;
+    text-decoration:none;
+    color:#000;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin: 5px 5px 0 0;
+    box-shadow: 0 1px 3px #bebebe;-moz-box-shadow:0 1px 3px #bebebe;-webkit-box-shadow:0 1px 3px #bebebe;
+  }
+
+  .mainmenu li a {
+    display:block;
+    padding:0px;
+    font-size:14px;
+    color: #000000;
+    text-decoration: none;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+  }
+  .mainmenu li .menubtn .menumesg {
+    padding:0px
+  }
+  .mainmenu li .menubtn .menuimg {
+    /*max-height:106px;*/
+    overflow:hidden;
+
+  }
+  .mainmenu li div img {
+    border:0;
+    width:100%;
+  }
+  .mainmenu li .menutitle {
+    text-align:center;
+    line-height: 25px;
+    text-decoration: none;
+    color:#000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.legacy_list {
+
+  display: block; margin: 0 auto;
+  ul, li, ol {
+    list-style: none outside none;
+    margin:0;
+    padding: 0;
+  }
+  .todayList li {
+    display: block;
+    color: #222222;
+    border-bottom:1px solid #DDDDDD;
+    font-weight: bold;
+    /*text-shadow: 0 1px 0 #FFFFFF;*/
+    text-decoration: none;
+    background:#F9F9F9;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    position: relative;
+    /*padding:10px 8px;*/overflow:hidden;
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset;
+    -moz-box-shadow:0 1px 0 0 rgba(255, 255, 255, 1) inset;
+    -webkit-box-shadow:0 1px 0 0 rgba(255, 255, 255, 1) inset;
+  }
+  .todayList li a{
+    padding:10px 40px 9px 8px;
+    display: block;
+  }
+  .todayList li.only4 a{
+    padding:10px 40px 9px 8px;
+    display: block;
+  }
+  .todayList li.only4 a:hover{
+    text-decoration:none;
+  }
+  .todayList li .img {
+    width:75px;height:42px;float:left;margin:0 10px 0 0; display:inline;overflow:hidden;border-radius: 3px;
+  }
+  .todayList li img {
+    width:75px;
+    float:left;
+  }
+  .todayList li:hover {
+    background-color:#eeeeee;
+    font-weight:bold;
+    cursor:pointer;
+    text-decoration:none;
+  }
+  .todayList li:active {
+    background-color:#eeeeee;
+    font-weight:bold;
+    cursor:pointer;
+    text-decoration:none;
+  }
+
+  .todayList li h2 {
+    font-size: 16px;
+    color:#2f2f2f;
+    font-weight:normal;
+    height:20px;font-weight:normal;line-height:16px;padding:0;
+    max-width:100%;text-overflow:ellipsis;white-space:nowrap !important;white-space:normal;overflow:hidden;
+  }
+  .todayList li.only4 h2 {
+    padding:2px 0 0;
+  }
+  .todayList li p.onlyheight {
+    height:16px; /*margin-bottom:5px*/
+  }
+  .todayList li p {
+    display: block;
+    font-size: 12px;
+    color:#9C9C9C;
+    line-height: 16px;
+    font-weight: normal;
+    margin-top: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;/*white-space: nowrap;*/
+    padding-right:2px;
+  }
+  .todayList li.only4 p {
+    white-space: nowrap;
+  }
+  .todayList li .icon {
+    margin-top: -6px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    height: 14px;
+    width: 14px;
+    background:url(legacy/icons/jiantou.png) no-repeat 0 0 ;
+    background-size: 14px 14px;
+  }
+}
+
+.legacy_image {
+  background-color: #F0EFEF;
+  margin: 0 auto;
+  overflow-x: hidden;
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.copyright {
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+.clr {
+  display:block;
+  clear:both;
+  height:0;
+  overflow:hidden;
+}

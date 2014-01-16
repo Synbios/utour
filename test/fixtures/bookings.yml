@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  departure_date: 2014-01-13
+  number_of_people: 1
+  package_id: MyString
+  tour_id: 1
+
+two:
+  departure_date: 2014-01-13
+  number_of_people: 1
+  package_id: MyString
+  tour_id: 1

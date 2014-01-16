@@ -1,0 +1,84 @@
+<% if @current_node["render"] == "tile" %>
+
+<% index = 0 %>
+<div class="legacy_tile">
+<div class="mainmenu">
+<% while index < @node_content.length %>
+  <ul>
+    <li>
+      <div class="menubtn">
+        <a href="<%= add_node(@node_tag, @node_content[index]['index']) %>">
+          <div class="menutitle"><%= @node_content[index]["h"] %></div>
+          <div class="menuimg"><%= image_tag @node_content[index]["image"] %></div>
+        </a>
+      </div>
+    </li>
+<% index = index + 1 %>
+<% if index < @node_content.length %>
+    <li>
+      <div class="menubtn">
+        <a href="<%= add_node(@node_tag, @node_content[index]['index']) %>">
+          <div class="menutitle"><%= @node_content[index]["h"] %></div>
+          <div class="menuimg"><%= image_tag @node_content[index]["image"] %></div>
+        </a>
+      </div>
+    </li>
+<% index = index + 1 %>
+<% end # if %>
+  </ul>
+<% end # while %>
+</div>
+</div>
+
+<% elsif @current_node["render"] == "block" %>
+<div class="legacy_block">
+<ul class="mainmenu">
+<% @node_content.each do |n| %>
+  <li>
+    <div class="menubtn">
+      <a href="<%= add_node(@node_tag, n['index']) %>">
+        <div class="menumesg">
+          <div class="menuimg"><%= image_tag n["image"] %></div>
+          <div class="menutitle"><%= n["h"] %></div>
+        </div>
+      </a>
+    </div>
+  </li>
+<% end %>
+</ul>
+</div>
+<% elsif @current_node["render"] == "list" %>
+
+<div class="legacy_list">
+  <ul  class="todayList">
+<% @node_content.each do |n| %>
+    <li class="only4">
+      <a href="<%= add_node(@node_tag, n['index']) %>">
+        <div class="img"><%= image_tag n["image"] %></div>
+        <h2><%= n["h"] %></h2>
+        <p class="onlyheight"><%= n["p"] %></p>
+        <span class="icon">&nbsp;</span>
+        <div class="clr"></div>
+      </a>
+    </li>
+<% end %>
+  </ul>
+</div>
+
+
+<% elsif @current_node["render"] == "image" %>
+<div class="legacy_image">
+  <h3><%= @current_node["h"] %></h3>
+  <p><%= Date.today.to_s %></p>
+  <br/>
+  <% @node_content.each do |n| %>
+    <%= image_tag n %>
+    <br/>
+  <% end %>
+</div>
+
+<% else %>
+错误: 数据标签不可识别(<%=  @current_node["render"] %>)
+<% end # if %>
+
+

@@ -1,0 +1,53 @@
+<%= form_for(@tour) do |f| %>
+  <% if @tour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tour.errors.count, "error") %> prohibited this tour from being saved:</h2>
+
+      <ul>
+      <% @tour.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :identifier %><br>
+    <%= f.text_field :identifier %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_field :content %>
+  </div>
+  <div class="field">
+    <%= f.label :departure_date %><br>
+    <%= f.date_select :departure_date %>
+  </div>
+  <div class="field">
+    <%= f.label :return_date %><br>
+    <%= f.date_select :return_date %>
+  </div>
+  <div class="field">
+    <%= f.label :visa_mailing_date %><br>
+    <%= f.date_select :visa_mailing_date %>
+  </div>
+  <div class="field">
+    <%= f.label :ticket_issuing_date %><br>
+    <%= f.date_select :ticket_issuing_date %>
+  </div>
+  <div class="field">
+    <%= f.label :trade_price %><br>
+    <%= f.text_field :trade_price %>
+  </div>
+  <div class="field">
+    <%= f.label :retail_price %><br>
+    <%= f.text_field :retail_price %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
