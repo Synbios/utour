@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115151343) do
+ActiveRecord::Schema.define(version: 20140118161937) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20140115151343) do
     t.string   "email"
     t.string   "gender"
     t.string   "wechat_id"
-    t.string   "user_group"
+    t.integer  "user_group"
     t.string   "encrypted_password"
     t.string   "salt"
     t.string   "memory_token"
@@ -50,6 +50,21 @@ ActiveRecord::Schema.define(version: 20140115151343) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
+  end
+
+  create_table "user_group_hashes", force: true do |t|
+    t.integer  "user_group_id"
+    t.integer  "belongs_to"
+    t.integer  "premission"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_groups", force: true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

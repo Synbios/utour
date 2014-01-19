@@ -1,0 +1,4 @@
+<div class="user_group_tree_view">
+<% tree_data = UserGroup.get_tree %>
+<%= UserGroup.hash_tree_to_list(tree_data).html_safe %>
+</div>

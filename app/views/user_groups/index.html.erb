@@ -1,29 +1,33 @@
-<h1>Listing user_groups</h1>
+<h2>用户组(user_groups)数据管理表</h2>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Parent</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>ID</th>
+      <th>用户组名称</th>
+      <th>上级用户组ID</th>
+      <th>查看</th>
+      <th>修改</th>
+      <th>删除</th>
     </tr>
   </thead>
 
   <tbody>
     <% @user_groups.each do |user_group| %>
       <tr>
+        <td><%= user_group.id %></td>
         <td><%= user_group.name %></td>
         <td><%= user_group.parent_id %></td>
-        <td><%= link_to 'Show', user_group %></td>
-        <td><%= link_to 'Edit', edit_user_group_path(user_group) %></td>
-        <td><%= link_to 'Destroy', user_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '查看', user_group %></td>
+        <td><%= link_to '修改', edit_user_group_path(user_group) %></td>
+        <td><%= link_to '删除', user_group, method: :delete, data: { confirm: '确定删除该用户组(该用户组标签会被系统移除)?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
+<div class="container">
+  <%= render 'tree_view' %>
+</div>
 <%= link_to 'New User group', new_user_group_path %>
