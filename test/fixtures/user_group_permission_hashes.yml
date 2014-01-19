@@ -2,10 +2,8 @@
 
 one:
   user_group_id: 1
-  belongs_to: 1
-  premission: 1
+  allowed_user_group_id: 1
 
 two:
   user_group_id: 1
-  belongs_to: 1
-  premission: 1
+  allowed_user_group_id: 1

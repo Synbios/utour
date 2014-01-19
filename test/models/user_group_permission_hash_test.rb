@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UserGroupHashTest < ActiveSupport::TestCase
+class UserGroupPermissionHashTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140118161937) do
+ActiveRecord::Schema.define(version: 20140119142844) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -52,10 +52,9 @@ ActiveRecord::Schema.define(version: 20140118161937) do
     t.integer  "account_id"
   end
 
-  create_table "user_group_hashes", force: true do |t|
+  create_table "user_group_permission_hashes", force: true do |t|
     t.integer  "user_group_id"
-    t.integer  "belongs_to"
-    t.integer  "premission"
+    t.integer  "allowed_user_group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

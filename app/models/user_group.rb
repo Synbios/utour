@@ -2,6 +2,8 @@ class UserGroup < ActiveRecord::Base
   validates :name, :presence => { :message => "用户组名为必填" }, :uniqueness => { :message => "此用户组已存在" }
   validate :check_parent_id
 
+  has_many :user_group_permission_hashes
+
   # return a hash of user group hierarchy
   # note: this method requires polynomial database lookups avoid using it when possible
   def self.get_tree
