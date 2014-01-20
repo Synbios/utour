@@ -1,0 +1,7 @@
+ <xml>
+  <ToUserName><![CDATA[<%= yield(:FromUserName) %>]]></ToUserName>
+  <FromUserName><![CDATA[<%= yield(:ToUserName) %>]]></FromUserName>
+  <CreateTime><%= Time.now.to_i %></CreateTime>
+  <MsgType><![CDATA[text]]></MsgType>
+  <Content><![CDATA[<%= yield(:Content) %>]]></Content>
+</xml>
