@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140119142844) do
+ActiveRecord::Schema.define(version: 20140120012457) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20140119142844) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "superuser"
+    t.integer  "user_class_id"
   end
 
   create_table "bookings", force: true do |t|
@@ -33,6 +34,16 @@ ActiveRecord::Schema.define(version: 20140119142844) do
     t.integer  "number_of_people"
     t.string   "package_id"
     t.integer  "tour_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invitaion_codes", force: true do |t|
+    t.integer  "account_id"
+    t.integer  "user_class_id"
+    t.integer  "user_group_id"
+    t.datetime "expire_time"
+    t.boolean  "used"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

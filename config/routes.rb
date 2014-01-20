@@ -30,6 +30,10 @@ Utour::Application.routes.draw do
   match '/legacy/info', to: 'legacies#info', via: 'get'
   match '/legacy/guide', to: 'legacies#guide', via: 'get'
 
+  # wechat API routs
+  match '/wechat', to: 'wechats#check', via: 'get'
+  match '/wechat', to: 'wechats#message', via: 'post'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
