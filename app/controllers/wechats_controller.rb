@@ -7,8 +7,8 @@ class WechatsController < ApplicationController
   end
 
   def message
-    #logger.info ">>> DEBUG >>> request type: POST"
-    #logger.info ">>> DEBUG >>> message type: POST #{params[:xml][:MsgType]}"
+    logger.info ">>> DEBUG >>> request type: POST"
+    logger.info ">>> DEBUG >>> message type: POST #{params[:xml][:MsgType]}"
     respond_to do |format|
       format.xml {
         if params[:xml][:MsgType] == "event"
@@ -19,10 +19,11 @@ class WechatsController < ApplicationController
             "2. 注册众信会员\n"+
             "更多资讯请点击屏幕下方的链接访问我们的分销网或者语音留言与我们联系！"
 
-            render "message", :formats => :xml, :layout => 'wechat_api/text'
+            logger.info render_to_string "message", :formats => :xml
+            render  "message", :formats => :xml, :layout => 'wechat_api/text'
           elsif params[:xml][:Event] == "unsubscribe"
             @message = "感谢您对我们的支持！"
-            render "message", :formats => :xml, :layout => 'wechat_api/text'
+            render "message", :formats => :xml
           elsif params[:xml][:Event] == "scan"
           elsif params[:xml][:Event] == "LOCATION"
           elsif params[:xml][:Event] == "CLICK"
@@ -31,7 +32,8 @@ class WechatsController < ApplicationController
           if params[:xml][:Content] =~ /^1\s*/
             @message= "请点击屏幕下方的链接访问成都众信分销网!"
           end
-          render "message", :formats => :xml, :layout => 'wechat_api/text'
+          logger.info render_to_string "message", :formats => :xml
+          render "message", :formats => :xml
         elsif params[:xml][:MsgType] == "image"
 
         elsif params[:xml][:MsgType] == "voice"
