@@ -17,10 +17,10 @@ class WechatsController < ApplicationController
             "欢迎关注 UTOUR【成都众信旅游】！我们将竭诚为您服务, 请输入数字以选择下内容:\n" +
             "1. 出国旅游线路咨询\n"+
             "2. 注册众信会员\n"+
-            "更多资讯请点击屏幕下方的链接访问我们的分销网或者语音留言与我们联系！"
+            ""
 
             logger.info render_to_string "message", :formats => :xml
-            render  "message", :formats => :xml, :layout => 'wechat_api/text'
+            render  "message", :formats => :xml
           elsif params[:xml][:Event] == "unsubscribe"
             @message = "感谢您对我们的支持！"
             render "message", :formats => :xml
