@@ -9,9 +9,11 @@ class WechatsController < ApplicationController
   def message
     logger.info "MESSAGE REACHED"
     #logger.info params[:xml]
-    @doc = Nokogiri::XML(request.body.read)
-    puts ">>>#{@doc.at_xpath('/xml/ToUserName').text}"
-    if @doc.at_xpath("/xml/MsgType").text == "text"
+    # @doc = Nokogiri::XML(request.body.read)
+    # puts ">>>#{@doc.at_xpath('/xml/ToUserName').text}"
+    #if @doc.at_xpath("/xml/MsgType").text == "text"
+    logger.info "******* we have **************** #{params[:xml][:MsgType]}"
+    if params[:xml][:MsgType] == "text"
       respond_to do |format|
       format.xml { 
         logger.info ">>>>>>>>>>>>>>>>>>>> XML REQUEST"
@@ -25,6 +27,7 @@ class WechatsController < ApplicationController
       
     else
       render :text => "message type not supported"
+      logger.info "POST does not contain XML params = #{params}"
     end
   end
  
