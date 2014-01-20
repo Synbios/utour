@@ -8,16 +8,18 @@ class WechatsController < ApplicationController
 
   def message
     logger.info "MESSAGE REACHED"
-    logger.info params[:xml]
-    if params[:xml].present? && params[:xml][:MsgType] == "text"
+    #logger.info params[:xml]
+    @doc = Nokogiri::XML(request.body.read)
+    puts ">>>#{@doc.at_xpath('/xml/ToUserName').text}"
+    if @doc.at_xpath("/xml/MsgType").text == "text"
       respond_to do |format|
       format.xml { 
         logger.info ">>>>>>>>>>>>>>>>>>>> XML REQUEST"
-        render "echo", :formats => :xml
+        render "message", :formats => :xml
       }
       format.html { 
         logger.info ">>>>>>>>>>>>>>>>>>>> HTML REQUEST"
-        render "echo", :formats => :xml
+        render "message", :formats => :xml
       }
       end
       

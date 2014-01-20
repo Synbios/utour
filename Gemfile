@@ -49,6 +49,8 @@ gem 'font-awesome-sass-rails'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem "bootstrap-switch-rails", "~> 2.0.0"
 
+gem 'nokogiri'
+gem 'actionpack-xml_parser', github: 'rails/actionpack-xml_parser'
 
 group :development do
   gem 'rails_layout'
