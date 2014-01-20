@@ -7,16 +7,16 @@ class WechatsController < ApplicationController
   end
 
   def message
-    puts "MESSAGE CALLED"
-
+    logger.info "MESSAGE REACHED"
+    logger.info params[:xml]
     if params[:xml].present? && params[:xml][:MsgType] == "text"
       respond_to do |format|
       format.xml { 
-        puts ">>>>>>>>>>>>>>>>>>>> XML REQUEST"
+        logger.info ">>>>>>>>>>>>>>>>>>>> XML REQUEST"
         render "echo", :formats => :xml
       }
       format.html { 
-        puts ">>>>>>>>>>>>>>>>>>>> HTML REQUEST"
+        logger.info ">>>>>>>>>>>>>>>>>>>> HTML REQUEST"
         render "echo", :formats => :xml
       }
       end
@@ -28,7 +28,8 @@ class WechatsController < ApplicationController
  
   private
     def check_signature
-      puts params
+      logger.info "CHECKING SIGNATURE"
+      logger.info params
       if params[:timestamp].nil? || params[:nonce].nil?
         render :text => "timestamp and nonce params missing ", :status => 403
       else
