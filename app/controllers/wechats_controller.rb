@@ -1,6 +1,6 @@
 class WechatsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  before_filter :check_signature
+  before_filter :check_signature, :except => [:debug]
 
   def check
     render :text => params[:echostr]
@@ -44,6 +44,11 @@ class WechatsController < ApplicationController
         end
       }
     end
+  end
+
+  def debug
+    @message = params[:text]
+    render "message", :formats => :xml, :layout => 'wechat_api/text'
   end
 
   private

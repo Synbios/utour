@@ -33,6 +33,7 @@ Utour::Application.routes.draw do
   # wechat API routs
   match '/wechat', to: 'wechats#check', via: 'get'
   match '/wechat', to: 'wechats#message', via: 'post'
+  match '/wechat/debug', to: 'wechats#debug', via: 'get'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
