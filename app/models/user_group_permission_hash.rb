@@ -26,5 +26,5 @@ class UserGroupPermissionHash < ActiveRecord::Base
       end
       ancestors.pop
     end
-   end
+  end
 end

@@ -14,6 +14,8 @@ class Account < ActiveRecord::Base
   before_save :encrypt_password
   after_save :clear_password
 
+  has_many :invitaion_codes
+
   def encrypt_password
     if password.present?
       self.salt = BCrypt::Engine.generate_salt
