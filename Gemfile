@@ -52,6 +52,9 @@ gem "bootstrap-switch-rails", "~> 2.0.0"
 gem 'nokogiri'
 gem 'actionpack-xml_parser', github: 'rails/actionpack-xml_parser'
 
+gem 'therubyracer'
+gem 'metro-ui-rails'
+
 group :development do
   gem 'rails_layout'
   gem 'capistrano'

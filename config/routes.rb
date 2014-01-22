@@ -1,4 +1,5 @@
 Utour::Application.routes.draw do
+  
   resources :tours
 
   resources :bookings
@@ -34,6 +35,10 @@ Utour::Application.routes.draw do
   match '/wechat', to: 'wechats#check', via: 'get'
   match '/wechat', to: 'wechats#message', via: 'post'
   match '/wechat/debug', to: 'wechats#debug', via: 'get'
+
+  # Tiger
+  match '/tiger', to: 'wechat_webs#tiger', via: 'get'
+  match '/tiger/group_travel', to: 'wechat_webs#group_travel', via: 'get'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

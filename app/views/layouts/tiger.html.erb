@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "UTOUR成都众信" %>">
+  <title><%= content_for?(:title) ? yield(:title) : "Utour" %></title>
+  <%= stylesheet_link_tag "tiger", :media => "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "tiger", "data-turbolinks-track" => true %>	
+  <%= csrf_meta_tags %>
+</head>
+  <body class="metro">
+  <%= yield %>
+  </body>
+</html>

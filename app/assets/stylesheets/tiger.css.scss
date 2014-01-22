@@ -9,15 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree ./standard/
- */
+*/
 
-
-.has-switch label { 
-	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
-}
-.full_width { width: 100% }
-
-.form_window {
-	h2 { text-align: center; }
-}
+@import 'metro-ui';
+@import 'metro-ui/modern.less';
+@import 'metro-ui/modern-responsive.less'; // for responsive design
+@import "font-awesome";

@@ -1,0 +1,29 @@
+// Place all the styles related to the WechatWebs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.group_travel_menu {
+	margin-top: 10px;
+
+	.panel-group .panel-primary .panel-heading {
+    a, a:hover {
+      text-decoration: none;
+      h2 {
+        color: #FFFFFF;
+        font-size: 22px;
+        text-align: center;
+      }
+    }
+		h2 {
+      font-size: 22px;
+      text-align: center;
+    }
+    h3 {
+      font-size: 20px;
+      text-align: center;
+    }
+	}
+}
+.menu_body_1 { padding: 5px; }
+.menu_body_2 { padding: 0px; }
+.menu_list { margin: 0 }
