@@ -1,17 +1,23 @@
-<div class="container">
+<% content_for :stylesheet do %>
+<%= stylesheet_link_tag "accounts", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+<div class="container account_new">
+<div>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <h2 style="text-align:center">提交个人信息</h2>
+      <h2>提交个人信息</h2>
 
       <%= render 'form' %>
 
     </div>
   </div>
-  <%#= link_to 'Back', accounts_path %>
+</div>
+
+<%#= link_to 'Back', accounts_path %>
 </div>
 
 <script>
 $(function() {
-  $('.switch').bootstrapSwitch();
+$('.switch').bootstrapSwitch();
 });
 </script>

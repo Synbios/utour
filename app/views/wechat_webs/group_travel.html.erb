@@ -1,5 +1,12 @@
-<div class=container>
+<% content_for :stylesheet do %>
+<%= stylesheet_link_tag "wechat_webs", media: "all", "data-turbolinks-track" => true %>
+<% end %>
 
+<div class="container lion">
+  <div class="head">
+    <%= image_tag "legacy/carousel/le_0.jpg", alt: "picture", style: "width:100%" %>
+  </div>
+  
   <div class="group_travel_menu">
     <div id="continent_panel" class="accordion-group panel-group">
 
@@ -89,6 +96,36 @@
           <a data-toggle="collapse" data-parent="#continent_panel" href="#america">
             <h2 class="panel-title">
               美洲行程
+            </h2>
+          </a>
+        </div>
+        <div id="america" class="panel-collapse collapse in">
+          <div class="panel-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <a data-toggle="collapse" data-parent="#continent_panel" href="#america">
+            <h2 class="panel-title">
+              澳新行程
+            </h2>
+          </a>
+        </div>
+        <div id="america" class="panel-collapse collapse in">
+          <div class="panel-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <a data-toggle="collapse" data-parent="#continent_panel" href="#america">
+            <h2 class="panel-title">
+              非洲行程
             </h2>
           </a>
         </div>

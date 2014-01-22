@@ -3,6 +3,10 @@ class WechatWebsController < ApplicationController
   	render 'tiger', :layout => 'tiger'
   end
 
+  def lion
+
+  end
+
   # 签证资料
   def visa
 

@@ -38,7 +38,10 @@ Utour::Application.routes.draw do
 
   # Tiger
   match '/tiger', to: 'wechat_webs#tiger', via: 'get'
+  match '/lion', to: 'wechat_webs#lion', via: 'get'
   match '/tiger/group_travel', to: 'wechat_webs#group_travel', via: 'get'
+  match '/lion/group_travel', to: 'wechat_webs#group_travel', via: 'get'
+  match '/lion/visa', to: 'wechat_webs#visa', via: 'get'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

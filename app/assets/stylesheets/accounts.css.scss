@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+  background-color: #ccc;
+}
 .container-full {
   margin: 0 auto;
   width: 100%;
@@ -12,4 +15,12 @@
 }
 .inline_error_message {
   color: red;
+}
+
+.account_new {
+  background-color: #fff;
+	h2 {
+	  text-align: center;
+    margin: 10px;
+	}
 }
