@@ -11,3 +11,6 @@
 // about supported directives.
 //
 //= require slidebars.min
+//= require jquery.mobile.touch.min
+//= require jquery_ujs
+//= require turbolinks
