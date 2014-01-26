@@ -59,7 +59,7 @@ Utour::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-    config.assets.precompile += %w( tiger.js, tiger.css.scss )
+    config.assets.precompile += %w( tiger.js, tiger.css.scss accounts.css.scss lion.css.scss metro-bootstrap.css wechat_webs.css.scss lion_nav.css.scss metro_ui_and_overrides.css.less legacies.css.scss slidebars.css tours.css.scss slidebars.min.js)
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
