@@ -10,8 +10,4 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require jquery.mobile.touch.min
-//= require_tree ./standard/
+//= require slidebars.min
