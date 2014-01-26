@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120012457) do
+ActiveRecord::Schema.define(version: 20140125165833) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20140120012457) do
     t.string   "memory_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "superuser"
     t.integer  "user_class_id"
+    t.boolean  "active"
   end
 
   create_table "bookings", force: true do |t|
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20140120012457) do
     t.datetime "updated_at"
   end
 
-  create_table "invitaion_codes", force: true do |t|
+  create_table "invitation_codes", force: true do |t|
     t.integer  "account_id"
     t.integer  "user_class_id"
     t.integer  "user_group_id"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20140120012457) do
   create_table "tours", force: true do |t|
     t.string   "identifier"
     t.string   "name"
-    t.string   "content"
+    t.text     "content"
     t.date     "departure_date"
     t.date     "return_date"
     t.date     "visa_mailing_date"
@@ -61,6 +61,10 @@ ActiveRecord::Schema.define(version: 20140120012457) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
+    t.string   "tour_group"
+    t.string   "sale_state"
+    t.string   "description"
+    t.string   "tour_type"
   end
 
   create_table "user_group_permission_hashes", force: true do |t|

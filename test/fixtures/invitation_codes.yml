@@ -4,12 +4,12 @@ one:
   account_id: 1
   user_class_id: 1
   user_group_id: 1
-  expire_time: 2014-01-20 09:24:57
+  expire_time: 2014-01-23 14:55:22
   used: false
 
 two:
   account_id: 1
   user_class_id: 1
   user_group_id: 1
-  expire_time: 2014-01-20 09:24:57
+  expire_time: 2014-01-23 14:55:22
   used: false

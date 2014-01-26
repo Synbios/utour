@@ -9,31 +9,30 @@ body {
   max-width: 800px;
   background-color: #fff;
 }
+
+
 .head
 {
   margin: 0 -15px;
 }
 .group_travel_menu {
-	margin-top: 10px;
+  margin-top: 10px;
+}
 
-	.panel-group .panel-primary .panel-heading {
-    a, a:hover {
-      text-decoration: none;
-      h2 {
-        color: #FFFFFF;
-        font-size: 22px;
-        text-align: center;
-      }
-    }
-		h2 {
+.whole_heading_link {
+  a, a:hover {
+    text-decoration: none;
+    h2 {
+      color: #FFFFFF;
       font-size: 22px;
       text-align: center;
     }
     h3 {
+      color: #31708F;
       font-size: 20px;
       text-align: center;
     }
-	}
+  }
 }
 .menu_body_1 { padding: 5px; }
 .menu_body_2 { padding: 0px; }
@@ -41,8 +40,24 @@ body {
 
 .visa {
   margin-top: 20px;
+  h2 { 
+    text-align: center;
+    margin-bottom: 20px;
+  }
 }
 
-.thumbnail {
-  h3 { text-align: center }
+
+.visa .col-xs-4 {
+  padding: 0 5px;
+  .thumbnail {
+    h3 { 
+      text-align: center;
+      font-size: 18px;
+      margin: 10px auto;
+    }
+  }
+}
+
+.lion .trade {
+  margin-top: 20px;
 }

@@ -1,0 +1,55 @@
+// Place all the styles related to the Tours controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$indicator_color: #CC0099;
+
+#classic {
+  max-width: 600px;
+  margin: 0 auto;
+	.head_image {
+    width: 100%;
+  }
+}
+
+
+///////////////////////////////////////////////////////////
+
+#legacy_window {
+  left: 0;
+  top: 0;
+  padding: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #999
+}
+#tour_slider{
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+
+  .carousel-indicators li {
+    border: 1px solid $indicator_color;
+  }
+  .carousel-indicators .active {
+    background-color: $indicator_color;
+  }
+
+  .carousel-inner {
+    height: 100%;
+  }
+
+  .carousel-inner .item { 
+    position: fixed;
+    height: 100%;
+    width: 100%;
+  }
+
+  .carousel-inner .item img { 
+    margin: 0 auto;
+    height: 100%;
+  }
+
+}
+

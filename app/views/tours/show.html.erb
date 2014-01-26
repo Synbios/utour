@@ -1,3 +1,16 @@
+<% content_for :stylesheet do %>
+<%= stylesheet_link_tag "tours", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+
+<div id="classic">
+  <% content_for :left_links do %>
+  <% render "wechat_webs/left_links" %>
+  <% end %>
+
+  <%= image_tag "example.jpg", alt: "", class: "head_image" %>
+</div>
+
+
 <p id="notice"><%= notice %></p>
 
 <p>

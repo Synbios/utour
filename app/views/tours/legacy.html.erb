@@ -1,0 +1,52 @@
+<% content_for :stylesheet do %>
+<%= stylesheet_link_tag "tours", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+<div id="legacy_window" class="container">
+  <div id="tour_slider" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#tour_slider" data-slide-to="0" class="active"></li>
+      <li data-target="#tour_slider" data-slide-to="1"></li>
+      <li data-target="#tour_slider" data-slide-to="2"></li>
+      <li data-target="#tour_slider" data-slide-to="3"></li>
+      <li data-target="#tour_slider" data-slide-to="4"></li>
+      <li data-target="#tour_slider" data-slide-to="5"></li>
+      <li data-target="#tour_slider" data-slide-to="6"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active"><%= image_tag "day1.jpg", alt: "picture" %></div>
+      <div class="item"><%= image_tag "day2.jpg", alt: "picture" %></div>
+      <div class="item"><%= image_tag "day3.jpg", alt: "picture" %></div>
+      <div class="item"><%= image_tag "day4.jpg", alt: "picture" %></div>
+      <div class="item"><%= image_tag "day5.jpg", alt: "picture" %></div>
+      <div class="item"><%= image_tag "day6.jpg", alt: "picture" %></div>
+      <div class="item"><%= image_tag "day7.jpg", alt: "picture" %></div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control hidden-xs hidden-sm" href="#tour_slider" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control hidden-xs hidden-sm" href="#tour_slider" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+  </div>
+</div>
+
+<script>
+$('.carousel').carousel({
+  interval: false,
+  wrap: false
+});
+
+$(document).ready(function() {  
+ $("#tour_slider").swiperight(function() {  
+  $(this).carousel('prev');  
+});  
+ $("#tour_slider").swipeleft(function() {  
+  $(this).carousel('next');  
+});  
+});  
+</script>

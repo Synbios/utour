@@ -1,5 +1,12 @@
 class SessionsController < ApplicationController
   def new
+    if params[:user_class] == "trade"
+      render 'sessions/new/trade'
+    elsif params[:user_class] == "customer"
+      render 'sessions/new/customer'
+    elsif params[:user_class] == "staff"
+      render 'sessions/new/staff'
+    end
   end
 
   def create
@@ -9,16 +16,17 @@ class SessionsController < ApplicationController
     @user = Account.find_by(wechat_id: params[:session][:identification_id].downcase) if @user.nil?
 
     if @user.nil?
-      flash.now[:error] = '无法识别'
-      render text: "NO"
+      flash.now[:error] = '抱歉，您输入的用户名无法识别！'
+      render 'new'
     elsif Account.authenticate_by_id(@user.id, params[:session][:password].downcase)
       sign_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user 
+      flash[:success] = "登录成功"
+      #redirect_to @user
+      redirect_to session.delete(:return_to) 
       #render text: "search #{signed_in?}"
     else
-      flash.now[:error] = '用户名或密码无效'
-      render text: "NO"
+      flash.now[:error] = '密码验证失败'
+      render 'new'
     end
   end
 
@@ -26,4 +34,5 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_url
   end
+
 end

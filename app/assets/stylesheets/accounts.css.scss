@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-  background-color: #ccc;
+  
 }
 .container-full {
   margin: 0 auto;
@@ -18,9 +18,29 @@ body {
 }
 
 .account_new {
+  margin-left: 0;
+  margin-right: 0;
   background-color: #fff;
 	h2 {
 	  text-align: center;
     margin: 10px;
 	}
 }
+
+.trade_activation
+{
+  max-width: 800px;
+  h2 
+  {
+    text-align: center;
+  }
+}
+
+/*
+.activation_box
+{
+  border:2px dashed #ccc;
+  margin: 0 50px;
+  padding: 20px;
+}
+*/

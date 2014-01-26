@@ -5,3 +5,44 @@
 .session_login_window {
   h2 { text-align: center; }
 }
+
+.session_mobile_container {
+	max-width: 800px;
+
+  .form-horizontal .form-group{
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.user_card .portray {
+  width: 180px;
+  margin: 30px auto 30px auto;
+  display: block;
+//  background-color: #eee
+
+}
+.apollo-seperator {
+  position: relative;
+  display: block;
+  margin: 10px 0 10px 0;
+  text-align: center;
+  color: #666;
+}
+
+.apollo-seperator:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 43%;
+  border-bottom: 1px solid #cccccc;
+}
+.apollo-seperator:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 43%;
+  border-bottom: 1px solid #cccccc;
+}

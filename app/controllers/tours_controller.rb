@@ -1,4 +1,7 @@
 class ToursController < ApplicationController
+  layout "lion"
+  before_action :check_privilege, except: [:show]
+  #before_action :store_location, except: [:show]
   before_action :set_tour, only: [:show, :edit, :update, :destroy]
 
   # GET /tours
@@ -10,6 +13,10 @@ class ToursController < ApplicationController
   # GET /tours/1
   # GET /tours/1.json
   def show
+  end
+
+  def legacy
+    render 'legacy', layout: 'application'
   end
 
   # GET /tours/new
@@ -70,5 +77,9 @@ class ToursController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tour_params
       params.require(:tour).permit(:identifier, :name, :content, :departure_date, :return_date, :visa_mailing_date, :ticket_issuing_date, :trade_price, :retail_price)
+    end
+
+    def check_privilege
+
     end
 end

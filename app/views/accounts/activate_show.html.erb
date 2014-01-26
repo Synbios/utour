@@ -1,0 +1,62 @@
+<% content_for :stylesheet do %>
+<%= stylesheet_link_tag "accounts", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+<div class="container trade_activation">
+  <% if @account.active %>
+  
+  <%= image_tag "umonster.png", alt: "", class: "actived_img" %>
+  <h2>您的账户已成功激活</h2>
+
+  <%#= link_to "我要注册", new_account_path(user_class: "trade"), class: "btn btn-warning full_width" %>
+  <% else %>
+  <h2>您的账户尚未激活！</h2>
+  
+  <div class="alert alert-warning">
+    <p>您需要激活账户才能访问同业页面。当本公司审核您的资料后会向您发送激活码。如果您已有激活码请现在输入即可激活账号。<br/>
+      注意：激活码只在一定时间内有效<strong>请在其过期前使用</strong>。</p>    
+    </div>
+
+    <%= form_for @account, :url => {:action => "activate"}, :method => "post", :html => {:role => "form", :class => "form-horizontal"} do |f| %>
+
+    <div class="form-group">
+      <%= f.label :name, '姓名', :class => "col-xs-4 col-sm-2 control-label" %>
+      <div class="col-xs-8 col-sm-10">
+        <%= f.text_field :name, :value => @account.name, :class => "form-control", :readonly => true %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :wechat_id, '微信号', :class => "col-xs-4 col-sm-2 control-label" %>
+      <div class="col-xs-8 col-sm-10">
+        <%= f.text_field :wechat_id, :value => @account.wechat_id, :class => "form-control", :readonly => true %>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <%= f.label :activation_code, '邀请码', :class => "col-xs-4 col-sm-2 control-label" %>
+      <div class="col-xs-8 col-sm-10">
+        <% if @account.present? && @account.errors[:activation_code] %>
+        <% @account.errors[:activation_code].each do |msg| %>
+        
+        <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+
+        <% end %>
+        <% end %>
+        <%= f.text_field :activation_code, :placeholder => "输入您的邀请码", :class => "form-control" %>
+      </div>
+    </div>
+    
+    
+    
+    <div class="form-group">
+      <div class="col-xs-8 col-xs-offset-4 col-sm-10 col-md-offset-2">
+        <%= f.submit "激活账户", :class => "btn btn-success full_width" %>
+      </div>
+    </div>
+
+    <% end %>
+
+    
+    <% end %>
+  </div>

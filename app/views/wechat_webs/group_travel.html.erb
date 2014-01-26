@@ -2,6 +2,10 @@
 <%= stylesheet_link_tag "wechat_webs", media: "all", "data-turbolinks-track" => true %>
 <% end %>
 
+<% content_for :left_links do %>
+<% render "left_links" %>
+<% end %>
+
 <div class="container lion">
   <div class="head">
     <%= image_tag "legacy/carousel/le_0.jpg", alt: "picture", style: "width:100%" %>
@@ -11,56 +15,56 @@
     <div id="continent_panel" class="accordion-group panel-group">
 
       <div class="panel panel-primary">
-        <div class="panel-heading">  
+        <div class="panel-heading whole_heading_link">  
           <a data-toggle="collapse" data-parent="#continent_panel" href="#asia">
             <h2 class="panel-title">
               亚洲行程
             </h2>
           </a>
         </div>
-        <div id="asia" class="panel-collapse collapse in">
+        <div id="asia" class="panel-collapse collapse">
           <div class="panel-body menu_body_1" >
 
 
 
             <div class="panel-group" id="asia_country_panel">
               <div class="panel panel-success">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#asia_country_panel" href="#japan">
-                      日本
-                    </a>
-                  </h3>
+                <div class="panel-heading whole_heading_link">                  
+                  <a data-toggle="collapse" data-parent="#asia_country_panel" href="#japan">
+                    <h3 class="panel-title">
+                      日本                    
+                    </h3>
+                  </a>
                 </div>
-                <div id="japan" class="panel-collapse collapse in">
+                <div id="japan" class="panel-collapse collapse">
                   <div class="panel-body menu_body_2" >
-
-
+                    <% if @tours.any?{|tour| tour.tour_group == "japan"} %>
                     <div class="list-group menu_list">
-                      <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">东京大阪5天7晚</h4>
-                        <p class="list-group-item-text">精选港龙航空，停留香港旅程更丰富</p>
+                      <% @tours.each do |tour| %>
+                      <% if tour.tour_group ==  "japan" %>
+                      <a href="/tours/1/legacy" class="list-group-item">
+                        <h4 class="list-group-item-heading"><%= tour.name %></h4>
+                        <p class="list-group-item-text"><%= tour.description %></p>
                       </a>
-                      <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">日本安心东阪6天4夜</h4>
-                        <p class="list-group-item-text">在古庙于繁华商业街间穿梭象山传统文化于现代魅力的碰撞</p>
-                      </a>
+                      <% end %>
+                      <% end %>
                     </div>
-
-
+                    <% else %>
+                      暂无
+                    <% end %>
                   </div>
                 </div>
               </div>
 
               <div class="panel panel-info">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#asia_country_panel" href="#korea">
+                <div class="panel-heading whole_heading_link">
+                  <a data-toggle="collapse" data-parent="#asia_country_panel" href="#korea">
+                    <h3 class="panel-title">
                       韩国
-                    </a>
-                  </h3>
+                    </h3>
+                  </a>
                 </div>
-                <div id="korea" class="panel-collapse collapse in">
+                <div id="korea" class="panel-collapse collapse">
                   <div class="panel-body">
                     暂无
                   </div>
@@ -68,6 +72,20 @@
               </div>
 
 
+              <div class="panel panel-info">
+                <div class="panel-heading whole_heading_link">
+                  <a data-toggle="collapse" data-parent="#asia_country_panel" href="#thailand">
+                    <h3 class="panel-title">
+                      泰国
+                    </h3>
+                  </a>
+                </div>
+                <div id="thailand" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    暂无
+                  </div>
+                </div>
+              </div>
 
             </div>
 
@@ -77,61 +95,61 @@
       </div>
 
       <div class="panel panel-primary">
-        <div class="panel-heading">
+        <div class="panel-heading whole_heading_link">
           <a data-toggle="collapse" data-parent="#continent_panel" href="#europe">
             <h2 class="panel-title">
               欧洲行程
             </h2>
           </a>
         </div>
-        <div id="europe" class="panel-collapse collapse in">
+        <div id="europe" class="panel-collapse collapse">
           <div class="panel-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            暂无
           </div>
         </div>
       </div>
 
       <div class="panel panel-primary">
-        <div class="panel-heading">
+        <div class="panel-heading whole_heading_link">
           <a data-toggle="collapse" data-parent="#continent_panel" href="#america">
             <h2 class="panel-title">
               美洲行程
             </h2>
           </a>
         </div>
-        <div id="america" class="panel-collapse collapse in">
+        <div id="america" class="panel-collapse collapse">
           <div class="panel-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            暂无
           </div>
         </div>
       </div>
 
       <div class="panel panel-primary">
-        <div class="panel-heading">
-          <a data-toggle="collapse" data-parent="#continent_panel" href="#america">
+        <div class="panel-heading whole_heading_link">
+          <a data-toggle="collapse" data-parent="#continent_panel" href="#australia">
             <h2 class="panel-title">
               澳新行程
             </h2>
           </a>
         </div>
-        <div id="america" class="panel-collapse collapse in">
+        <div id="australia" class="panel-collapse collapse">
           <div class="panel-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            暂无
           </div>
         </div>
       </div>
 
       <div class="panel panel-primary">
-        <div class="panel-heading">
-          <a data-toggle="collapse" data-parent="#continent_panel" href="#america">
+        <div class="panel-heading whole_heading_link">
+          <a data-toggle="collapse" data-parent="#continent_panel" href="#africa">
             <h2 class="panel-title">
               非洲行程
             </h2>
           </a>
         </div>
-        <div id="america" class="panel-collapse collapse in">
+        <div id="africa" class="panel-collapse collapse">
           <div class="panel-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            暂无
           </div>
         </div>
       </div>
@@ -141,7 +159,6 @@
 </div>
 
 
-
 <script>
-$('.collapse').collapse()
+
 </script>

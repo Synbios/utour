@@ -34,4 +34,11 @@ module SessionsHelper
     cookies.delete(:memory_token)
   end
 
+  def account_filter(user_class_name, user_group)
+    account = current_user
+    return nil if account.nil?
+    return nil unless account.user_class_id = Account.find_user_class_id_by_name(user_class_name)
+    return nil unless user_group == :all
+    return account
+  end
 end

@@ -1,3 +1,11 @@
+<% content_for :stylesheet do %>
+<%= stylesheet_link_tag "wechat_webs", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+
+<% content_for :left_links do %>
+<% render "left_links" %>
+<% end %>
+
 <div class="container lion">
   <div class="head">
     <%= image_tag "legacy/carousel/le_0.jpg", alt: "picture", style: "width:100%" %>

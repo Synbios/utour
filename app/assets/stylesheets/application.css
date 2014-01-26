@@ -13,18 +13,36 @@
  */
 
 
-.has-switch label { 
-	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
-}
-.full_width { width: 100% }
+ .has-switch label { 
+   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+ }
+ .full_width { width: 100% }
 
-.form_window {
-	h2 { text-align: center; }
-}
+ .form_window {
+   h2 { text-align: center; }
+ }
 
-.copyright {
+ .copyright {
   padding: 8px;
   text-align: center;
   font-size: 14px;
   color: #666;
+}
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
 }

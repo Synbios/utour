@@ -1,10 +1,15 @@
 Utour::Application.routes.draw do
   
-  resources :tours
+  resources :tours do
+    get 'legacy', on: :member
+  end
 
   resources :bookings
 
-  resources :accounts
+  resources :accounts do
+    get 'activate_show', on: :member
+    post 'activate', on: :member
+  end
 
   resources :user_groups
 
@@ -14,7 +19,7 @@ Utour::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-    root 'clients#home'
+  root 'wechat_webs#lion'
 
   match '/signup',  to: 'accounts#new', via: 'get'
   match '/signin',  to: 'sessions#new', via: 'get'
@@ -42,6 +47,7 @@ Utour::Application.routes.draw do
   match '/tiger/group_travel', to: 'wechat_webs#group_travel', via: 'get'
   match '/lion/group_travel', to: 'wechat_webs#group_travel', via: 'get'
   match '/lion/visa', to: 'wechat_webs#visa', via: 'get'
+  match '/lion/trade', to: 'wechat_webs#trade', via: 'get'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
