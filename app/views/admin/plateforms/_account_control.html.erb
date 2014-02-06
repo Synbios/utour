@@ -1,0 +1,25 @@
+<div class="row">
+  <h1 class="page-title txt-color-blueDark"><i class="fa fa-desktop fa-fw "></i> 
+    客户权限管理
+  </h1>
+</div>
+
+<div id="user_group_index"></div>
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+  function reload_user_group_table(){
+    $.ajax({url: '/admin/user_groups.js',
+     success: function(data) {
+
+     }
+   });
+  }
+
+  reload_user_group_table();
+});
+  
+
+</script>

@@ -7,6 +7,9 @@ class BookingsController < ApplicationController
     @bookings = Booking.all
   end
 
+  def account_specific_index
+    @bookings = Booking.all#account.booking
+  end
   # GET /bookings/1
   # GET /bookings/1.json
   def show

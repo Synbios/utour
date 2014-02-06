@@ -1,0 +1,22 @@
+
+<h1>Admin::FeatureTags#new</h1>
+
+<div classs="">
+  <table class="table table-stript">
+    <thead>
+      <tr>
+        <td>编号</td>
+        <td>名称</td>
+        <td>深度</td>
+      </tr>
+    </thead>
+    <% @feature_tags.each do |feature_tag| %>
+      <tr>
+        <td><%= feature_tag.id %></td>
+        <td><%= feature_tag.name %></td>
+        <td><%= feature_tag.depth %></td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>

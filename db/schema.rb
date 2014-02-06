@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140125165833) do
+ActiveRecord::Schema.define(version: 20140131173426) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -30,34 +30,59 @@ ActiveRecord::Schema.define(version: 20140125165833) do
   end
 
   create_table "bookings", force: true do |t|
-    t.date     "departure_date"
-    t.integer  "number_of_people"
-    t.string   "package_id"
+    t.integer  "date_and_price_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "number_of_children"
+    t.integer  "number_of_adults"
+    t.string   "comment"
+  end
+
+  create_table "date_and_prices", force: true do |t|
     t.integer  "tour_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "invitation_codes", force: true do |t|
-    t.integer  "account_id"
-    t.integer  "user_class_id"
-    t.integer  "user_group_id"
-    t.datetime "expire_time"
-    t.boolean  "used"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tours", force: true do |t|
-    t.string   "identifier"
-    t.string   "name"
-    t.text     "content"
     t.date     "departure_date"
     t.date     "return_date"
     t.date     "visa_mailing_date"
     t.date     "ticket_issuing_date"
     t.decimal  "trade_price",         precision: 10, scale: 0
     t.decimal  "retail_price",        precision: 10, scale: 0
+    t.boolean  "export"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feature_tag_connections", force: true do |t|
+    t.integer  "parent_tag_id"
+    t.integer  "child_tag_id"
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feature_tags", force: true do |t|
+    t.string   "name"
+    t.integer  "depth"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invitation_codes", force: true do |t|
+    t.integer  "user_class_id"
+    t.integer  "user_group_id"
+    t.datetime "expire_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+    t.integer  "issued_by"
+    t.integer  "used_by"
+    t.datetime "used_at"
+    t.boolean  "cancelled"
+  end
+
+  create_table "tours", force: true do |t|
+    t.string   "identifier"
+    t.string   "name"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"

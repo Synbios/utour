@@ -1,0 +1,49 @@
+<%= form_for(@date_and_price) do |f| %>
+  <% if @date_and_price.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@date_and_price.errors.count, "error") %> prohibited this date_and_price from being saved:</h2>
+
+      <ul>
+      <% @date_and_price.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tour_id %><br>
+    <%= f.number_field :tour_id %>
+  </div>
+  <div class="field">
+    <%= f.label :departure_date %><br>
+    <%= f.date_select :departure_date %>
+  </div>
+  <div class="field">
+    <%= f.label :return_date %><br>
+    <%= f.date_select :return_date %>
+  </div>
+  <div class="field">
+    <%= f.label :visa_mailing_date %><br>
+    <%= f.date_select :visa_mailing_date %>
+  </div>
+  <div class="field">
+    <%= f.label :ticket_issuing_date %><br>
+    <%= f.date_select :ticket_issuing_date %>
+  </div>
+  <div class="field">
+    <%= f.label :trade_price %><br>
+    <%= f.text_field :trade_price %>
+  </div>
+  <div class="field">
+    <%= f.label :retail_price %><br>
+    <%= f.text_field :retail_price %>
+  </div>
+  <div class="field">
+    <%= f.label :export %><br>
+    <%= f.check_box :export %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

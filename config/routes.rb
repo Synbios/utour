@@ -1,17 +1,20 @@
 Utour::Application.routes.draw do
-  
+  resources :date_and_prices
+
   resources :tours do
     get 'legacy', on: :member
   end
 
-  resources :bookings
+  resources :bookings do
+    get 'account_specific_index', on: :collection
+  end
 
   resources :accounts do
     get 'activate_show', on: :member
     post 'activate', on: :member
   end
 
-  resources :user_groups
+  #resources :user_groups
 
   resources :sessions, only: [:new, :create, :destroy]
 
@@ -97,4 +100,38 @@ Utour::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  namespace :admin do |admin|
+    resources :accounts
+    resources :tours
+    resources :bookings
+    resources :user_groups
+    resources :date_and_prices
+
+    resources :feature_tag_connections, only: [:new, :create, :destroy, :index]
+    resources :feature_tags, only: [:new, :create, :destroy, :index]
+    resources :invitation_codes, only: [:new, :create, :destroy, :index]
+
+    resources :invitation_codes do |invitation_code|
+      get 'cancel', on: :member
+    end
+    
+
+    get '/', to: 'plateforms#dashboard'
+    get '/home', to: 'plateforms#home'
+    get '/inbox', to: 'plateforms#inbox'
+    get '/email_list', to: 'plateforms#email_list'
+    get '/email_compose', to: 'plateforms#email_compose'
+    get '/calendar', to: 'plateforms#calendar'
+    get '/invitation_code_control', to: 'plateforms#invitation_code_control'
+    get '/account_control', to: 'plateforms#account_control'
+
+    get '/account_admin', to: 'plateforms#account_admin'
+    get '/new_tour', to: 'plateforms#new_tour'
+    get '/tour_admin', to: 'plateforms#tour_admin'
+
+    get '/sale_group_admin', to: 'plateforms#sale_group_admin'
+    get '/sale_admin', to: 'plateforms#sale_admin'
+
+  end
 end

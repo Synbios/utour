@@ -1,0 +1,41 @@
+<h1>Listing date_and_prices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tour</th>
+      <th>Departure date</th>
+      <th>Return date</th>
+      <th>Visa mailing date</th>
+      <th>Ticket issuing date</th>
+      <th>Trade price</th>
+      <th>Retail price</th>
+      <th>Export</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @date_and_prices.each do |date_and_price| %>
+      <tr>
+        <td><%= date_and_price.tour_id %></td>
+        <td><%= date_and_price.departure_date %></td>
+        <td><%= date_and_price.return_date %></td>
+        <td><%= date_and_price.visa_mailing_date %></td>
+        <td><%= date_and_price.ticket_issuing_date %></td>
+        <td><%= date_and_price.trade_price %></td>
+        <td><%= date_and_price.retail_price %></td>
+        <td><%= date_and_price.export %></td>
+        <td><%= link_to 'Show', date_and_price %></td>
+        <td><%= link_to 'Edit', edit_date_and_price_path(date_and_price) %></td>
+        <td><%= link_to 'Destroy', date_and_price, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Date and price', new_date_and_price_path %>

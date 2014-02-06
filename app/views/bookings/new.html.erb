@@ -1,5 +1,43 @@
-<h1>New booking</h1>
+<div class="container lion">
+  <div id="booking_page">
+    <div class="booking_head">
+      <h2>预订详情</h2>
+    </div>
+    
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+        <%= image_tag "sample.jpg", alt: "picture" %>
+      </div>
+    </div>
+    
+    <p class="head_text">日本6日游日本6</p>
+    <div class="alert alert-warning info_text">2014年1月2日 -【编号：AAAAA】</div>
 
-<%= render 'form' %>
+    <%= render 'form' %>
+    <div class="booking_links">
+      <%= link_to_function "返回", "history.back()", :class => "btn btn-info btn-sm" %>
+      <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#booking_info">预订说明</button>
 
-<%= link_to 'Back', bookings_path %>
+      <!-- Modal -->
+      <div class="modal fade" id="booking_info" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="modal_label">微信订团说明</h4>
+            </div>
+            <div class="modal-body">
+              很多很多很长很长...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">了解</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+    </div>
+    
+  </div>
+</div>
+
+

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  parent_tag_id: 1
+  child_tag_id: 1
+  account_id: 1
+
+two:
+  parent_tag_id: 1
+  child_tag_id: 1
+  account_id: 1

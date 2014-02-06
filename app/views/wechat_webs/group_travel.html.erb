@@ -34,14 +34,61 @@
                 </div>
                 <div id="japan" class="panel-collapse collapse">
                   <div class="panel-body menu_body_2" >
+
+
+
+
                     <% if @tours.any?{|tour| tour.tour_group == "japan"} %>
                     <div class="list-group menu_list">
                       <% @tours.each do |tour| %>
                       <% if tour.tour_group ==  "japan" %>
-                      <a href="/tours/1/legacy" class="list-group-item">
-                        <h4 class="list-group-item-heading"><%= tour.name %></h4>
-                        <p class="list-group-item-text"><%= tour.description %></p>
-                      </a>
+
+
+                      <div class="list-group-item">
+                        <div class="row">
+                          <div class="col-xs-9 col-sm-9 col-md-10" style="padding:5px">
+                            <h4 class="list-group-item-heading"><%= tour.name %></h4>
+                            <p class="list-group-item-text"><%= tour.description %></p>
+                          </div>
+                          <div class="col-xs-3 col-sm-3 col-md-2" style="padding:5px">
+                            <a href="/tours/1/legacy" class="btn btn-warning btn-sm" style="width: 100%; margin-bottom: 2px; color: white; padding: 5px 2px">详 <span class="glyphicon glyphicon-chevron-right" style="color: white"></span></a>
+                            <button class="btn btn-info btn-sm" data-toggle="collapse" data-target="#xyz" style="width:100%;color: white; padding: 5px 2px">订 <span class="glyphicon glyphicon-chevron-down" style="color: white"></span></button>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      
+
+
+                       <div id="xyz" class="panel panel-default collapse">
+                        <table class="table table-striped" style="background-color: white; padding: 5px;">
+                          <tr>
+                            <th>日期</th>
+                            <th>单人价</th>
+                            <th>余位数</th>
+                          </tr>
+                          <tr>
+                            <td style="text-decoration: line-through;">14.02.28</td>
+                            <td>￥5,000 <span class="label label-primary">同行</span></td>
+                            <td><span class="label label-warning">已满</span></td>
+                          </tr>
+                          <tr>
+                            <td>14.03.01</td>
+                            <td>￥5,000 <span class="label label-primary">同行</span></td>
+                            <td><a href="">报名(>9)</a></td>
+                          </tr>
+                          <tr>
+                            <td>14.02.03</td>
+                            <td>￥5,000 <span class="label label-primary">同行</span></td>
+                            <td><a href="">报名(>9)</a></td>
+                          </tr>
+                        </table>
+                        <div class="row" style="width:100%; margin: 5px 0;">  
+                          <a class="col-xs-4 col-xs-offset-1 btn btn-success btn-sm" style="padding: 5px">word版</a>
+                          <a class="col-xs-4 col-xs-offset-2 btn btn-warning btn-sm" style="padding: 5px">协议</a>
+                        </div>
+                        
+                      </div>
                       <% end %>
                       <% end %>
                     </div>

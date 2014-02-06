@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tour_id: 1
+  departure_date: 2014-01-27
+  return_date: 2014-01-27
+  visa_mailing_date: 2014-01-27
+  ticket_issuing_date: 2014-01-27
+  trade_price: 9.99
+  retail_price: 9.99
+  export: false
+
+two:
+  tour_id: 1
+  departure_date: 2014-01-27
+  return_date: 2014-01-27
+  visa_mailing_date: 2014-01-27
+  ticket_issuing_date: 2014-01-27
+  trade_price: 9.99
+  retail_price: 9.99
+  export: false

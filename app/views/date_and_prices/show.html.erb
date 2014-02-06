@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tour:</strong>
+  <%= @date_and_price.tour_id %>
+</p>
+
+<p>
+  <strong>Departure date:</strong>
+  <%= @date_and_price.departure_date %>
+</p>
+
+<p>
+  <strong>Return date:</strong>
+  <%= @date_and_price.return_date %>
+</p>
+
+<p>
+  <strong>Visa mailing date:</strong>
+  <%= @date_and_price.visa_mailing_date %>
+</p>
+
+<p>
+  <strong>Ticket issuing date:</strong>
+  <%= @date_and_price.ticket_issuing_date %>
+</p>
+
+<p>
+  <strong>Trade price:</strong>
+  <%= @date_and_price.trade_price %>
+</p>
+
+<p>
+  <strong>Retail price:</strong>
+  <%= @date_and_price.retail_price %>
+</p>
+
+<p>
+  <strong>Export:</strong>
+  <%= @date_and_price.export %>
+</p>
+
+<%= link_to 'Edit', edit_date_and_price_path(@date_and_price) %> |
+<%= link_to 'Back', date_and_prices_path %>

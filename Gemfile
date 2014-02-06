@@ -46,6 +46,7 @@ end
 
 gem 'bootstrap-sass', '~>3.0.0'
 gem 'font-awesome-sass-rails'
+gem "font-awesome-rails"
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem "bootstrap-switch-rails", "~> 2.0.0"
 

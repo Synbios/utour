@@ -1,0 +1,38 @@
+<%= form_for [:admin, @user_group], :html => {:role => "form", :class => "form-horizontal"} do |f| %>
+
+  <div class="form-group">
+  <%= f.label :parent_id, '上层用户组', :class => "col-xs-3 col-sm-3 control-label" %>
+  <div class="col-xs-9 col-sm-8">
+    <% if @user_group.present? && @user_group.errors[:parent_id] %>
+    <% @user_group.errors[:parent_id].each do |msg| %>
+    <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+    <% end %>
+    <% end %>
+    <%= f.number_field :parent_id, :value => params[:parent_id], :class => "form-control" %>
+    <p><%= UserGroup.find_by_id(params[:parent_id]).name unless UserGroup.find_by_id(params[:parent_id]).nil? %></p>
+    <!-- <span class="cal">小计0元</span> -->
+  </div>
+  </div>
+
+
+  <div class="form-group">
+  <%= f.label :name, '用户组名', :class => "col-xs-3 col-sm-3 control-label" %>
+  
+  <div class="col-xs-9 col-sm-8">
+    <% if @user_group.present? && @user_group.errors[:name] %>
+    <% @user_group.errors[:name].each do |msg| %>
+    <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+    <% end %>
+    <% end %>
+    <%= f.text_field :name, :placeholder => "用户组名不能重复", :class => "form-control" %>
+    <!-- <span class="cal">小计0元</span> -->
+  </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-xs-9 col-xs-offset-3 col-sm-offset-3 col-sm-8">
+      <%= f.submit "新建", :class => "btn btn-default btn-success full_width" %>
+    </div>
+  </div>
+
+<% end %>

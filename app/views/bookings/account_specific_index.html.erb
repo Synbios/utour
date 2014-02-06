@@ -1,0 +1,31 @@
+<div class="container lion">
+  <h1>我的订单</h1>
+  <% if @bookings.empty? %>
+  您目前没有预订记录
+  <% else %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>单号</th>
+        <th>产品</th>
+        <th>时间</th>
+        <th>人数</th>
+        <th>状态</th>
+        <th>选项</th>
+      </tr>
+    </thead>
+    <% @bookings.each do |booking| %>
+    <tr>
+      <th>1</th>
+      <th>1</th>
+      <th>date</th>
+      <th>1</th>
+      <th>OK</th>
+      <th><%= link_to 'Destroy', booking, method: :delete, data: { confirm: '确定删除订单?' } %></th>
+    </tr>
+    <% end %>
+  </table>
+  <% end %>
+</div>
+
+<%#= link_to 'Edit', edit_booking_path(booking) %>

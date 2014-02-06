@@ -1,0 +1,106 @@
+<div id="invitation_code_index"></div>
+
+<!-- Button trigger modal -->
+<a data-toggle="modal" href="#new_invitation_code_form_modal" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i>新建邀请码</a>
+
+<!-- Modal -->
+<div class="modal fade" id="new_invitation_code_form_modal" tabindex="-1" role="dialog" aria-labelledby="modal-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="modal-1">
+          <%= image_tag "plateform_logo_dark.png", alt: "picture", width: "150" %>
+        </h4>
+      </div>
+      <div class="modal-body no-padding">
+
+        <%= form_for :invitation_code, url: admin_invitation_codes_path, :remote => false, :html => {:role => "form", :id => 'xform', :class => "smart-form", :'data-type' => 'js'} do |f| %>
+        <fieldset>
+          <section>
+            <div class="row">
+              <%= f.label :user_class_id, '邀请账户类型', :class => "label col col-2" %>
+              <div class="col col-10">
+                <label class="input"> <i class="icon-append fa fa-user"></i>
+                  <%= f.text_field :user_class_id %>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="row">
+              <%= f.label :user_group_id, '邀请账户权限', :class => "label col col-2" %>
+              <div class="col col-10">
+                <label class="input"> <i class="icon-append fa fa-user"></i>
+                  <%= f.text_field :user_group_id %>
+                </label>
+              </div>
+            </div>
+          </section>
+
+
+        </fieldset>
+
+        <footer>
+          <%= f.submit "新建", :class => "btn btn-primary" %>
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            取消
+          </button>
+
+        </footer>
+        <% end %>
+
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+  function reload_invitation_code_table(){
+    $.ajax({url: '/admin/invitation_codes.js',
+     success: function(data) {
+
+     }
+   });
+  }
+
+  reload_invitation_code_table();
+
+  $('#xform')
+
+  .bind("ajax:beforeSend", function(evt, xhr, settings){
+
+    alert("beforeSend !");
+
+
+  })
+  .bind("ajax:success", function(evt, data, status, xhr){
+
+    alert("success !");
+
+
+  })
+  .bind('ajax:complete', function(evt, xhr, status){
+
+    alert("complete !");
+
+  })
+  .bind("ajax:error", function(evt, xhr, status, error){
+
+
+  });
+
+
+});
+
+</script>

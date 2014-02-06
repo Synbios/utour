@@ -1,0 +1,86 @@
+<h1>Admin::InvitationCodes#new</h1>
+<%= form_for :invitation_code, url: admin_invitation_codes_path, :remote => true, :html => {:role => "form", :id => 'xform', :class => "smart-form"} do |f| %>
+<fieldset>
+  <section>
+    <div class="row">
+      <%= f.label :user_class_id, '邀请账户类型', :class => "label col col-2" %>
+      <div class="col col-10">
+        <label class="input"> <i class="icon-append fa fa-user"></i>
+          <%= f.text_field :user_class_id %>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <%= f.label :user_group_id, '邀请账户权限', :class => "label col col-2" %>
+      <div class="col col-10">
+        <label class="input"> <i class="icon-append fa fa-user"></i>
+          <%= f.text_field :user_group_id %>
+        </label>
+      </div>
+    </div>
+  </section>
+
+</fieldset>
+
+<footer>
+  <%= f.submit "新建", :class => "btn btn-primary" %>
+
+  <button type="button" class="btn btn-default" data-dismiss="modal">
+    取消
+  </button>
+
+</footer>
+<% end %>
+<p id="xxx"></p>
+<script>
+
+$(document).ready(function(){
+
+  $('#xform')
+    .bind("ajax:beforeSend", function(evt, xhr, settings){
+      
+      alert("beforeSend !");
+      
+
+    })
+    .bind("ajax:success", function(evt, data, status, xhr){
+
+      alert("success !");
+      
+
+    })
+    .bind('ajax:complete', function(evt, xhr, status){
+
+      alert("complete !");
+      
+    })
+    .bind("ajax:error", function(evt, xhr, status, error){
+     
+      alert("error !");
+      try {
+        // Populate errorText with the comment errors
+        errors = $.parseJSON(xhr.responseText);
+      } catch(err) {
+        // If the responseText is not valid JSON (like if a 500 exception was thrown), populate errors with a generic error message.
+        errors = {message: "Please reload the page and try again"};
+      }
+
+      // Build an unordered list from the list of errors
+      errorText = "There were errors with the submission: \n<ul>";
+
+      for ( error in errors ) {
+        errorText += "<li>" + error + ': ' + errors[error] + "</li> ";
+      }
+
+      errorText += "</ul>";
+
+      // Insert error list into form
+      alert(errorText);
+    });
+
+
+});
+</script>

@@ -44,6 +44,35 @@ class UserGroup < ActiveRecord::Base
     out
   end
 
+  def self.sub_tree(start_node_id)
+    tree = UserGroup.get_tree
+    return tree if start_node_id == :root
+    node = nil
+    stack = [tree]
+    until !node.nil? || stack.empty?
+      expand = stack.pop
+      if expand[:id] == start_node_id
+        node = expandw
+      else
+        expand[:members].each do |member|
+          stack.push member
+        end
+      end
+    end
+    node
+  end
+
+  def self.to_admin_list(start_node_id = :root)
+    tree = self.sub_tree(start_node_id)
+    out = ""
+    unless tree.nil?
+      out += "<ul>"
+      out += self.render_tree_list(tree)
+      out += "</ul>"
+    end
+    out
+  end
+  
   private
   def check_parent_id
     if parent_id.nil?
@@ -51,5 +80,22 @@ class UserGroup < ActiveRecord::Base
     elsif parent_id != 0 && UserGroup.find_by_id(parent_id).nil?
       errors.add(:parent_id, "上级用户组(parent_id = #{parent_id})不存在")
     end
+  end
+
+  def self.render_tree_list(hash, out="")
+    unless hash.nil?
+      out += "<li>"
+      out += "<span><i class=\"fa fa-lg fa-minus-circle\"></i>#{hash[:name]} (#{hash[:id]})</span>"
+      out += " <a href=\"admin/user_groups/new?parent_id=#{hash[:id]}\">新建</a> <a href='/admin/user_groups/#{hash[:id]}' rel=\"nofollow\" data-method=\"delete\">删除</a>"
+      unless hash[:members].empty?
+        out += "<ul>"
+        hash[:members].each do |member|
+          out = self.render_tree_list(member, out)
+        end
+        out += "</ul>"
+      end
+      out += "</li>"
+    end
+    out
   end
 end
