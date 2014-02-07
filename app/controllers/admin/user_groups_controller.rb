@@ -1,5 +1,6 @@
 class Admin::UserGroupsController < ApplicationController
   before_action :set_user_group, only: [:show, :edit, :update, :destroy]
+  after_action :rebuild_permission_hash, only: [:create, :destroy]
 
   # GET /user_groups
   # GET /user_groups.json
@@ -71,5 +72,9 @@ class Admin::UserGroupsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_group_params
       params.require(:user_group).permit(:name, :parent_id)
+    end
+
+    def rebuild_permission_hash
+      UserGroupPermissionHash.reload
     end
 end

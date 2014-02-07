@@ -1,7 +1,8 @@
 class Admin::PlateformsController < ApplicationController
+  before_action :check_login
 
   def dashboard
-    @account = Account.first
+    @account = current_user
     render 'dashboard', :layout => false
   end
 
@@ -47,6 +48,14 @@ class Admin::PlateformsController < ApplicationController
   end
 
   def account_admin
+    respond_to do |format|
+      format.html { render :layout=>false }
+    end
   end
+
+  private
+    def check_login
+      redirect_to admin_signin_path unless staff_signed_in?
+    end
 
 end

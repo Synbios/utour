@@ -1,0 +1,100 @@
+<!-- Widget ID (each widget will need unique ID)-->
+<div class="jarviswidget jarviswidget-color-blueDark" id="account_table_of_user_class_<%= user_class_id %>" data-widget-editbutton="false">
+  <%# widget options:
+
+  usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+        
+  data-widget-colorbutton="false"
+  data-widget-editbutton="false"
+  data-widget-togglebutton="false"
+  data-widget-deletebutton="false"
+  data-widget-fullscreenbutton="false"
+  data-widget-custombutton="false"
+  data-widget-collapsed="true"
+  data-widget-sortable="false"
+        
+  %>
+  <header>
+   <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+   <h2><%= Account.user_class_name(user_class_id) %>账户列表</h2>
+
+  </header>
+ 
+  <!-- widget div-->
+  <div>
+
+    <!-- widget edit box -->
+    <div class="jarviswidget-editbox">
+    <!-- This area used as dropdown edit box -->
+
+    </div><!-- end widget edit box -->
+
+    <!-- widget content -->
+    <div class="widget-body no-padding">
+
+      <table id="datatable_fixed_column" class="table table-striped table-bordered smart-form account_table">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>权限组</th>
+            <th>电话</th>
+            <th>电子邮箱</th>
+            <th>状态</th>
+          </tr>
+          <tr class="second">
+            <td>
+              <label class="input">
+                <input type="text" name="search_id" value="过滤编号" class="search_init">
+              </label>
+            </td>
+            <td>
+              <label class="input">
+                <input type="text" name="search_used" value="过滤姓名" class="search_init">
+              </label>  
+            </td>
+            <td>
+              <label class="input">
+                <input type="text" name="search_account_id" value="过滤权限" class="search_init">
+              </label>  
+            </td>
+            <td>
+              <label class="input">
+                <input type="text" name="search_user_class_id" value="过滤电话" class="search_init">
+              </label>  
+            </td>
+            <td>
+              <label class="input">
+                <input type="text" name="search_user_group_id" value="过滤电子邮箱" class="search_init">
+              </label>  
+            </td>
+            <td>
+              <label class="input">
+                <input type="text" name="search_created_at" value="过滤状态" class="search_init">
+              </label>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <% accounts.each do |account| %>
+            <tr>
+              <td><%= account.id %></td>
+              <td>
+                <%= account.name %>  
+              </td>
+              <td><%= UserGroup.find_by_id(account.user_group_id).name %></td>
+              <td><%= account.mobile %></td>
+              <td><%= account.email %></td>
+              <td><%= account.active ? "正常" : "未激活" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <!-- end widget content -->
+
+  </div>
+  <!-- end widget div -->
+
+</div>
+<!-- end widget -->

@@ -210,8 +210,8 @@ $(document).ready(function() {
 		// ask verification
 		$.SmartMessageBox({
 			title : "<i class='fa fa-sign-out txt-color-orangeDark'></i> Logout <span class='txt-color-orangeDark'><strong>" + $('#show-shortcut').text() + "</strong></span> ?",
-			content : "You can improve your security further after logging out by closing this opened browser",
-			buttons : '[No][Yes]'
+			content : "注销登录可以保护账户安全, 您确定要注销登录吗？",
+			buttons : '[否][是]'
 
 		}, function(ButtonPressed) {
 			if (ButtonPressed == "Yes") {

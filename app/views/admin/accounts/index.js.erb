@@ -1,0 +1,71 @@
+$('#admin_table').html("<%= escape_javascript( render( partial: 'index', locals: { user_class_id: 1, accounts: @admin_accounts }) )  %>");
+$('#staff_table').html("<%= escape_javascript( render( partial: 'index', locals: { user_class_id: 2, accounts: @staff_accounts }) )  %>");
+$('#trade_table').html("<%= escape_javascript( render( partial: 'index', locals: { user_class_id: 3, accounts: @trade_accounts }) )  %>");
+$('#customer_table').html("<%= escape_javascript( render( partial: 'index', locals: { user_class_id: 4, accounts: @customer_accounts }) )  %>");
+
+
+loadDataTableScripts();
+function loadDataTableScripts() {
+
+	loadScript("assets/smartadmin/plugin/datatables/jquery.dataTables-cust.min.js", dt_2);
+
+	function dt_2() {
+		loadScript("assets/smartadmin/plugin/datatables/ColReorder.min.js", dt_3);
+	}
+
+	function dt_3() {
+		loadScript("assets/smartadmin/plugin/datatables/FixedColumns.min.js", dt_4);
+	}
+
+	function dt_4() {
+		loadScript("assets/smartadmin/plugin/datatables/ColVis.min.js", dt_5);
+	}
+
+	function dt_5() {
+		loadScript("assets/smartadmin/plugin/datatables/ZeroClipboard.js", dt_6);
+	}
+
+	function dt_6() {
+		loadScript("assets/smartadmin/plugin/datatables/media/js/TableTools.min.js", dt_7);
+	}
+
+	function dt_7() {
+		loadScript("assets/smartadmin/plugin/datatables/DT_bootstrap.js", runDataTables);
+	}
+
+}
+
+function runDataTables() {
+
+
+	/* Add the events etc before DataTables hides a column */
+	$(".account_table thead input").keyup(function() {
+		oTable.fnFilter(this.value, oTable.oApi._fnVisibleToColumnIndex(oTable.fnSettings(), $("thead input").index(this)));
+	});
+
+	$(".account_table thead input").each(function(i) {
+		this.initVal = this.value;
+	});
+	$(".account_table thead input").focus(function() {
+		if (this.className == "search_init") {
+			this.className = "";
+			this.value = "";
+		}
+	});
+	$(".account_table thead input").blur(function(i) {
+		if (this.value == "") {
+			this.className = "search_init";
+			this.value = this.initVal;
+		}
+	});   
+
+
+	var oTable = $('.account_table').dataTable({
+		"sDom" : "<'dt-top-row'><'dt-wrapper't><'dt-row dt-bottom-row'<'row'<'col-sm-6'i><'col-sm-6 text-right'p>>",
+    "oLanguage" : {
+     "sSearch" : "Search all columns:"
+   },
+   "bSortCellsTop" : true
+ });   
+
+}

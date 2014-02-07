@@ -2,7 +2,7 @@
 <%= form_for :account, url: accounts_path, :html => {:role => "form", :class => "form-horizontal"} do |f| %>
 
 <%#= hidden_field_tag 'user_class_id', @user_class_id %>
-<input id="user_class_id" name="account[user_class_id]" type="hidden" value="<%= user_class_id %>" />
+<%# input id="user_class_id" name="account[user_class_id]" type="hidden" value="<%= user_class_id %>" /%>
 <div class="form-group">
   <%= f.label :name, '姓名'%>
   <% if @account.present? && @account.errors[:name] %>

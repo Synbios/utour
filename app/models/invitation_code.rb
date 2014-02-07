@@ -18,4 +18,18 @@ class InvitationCode < ActiveRecord::Base
     end
     return { state: state, message: msg }
   end
+
+  def applicable?(account)
+    return false if status[:state] != :ok
+    return false if user_class_id != 1 && account.user_class_id != user_class_id
+    true
+  end
+  def use(account)
+    return false unless applicable?(account)
+    account.update_columns(user_group_id: user_group_id)
+    account.update_columns(user_class_id: user_class_id)
+    self.update_columns(used_by: account.id)
+    self.update_columns(used_at: Time.now)
+    return true
+  end
 end

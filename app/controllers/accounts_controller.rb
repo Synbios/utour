@@ -67,7 +67,7 @@ class AccountsController < ApplicationController
   # POST /accounts.json
   def create
     @account = Account.new(account_params)
-    @account.user_group = 0
+    @account.user_group_id = 0
     if @account.gender == 2
       @account.gender = "女"
     else
@@ -135,7 +135,7 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:name, :mobile, :email, :gender, :wechat_id, :user_group, :password, :password_confirmation, :memory_token, :user_class_id)
+      params.require(:account).permit(:name, :mobile, :email, :gender, :wechat_id, :password, :password_confirmation, :memory_token, :user_class_id)
     end
 
     def signin_filter

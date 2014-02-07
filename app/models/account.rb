@@ -8,7 +8,7 @@ class Account < ActiveRecord::Base
   validates :email, :presence => { :message => "电子邮箱为必填" }, :uniqueness => { :message => "该电子邮箱已被注册" }, :format => { :with => EMAIL_REGEX, :message => "电子邮箱格式非法" } 
   validates :gender, :presence => true, :inclusion => { :in => ["男", "女"], :message => "合法输入为”男“或”女“" }
   validates :wechat_id, :presence => { :message => "微信号为必填" }, :uniqueness => { :message => "该微信号已被注册" }, :length => { :in => 6..30, :message => "微信号至少6位" }
-  validates :user_group, :presence => true
+#  validates :user_group_id, :presence => true
 
   validates :password, :presence => { :message => "密码为必填" }, :confirmation => { :message => "密码不一致" }, :length => { :minimum => 6, :message => "密码至少6位" }
   before_save :encrypt_password
@@ -36,6 +36,15 @@ class Account < ActiveRecord::Base
     end
   end
 
+  def self.authenticate_by_email(email, password)
+    user = find_by_email(email)
+    if user && user.encrypted_password == BCrypt::Engine.hash_secret(password, user.salt)
+      user
+    else
+      nil
+    end
+  end
+
   def Account.new_remember_token
     SecureRandom.urlsafe_base64
   end
@@ -49,18 +58,16 @@ class Account < ActiveRecord::Base
     self.remember_token = Account.encrypt(Account.new_remember_token)
   end
 
-  def admin?
-    if self.user_group == 'admin'
-      return true
-    end
-    return false
-  end
-
   def user_class?(user_class_name)
     return true if self.user_class_id == 1 && user_class_name == :admin
     return true if self.user_class_id == 2 && user_class_name == :staff
     return true if self.user_class_id == 3 && user_class_name == :customer
     return false
+  end
+
+  def staff?
+    return true if user_class_id == 2 || user_class_id == 3
+    false
   end
 
   def activate(activation_code)
@@ -70,7 +77,7 @@ class Account < ActiveRecord::Base
     return "该邀请码已过期" if Date.today > activation_code.expire_time
     return "你的账号不需激活，邀请码未使用" if self.active
     self.active = true;
-    self.user_group = activation_code.user_group
+    self.user_group_id = activation_code.user_group_id
     self.save
     activation_code.used = true;
     activation_code.save
@@ -83,6 +90,14 @@ class Account < ActiveRecord::Base
     return 3 if class_name == :trade
     return 4 if class_name == :customer
     return 0
+  end
+
+  def self.user_class_name(user_class_id)
+    return "管理员" if user_class_id == 1
+    return "员工" if user_class_id == 2
+    return "同行" if user_class_id == 3
+    return "直客" if user_class_id == 4
+    return "其他"
   end
 
 end

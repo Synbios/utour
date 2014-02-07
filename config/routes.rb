@@ -116,6 +116,7 @@ Utour::Application.routes.draw do
       get 'cancel', on: :member
     end
     
+    resources :sessions, only: [:new, :create, :destroy]
 
     get '/', to: 'plateforms#dashboard'
     get '/home', to: 'plateforms#home'
@@ -133,5 +134,8 @@ Utour::Application.routes.draw do
     get '/sale_group_admin', to: 'plateforms#sale_group_admin'
     get '/sale_admin', to: 'plateforms#sale_admin'
 
+      match '/signup',  to: 'accounts#new', via: 'get'
+      match '/signin',  to: 'sessions#new', via: 'get'
+      match '/signout', to: 'sessions#destroy', via: 'delete'
   end
 end

@@ -1,0 +1,30 @@
+<div class="row">
+  <h1 class="page-title txt-color-blueDark"><i class="fa fa-desktop fa-fw "></i> 
+    账户管理
+  </h1>
+</div>
+
+<div id="admin_table"></div>
+
+<div id="staff_table"></div>
+
+<div id="trade_table"></div>
+
+<div id="customer_table"></div>
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+  function reload_account_table(){
+    $.ajax({url: '/admin/accounts.js',
+     success: function(data) {
+
+     }
+   });
+  };
+
+  reload_account_table();
+});
+
+</script>

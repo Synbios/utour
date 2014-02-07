@@ -24,6 +24,13 @@ module SessionsHelper
     return false
   end
 
+  def staff_signed_in?
+    user = current_user
+    return false if user.nil?
+    return false unless user.staff?
+    true
+  end
+
 	def current_user
     remember_token = Account.encrypt(cookies[:memory_token])
     @current_user ||= Account.find_by(memory_token: remember_token)

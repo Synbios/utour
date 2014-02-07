@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131173426) do
+ActiveRecord::Schema.define(version: 20140206151813) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20140131173426) do
     t.string   "email"
     t.string   "gender"
     t.string   "wechat_id"
-    t.integer  "user_group"
+    t.integer  "user_group_id"
     t.string   "encrypted_password"
     t.string   "salt"
     t.string   "memory_token"

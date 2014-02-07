@@ -47,7 +47,7 @@
 		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon"> -->
 
 		<!-- GOOGLE FONT -->
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+		<!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700"> -->
 
 		<%= csrf_meta_tags %>
 	</head>
@@ -144,7 +144,7 @@
 
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
-					<span> <a href="login.html" title="Sign Out"><i class="fa fa-sign-out"></i></a> </span>
+					<span><%= link_to admin_signout_path, method: "delete" do %><i class="fa fa-sign-out"></i><% end %> </span>
 				</div>
 				<!-- end logout button -->
 
@@ -451,7 +451,7 @@
                 <a href="admin/account_control.html">权限</a>
               </li>
               <li>
-                <a href="admin/account_admin">账户</a>
+                <a href="admin/account_admin.html">账户</a>
               </li>
             </ul>
           </li>
@@ -566,7 +566,7 @@
     <%= javascript_include_tag "jquery-2.0.2.min", "data-turbolinks-track" => true %>
 		<script>
 			if (!window.jQuery) {
-				document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+				document.write('<script src="/assets/jquery-2.0.2.min.js"><\/script>');
 			}
 		</script>
 
@@ -574,7 +574,7 @@
     <%= javascript_include_tag "jquery-ui-1.10.3.min", "data-turbolinks-track" => true %>
 		<script>
 			if (!window.jQuery.ui) {
-				document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+				document.write('<script src="/assets/jquery-ui-1.10.3.min.js"><\/script>');
 			}
 		</script>
 
@@ -651,18 +651,18 @@
 
 		<!-- Your GOOGLE ANALYTICS CODE Below -->
 		<script type="text/javascript">
-			var _gaq = _gaq || [];
-				_gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-				_gaq.push(['_trackPageview']);
+			// var _gaq = _gaq || [];
+			// 	_gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+			// 	_gaq.push(['_trackPageview']);
 			
-			(function() {
-				var ga = document.createElement('script');
-				ga.type = 'text/javascript';
-				ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0];
-				s.parentNode.insertBefore(ga, s);
-			})();
+			// (function() {
+			// 	var ga = document.createElement('script');
+			// 	ga.type = 'text/javascript';
+			// 	ga.async = true;
+			// 	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			// 	var s = document.getElementsByTagName('script')[0];
+			// 	s.parentNode.insertBefore(ga, s);
+			// })();
 
 		</script>
 
