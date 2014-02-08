@@ -1,0 +1,5 @@
+<% if @shelf.nil? %>
+<%= render partial: "admin/shelves/index", locals: { shelves: @shelves } %>
+<% else %>
+<%= render partial: "admin/shelves/form", locals: { shelf: @shelf } %>
+<% end %>

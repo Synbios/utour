@@ -17,7 +17,9 @@ class WechatWebsController < ApplicationController
 
   # 团队行程
   def group_travel
-  	@tours = Tour.where('tour_type' => "group")
+  	@tours = Tour.all
+    @root = JSON.parse Shelf.find_by_name("团队行程").rack
+    @set = ["团队行程"]
   end
 
   # 自由行
@@ -26,11 +28,13 @@ class WechatWebsController < ApplicationController
 
   # 同业动态
   def trade
-    account = account_filter(:trade, :all)
-    if account.nil?
+    account = trade_or_staff?
+    puts ">>>>>>>>>>>>>>> #{account}"
+    if account.nil? # 要求登录
       redirect_to :controller=> 'sessions', :action => 'new', :user_class => 'trade'
     else
-      redirect_to activate_show_account_path(account) if account.active != 1
+      puts ">>>>>>>>>>>>>>>>>>#{account.active} >>>>>>>>>>>>>>>>>>>#{activate_show_account_path(account)}"
+      redirect_to activate_show_account_path(account) if account.active == false # 要求注册码激活
     end
   end
 
@@ -55,13 +59,5 @@ class WechatWebsController < ApplicationController
   end
 
   private
-  def store_location
-    if request.get?
-      #puts ">>>>>>>>>>>>>>>>>> STORE LOCATION: #{request.url} = #{request.protocol} #{request.host_with_port} #{request.fullpath}"
-      session[:return_to] = request.url
-    else
-      session[:return_to] = request.referer
-    end
-  end
 
 end

@@ -1,0 +1,102 @@
+<div class="jarviswidget jarviswidget-color-blue" id="new_date_and_price_form" data-widget-editbutton="false">
+
+  <header>
+    <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+    <h2>添加价格和时间</h2>
+
+  </header>
+
+
+  <div><!-- widget div-->
+
+
+    <div class="jarviswidget-editbox"><!-- widget edit box --><!-- This area used as dropdown edit box -->
+
+
+    </div><!-- end widget edit box -->
+
+
+    <div class="widget-body"><!-- widget content -->
+      <%= form_for [:admin, @date_and_price], :html => {:role => "form", :id => 'xform', :class => "smart-form"} do |f| %>
+      <fieldset>
+
+        <section>
+          <div class="row">
+            <%= f.label :tour_id, '线路编号', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input"></i>
+                <%= f.text_field :tour_id, value: tour.id, readonly: true %>
+              </label>
+              <h4 style="margin-top: 5px">名称: <%= tour.name %></h4>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="row">
+            <%= f.label :departure_date, '出发日期', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input"><i class="icon-append fa fa-calendar"></i>
+                <%= f.text_field :departure_date, id: "depature_date", class: "datepicker", :'data-dateformat' => 'mm/dd/yy', placeholder: "例如 2014-01-01" %>
+              </label>
+            </div>
+          </div>
+        </section>
+
+      </fieldset>
+
+      <fieldset>
+
+
+
+
+        <section>
+          <div class="form-group">
+            <%= f.label :retail_price, '直客价格', :class => "col-md-2 control-label" %>
+            <div class="col-md-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                <%= f.text_field :retail_price, class: "form-control" %>
+              </div>
+              
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="form-group">
+            <%= f.label :trade_price, '同行价格', :class => "col-md-2 control-label" %>
+            <div class="col-md-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                <%= f.text_field :trade_price, class: "form-control" %>
+              </div>
+              
+            </div>
+          </div>
+        </section>
+
+
+
+      </fieldset>
+
+      <footer>
+        <%= f.submit "提交", :class => "btn btn-primary" %>
+      </footer>
+      <% end %>
+    </div><!-- end widget content -->
+
+
+  </div><!-- end widget div -->
+
+
+</div>
+
+<script>
+
+  // $(function() {
+  //   $( "#depature_date" ).datepicker();
+  // });
+
+
+</script>

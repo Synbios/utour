@@ -91,7 +91,7 @@ Utour::Application.routes.draw do
   #   concern :toggleable do
   #     post 'toggle'
   #   end
-  #   resources :posts, concerns: :toggleable
+  #   resources :posts, concerns: :toggleablep
   #   resources :photos, concerns: :toggleable
 
   # Example resource route within a namespace:
@@ -107,6 +107,7 @@ Utour::Application.routes.draw do
     resources :bookings
     resources :user_groups
     resources :date_and_prices
+    resources :shelves
 
     resources :feature_tag_connections, only: [:new, :create, :destroy, :index]
     resources :feature_tags, only: [:new, :create, :destroy, :index]
@@ -129,10 +130,15 @@ Utour::Application.routes.draw do
 
     get '/account_admin', to: 'plateforms#account_admin'
     get '/new_tour', to: 'plateforms#new_tour'
-    get '/tour_admin', to: 'plateforms#tour_admin'
+    get '/edit_tour', to: 'plateforms#edit_tour'
+    get '/index_tour', to: 'plateforms#index_tour'
 
-    get '/sale_group_admin', to: 'plateforms#sale_group_admin'
-    get '/sale_admin', to: 'plateforms#sale_admin'
+    get '/new_shelf', to: 'plateforms#new_shelf'
+    get '/edit_shelf', to: 'plateforms#edit_shelf'
+    get '/index_shelf', to: 'plateforms#index_shelf'
+
+    get '/tag_control', to: 'plateforms#tag_control'
+    get 'date_and_price_control', to: 'plateforms#date_and_price_control'
 
       match '/signup',  to: 'accounts#new', via: 'get'
       match '/signin',  to: 'sessions#new', via: 'get'

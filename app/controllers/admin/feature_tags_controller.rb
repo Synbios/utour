@@ -1,5 +1,5 @@
 class Admin::FeatureTagsController < ApplicationController
-  before_action :set_feature_tag, only: [:new, :destroy]
+  before_action :set_feature_tag, only: [:destroy]
   def index
   	@feature_tags = FeatureTag.all
   end
@@ -10,27 +10,26 @@ class Admin::FeatureTagsController < ApplicationController
 
   def create
     @feature_tag = FeatureTag.new(feature_tag_params)
-    respond_to do |format|
-      if @feature_tag.save
-        format.html {
-          render 'index'
-        }
+    if @feature_tag.save
+        redirect_to '/admin#admin/tag_control.html'
       else
-        format.html { render 'new' }
+        flash.now[:error] = @feature_tag.errors.full_messages
+        redirect_to '/admin#admin/tag_control.html'
       end
-    end
   end
 
   def destroy
+    @feature_tag.destroy
+    redirect_to '/admin#admin/tag_control.html'
   end
 
   private
-    def set_feature_tags
-      @account = FeatureTag.find(params[:id])
+    def set_feature_tag
+      @feature_tag = FeatureTag.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feature_tag_params
-      params.require(:account).permit(:name, :depth)
+      params.require(:feature_tag).permit(:name)
     end
 end

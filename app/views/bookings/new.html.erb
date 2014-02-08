@@ -10,8 +10,15 @@
       </div>
     </div>
     
-    <p class="head_text">日本6日游日本6</p>
-    <div class="alert alert-warning info_text">2014年1月2日 -【编号：AAAAA】</div>
+    
+    <% if @tour.nil? %>
+      <p class="head_text">错误：请先选择团队的时间和价格</p>
+      <div class="alert alert-warning info_text">错误：无法获取预订信息</div>
+    <% else %>
+      <p class="head_text"><%= @tour.name %></p>
+      <div class="alert alert-warning info_text">出发日期: <%= @date_and_price.departure_date %> - 团号:<%= @tour.id %> </div>
+    <% end %>
+    
 
     <%= render 'form' %>
     <div class="booking_links">

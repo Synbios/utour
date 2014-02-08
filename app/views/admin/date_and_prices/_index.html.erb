@@ -1,0 +1,51 @@
+<div class="jarviswidget jarviswidget-color-blue" id="wid-date_and_prices" data-widget-editbutton="false">
+
+  <header>
+    <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+    <h2><%= tour.name %>【编号: <%= tour.id %>】的日期和价格列表</h2>
+
+  </header>
+
+
+  <div><!-- widget div-->
+
+
+    <div class="jarviswidget-editbox"><!-- widget edit box --><!-- This area used as dropdown edit box -->
+
+
+    </div><!-- end widget edit box -->
+
+
+    <div class="widget-body"><!-- widget content -->
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>出发日期</th>
+            <th>同行价</th>
+            <th>直客价</th>
+         </tr>
+        </thead>
+        <tbody>
+          <% tour.date_and_prices.each do |date_and_price| %>
+          <tr>
+            <td><%= date_and_price.id %></td>
+            <td><%= date_and_price.departure_date %></td>
+            <td><%= date_and_price.trade_price %></td>
+            <td><%= date_and_price.retail_price %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <br/>
+      <%= link_to "返回行程列表", "/admin#admin/date_and_price_control.html", class: "btn btn-warning" %>
+      <%= link_to "添加新价格", "/admin#admin/date_and_price_control.html?tour_id=#{tour.id}&date_and_price_id=new", class: "btn btn-primary" %>
+
+
+    </div><!-- end widget content -->
+
+
+  </div><!-- end widget div -->
+
+
+</div>

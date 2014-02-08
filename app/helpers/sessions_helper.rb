@@ -27,7 +27,7 @@ module SessionsHelper
   def staff_signed_in?
     user = current_user
     return false if user.nil?
-    return false unless user.staff?
+    return false unless user.staff? || user.admin?
     true
   end
 
@@ -41,6 +41,7 @@ module SessionsHelper
     cookies.delete(:memory_token)
   end
 
+  # 
   def account_filter(user_class_name, user_group)
     account = current_user
     return nil if account.nil?
@@ -48,4 +49,36 @@ module SessionsHelper
     return nil unless user_group == :all
     return account
   end
+
+  def trade_or_staff?
+    account = current_user
+    return account if !account.nil? && (account.trade? || account.staff? || account.admin? )
+    nil
+  end
+
+  def inspect_right(tour)
+    account = current_user
+    if account.nil?
+      return :customer
+    elsif
+      user_group_ids = tour.tour_group.split
+      user_group_ids.each do |id|
+        return :trade if UserGroupPermissionHash.where(user_group_id: id, allowed_user_group_id: account.user_group_id).present?
+      end
+      return :customer
+    else
+      return :customer
+    end
+  end
+
+  def store_location   
+    session[:return_to] = request.original_url
+  end  
+  
+  # Redirect to the URI stored by the most recent store_location call or  
+  # to the passed default.  
+  def redirect_back_or_default(default=root_url)  
+    redirect_to(session[:return_to] || default)  
+    session[:return_to] = nil  
+  end 
 end

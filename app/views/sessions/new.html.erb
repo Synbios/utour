@@ -1,15 +1,20 @@
-<div class="container">
+<div class="container session_mobile_container">
+  <div class="session_trade_login">
+    <div class="user_card">
+      <%= image_tag "umonster.png", alt: "", class: "portray" %>
+      <div class="caption">
+        <%= link_to "我要注册", new_account_path(), class: "btn btn-warning full_width" %>
 
-  <div class="session_login_window well">
-    <h2>请先登录</h2>
+        <p class="apollo-seperator"> 或 </p>
+        <%= render "sessions/new/form" %>
+      </div>
+    </div>
 
     <% if flash[:error].present? %>
     <div class="alert alert-danger">
       <%= flash[:error] %>
     </div>
     <% end %>
-
-    <%= render "sessions/new/form" %>
+    
   </div>
 </div>
-

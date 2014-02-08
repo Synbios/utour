@@ -2,206 +2,80 @@
 <% render "left_links" %>
 <% end %>
 
+
+
 <div class="container lion">
   <div class="head">
     <%= image_tag "legacy/carousel/le_0.jpg", alt: "picture", style: "width:100%" %>
   </div>
-  
-  <div class="group_travel_menu">
-    <div id="continent_panel" class="accordion-group panel-group">
 
+
+
+
+  <div class="group_travel_menu">
+    <% if !@root["members"].empty? %>
+    <div id="<%= @root["members"].object_id %>" class="accordion-group panel-group">
+
+      <% @root["members"].each do |one| %><!-- level one loop -->
+      <% @set.push one["name"] %>
       <div class="panel panel-primary">
-        <div class="panel-heading whole_heading_link">  
-          <a data-toggle="collapse" data-parent="#continent_panel" href="#asia">
+        <div class="panel-heading whole_heading_link">
+          <a data-toggle="collapse" data-parent="#<%= @root["members"].object_id %>" href="#<%= one.object_id %>">
             <h2 class="panel-title">
-              亚洲行程
+              <%= one["name"] %>
             </h2>
           </a>
         </div>
-        <div id="asia" class="panel-collapse collapse">
-          <div class="panel-body menu_body_1" >
+        <div id="<%= one.object_id %>" class="panel-collapse collapse">
+          <div class="panel-body menu_body_1">
 
+            <% if !one["members"].empty? %>
+            <div id="<%= one["members"].object_id %>" class="panel-group">
 
-
-            <div class="panel-group" id="asia_country_panel">
+              <% one["members"].each do |two| %><!-- level two loop -->
+              <% @set.push two["name"] %>
               <div class="panel panel-success">
                 <div class="panel-heading whole_heading_link">                  
-                  <a data-toggle="collapse" data-parent="#asia_country_panel" href="#japan">
+                  <a data-toggle="collapse" data-parent="#<%= one["members"].object_id %>" href="#<%= two.object_id %>">
                     <h3 class="panel-title">
-                      日本                    
+                      <%= two["name"] %>                    
                     </h3>
                   </a>
                 </div>
-                <div id="japan" class="panel-collapse collapse">
+                <div id="<%= two.object_id %>" class="panel-collapse collapse">
                   <div class="panel-body menu_body_2" >
-
-
-
-
-                    <% if @tours.any?{|tour| tour.tour_group == "japan"} %>
-                    <div class="list-group menu_list">
-                      <% @tours.each do |tour| %>
-                      <% if tour.tour_group ==  "japan" %>
-
-
-                      <div class="list-group-item">
-                        <div class="row">
-                          <div class="col-xs-9 col-sm-9 col-md-10" style="padding:5px">
-                            <h4 class="list-group-item-heading"><%= tour.name %></h4>
-                            <p class="list-group-item-text"><%= tour.description %></p>
-                          </div>
-                          <div class="col-xs-3 col-sm-3 col-md-2" style="padding:5px">
-                            <a href="/tours/1/legacy" class="btn btn-warning btn-sm" style="width: 100%; margin-bottom: 2px; color: white; padding: 5px 2px">详 <span class="glyphicon glyphicon-chevron-right" style="color: white"></span></a>
-                            <button class="btn btn-info btn-sm" data-toggle="collapse" data-target="#xyz" style="width:100%;color: white; padding: 5px 2px">订 <span class="glyphicon glyphicon-chevron-down" style="color: white"></span></button>
-                          </div>
-                        </div>
-                        
-                      </div>
-                      
-
-
-                       <div id="xyz" class="panel panel-default collapse">
-                        <table class="table table-striped" style="background-color: white; padding: 5px;">
-                          <tr>
-                            <th>日期</th>
-                            <th>单人价</th>
-                            <th>余位数</th>
-                          </tr>
-                          <tr>
-                            <td style="text-decoration: line-through;">14.02.28</td>
-                            <td>￥5,000 <span class="label label-primary">同行</span></td>
-                            <td><span class="label label-warning">已满</span></td>
-                          </tr>
-                          <tr>
-                            <td>14.03.01</td>
-                            <td>￥5,000 <span class="label label-primary">同行</span></td>
-                            <td><a href="">报名(>9)</a></td>
-                          </tr>
-                          <tr>
-                            <td>14.02.03</td>
-                            <td>￥5,000 <span class="label label-primary">同行</span></td>
-                            <td><a href="">报名(>9)</a></td>
-                          </tr>
-                        </table>
-                        <div class="row" style="width:100%; margin: 5px 0;">  
-                          <a class="col-xs-4 col-xs-offset-1 btn btn-success btn-sm" style="padding: 5px">word版</a>
-                          <a class="col-xs-4 col-xs-offset-2 btn btn-warning btn-sm" style="padding: 5px">协议</a>
-                        </div>
-                        
-                      </div>
-                      <% end %>
-                      <% end %>
-                    </div>
+                    <% tours = @tours.select { |tour| (@set & tour.tour_type.split) == @set } %>
+                    
+                    <% if !tours.empty? %>
+                    <%= render partial: 'tour_list', locals: { tours: tours } %>
                     <% else %>
-                      暂无
+                    暂无
                     <% end %>
+
                   </div>
                 </div>
               </div>
-
-              <div class="panel panel-info">
-                <div class="panel-heading whole_heading_link">
-                  <a data-toggle="collapse" data-parent="#asia_country_panel" href="#korea">
-                    <h3 class="panel-title">
-                      韩国
-                    </h3>
-                  </a>
-                </div>
-                <div id="korea" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    暂无
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="panel panel-info">
-                <div class="panel-heading whole_heading_link">
-                  <a data-toggle="collapse" data-parent="#asia_country_panel" href="#thailand">
-                    <h3 class="panel-title">
-                      泰国
-                    </h3>
-                  </a>
-                </div>
-                <div id="thailand" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    暂无
-                  </div>
-                </div>
-              </div>
+              <% @set.pop %>          
+              <% end %><!-- end level two loop -->
 
             </div>
-
-
-          </div>
-        </div>
-      </div>
-
-      <div class="panel panel-primary">
-        <div class="panel-heading whole_heading_link">
-          <a data-toggle="collapse" data-parent="#continent_panel" href="#europe">
-            <h2 class="panel-title">
-              欧洲行程
-            </h2>
-          </a>
-        </div>
-        <div id="europe" class="panel-collapse collapse">
-          <div class="panel-body">
+            <% else %>
+            <% tours = @tours.select { |tour| (@set & tour.tour_type.split) == @set } %>
+            <% if !tours.empty? %>
+            <%= render partial: 'tour_list', locals: { tours: tours } %>
+            <% else %>
             暂无
-          </div>
-        </div>
-      </div>
+            <% end %>
 
-      <div class="panel panel-primary">
-        <div class="panel-heading whole_heading_link">
-          <a data-toggle="collapse" data-parent="#continent_panel" href="#america">
-            <h2 class="panel-title">
-              美洲行程
-            </h2>
-          </a>
-        </div>
-        <div id="america" class="panel-collapse collapse">
-          <div class="panel-body">
-            暂无
+            <% end %>
           </div>
         </div>
       </div>
-
-      <div class="panel panel-primary">
-        <div class="panel-heading whole_heading_link">
-          <a data-toggle="collapse" data-parent="#continent_panel" href="#australia">
-            <h2 class="panel-title">
-              澳新行程
-            </h2>
-          </a>
-        </div>
-        <div id="australia" class="panel-collapse collapse">
-          <div class="panel-body">
-            暂无
-          </div>
-        </div>
-      </div>
-
-      <div class="panel panel-primary">
-        <div class="panel-heading whole_heading_link">
-          <a data-toggle="collapse" data-parent="#continent_panel" href="#africa">
-            <h2 class="panel-title">
-              非洲行程
-            </h2>
-          </a>
-        </div>
-        <div id="africa" class="panel-collapse collapse">
-          <div class="panel-body">
-            暂无
-          </div>
-        </div>
-      </div>
+      <% @set.pop %>
+      <% end %><!-- end level one loop -->
 
     </div>
+    <% else %>
+    <h3>本业没有内容</h3>
+    <% end %>
   </div>
-</div>
-
-
-<script>
-
-</script>

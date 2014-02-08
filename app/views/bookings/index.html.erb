@@ -1,33 +1,53 @@
-<h1>Listing bookings</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Departure date</th>
-      <th>Number of people</th>
-      <th>Package</th>
-      <th>Tour</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @bookings.each do |booking| %>
+<div class="container lion">
+  <div id="booking_list">
+    <div class="booking_list_head">
+      <h2>我的订单</h2>
+    </div>
+    <% if @booking.nil? || @booking.empty? %>
+    <div class="notice">
+      <h3>没有订单</h3>
+    </div>
+    <% else %>
+    <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= booking.departure_date %></td>
-        <td><%= booking.number_of_people %></td>
-        <td><%= booking.package_id %></td>
-        <td><%= booking.tour_id %></td>
-        <td><%= link_to 'Show', booking %></td>
-        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-        <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>订单号</th>
+        <th>团队名称</th>
+        <th>人数(大+小)</th>
+        <th>出发日期</th>
+        <th>估计价格(人)</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @bookings.each do |booking| %>
+      <% date_and_price = DateAndPrice.find_by_id(booking.date_and_price_id) %>
+      <% tour = Tour.find_by_id(date_and_price.tour_id) %>
+      <tr>
+        <td><%= booking.id %></td>
+        <td><%= tour.name %></td>
+        <td><%= booking.number_of_adults %> + <%= booking.number_of_children %></td>
+        <td><%= date_and_price.departure_date %></td>
+        <td>
+          <% if inspect_right(tour) == :trade %>
+            <%= date_and_price.retail_price %>
+          <% else %>
+            <%= date_and_price.retail_price %> <span class="label label-primary">同行</span><br />
+            <%= date_and_price.trade_price %><span class="label label-warning">直客</span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to "取消", booking_path(booking), method: "delete", data: { confirm: "确定删除订单吗?"}, class: "btn btn-sm btn-primary" %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+  </div>
 
-<%= link_to 'New Booking', new_booking_path %>
+  
+</div>
+
+

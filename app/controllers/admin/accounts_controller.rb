@@ -56,6 +56,7 @@ class Admin::AccountsController < ApplicationController
     end
   end
 
+  
   private
     def account_params
       params.require(:account).permit(:name, :mobile, :email, :gender, :wechat_id, :password, :password_confirmation, :memory_token)

@@ -1,0 +1,92 @@
+<div class="jarviswidget jarviswidget-color-blue" id="new_tour_form" data-widget-editbutton="false">
+
+  <header>
+    <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+    <h2>新建/修改线路</h2>
+
+  </header>
+
+
+  <div><!-- widget div-->
+
+
+    <div class="jarviswidget-editbox"><!-- widget edit box --><!-- This area used as dropdown edit box -->
+
+
+    </div><!-- end widget edit box -->
+
+
+    <div class="widget-body"><!-- widget content -->
+      <%= form_for [:admin, @tour], :html => {:role => "form", :id => 'xform', :class => "smart-form"} do |f| %>
+      <fieldset>
+
+        <section>
+          <div class="row">
+            <%= f.label :name, '线路名称', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input"> <i class="icon-append fa fa-user"></i>
+                <%= f.text_field :name %>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="row">
+            <%= f.label :description, '线路简介', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="textarea">
+                <%= f.text_area :description, :rows => 3 %>
+              </label>
+            </div>
+          </div>
+        </section>
+
+      </fieldset>
+
+      <fieldset>
+        <section>
+        <div class="row">
+            <%= f.label :tour_group, '用户组', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input">
+                <%= f.text_field :tour_group, :placeholder => "目前只支持手工收入用户组, 不同权限请用空格隔开, 如 \"成都同行 重庆同行 内江同行\", 不能识别的名字将自动忽略", :value => UserGroup.convert_id_string_to_name_string(@tour.tour_group) %>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section>
+        <div class="row">
+            <%= f.label :tour_type, '标签', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input">
+                <%= f.text_field :tour_type, :placeholder => "目前只支持手工收入标签, 不同标签请用空格隔开, 如 \"日本 夕阳红 大城小镇\", 不能识别的名字将自动忽略" %>
+              </label>
+            </div>
+          </div>
+        </section>
+      </fieldset>
+
+      <fieldset>
+        <div class="row">
+            <%= f.label :content, '线路内容', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="textarea">
+                <%= f.text_area :content, :placeholder => "目前只支持添加手工上传的图片。图片名请用英文并按以下格式添加图片: { images: [\"pic_1.jpg\", \"pic_2.jpg\", \"pic_3.jpg\"] }", :rows => 20 %>
+              </label>
+            </div>
+          </div>
+      </fieldset>
+
+      <footer>
+        <%= f.submit "提交", :class => "btn btn-primary" %>
+      </footer>
+      <% end %>
+    </div><!-- end widget content -->
+
+
+  </div><!-- end widget div -->
+
+
+</div>

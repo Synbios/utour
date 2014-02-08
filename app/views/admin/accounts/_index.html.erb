@@ -82,7 +82,7 @@
               <td>
                 <%= account.name %>  
               </td>
-              <td><%= UserGroup.find_by_id(account.user_group_id).name %></td>
+              <td><%= UserGroup.find_by_id(account.user_group_id).name if UserGroup.find_by_id(account.user_group_id).present? %></td>
               <td><%= account.mobile %></td>
               <td><%= account.email %></td>
               <td><%= account.active ? "正常" : "未激活" %></td>

@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  attr_accessor :password, :activation_code
+  attr_accessor :password, :activation_code, :is_trade
 
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i
   MOBILE_REGEX = /\A\d{11}\z/
@@ -14,7 +14,10 @@ class Account < ActiveRecord::Base
   before_save :encrypt_password
   after_save :clear_password
 
-  has_many :invitation_codes
+  has_many :invitation_codes, foreign_key: :issued_by
+  has_many :bookings
+  has_many :tours
+  has_one :user_group
 
   def encrypt_password
     if password.present?
@@ -98,6 +101,43 @@ class Account < ActiveRecord::Base
     return "同行" if user_class_id == 3
     return "直客" if user_class_id == 4
     return "其他"
+  end
+
+  def trade?
+    return true if self.user_class_id == 3
+    false
+  end
+
+  def set_trade
+    self.user_class_id = 3
+  end
+
+  def set_staff
+    self.user_class_id = 2
+  end
+
+  def set_customer
+    self.user_class_id = 4
+  end
+
+  def set_admin
+    self.user_class_id = 1
+  end
+
+
+  def staff?
+    return true if self.user_class_id == 2
+    false
+  end
+
+  def customer?
+    return true if self.user_class_id == 4
+    false
+  end
+
+  def admin?
+    return true if self.user_class_id == 1
+    false
   end
 
 end

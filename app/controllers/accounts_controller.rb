@@ -20,13 +20,14 @@ class AccountsController < ApplicationController
   # GET /accounts/new
   def new
     @account = Account.new
-    if params[:user_class] == "trade"
-      render 'accounts/new/trade', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:trade) } 
-    elsif params[:user_class] == "staff"
-      render 'accounts/new/staff', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:staff) } 
-    else #params[:user_class] == "customer"
-      render 'accounts/new/customer', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:customer) } 
-    end
+    # if params[:user_class] == "trade"
+    #   render 'accounts/new/trade', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:trade) } 
+    # elsif params[:user_class] == "staff"
+    #   render 'accounts/new/staff', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:staff) } 
+    # else #params[:user_class] == "customer"
+    #   render 'accounts/new/customer', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:customer) } 
+    # end
+    render 'accounts/new'
   end
 
   # GET /accounts/activate_show
@@ -40,19 +41,24 @@ class AccountsController < ApplicationController
   def activate
     @account = Account.find_by_wechat_id(params[:account][:wechat_id])
     if @account.present?
-      code = InvitationCode.find_by_account_id(@account.id)
+      code = InvitationCode.find_by_code(params[:account][:activation_code])
       if code.present? == false
         @account.errors.add(:activation_code, '该邀请码无效') 
         render 'activate_show'
-      elsif code.used
-        @account.errors.add(:activation_code, '该邀请码已被使用请填入其他激活码') 
-        render activate_show_account_path(account)
-      elsif Date.today > code.expire_time
-        @account.errors.add(:activation_code, '该邀请码已过期请重新申请') 
-        render activate_show_account_path(account)
-      else 
-        flash.now[:notice] = account.activate(code)
-        redirect_back_or_default
+      elsif code.status[:state] != :ok
+        #puts ">>>>>>>>>>>>>>>>>>#{code.status}"
+        @account.errors.add(:activation_code, code.status[:message])
+        render 'activate_show'
+      # elsif code.used
+      #   @account.errors.add(:activation_code, '该邀请码已被使用请填入其他激活码') 
+      #   render activate_show_account_path(account)
+      # elsif Date.today > code.expire_time
+      #   @account.errors.add(:activation_code, '该邀请码已过期请重新申请') 
+      #   render activate_show_account_path(account)
+      else
+        code.use(@account)
+        flash.now[:notice] = "账户验证成功"
+        redirect_to root_url
       end
     else
       render text: "WECHAT_ID #{params[:wechat_id]} not found"
@@ -73,32 +79,45 @@ class AccountsController < ApplicationController
     else
       @account.gender = "男"
     end
-    if @account.user_class_id == Account.find_user_class_id_by_name(:trade)
+    if @account.is_trade == "1"
       @account.active = false
-    elsif @account.user_class_id == Account.find_user_class_id_by_name(:customer)
+      @account.set_trade
+    else
       @account.active = true
-    else # by customer by default
-      @account.active = true
+      @account.set_customer
     end
 
     respond_to do |format|
       if @account.save
         format.html {
           sign_in @account
-          redirect_to activate_show_account_path(@account), notice: '新用户申请成功' if @account.user_class_id == Account.find_user_class_id_by_name(:trade)
-        }
-        format.json { render action: 'show', status: :created, location: @account }
-      else
-        format.html {
-          if @account.user_class_id == Account.find_user_class_id_by_name(:trade)
-            render 'accounts/new/trade', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:trade) } 
-          elsif @account.user_class_id == Account.find_user_class_id_by_name(:staff)
-            render 'accounts/new/staff', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:staff) } 
-          else #params[:user_class] == "customer"
-            render 'accounts/new/customer', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:customer) } 
+          #puts ">>>>>>>>>> #{@account.user_class_id} #{@account.user_class_id == 3} #{@account.user_class_id == '3'} #{@account.trade?} >>>>>>>>>>>> #{activate_show_account_path(@account)} "
+          if @account.trade?
+
+            redirect_to activate_show_account_path(@account), notice: '新用户申请成功'
+          else
+            # address = session.delete(:return_to)
+            # unless address.nil?
+            #   redirect_to address
+            # else
+            #   redirect_to root_url
+            # end 
+            redirect_to root_url
           end
         }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
+        #format.json { render action: 'show', status: :created, location: @account }
+      else
+        format.html {
+          # if @account.user_class_id == Account.find_user_class_id_by_name(:trade)
+          #   render 'accounts/new/trade', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:trade) } 
+          # elsif @account.user_class_id == Account.find_user_class_id_by_name(:staff)
+          #   render 'accounts/new/staff', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:staff) } 
+          # else #params[:user_class] == "customer"
+          #   render 'accounts/new/customer', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:customer) } 
+          # end
+          render 'accounts/new'
+        }
+        #format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -135,7 +154,7 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:name, :mobile, :email, :gender, :wechat_id, :password, :password_confirmation, :memory_token, :user_class_id)
+      params.require(:account).permit(:name, :mobile, :email, :gender, :wechat_id, :password, :password_confirmation, :memory_token, :is_trade)
     end
 
     def signin_filter

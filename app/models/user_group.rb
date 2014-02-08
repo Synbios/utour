@@ -3,6 +3,8 @@ class UserGroup < ActiveRecord::Base
   validate :check_parent_id
 
   has_many :user_group_permission_hashes
+  has_many :accounts
+  has_many :invitation_codes
 
   # return a hash of user group hierarchy
   # note: this method requires polynomial database lookups avoid using it when possible
@@ -73,7 +75,28 @@ class UserGroup < ActiveRecord::Base
     out
   end
   
-  private
+
+  def self.convert_name_string_to_id_string(name_string)
+    return "" if name_string.nil?
+    ids = []
+    name_string.split.each do |name|
+      id = UserGroup.find_by_name(name)
+      ids.push id.id if id.present?
+    end
+    return ids.join(" ")
+  end
+
+  def self.convert_id_string_to_name_string(id_string)
+    return "" if id_string.nil?
+    names = []
+    id_string.split.each do |id|
+      name = UserGroup.find_by_id(id)
+      names.push name.name if name.present?
+    end
+    return names.join(" ")
+  end
+
+private
   def check_parent_id
     if parent_id.nil?
       errors.add(:parent_id, "缺少上级用户组")

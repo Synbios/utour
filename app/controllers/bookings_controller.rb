@@ -1,10 +1,18 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :check_login, only: [:new]
+
 
   # GET /bookings
   # GET /bookings.json
   def index
-    @bookings = Booking.all
+    @account = current_user
+    if @account.nil?
+      store_location
+      redirect_to :controller=> 'sessions', :action => 'new'
+    else
+      @bookings = @account.bookings
+    end
   end
 
   def account_specific_index
@@ -18,6 +26,11 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
+    if params[:date_and_price_id].present?
+      @booking.date_and_price_id = params[:date_and_price_id]
+      @date_and_price = DateAndPrice.find_by_id(params[:date_and_price_id])
+      @tour = Tour.find_by_id(@date_and_price.tour_id)
+    end
   end
 
   # GET /bookings/1/edit
@@ -28,13 +41,15 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
+    @booking.number_of_adults = 0 if @booking.number_of_adults.nil?
+    @booking.number_of_children = 0 if @booking.number_of_children.nil?
 
     respond_to do |format|
       if @booking.save
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @booking }
+        format.json { render action: 'index' }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to action: 'new', date_and_price_id: @booking.date_and_price_id }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end
@@ -60,7 +75,6 @@ class BookingsController < ApplicationController
     @booking.destroy
     respond_to do |format|
       format.html { redirect_to bookings_url }
-      format.json { head :no_content }
     end
   end
 
@@ -72,6 +86,13 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:departure_date, :number_of_people, :package_id, :tour_id)
+      params.require(:booking).permit(:number_of_adults, :number_of_children, :date_and_price_id, :comment)
+    end
+
+    def check_login
+      unless signed_in?
+        store_location
+        redirect_to :controller=> 'sessions', :action => 'new'
+      end
     end
 end
