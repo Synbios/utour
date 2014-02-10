@@ -43,9 +43,12 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.number_of_adults = 0 if @booking.number_of_adults.nil?
     @booking.number_of_children = 0 if @booking.number_of_children.nil?
+    @booking.account_id = currrent_user.account_id
 
     respond_to do |format|
       if @booking.save
+        # WexchatMailer.booking_notice(@booking.account)
+        WexchatMailer.booking_notice_staff(@booking.account, Account.find_by_id(15), Booking.first).deliver
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
         format.json { render action: 'index' }
       else

@@ -5,24 +5,24 @@
   <div id="tour_slider" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-      <li data-target="#tour_slider" data-slide-to="0" class="active"></li>
-      <li data-target="#tour_slider" data-slide-to="1"></li>
-      <li data-target="#tour_slider" data-slide-to="2"></li>
-      <li data-target="#tour_slider" data-slide-to="3"></li>
-      <li data-target="#tour_slider" data-slide-to="4"></li>
-      <li data-target="#tour_slider" data-slide-to="5"></li>
-      <li data-target="#tour_slider" data-slide-to="6"></li>
+      <% (0 .. @pictures.size-1).each do |i| %>
+      <% if i == 0 %>
+        <li data-target="#tour_slider" data-slide-to="<%= i %>" class="active"></li>
+      <% else %>
+        <li data-target="#tour_slider" data-slide-to="<%= i %>"></li>
+      <% end %>
+      <% end %>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
-      <div class="item active"><%= image_tag "day1.jpg", alt: "picture" %></div>
-      <div class="item"><%= image_tag "day2.jpg", alt: "picture" %></div>
-      <div class="item"><%= image_tag "day3.jpg", alt: "picture" %></div>
-      <div class="item"><%= image_tag "day4.jpg", alt: "picture" %></div>
-      <div class="item"><%= image_tag "day5.jpg", alt: "picture" %></div>
-      <div class="item"><%= image_tag "day6.jpg", alt: "picture" %></div>
-      <div class="item"><%= image_tag "day7.jpg", alt: "picture" %></div>
+      <% (0 .. @pictures.size-1).each do |i| %>
+      <% if i == 0 %>
+        <div class="item active"><%= image_tag "/images/tours/#{@pictures[i]}", alt: "抱歉, 无法显示行程图片..." %></div>
+      <% else %>
+        <div class="item"><%= image_tag "/images/tours/#{@pictures[i]}", alt: "抱歉, 无法显示行程图片..." %></div>
+      <% end %>
+      <% end %>
     </div>
 
     <!-- Controls -->

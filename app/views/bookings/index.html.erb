@@ -3,9 +3,9 @@
     <div class="booking_list_head">
       <h2>我的订单</h2>
     </div>
-    <% if @booking.nil? || @booking.empty? %>
-    <div class="notice">
-      <h3>没有订单</h3>
+    <% if @bookings.nil? || @bookings.empty? %>
+    <div class="alert alert-warning">
+      <h4>没有订单</h4>
     </div>
     <% else %>
     <table class="table table-striped">

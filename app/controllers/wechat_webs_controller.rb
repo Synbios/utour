@@ -24,6 +24,10 @@ class WechatWebsController < ApplicationController
 
   # 自由行
   def diy
+    @tours = Tour.all
+    @root = JSON.parse Shelf.find_by_name("自由行").rack
+    @set = ["自由行"]
+    render 'group_travel'
   end
 
   # 同业动态
@@ -56,6 +60,21 @@ class WechatWebsController < ApplicationController
 
   # 特别推荐
   def sale
+    @tours = Tour.all
+    @root = JSON.parse Shelf.find_by_name("特惠行程").rack
+    @set = ["特惠行程"]
+    render 'group_travel'
+  end
+
+  def contact
+    @account = current_user
+  end
+
+  def feedback
+    WexchatMailer.contact_message(params[:name], params[:contact], params[:content]).deliver
+    @account = current_user
+    @message = "您的问题已提交, 我们会尽快与您联系."
+    render 'contact'
   end
 
   private

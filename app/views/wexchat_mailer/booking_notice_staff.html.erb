@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <div class="container" style="margin: 0 auto; width: 800px">
+    <div style="width: 100%">
+      <img alt="picture" src="http://http://23.92.27.216/public/images/company_mail_header.jpg" style="100%">
+    </div>
+    <div class="content" style="100%">
+      <p style="margin-left: 20px">亲爱的<%= @staff.name %>：</p>
+      <p style="margin-left: 20px">
+        客户<%= @customer.name %>(<%= "同行" if @customer.trade? %><%= "直客" if @customer.customer? %>)预订了<%= @booking.date_and_price.departure_date %> <%= @booking.date_and_price.tour.name %>, 预订人数为大人<%= @booking.number_of_adults %>人，小孩<%= @booking.number_of_children %>人, 请尽快处理.
+      </p>
+        <br />
+        <h4>预订信息</h4>
+        <table border="1" style="margin-left: 60px">
+          <tr>
+            <th>预定编号</th>
+            <th>预订产品</th>
+            <th>预订人数</th>
+            <th>出发日期</th>
+            <th>预订日期</th>
+            <th>预订价格</th>
+            <th>客户备注</th>
+          </tr>
+          <tr>
+            <td><%= @booking.id %></td>
+            <td><strong>【团号: <%= @booking.date_and_price.tour.id %>】</strong>@booking.date_and_price.tour.name</td>
+            <td>大人 <%= @booking.number_of_adults %>, 小孩 <%= @booking.number_of_children %></td>
+            <td><%= @booking.date_and_price.departure_date %></td>
+            <td><%= @booking.created_at %></td>
+            <% if @customer.trade? %>
+              <td><%= @booking.date_and_price.trade_price %> (同行)</td>
+            <% else %>
+            <td><%= @booking.date_and_price.retail_price %></td>
+            <% end %>
+            <td>
+              <% if @booking.comment.present? %>
+              <%= @booking.comment %>
+              <% else %>
+              无备注
+              <% end %>
+            </td>
+          </tr>
+        </table>
+        <h4>客户<strong><%= @customer.name %></strong>的联系方式如下</h4>
+        <table border="0" style="margin-left: 60px">
+          <tr>
+            <td><%= @customer.name %>的性别为：</td>
+            <td><strong><%= @customer.gender %></strong></td>
+          </tr>
+          <tr>
+            <td><%= @customer.name %>的微信号为：</td>
+            <td><strong><%= @customer.wechat_id %></strong></td>
+          </tr>
+          <tr>
+            <td><%= @customer.name %>的手机号为：</td>
+            <td><strong><%= @customer.mobile %></strong></td>
+          </tr>
+          <tr>
+            <td><%= @customer.name %>的邮箱为：</td>
+            <td><strong><%= @customer.email %></strong></td>
+          </tr>
+        </table>
+
+      <p style="margin-left: 20px">该预订在管理平台的链接请点<a>这里</a>。</p>
+      <p style="margin-left: 20px">谢谢！</p>
+    </div>
+
+    <div style="width: 100%; height: 20px; background-color: #dcdddd"></div>
+  </div>
+</body>
+</html>

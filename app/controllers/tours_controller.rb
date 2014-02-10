@@ -2,7 +2,7 @@ class ToursController < ApplicationController
   layout "lion"
   before_action :check_privilege, except: [:show]
   #before_action :store_location, except: [:show]
-  before_action :set_tour, only: [:show, :edit, :update, :destroy]
+  before_action :set_tour, only: [:show, :edit, :update, :destroy, :legacy]
 
   # GET /tours
   # GET /tours.json
@@ -16,6 +16,7 @@ class ToursController < ApplicationController
   end
 
   def legacy
+    @pictures = JSON.parse(@tour.content)["images"]
     render 'legacy', layout: 'application'
   end
 

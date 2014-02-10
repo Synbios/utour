@@ -51,6 +51,9 @@ Utour::Application.routes.draw do
   match '/lion/group_travel', to: 'wechat_webs#group_travel', via: 'get'
   match '/lion/visa', to: 'wechat_webs#visa', via: 'get'
   match '/lion/trade', to: 'wechat_webs#trade', via: 'get'
+  match '/lion/contact', to: 'wechat_webs#contact', via: 'get'
+  match '/lion/feedback', to: 'wechat_webs#feedback', via: 'post'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
