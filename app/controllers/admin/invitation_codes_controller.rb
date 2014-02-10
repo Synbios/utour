@@ -1,4 +1,4 @@
-require 'SecureRandom'
+#require 'SecureRandom'
 
 class Admin::InvitationCodesController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:create]
@@ -13,7 +13,8 @@ class Admin::InvitationCodesController < ApplicationController
     @code.used_by = nil
     @code.used_at = nil
     @code.cancelled = false
-    @code.code = SecureRandom.hex(4)
+    #@code.code = SecureRandom.hex(4)
+    @code.code = (rand * 10000000000).to_i.to_s
     @code.expire_time = Time.now + 7.days 
 
     respond_to do |format|
