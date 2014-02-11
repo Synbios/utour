@@ -34,7 +34,7 @@
 
 		<%= csrf_meta_tags %>
 	</head>
-	<body class="">
+	<body class="fixed-header fixed-ribbon fixed-navigation">
 		<!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
 		<!-- HEADER -->
@@ -368,7 +368,8 @@
 		<!-- PAGE RELATED PLUGIN(S) 
 		<script src="..."></script>-->
 
-		
+		<%= javascript_include_tag "demo", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "app", "data-turbolinks-track" => true %>
 
 		<script type="text/javascript">
 		

@@ -16,4 +16,4 @@
 //= require bootstrap
 //= require jquery.mobile.touch.min
 //= require smartadmin
-//= require demo
+

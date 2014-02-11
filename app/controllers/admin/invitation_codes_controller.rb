@@ -8,8 +8,16 @@ class Admin::InvitationCodesController < ApplicationController
   end
 
   def create
-  	@code = InvitationCode.new(invitation_code_params)
-    @code.issued_by = 1
+  	#@code = InvitationCode.new(invitation_code_params)
+    @code = InvitationCode.new
+    if params[:invitation_code][:user_group_id] =~ /\A[0-9]+\Z/
+      @code.user_group_id = params[:invitation_code][:user_group_id]
+    elsif params[:invitation_code][:user_group_id].present?
+      user_group = UserGroup.find_by_name(params[:invitation_code][:user_group_id])
+      @code.user_group_id = user_group.id if user_group.present? 
+    end
+    @code.user_class_id = params[:invitation_code][:user_class_id]
+    @code.issued_by = current_user.id
     @code.used_by = nil
     @code.used_at = nil
     @code.cancelled = false
