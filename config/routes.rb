@@ -53,6 +53,9 @@ Utour::Application.routes.draw do
   match '/lion/trade', to: 'wechat_webs#trade', via: 'get'
   match '/lion/contact', to: 'wechat_webs#contact', via: 'get'
   match '/lion/feedback', to: 'wechat_webs#feedback', via: 'post'
+  match '/lion/diy', to: 'wechat_webs#diy', via: 'get'
+  match '/lion/sale', to: 'wechat_webs#sale', via: 'get'
+  match '/lion/guide', to: 'wechat_webs#guide', via: 'get'
 
 
   # Example of regular route:
