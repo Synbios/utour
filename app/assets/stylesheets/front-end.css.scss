@@ -1,0 +1,543 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require bootstrap
+ *= require bootstrap3-switch
+ *= require font-awesome
+ *= require slidebars
+ *= require demo
+ */
+
+/* GLOBAL CSS */
+ .has-switch label { 
+   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+ }
+ .full_width { width: 100% }
+
+ .form_window {
+   h2 { text-align: center; }
+ }
+
+ .copyright {
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+}
+
+/* account.css */
+
+.container-full {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.field_with_errors {
+
+}
+.inline_error_message {
+  color: red;
+}
+
+.account_new {
+  margin-left: 0;
+  margin-right: 0;
+  background-color: #fff;
+  h2 {
+    text-align: center;
+    margin: 10px;
+  }
+}
+
+.trade_activation
+{
+  max-width: 800px;
+  h2 
+  {
+    text-align: center;
+  }
+}
+
+/*
+.activation_box
+{
+  border:2px dashed #ccc;
+  margin: 0 50px;
+  padding: 20px;
+}
+*/
+
+/* booking.css */
+#booking_page {
+  .booking_head {
+    background-color: #F2F2F2;
+    padding: 15px;
+    margin: 0 -15px 15px -15px;
+    h2 {
+      margin: 0;
+      text-align: center;
+    }
+  }
+  
+  img {
+    margin: 20px auto 30px auto;
+    width: 100%;
+  }
+
+  .head_text {
+    color: #9F1B32;
+    font-size: 24px;
+    text-align: center;
+  }
+  .info_text {
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+    width: auto;
+  }
+  .booking_links {
+    text-align: center;
+
+  }
+}
+
+#account_specific_index {
+  
+}
+
+#booking_list {
+  h2 {
+    text-align: center;
+  }
+
+  table td { vertical-align: middle; }
+}
+
+/* lion.css */
+.lion {
+  max-width: 800px;
+  background-color: #fff;
+}
+.head
+{
+  margin: 0 -15px;
+}
+
+.tile_menu
+{
+  padding: 10px 0 0 0;  
+}
+
+.tile-cust-blue{ background-color: #3399ff }
+.full_tile { width: 100%; }
+
+.tile_title {
+  font-size: 14px;
+  text-align: left;
+  margin-top: 2px;
+}
+
+.menu_icon {
+  width: 40px;
+  height: 40px;
+}
+
+.menu_company_icon {
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* main menu bar */
+#main_nav
+{
+  background-color: transparent;
+  border-style: none;
+  div.collapse
+  {
+    padding: 0;
+  }
+}
+.navicon-line {
+  width: 100%;
+  height: 4px;
+  border-radius: 1px;
+  margin-bottom: 4px;
+  background-color: #fff;
+}
+
+.sb-toggle-left {
+  width: 35px;
+  float: left;
+  padding: 6px 5px 3px 5px;
+  margin: 5px 10px;
+  background-color: #563d7c;
+  border-radius: 2px;
+}
+
+.sb-toggle-right {
+  width: 35px;
+  float: right;
+  padding: 0;
+  margin: 5px 10px;
+//  background-color: #563d7c;
+//  border-radius: 2px;
+}
+
+/* left sidebar */
+
+ul.sb-nav {
+  list-style-type: none;
+}
+
+ul.sb-nav li {
+  width: 100%;
+  padding: 14px;
+  border-top: 1px solid #303030;
+  border-bottom: 1px solid #1C1C1C;
+}
+
+ul.sb-nav li:first-child {
+  border-top: none;
+}
+
+ul.sb-nav li:last-child {
+  border-bottom: none;
+}
+
+
+.log_in_card {
+  width: 100%;
+  padding: 0 15px;
+  margin-top: 40px;
+  p { 
+    margin: 20px 0;
+    text-align: center;
+  }
+}
+
+.log_in_card form { margin: 0 15px }
+
+/* right sidebar */
+
+.user_card {
+  width: 100%;
+  padding: 0 15px;
+  margin-top: 40px;
+
+  hr { border-color: #1C1C1C; }
+
+  p { 
+    margin: 20px 0;
+    text-align: center;
+  }
+
+}
+
+.user_card a { margin: 10px 0;}
+
+.user_card form { margin: 0 15px }
+
+/* both */
+
+/* Slidebar Type */
+
+.sb-slidebar, .sb-slidebar h3 {
+  color: #F0F0F0;
+}
+
+.sb-slidebar ul.sb-nav a li{
+  color: #DEDEDE;
+}
+
+.sb-slidebar ul.sb-nav li a {
+  color: #DEDEDE;
+}
+
+.sb-slidebar ul.sb-nav li a:hover {
+  color: #C7C7C7;
+  text-decoration: none;
+}
+
+.sb-slidebar ul.sb-nav li span:hover {
+  color: #C7C7C7;
+}
+
+.sb-slidebar .portray {
+  width: 120px;
+  margin: 0 auto 0 auto;
+  display: block;
+}
+
+/* session.css */
+.session_login_window {
+  h2 { text-align: center; }
+}
+
+.session_mobile_container {
+  max-width: 800px;
+
+  .form-horizontal .form-group{
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.user_card .portray {
+  width: 180px;
+  margin: 30px auto 30px auto;
+  display: block;
+//  background-color: #eee
+
+}
+.apollo-seperator {
+  position: relative;
+  display: block;
+  margin: 10px 0 10px 0;
+  text-align: center;
+  color: #666;
+}
+
+.apollo-seperator:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 43%;
+  border-bottom: 1px solid #cccccc;
+}
+.apollo-seperator:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 43%;
+  border-bottom: 1px solid #cccccc;
+}
+
+/* tour.css */
+$indicator_color: #CC0099;
+
+#classic {
+  max-width: 600px;
+  margin: 0 auto;
+  .head_image {
+    width: 100%;
+  }
+}
+
+
+///////////////////////////////////////////////////////////
+
+#legacy_window {
+  left: 0;
+  top: 0;
+  padding: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #999
+}
+#tour_slider{
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+
+  .carousel-indicators li {
+    border: 1px solid $indicator_color;
+  }
+  .carousel-indicators .active {
+    background-color: $indicator_color;
+  }
+
+  .carousel-inner {
+    height: 100%;
+  }
+
+  .carousel-inner .item { 
+    position: fixed;
+    height: 100%;
+    width: 100%;
+  }
+
+  .carousel-inner .item img { 
+    margin: 0 auto;
+    height: 100%;
+  }
+
+}
+
+/* user_group.css */
+//$tree_border_color_normal = 
+
+.user_group_tree_view ul {
+  padding-top: 20px; position: relative;
+  
+  -transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+
+.user_group_tree_view li {
+  float: left; text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 20px 5px 0 5px;
+  
+  -transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+
+/* We will use ::before and ::after to draw the connectors */
+
+.user_group_tree_view li::before, .user_group_tree_view li::after{
+  content: '';
+  position: absolute; top: 0; right: 50%;
+  border-top: 3px solid #ccc;
+  width: 50%; height: 20px;
+}
+.user_group_tree_view li::after{
+  right: auto; left: 50%;
+  border-left: 3px solid #ccc;
+}
+
+/* We need to remove left-right connectors from elements without any siblings */
+.user_group_tree_view li:only-child::after, .user_group_tree_view li:only-child::before {
+  display: none;
+}
+
+/* Remove space from the top of single children */
+.user_group_tree_view li:only-child{ padding-top: 0;}
+
+/* Remove left connector from first child and right connector from last child */
+.user_group_tree_view li:first-child::before, .user_group_tree_view li:last-child::after{
+  border: 0 none;
+}
+/* Adding back the vertical connector to the last nodes */
+.user_group_tree_view li:last-child::before{
+  border-right: 3px solid #ccc;
+  border-radius: 0 5px 0 0;
+  -webkit-border-radius: 0 5px 0 0;
+  -moz-border-radius: 0 5px 0 0;
+}
+.user_group_tree_view li:first-child::after{
+  border-radius: 5px 0 0 0;
+  -webkit-border-radius: 5px 0 0 0;
+  -moz-border-radius: 5px 0 0 0;
+}
+
+/* Time to add downward connectors from parents */
+.user_group_tree_view ul ul::before{
+  content: '';
+  position: absolute; top: 0; left: 50%;
+  border-left: 3px solid #ccc;
+  width: 0; height: 20px;
+}
+
+/*.user_group_tree_view li a{
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #666;
+  font-family: arial, verdana, tahoma;
+  font-size: 11px;
+  display: inline-block;
+  
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  
+  -transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}*/
+
+/*Time for some hover effects*/
+/*We will apply the hover effect the the lineage of the element also*/
+/*.user_group_tree_view li a:hover, .tree li a:hover+ul li a {
+  background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
+}*/
+/*Connector styles on hover*/
+.user_group_tree_view li a:hover+ul li::after, 
+.user_group_tree_view li a:hover+ul li::before, 
+.user_group_tree_view li a:hover+ul::before, 
+.user_group_tree_view li a:hover+ul ul::before{
+  border-color: #B8860B;
+  border-width: 3px;
+}
+
+/* wechat_web.css */
+.group_travel_menu {
+  margin-top: 10px;
+}
+
+.whole_heading_link {
+  a, a:hover {
+    text-decoration: none;
+    h2 {
+      color: #FFFFFF;
+      font-size: 22px;
+      text-align: center;
+    }
+    h3 {
+      color: #31708F;
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+}
+.menu_body_1 { padding: 5px; }
+.menu_body_2 { padding: 0px; }
+.menu_list { margin: 0 }
+
+.visa {
+  margin-top: 20px;
+  h2 { 
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+
+
+.visa .col-xs-4 {
+  padding: 0 5px;
+  .thumbnail {
+    h3 { 
+      text-align: center;
+      font-size: 18px;
+      margin: 10px auto;
+    }
+  }
+}
+
+.lion .trade {
+  margin-top: 20px;
+}

@@ -9,12 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require bootstrap
+ *= require bootstrap3-switch
+ *= require font-awesome
  *= require_tree .
  */
-
-@import "bootstrap";
-@import "bootstrap3-switch";
-@import "font-awesome";
 
  .has-switch label { 
    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "UTOUR成都众信" %>">
   <title><%= content_for?(:title) ? yield(:title) : "Utour" %></title>
-  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "jquery.mobile.touch.min.js", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "front-end", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "front-end", media: "all", "data-turbolinks-track" => true %>
   <%= yield(:stylesheet) %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
 

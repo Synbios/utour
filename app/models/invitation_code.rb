@@ -1,7 +1,7 @@
 class InvitationCode < ActiveRecord::Base
 
   belongs_to :account, primary_key: :issued_by
-  has_one :user_group
+  belongs_to :user_group
   # check the code's current status
   # ok, used, expired, cancelled and a chinese message
   def status

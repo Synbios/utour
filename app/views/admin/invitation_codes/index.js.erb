@@ -2,30 +2,30 @@ $('#invitation_code_index').html("<%= escape_javascript( render( partial: 'index
 loadDataTableScripts();
 function loadDataTableScripts() {
 
-	loadScript("assets/smartadmin/plugin/datatables/jquery.dataTables-cust.min.js", dt_2);
+	loadScript("javascripts/plugin/datatables/jquery.dataTables-cust.min.js", dt_2);
 
 	function dt_2() {
-		loadScript("assets/smartadmin/plugin/datatables/ColReorder.min.js", dt_3);
+		loadScript("javascripts/plugin/datatables/ColReorder.min.js", dt_3);
 	}
 
 	function dt_3() {
-		loadScript("assets/smartadmin/plugin/datatables/FixedColumns.min.js", dt_4);
+		loadScript("javascripts/plugin/datatables/FixedColumns.min.js", dt_4);
 	}
 
 	function dt_4() {
-		loadScript("assets/smartadmin/plugin/datatables/ColVis.min.js", dt_5);
+		loadScript("javascripts/plugin/datatables/ColVis.min.js", dt_5);
 	}
 
 	function dt_5() {
-		loadScript("assets/smartadmin/plugin/datatables/ZeroClipboard.js", dt_6);
+		loadScript("javascripts/plugin/datatables/ZeroClipboard.js", dt_6);
 	}
 
 	function dt_6() {
-		loadScript("assets/smartadmin/plugin/datatables/media/js/TableTools.min.js", dt_7);
+		loadScript("javascripts/plugin/datatables/media/js/TableTools.min.js", dt_7);
 	}
 
 	function dt_7() {
-		loadScript("assets/smartadmin/plugin/datatables/DT_bootstrap.js", runDataTables);
+		loadScript("javascripts/plugin/datatables/DT_bootstrap.js", runDataTables);
 	}
 
 }

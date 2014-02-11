@@ -95,7 +95,7 @@
               </td>
               <td><%= Account.find_by_id(code.issued_by).name %></td>
               <td><%= code.user_class_id %></td>
-              <td><%= code.user_group_id %></td>
+              <td><%= code.user_group.name unless code.user_group.nil? %></td>
               <td><%= code.created_at %></td>
               <td><%= code.code %></td>
             </tr>
