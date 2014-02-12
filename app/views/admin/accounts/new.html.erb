@@ -17,16 +17,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<!-- Basic Styles -->
-		<%= stylesheet_link_tag "font-awesome.min", media: "all", "data-turbolinks-track" => true %>
-		<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-
-
-		<!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-		<%= stylesheet_link_tag "smartadmin/smartadmin-production", media: "all", "data-turbolinks-track" => true %>
-		<%= stylesheet_link_tag "smartadmin/smartadmin-skins", media: "all", "data-turbolinks-track" => true %>
-
-		<%= javascript_include_tag "smartadmin/app", "data-turbolinks-track" => true %>
+		<%= stylesheet_link_tag "back-end", media: "all", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag "back-end", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
 
 	</head>
 	<body id="login" class="animated fadeInDown">
@@ -190,6 +183,8 @@
 			
 			<![endif]-->
 
+    <%= javascript_include_tag "demo", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "app", "data-turbolinks-track" => true %>
 			<!-- MAIN APP JS FILE -->
 
 			<script type="text/javascript">
