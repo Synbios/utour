@@ -1,35 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-</head>
-<body>
-  <div class="container" style="margin: 0 auto; width: 800px">
-    <div style="width: 100%">
-      <img alt="picture" src="http://http://23.92.27.216/public/images/company_mail_header.jpg" style="100%">
-    </div>
-    <div class="content" style="100%">
-      <p style="margin-left: 20px">亲爱的客户经理</p>
-      <p style="margin-left: 20px">
-        最近访问微信网的客户<%= @name %>提交咨询表:
-      </p>
-        <br />
-        <table border="1" style="margin-left: 60px">
-          <tr>
-            <th>咨询人</th>
-            <th>联系方式(电话或邮件)</th>
-            <th>咨询内容</th>
-          </tr>
-          <tr>
-            <td><%= @name %></td>
-            <td><%= @contact %></td>
-            <td><%= @content %></td>
-          </tr>
-        </table>
-      <p style="margin-left: 20px">请尽快答复, 谢谢！</p>
-    </div>
-
-    <div style="width: 100%; height: 20px; background-color: #dcdddd"></div>
-  </div>
-</body>
-</html>
+<p style="margin-left: 20px">亲爱的客户经理</p>
+<p style="margin-left: 20px">
+  最近访问微信网的客户<%= @name %>提交咨询表:
+</p>
+<br />
+<table border="1" style="margin-left: 60px">
+  <tr>
+    <th>咨询人</th>
+    <th>联系方式(电话或邮件)</th>
+    <th>咨询内容</th>
+  </tr>
+  <tr>
+    <td><%= @name %></td>
+    <td><%= @contact %></td>
+    <td><%= @content %></td>
+  </tr>
+</table>
+<p style="margin-left: 20px">请尽快答复, 谢谢！</p>

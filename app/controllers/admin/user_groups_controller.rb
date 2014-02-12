@@ -1,6 +1,6 @@
 class Admin::UserGroupsController < ApplicationController
   before_action :set_user_group, only: [:show, :edit, :update, :destroy]
-  after_action :rebuild_permission_hash, only: [:create, :destroy]
+  #after_action :rebuild_permission_hash, only: [:create, :destroy]
 
   # GET /user_groups
   # GET /user_groups.json
@@ -30,10 +30,13 @@ class Admin::UserGroupsController < ApplicationController
 
     respond_to do |format|
       if @user_group.save
+        rebuild_permission_hash
+        format.json { render json: @code, status: :ok }
         format.html { redirect_to '/admin#admin/account_control.html', notice: '成功建立新用户组' }
         #format.json { render action: 'show', status: :created, location: @user_group }
       else
         format.html { render action: 'new' }
+        format.json { render json: @user_group.errors, status: :failed }
         #format.json { render json: @user_group.errors, status: :unprocessable_entity }
       end
     end
@@ -57,6 +60,7 @@ class Admin::UserGroupsController < ApplicationController
   # DELETE /user_groups/1.json
   def destroy
     @user_group.destroy
+    rebuild_permission_hash
     respond_to do |format|
       format.html { redirect_to '/admin#admin/account_control.html', notice: '成功删除新用户组' }
       format.json { head :no_content }

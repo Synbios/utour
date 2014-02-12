@@ -1197,7 +1197,7 @@ function loadURL(url, container) {
 		cache : true, // (warning: this will cause a timestamp and will call the request twice)
 		beforeSend : function() {
 			// cog placed
-			container.html('<h1><i class="fa fa-cog fa-spin"></i> Loading...</h1>');
+			container.html('<h1><i class="fa fa-cog fa-spin"></i>读取中...</h1>');
 
 			// Only draw breadcrumb if it is main content material
 			// TODO: see the framerate for the animation in touch devices
@@ -1246,7 +1246,7 @@ function drawBreadCrumb() {
 
 	//console.log("breadcrumb")
 	$("#ribbon ol.breadcrumb").empty();
-	$("#ribbon ol.breadcrumb").append($("<li>Home</li>"));
+	$("#ribbon ol.breadcrumb").append($("<li>众信微分销</li>"));
 	$('nav li.active > a').each(function() {
 		$("#ribbon ol.breadcrumb").append($("<li></li>").html($.trim($(this).clone().children(".badge").remove().end().text())));
 	});

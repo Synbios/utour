@@ -89,6 +89,11 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if @account.save
+        if @account.is_trade == "1"
+          WexchatMailer.trader_welcome_email(@account).deliver
+        else
+          WexchatMailer.customer_welcome_email(@account).deliver
+        end
         format.html {
           sign_in @account
           #puts ">>>>>>>>>> #{@account.user_class_id} #{@account.user_class_id == 3} #{@account.user_class_id == '3'} #{@account.trade?} >>>>>>>>>>>> #{activate_show_account_path(@account)} "

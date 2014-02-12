@@ -28,7 +28,7 @@ class Admin::InvitationCodesController < ApplicationController
     respond_to do |format|
       if @code.save
         format.js
-        format.json {render json: @code, status: :ok }
+        format.json { render json: @code, status: :ok }
         format.html { redirect_to '/admin#admin/invitation_code_control.html' }
       else
         format.json { render json: @code.errors, status: :failed }

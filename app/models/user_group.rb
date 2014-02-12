@@ -108,8 +108,18 @@ private
   def self.render_tree_list(hash, out="")
     unless hash.nil?
       out += "<li>"
-      out += "<span><i class=\"fa fa-lg fa-minus-circle\"></i>#{hash[:name]} (#{hash[:id]})</span>"
-      out += " <a href=\"admin/user_groups/new?parent_id=#{hash[:id]}\">新建</a> <a href='/admin/user_groups/#{hash[:id]}' rel=\"nofollow\" data-method=\"delete\">删除</a>"
+      if hash[:members].empty?
+        out += "<span> #{hash[:name]}</span>"
+      else
+        out += "<span><i class=\"fa fa-lg fa-minus-circle\"></i> #{hash[:name]}</span>"
+      end
+      
+      #<a href=\"admin/user_groups/new?parent_id=#{hash[:id]}\">新建</a>
+      if hash[:id] == 0
+        out += " <button onclick=\"new_user_group(#{hash[:id]}, '#{hash[:name]}')\", class=\"btn btn-primary btn-sm\">添加</button>"
+      else
+        out += " <button onclick=\"new_user_group(#{hash[:id]}, '#{hash[:name]}')\", class=\"btn btn-primary btn-sm\">添加</button> <a href='/admin/user_groups/#{hash[:id]}' rel=\"nofollow\" data-method=\"delete\" class=\"btn btn-danger btn-sm\">删除</a>"
+      end
       unless hash[:members].empty?
         out += "<ul>"
         hash[:members].each do |member|
