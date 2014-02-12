@@ -107,7 +107,9 @@ class AccountsController < ApplicationController
             # else
             #   redirect_to root_url
             # end 
-            redirect_to root_url
+            
+            #redirect_to root_url
+            redirect_back_or_default
           end
         }
         #format.json { render action: 'show', status: :created, location: @account }

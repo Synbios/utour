@@ -27,6 +27,7 @@ Utour::Application.routes.draw do
   match '/signup',  to: 'accounts#new', via: 'get'
   match '/signin',  to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
+  match '/signout', to: 'sessions#destroy', via: 'get'
 
   match '/legacy/home', to: 'legacies#home', via: 'get'
 
