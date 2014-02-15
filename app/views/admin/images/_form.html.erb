@@ -1,0 +1,48 @@
+<%#= form_for [:admin, image], :remote => true, :html => {:role => "form", :id => id, :multipart => true, :class => "smart-form", :'data-type' => 'json' } do |f| %>
+<%= form_for [:admin, image], :html => {:role => "form", :id => id, :multipart => true, :class => "smart-form" } do |f| %>
+<% if flash[:error].present? %>
+<p><%= flash[:error] %></p>
+<% end %>
+<fieldset>
+  <section>
+    <div class="row">
+      <%= f.label :name, '图片名称', :class => "label col col-2" %>
+      <div class="col col-10">
+        <label class="input"></i>
+          <%= f.text_field :name, placeholder: "注意: 1. 名字切勿太长. 2. 不要空格和符号. 2. 将来可以凭此检索" %>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <%= f.label :description, '图片简介', :class => "label col col-2" %>
+      <div class="col col-10">
+        <label class="input">
+          <%= f.text_field :description, placeholder: "介绍和备注以资参考" %>
+        </label>
+      </div>
+    </div>
+  </section>
+
+</fieldset>
+
+<fieldset>
+  <section>
+    <div class="row">
+      <%= f.label :photo, '上传图片', :class => "label col col-2" %>
+      <div class="col col-10">
+        <label class="input">
+          <%= f.file_field :photo %>
+        </label>
+      </div>
+    </div>
+  </section>
+
+</fieldset>
+
+<footer>
+  <%= f.submit "提交", :class => "btn btn-primary" %>
+</footer>
+<% end %>

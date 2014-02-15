@@ -56,6 +56,8 @@ gem 'actionpack-xml_parser', github: 'rails/actionpack-xml_parser'
 gem 'therubyracer'
 gem 'metro-ui-rails'
 
+gem "paperclip", "~> 3.0"
+
 group :development do
   gem 'rails_layout'
   gem 'capistrano'

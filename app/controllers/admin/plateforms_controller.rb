@@ -118,6 +118,14 @@ class Admin::PlateformsController < ApplicationController
     end
   end
 
+  def image_admin
+    @image = Image.new
+    @images = Image.all
+    respond_to do |format|
+      format.html { render :layout=>false }
+    end
+  end
+
   private
     def check_login
       redirect_to admin_signin_path unless staff_signed_in?

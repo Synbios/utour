@@ -1,4 +1,8 @@
 Utour::Application.routes.draw do
+  get "images/index"
+  get "images/show"
+  get "images/create"
+  get "images/destroy"
   resources :date_and_prices
 
   resources :tours do
@@ -119,6 +123,7 @@ Utour::Application.routes.draw do
     resources :feature_tag_connections, only: [:new, :create, :destroy, :index]
     resources :feature_tags, only: [:new, :create, :destroy, :index]
     resources :invitation_codes, only: [:new, :create, :destroy, :index]
+    resources :images, only: [:create, :destroy, :index]
 
     resources :invitation_codes do |invitation_code|
       get 'cancel', on: :member
@@ -145,7 +150,8 @@ Utour::Application.routes.draw do
     get '/index_shelf', to: 'plateforms#index_shelf'
 
     get '/tag_control', to: 'plateforms#tag_control'
-    get 'date_and_price_control', to: 'plateforms#date_and_price_control'
+    get '/date_and_price_control', to: 'plateforms#date_and_price_control'
+    get '/image_admin', to: 'plateforms#image_admin'
 
       match '/signup',  to: 'accounts#new', via: 'get'
       match '/signin',  to: 'sessions#new', via: 'get'
