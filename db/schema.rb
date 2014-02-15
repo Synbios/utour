@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208153823) do
+ActiveRecord::Schema.define(version: 20140214030755) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140208153823) do
     t.boolean  "export"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "user_groups"
   end
 
   create_table "feature_tag_connections", force: true do |t|

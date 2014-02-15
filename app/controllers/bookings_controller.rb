@@ -43,13 +43,13 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.number_of_adults = 0 if @booking.number_of_adults.nil?
     @booking.number_of_children = 0 if @booking.number_of_children.nil?
-    @booking.account_id = currrent_user.account_id
+    @booking.account_id = current_user.id
 
     respond_to do |format|
       if @booking.save
         # WexchatMailer.booking_notice(@booking.account)
         WexchatMailer.booking_notice_staff(@booking.account, Account.find_by_id(15), Booking.first).deliver
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
+        format.html { render action: 'index', notice: '预订成功' }
         format.json { render action: 'index' }
       else
         format.html { redirect_to action: 'new', date_and_price_id: @booking.date_and_price_id }

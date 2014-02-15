@@ -494,6 +494,13 @@ $indicator_color: #CC0099;
 }
 
 /* wechat_web.css */
+
+.date_and_price_table {
+  th, td {
+    text-align: center;
+  }
+}
+
 .group_travel_menu {
   margin-top: 10px;
 }
@@ -514,6 +521,7 @@ $indicator_color: #CC0099;
   }
 }
 .menu_body_1 { padding: 5px; }
+
 .menu_body_2 { padding: 0px; }
 .menu_list { margin: 0 }
 

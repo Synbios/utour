@@ -37,7 +37,7 @@
             <%= f.label :departure_date, '出发日期', :class => "label col col-2" %>
             <div class="col col-10">
               <label class="input"><i class="icon-append fa fa-calendar"></i>
-                <%= f.text_field :departure_date, id: "depature_date", class: "datepicker", :'data-dateformat' => 'mm/dd/yy', placeholder: "例如 2014-01-01" %>
+                <%= f.text_field :departure_date, id: "departure_date_picker", placeholder: "例如 2014-01-01" %>
               </label>
             </div>
           </div>
@@ -46,10 +46,18 @@
       </fieldset>
 
       <fieldset>
+        <section>
+          <div class="row">
+            <%= f.label :user_groups, '客户组名单', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input">
+                <%= f.text_field :user_groups,  placeholder: "用户组用空格分开，不能识别的用户组自动忽略，不输入则对所有用户公开" %>
+              </label>
+            </div>
+          </div>
+        </section>
 
-
-
-
+        
         <section>
           <div class="form-group">
             <%= f.label :retail_price, '直客价格', :class => "col-md-2 control-label" %>
@@ -82,21 +90,23 @@
 
       <footer>
         <%= f.submit "提交", :class => "btn btn-primary" %>
+        <%= link_to "返回", "javascript:history.back()", :class => "btn btn-default" %>
       </footer>
       <% end %>
-    </div><!-- end widget content -->
 
+      
+    </div><!-- end widget content -->
 
   </div><!-- end widget div -->
 
 
 </div>
-
-<script>
-
-  // $(function() {
-  //   $( "#depature_date" ).datepicker();
-  // });
-
-
+<script type="text/javascript">
+$(document).ready(function() {
+$('#startdate').datepicker({
+        dateFormat : 'dd.mm.yy',
+        prevText : '<i class="fa fa-chevron-left"></i>',
+        nextText : '<i class="fa fa-chevron-right"></i>'
+      });
+})
 </script>

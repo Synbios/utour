@@ -1,8 +1,9 @@
-<p id="notice"><%= notice %></p>
 
+
+<div class=""></div>
 <p>
   <strong>Departure date:</strong>
-  <%= @booking.departure_date %>
+  <%= @booking.date_and_price.departure_date %>
 </p>
 
 <p>
@@ -22,3 +23,12 @@
 
 <%= link_to 'Edit', edit_booking_path(@booking) %> |
 <%= link_to 'Back', bookings_path %>
+<td><%= booking.number_of_adults %> + <%= booking.number_of_children %></td>
+<td>
+          <% if inspect_right(tour) == :trade %>
+            <%= date_and_price.retail_price %>
+          <% else %>
+            <%= date_and_price.retail_price %> <span class="label label-primary">同行</span><br />
+            <%= date_and_price.trade_price %><span class="label label-warning">直客</span>
+          <% end %>
+        </td>

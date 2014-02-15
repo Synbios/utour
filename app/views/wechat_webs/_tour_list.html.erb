@@ -4,65 +4,57 @@
   <div class="row">
     <div class="col-xs-9 col-sm-9 col-md-10" style="padding:5px">
       <h4 class="list-group-item-heading"><%= tour.name %></h4>
+      <% if !tour.date_and_prices.empty? && inspect_right(tour) == :trade %>
+        <span style="color: red">同行 <i class="fa fa-rmb"></i> <%= tour.lowest_readable_price(current_user)[:trade] %>起</span>
+      <% elsif !tour.date_and_prices.empty? %>
+        <span style="color: red"><i class="fa fa-rmb"></i> <%= tour.lowest_readable_price(current_user)[:retail] %>起</span>
+      <% end %>
       <p class="list-group-item-text"><%= tour.description %></p>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-2" style="padding:5px">
       <%= link_to "行程", legacy_tour_path(tour), {class: "btn btn-warning btn-sm", style: "width: 100%; margin-bottom: 2px; color: white; padding: 5px 2px"} %>
+      <%= link_to "下载", "/word_and_pdf/#{content["word"]}", {class: "btn btn-success btn-sm", style: "width: 100%; margin-bottom: 2px; color: white; padding: 5px 2px"} %>
       <button class="btn btn-info btn-sm" data-toggle="collapse" data-target="#<%= tour.object_id %>" style="width:100%;color: white; padding: 5px 2px">预订</button>
+
     </div>
   </div>
 </div>
 
-<div id="<%= tour.object_id %>" class="panel panel-default collapse">
+<div id="<%= tour.object_id %>" class="panel panel-default collapse" style="padding: 5px;">
   <% if tour.date_and_prices.empty? %>
   出团日期和价格敬请期待...
   <% else %>
-  <% if inspect_right(tour) == :trade %>
-  <table class="table table-striped" style="background-color: white; padding: 5px;">
-    <thead>
-      <tr>
-        <th>日期</th>
-        <th style="color: red">同行</th>
-        <th>直客</th>
-        <th>余位数</th>
-      </tr>
-    </thead>
 
-    <% tour.date_and_prices.each do |date_and_price| %>
+
+  <table class="table table-striped date_and_price_table" style="background-color: white; padding: 5px;">
     <tr>
-      <td><%= date_and_price.departure_date.strftime("%m.%d.%y") %></td>
-      <td style="color: red">￥<%= date_and_price.trade_price %></td>
-      <td>￥<%= date_and_price.retail_price %></td>
-      <td><%= link_to "报名", new_booking_path(date_and_price_id: date_and_price.id) %></td>
-    </tr>
-    <% end %>
-
-  </table>
-
-  <% else %>
-
-  <table class="table table-striped" style="background-color: white; padding: 5px;">
-    <tr>
-      <th>日期</th>
+      <th>出发日期</th>
       <th>单人价</th>
       <th>余位数</th>
     </tr>
     <% tour.date_and_prices.each do |date_and_price| %>
     <tr>
       <td><%= date_and_price.departure_date.strftime("%m.%d.%y") %></td>
-      <td>￥<%= date_and_price.retail_price %></td>
+       <% if inspect_right(tour) == :trade %>
+        <td class="price"><span style="color: red">同行 <i class="fa fa-rmb"></i> <%= date_and_price.retail_price %>/人</span><br/>
+        <span>直客 <i class="fa fa-rmb"></i> <%= date_and_price.trade_price %>/人</span>
+        </td>         
+        <% else %>
+        <td class="price"><span style="color: red"><i class="fa fa-rmb"></i> <%= date_and_price.retail_price %>/人</span></td>
+        <% end %>
       <td><%= link_to "报名", new_booking_path(date_and_price_id: date_and_price.id) %></td>
     </tr>
     <% end %>
   </table>
 
   <% end %>
-
-  <% end %>
   
-  <div class="row" style="width:100%; margin: 5px 0;">
-    <%= link_to "Word/PDF版本", "/word_and_pdf/#{content["word"]}", {class: "col-xs-4 col-xs-offset-1 btn btn-success btn-sm", style: "padding: 5px"} %>
-    <a class="col-xs-4 col-xs-offset-2 btn btn-warning btn-sm" style="padding: 5px">协议</a>
+  <div class="row" style="margin: 5px 0; padding: 0">
+    <%#= link_to "Word/PDF版本", "/word_and_pdf/#{content["word"]}", {class: "col-xs-4 col-xs-offset-1 btn btn-success btn-sm", style: "padding: 5px"} %>
+    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+      <a class="btn btn-default btn-sm" style="padding: 5px 15px; width: 100%">预订协议</a>
+    </div>
+    
   </div>
 </div>
 <% end %>

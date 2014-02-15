@@ -39,15 +39,15 @@
       </div>
 
       <!-- Controls -->
-      <a class="left carousel-control" href="#legacy-home-carousel" data-slide="prev">
+      <a class="left carousel-control hidden-xs hidden-sm" href="#legacy-home-carousel" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
-      <a class="right carousel-control" href="#legacy-home-carousel" data-slide="next">
+      <a class="right carousel-control hidden-xs hidden-sm" href="#legacy-home-carousel" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right"></span>
       </a>
     </div>
     <div style="width: 100%; height:20px; background-color: #000">
-      <p id="carousel-text" style="color: #fff;text-align: center">新西兰自驾游</p>
+      <p id="carousel-text" style="color: #fff;text-align: center">欢迎访问UTOUR-众信旅游微信分销平台</p>
     </div>
   </div>
 
@@ -136,4 +136,12 @@
 $('#legacy-home-carousel').bind('slide.bs.carousel', function(e) {
 
 });
+$(document).ready(function() {  
+ $("#legacy-home-carousel").swiperight(function() {  
+  $(this).carousel('prev');  
+});  
+ $("#legacy-home-carousel").swipeleft(function() {  
+  $(this).carousel('next');  
+});  
+});  
 </script>

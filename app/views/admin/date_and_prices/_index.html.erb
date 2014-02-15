@@ -21,6 +21,7 @@
         <thead>
           <tr>
             <th>编号</th>
+            <th>客户组标签</th>
             <th>出发日期</th>
             <th>同行价</th>
             <th>直客价</th>
@@ -30,7 +31,14 @@
           <% tour.date_and_prices.each do |date_and_price| %>
           <tr>
             <td><%= date_and_price.id %></td>
-            <td><%= date_and_price.departure_date %></td>
+            <td>
+              <% if date_and_price.user_groups.nil? || date_and_price.user_groups.empty? %>
+              <em>所有客户可见</em>
+              <% else %>
+              <%= UserGroup.convert_id_string_to_name_string(date_and_price.user_groups) %>
+              <% end %>
+            </td>
+            <td><%= date_and_price.departure_date.strftime("%b %d, %Y")  %></td>
             <td><%= date_and_price.trade_price %></td>
             <td><%= date_and_price.retail_price %></td>
           </tr>
