@@ -55,6 +55,7 @@ class Admin::PlateformsController < ApplicationController
 
   def new_tour
     @tour = Tour.new
+    @sites = Site.all
     respond_to do |format|
       format.html { render :layout=>false }
     end
@@ -120,6 +121,24 @@ class Admin::PlateformsController < ApplicationController
 
   def image_admin
     @image = Image.new
+    @images = Image.all
+    respond_to do |format|
+      format.html { render :layout=>false }
+    end
+  end
+
+  def new_site_admin
+    @site = Site.new
+    @images = Image.all
+    1.times { @site.image_and_sites.build }
+    respond_to do |format|
+      format.html { render :layout=>false }
+    end
+  end
+
+  def site_admin
+    @site = Site.find_by_id(params[:id])
+    @sites = Site.all
     @images = Image.all
     respond_to do |format|
       format.html { render :layout=>false }

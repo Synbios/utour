@@ -30,8 +30,21 @@ class Admin::ImagesController < ApplicationController
 		redirect_to "/admin#admin/image_admin.html", :notice => "图片资源删除成功"
 	end
 
+	def get_image_url
+		@image = Image.find_by_id(params[:id])
+		if @image.present?
+			if params[:type].present?
+				render json: { :url => @image.photo.url(params[:type].intern)  }.to_json , status: :ok
+			else
+				render 
+			end
+		else
+			render json: {:url => "/"}.to_json
+		end
+	end
+
 	private
 	def image_params
 		params.require(:image).permit(:name, :description, :photo)
-	end  
+	end
 end

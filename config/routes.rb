@@ -1,4 +1,10 @@
 Utour::Application.routes.draw do
+  get "image_and_sites/create"
+  get "image_and_sites/destroy"
+  get "sites/create"
+  get "sites/edit"
+  get "sites/destroy"
+  get "sites/index"
   get "images/index"
   get "images/show"
   get "images/create"
@@ -124,6 +130,9 @@ Utour::Application.routes.draw do
     resources :feature_tags, only: [:new, :create, :destroy, :index]
     resources :invitation_codes, only: [:new, :create, :destroy, :index]
     resources :images, only: [:create, :destroy, :index]
+    resources :sites
+    resources :activities
+    resources :days
 
     resources :invitation_codes do |invitation_code|
       get 'cancel', on: :member
@@ -152,6 +161,11 @@ Utour::Application.routes.draw do
     get '/tag_control', to: 'plateforms#tag_control'
     get '/date_and_price_control', to: 'plateforms#date_and_price_control'
     get '/image_admin', to: 'plateforms#image_admin'
+    get '/site_admin', to: 'plateforms#site_admin'
+    get '/new_site_admin', to: 'plateforms#new_site_admin'
+
+    get '/get_image_url', to: 'images#get_image_url'
+    get '/get_image_list_by_site_id', to: 'sites#get_image_list_by_site_id'
 
       match '/signup',  to: 'accounts#new', via: 'get'
       match '/signin',  to: 'sessions#new', via: 'get'

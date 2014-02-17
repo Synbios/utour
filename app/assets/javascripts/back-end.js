@@ -16,4 +16,6 @@
 //= require bootstrap
 //= require jquery.mobile.touch.min
 //= require smartadmin
+//= require jquery_nested_form
+//= require image-picker
 

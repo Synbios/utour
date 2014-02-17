@@ -58,6 +58,8 @@ gem 'metro-ui-rails'
 
 gem "paperclip", "~> 3.0"
 
+gem "nested_form"
+
 group :development do
   gem 'rails_layout'
   gem 'capistrano'

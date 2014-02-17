@@ -1,0 +1,111 @@
+<%= nested_form_for [:admin, site], :html => {:role => "form", :id => id, :class => "smart-form", :'data-type' => 'json' } do |f| %>
+<% if flash[:error].present? %>
+<div class="alert alert-danger fade in">
+  <button class="close" data-dismiss="alert">
+    ×
+  </button>
+  <i class="fa-fw fa fa-times"></i>
+  <strong>错误!</strong> <%= flash[:error] %>
+</div>
+<% end %>
+<fieldset>
+  <section>
+    <div class="row">
+      <%= f.label :name, '景点名称', :class => "label col col-2" %>
+      <div class="col col-10">
+        <label class="input"></i>
+          <%= f.text_field :name, placeholder: "注意: 1. 名字切勿太长. 2. 不要空格和符号. 2. 将来可以凭此检索" %>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <%= f.label :short_des, '行程衔接介绍', :class => "label col col-2" %>
+      <div class="col col-10">
+        <label class="input">
+          <%= f.text_field :short_des, placeholder: "显示在行程内的介绍，请用祈使句型，例如: 参观举世闻名的富士山风景区。" %>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <%= f.label :full_des, '完整介绍', :class => "label col col-2" %>
+      <div class="col col-10">
+        <label class="textarea">
+          <%= f.text_area :full_des, rows: 5, placeholder: "对该景点的单独描述，约30-100字" %>
+        </label>
+      </div>
+    </div>
+  </section>
+
+</fieldset>
+<fieldset>
+  <h3>景点图片</h3>
+
+  <%= f.fields_for :image_and_sites do |builder| %>
+  <section class="image_and_site_field">
+    <div class="row">
+      <div class="col col-5">
+        <label class="select">
+          <%= builder.collection_select(:image_id,  images,  :id, :name,  { :prompt   => "选择图片" }, { :class => 'image_select', :onchange => "display_selected_image(this);"}) %>
+          <div class="image_panel" style="margin: 5px 0; width: 100%;">
+
+          </div>
+        </label>
+        
+      </div>
+      <div class="col col-1">
+        <%= builder.link_to_remove "删除", class: "btn btn-danger btn-sm" %>
+      </div>
+    </div>
+  </section>
+  
+  <% end %>
+  <br />
+  <p><%= f.link_to_add "添加新图片", :image_and_sites, class: "btn btn-success btn-sm add_new_image_link" %></p>
+</fieldset>
+
+
+<footer>
+  <%= f.submit "提交", :class => "btn btn-primary" %>
+  <%= link_to "返回目录", "admin#admin/site_admin.html", :class => "btn btn-default" %>
+</footer>
+<% end %>
+
+<script type="text/javascript">
+
+
+function display_selected_image(select){
+  $.ajax({
+    type: 'GET',
+    data:{    
+      id : select.value,    
+      type : 'medium'   
+    },
+    dataType:'json', 
+    url: "/admin/get_image_url",
+    success:function(data) {
+      //var panel = $('#'+select.id+"_image");
+      var panel = $(select).next('.image_panel');
+      panel.html('<img src="'+ data.url + '" style="display: block; margin: 0 auto"/>').hide().show('slow');
+        //alert(panel.height());
+        
+      },    
+      error : function() {   
+        alert("无法获取图片！");   
+      }  
+    }); 
+}
+
+
+$(document).ready(function() {
+    //$('.add_new_image_link').mouseenter( bind_image_select());
+    //bind_image_select();
+    $('.image_select').each(function(){display_selected_image(this);});
+    
+  });
+</script>

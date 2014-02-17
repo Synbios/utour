@@ -14,7 +14,7 @@
       <td><%= image.id %></td>
       <td><%= image.name %></td>
       <td><%= image.description %></td>
-      <td><%= image_tag image.photo.url(:medium) %></td>
+      <td><%= image_tag image.photo.url(:thumb) %></td>
       <td>
         <%= link_to "删除", admin_image_path(image), method: :delete, class: "btn btn-primary" %>
 

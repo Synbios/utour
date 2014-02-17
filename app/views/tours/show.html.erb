@@ -2,61 +2,13 @@
 <%= stylesheet_link_tag "tours", media: "all", "data-turbolinks-track" => true %>
 <% end %>
 
-<div id="classic">
-  <% content_for :left_links do %>
-  <% render "wechat_webs/left_links" %>
-  <% end %>
-
-  <%= image_tag "example.jpg", alt: "", class: "head_image" %>
+<div class="container classic_tour_view">
+  <%= image_tag "japan.jpg", class: "head_img" %>
+  <%= image_tag "countries/japan_square_icon_256.png", class: "head_icon pull-right" %>
+  <div class="content">
+    <h2><%= @tour.name %></h2>
+  </div>
 </div>
 
 
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Identifier:</strong>
-  <%= @tour.identifier %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @tour.name %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @tour.content %>
-</p>
-
-<p>
-  <strong>Departure date:</strong>
-  <%= @tour.departure_date %>
-</p>
-
-<p>
-  <strong>Return date:</strong>
-  <%= @tour.return_date %>
-</p>
-
-<p>
-  <strong>Visa mailing date:</strong>
-  <%= @tour.visa_mailing_date %>
-</p>
-
-<p>
-  <strong>Ticket issuing date:</strong>
-  <%= @tour.ticket_issuing_date %>
-</p>
-
-<p>
-  <strong>Trade price:</strong>
-  <%= @tour.trade_price %>
-</p>
-
-<p>
-  <strong>Retail price:</strong>
-  <%= @tour.retail_price %>
-</p>
-
-<%= link_to 'Edit', edit_tour_path(@tour) %> |
-<%= link_to 'Back', tours_path %>

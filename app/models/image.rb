@@ -3,4 +3,7 @@ class Image < ActiveRecord::Base
  
 	has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/missing.png"
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
+
+  has_many :image_and_sites, :dependent => :destroy
+  has_many :sites, through: :image_and_sites
 end

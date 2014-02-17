@@ -1,5 +1,10 @@
 class Tour < ActiveRecord::Base
 	has_many :date_and_prices
+	has_many :days, :dependent => :destroy
+	has_many :activities, through: :days
+
+	accepts_nested_attributes_for :days, :reject_if => lambda { |a| a[:number].blank? }, :allow_destroy => true
+
 	belongs_to :account
 
 	def lowest_readable_price(account=nil)

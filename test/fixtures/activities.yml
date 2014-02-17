@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  time: 1
+  active_type: MyString
+  site_id: 1
+  image_id: 1
+  short_des: MyString
+  full_des: MyText
+
+two:
+  time: 1
+  active_type: MyString
+  site_id: 1
+  image_id: 1
+  short_des: MyString
+  full_des: MyText

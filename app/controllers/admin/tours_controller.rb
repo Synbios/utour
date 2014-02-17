@@ -36,4 +36,11 @@ class Admin::ToursController < ApplicationController
     @tour.destroy
     redirect_to "/admin#admin/index_tour.html"
   end
+
+  private
+  def tour_params
+    params.require(:tour).permit(:identifier, :name, :description, :include, :exclude, :transportations, :notes, :visa, 
+      :days_attributes => [:id, :tour_id, :number, :accommodation, :breakfast, :lunch, :dinner, :itinerary, :_destroy, 
+      :activities_attributes => [:id, :day_id, :time, :active_type, :site_id, :image_id, :short_des, :full_des, :_destroy] ] )
+  end
 end

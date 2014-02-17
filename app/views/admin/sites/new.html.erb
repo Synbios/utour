@@ -1,0 +1,53 @@
+<%= form_for [:admin, @site] do |f| %>
+<% if flash[:error].present? %>
+<p><%= flash[:error] %></p>
+<% end %>
+<fieldset>
+  <section>
+    <div class="row">
+      <%= f.label :name, '景点名称', :class => "label col col-2" %>
+      <div class="col col-10">
+        <label class="input"></i>
+          <%= f.text_field :name, placeholder: "注意: 1. 名字切勿太长. 2. 不要空格和符号. 2. 将来可以凭此检索" %>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <%= f.label :short_des, '行程衔接介绍', :class => "label col col-2" %>
+      <div class="col col-10">
+        <label class="input">
+          <%= f.text_field :short_des, placeholder: "显示在行程内的介绍，请用祈使句型，例如: 参观举世闻名的富士山风景区。" %>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <%= f.label :full_des, '完整介绍', :class => "label col col-2" %>
+      <div class="col col-10">
+        <label class="textarea">
+          <%= f.text_area :full_des, rows: 5, placeholder: "对该景点的单独描述，约30-100字" %>
+        </label>
+      </div>
+    </div>
+  </section>
+
+</fieldset>
+<fieldset>
+  <h2>景点图片</h2>
+  <% f.fields_for :image_and_sites do |builder| %>
+  nmawd
+    <%= builder.label :image_id, '添加图片' %>
+    <%= builder.number_field :image_id %>
+  <% end %>
+</fieldset>
+
+
+<footer>
+  <%= f.submit "提交", :class => "btn btn-primary" %>
+</footer>
+<% end %>

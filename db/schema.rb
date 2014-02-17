@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140215033257) do
+ActiveRecord::Schema.define(version: 20140217033854) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -27,6 +27,18 @@ ActiveRecord::Schema.define(version: 20140215033257) do
     t.datetime "updated_at"
     t.integer  "user_class_id"
     t.boolean  "active"
+  end
+
+  create_table "activities", force: true do |t|
+    t.integer  "day_id"
+    t.integer  "time"
+    t.string   "active_type"
+    t.integer  "site_id"
+    t.integer  "image_id"
+    t.string   "short_des"
+    t.text     "full_des"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "bookings", force: true do |t|
@@ -53,6 +65,18 @@ ActiveRecord::Schema.define(version: 20140215033257) do
     t.string   "user_groups"
   end
 
+  create_table "days", force: true do |t|
+    t.integer  "tour_id"
+    t.integer  "number"
+    t.string   "accommodation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "breakfast"
+    t.string   "lunch"
+    t.string   "dinner"
+    t.text     "itinerary"
+  end
+
   create_table "feature_tag_connections", force: true do |t|
     t.integer  "parent_tag_id"
     t.integer  "child_tag_id"
@@ -64,6 +88,13 @@ ActiveRecord::Schema.define(version: 20140215033257) do
   create_table "feature_tags", force: true do |t|
     t.string   "name"
     t.integer  "depth"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "image_and_sites", force: true do |t|
+    t.integer  "image_id"
+    t.integer  "site_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -99,6 +130,14 @@ ActiveRecord::Schema.define(version: 20140215033257) do
     t.datetime "updated_at"
   end
 
+  create_table "sites", force: true do |t|
+    t.string   "name"
+    t.string   "short_des"
+    t.text     "full_des"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tours", force: true do |t|
     t.string   "identifier"
     t.string   "name"
@@ -110,6 +149,11 @@ ActiveRecord::Schema.define(version: 20140215033257) do
     t.string   "sale_state"
     t.string   "description"
     t.string   "tour_type"
+    t.text     "include"
+    t.text     "exclude"
+    t.text     "transportations"
+    t.text     "notes"
+    t.text     "visa"
   end
 
   create_table "user_group_permission_hashes", force: true do |t|

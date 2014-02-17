@@ -1,0 +1,71 @@
+<% if @site.nil? %>
+
+<div class="jarviswidget" id="index_site_wid" data-widget-editbutton="false" data-widget-custombutton="false">
+	<header>
+		<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+		<h2>景点列表</h2>				
+	</header>
+	<div>
+		<div class="jarviswidget-editbox">
+		</div>
+		<div class="widget-body no-padding">
+			<%= render partial: "admin/sites/index", locals: { sites: @sites } %>
+		</div>
+	</div>
+</div>
+<% else %>
+<div class="jarviswidget" id="new_site_wid" data-widget-editbutton="false" data-widget-custombutton="false">
+	<header>
+		<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+		<h2>修改景点</h2>				
+	</header>
+	<div>
+		<div class="jarviswidget-editbox">
+		</div>
+		<div class="widget-body no-padding">
+			<%= render partial: "admin/sites/form", locals: { site: @site, images: @images, id: "new_site_form" } %>	
+		</div>
+	</div>
+</div>
+<% end %>
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+
+
+		// rails do not yet support file up loading with ajax
+    // if ( $('#new_image_form').length )
+    // {
+
+    //   $('#new_image_form').bind("ajax:beforeSend", function(evt, xhr, settings){
+
+    //   alert("beforeSend !");
+
+
+    //   }).bind("ajax:success", function(evt, data, status, xhr){
+
+    //   alert("success !");
+    //   $('#new_image_form').find('input:text, input:password, input:file, select, textarea').val('');
+    //   $('#new_image_form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
+
+
+    //   }).bind('ajax:complete', function(evt, xhr, status){
+
+    //   alert("complete !");
+
+    //   }).bind("ajax:error", function(evt, xhr, status, error){
+    //   alert("error!")
+
+    //   });
+
+    // }
+    
+
+  
+
+
+});
+
+</script>
