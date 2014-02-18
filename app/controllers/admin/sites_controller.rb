@@ -34,12 +34,11 @@ class Admin::SitesController < ApplicationController
   end
 
   def get_image_list_by_site_id
-  	@site = Site.find_by_id(params[:id])
-  	@select_id = params[:select_id]
-  	@images = @site.images
+  	site = Site.find_by_id(params[:id])
+  	options = "<option value=''>请选择图片</option>" + site.images.map { |image| "<option data-img-src='#{image.photo.url(:thumb)}' value='#{image.id}'>#{image.name}</option>" }.join
   	respond_to do |format|
-  		format.html { render layout: false }
-  		format.js
+  		format.text { render text: options }
+  		format.json { render json: { options: options, short_des: site.short_des, full_des: site.full_des }.to_json }
   	end
   end
 

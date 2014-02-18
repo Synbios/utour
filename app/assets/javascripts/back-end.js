@@ -18,4 +18,5 @@
 //= require smartadmin
 //= require jquery_nested_form
 //= require image-picker
+//= require clockface
 

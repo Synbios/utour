@@ -7,6 +7,12 @@ class Tour < ActiveRecord::Base
 
 	belongs_to :account
 
+	def generate_itinerary(force=false)
+		self.days.each do |day|
+			day.generate_itinerary(force)
+		end
+	end
+
 	def lowest_readable_price(account=nil)
 		prices = readable_date_and_prices(account)
 		if prices.nil?

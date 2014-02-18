@@ -63,6 +63,8 @@ class Admin::PlateformsController < ApplicationController
 
   def edit_tour
     @tours = Tour.all
+    @sites = Site.all
+    @images = Image.all
     @tour = Tour.find_by_id(params[:id])
     respond_to do |format|
       format.html { render :layout=>false }

@@ -6,8 +6,40 @@
   <%= image_tag "japan.jpg", class: "head_img" %>
   <%= image_tag "countries/japan_square_icon_256.png", class: "head_icon pull-right" %>
   <div class="content">
-    <h2><%= @tour.name %></h2>
+    <h3><%= @tour.name %></h3>
+
+    <% @tour.days.each do |day| %>
+    <div class="day" style="width: 100%">
+      <table style="width: 100%">
+        <tr>
+          <td style="vertical-align: top; width: 40px">
+            <i class="fa fa-calendar fa-3x"></i>
+          </td>
+          <td class="day_content" style="vertical-align: top">
+            <h4>第<%= day.number %>天 <small></small></h4>
+            <p><%= day.des_by_site_names %></p>
+            <% activities = day.activities.where("image_id IS NOT NULL") %>
+            <% size = activities.size %>
+            <%= render partial: 'frame_1_pic', locals: { activities: activities } if size == 1 %>
+            <%= render partial: 'frame_2_pic', locals: { activities: activities } if size == 2 %>
+            <%= render partial: 'frame_3_pic', locals: { activities: activities } if size == 3 %>
+            <%= render partial: 'frame_4_pic', locals: { activities: activities } if size == 4 %>
+            <%= render partial: 'frame_5_pic', locals: { activities: activities } if size == 5 %>
+            <%= render partial: 'frame_6_pic', locals: { activities: activities } if size == 6 %>
+            <%= render partial: 'frame_7_pic', locals: { activities: activities } if size == 7 %>
+            <%= render partial: 'frame_8_pic', locals: { activities: activities } if size == 8 %>
+            <%= render partial: 'frame_9_pic', locals: { activities: activities } if size >= 9 %>
+            <h4><small><%= "住宿: #{day.accommodation}" if day.accommodation.present? %></small></h4>
+          </td>
+        </tr>
+      </table>
+    </div>
+    
+    
+    <% end %>    
   </div>
+
+  
 </div>
 
 

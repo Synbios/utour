@@ -118,8 +118,7 @@
 										<%= f.label :content, '旧网兼容信息', :class => "col-md-2 control-label" %>
 										<div class="col-md-10">
 											<div class="input-group">
-												<%= f.text_area :content, :rows => 5, class: "form-control", placeholder: "旧行程图片端口(开新团勿用)，例: {\"images\": [\"day1.jpg\", \"day2.jpg\", \"day3.jpg\", \"day4.jpg\", \"day5.jpg\", \"day6.jpg\", \"day7.jpg\"], \"word\": \"japn1.pdf\"
-											}" %>
+												<%= f.text_area :content, :rows => 5, class: "form-control", placeholder: "旧行程图片端口(开新团勿用)，例: {\"images\": [\"day1.jpg\", \"day2.jpg\", \"day3.jpg\", \"day4.jpg\", \"day5.jpg\", \"day6.jpg\", \"day7.jpg\"], \"word\": \"japn1.pdf\"}" %>
 											<span class="input-group-addon"><i class="fa fa-warning"></i></span>
 										</div>
 									</div>
@@ -148,11 +147,12 @@
 									<div class="col-md-10 col-md-offset-2">
 										<div class="well well-sm">
 											<%= day.fields_for :activities do |activity| %>
+											<div class="day_root">
 											<div class="form-group">
 												<%= activity.label :time, '活动时间', :class => "col-md-2 control-label" %>
 												<div class="col-md-10">
 													<div class="input-group">
-														<%= activity.text_field :time, class: "form-control", placeholder: "非常重要" %>
+														<%= activity.text_field :time, class: "form-control", placeholder: "非常重要 - 不填写次活动将不保存", onmouseover: "$(this).clockface({format: 'H:mm'});" %>
 														<span class="input-group-addon" style="background-color: #ee1111"><%= activity.link_to_remove "删除本活动", data: { confirm: "确定要删除该活动?" }, style: "color: white; text-decoration:none;" %></span>
 													</div>
 												</div>
@@ -162,7 +162,7 @@
 												<%= activity.label :active_type, '活动类型', :class => "col-md-2 control-label" %>
 												<div class="col-md-10">
 													<div class="input-group">
-														<%= activity.select :active_type, "<option value='site'>景点</option><option value='transfer'>交通</option><option value='shopping'>购物</option><option value='dining'>吃饭</option>".html_safe, {}, { class: "form-control" } %>
+														<%= activity.select :active_type, "<option value='1'>景点</option><option value='2'>交通</option><option value='3'>购物</option><option value='4'>吃饭</option>".html_safe, {}, { class: "form-control" } %>
 													</div>
 												</div>
 											</div>
@@ -171,7 +171,7 @@
 												<%= activity.label :site_id, '景点', :class => "col-md-2 control-label" %>
 												<div class="col-md-10">
 													<div class="input-group">
-														<%= activity.collection_select(:site_id,  @sites,  :id, :name,  { :prompt   => "选择景点" }, { :class => 'form-control', :id => "#{activity.object_id}", :onchange => "init_image_select(this)"}) %>
+														<%= activity.collection_select(:site_id,  @sites, :id, :name, { :prompt   => "选择景点" }, { :class => 'form-control', :id => "#{activity.object_id}", :onchange => "init_image_select(this)"}) %>
 													</div>
 												</div>
 											</div>
@@ -180,7 +180,8 @@
 												<%= activity.label :image_id, '图片', :class => "col-md-2 control-label" %>
 												<div class="col-md-10">
 													<div class="input-group">
-														<%= activity.collection_select(:image_id,  Array.new,  :id, :name,  { :prompt   => "请先选择景点" }, { :class => 'form-control site_select', :id => "#{activity.object_id}_image", :onchange => ""}) %>
+
+														<%= activity.collection_select(:image_id,  Array.new, :id, :name, { :prompt   => "请先选择景点" }, { :class => 'form-control site_select', :onchange => ""}) %>
 													</div>
 												</div>
 											</div>
@@ -189,7 +190,7 @@
 												<%= activity.label :short_des, '活动简短描述', :class => "col-md-2 control-label" %>
 												<div class="col-md-10">
 													<div class="input-group">
-														<%= activity.text_area :short_des, class: "form-control", placeholder: "非常重要", rows: 3, :id => "#{activity.object_id}_short_des" %>
+														<%= activity.text_area :short_des, class: "form-control short_des", placeholder: "非常重要", rows: 3 %>
 														<span class="input-group-addon" ><i class="fa fa-warning"></i></span>
 													</div>
 												</div>
@@ -199,13 +200,13 @@
 												<%= activity.label :full_des, '景点详细描述', :class => "col-md-2 control-label" %>
 												<div class="col-md-10">
 													<div class="input-group">
-														<%= activity.text_area :full_des, class: "form-control", placeholder: "非常重要", rows: 5, :id => "#{activity.object_id}_full_des" %>
+														<%= activity.text_area :full_des, class: "form-control full_des", placeholder: "非常重要", rows: 5 %>
 														<span class="input-group-addon" ><i class="fa fa-warning"></i></span>
 													</div>
 												</div>
 											</div>
 
-
+											</div>
 											<hr />
 											<% end %>
 											<%= day.link_to_add "添加新活动", :activities, class: "btn btn-success btn-sm" %>
@@ -444,8 +445,11 @@
 	 			id : select.value,
 	 			select_id : select.id
 	 		},
-	 		dataType: "script",
+	 		dataType: "json",
 	 		success : function(data) {
+				$(select).closest('.day_root').find('.site_select').html(data.options).imagepicker({ hide_select : true });
+				$(select).closest('.day_root').find('.short_des').text(data.short_des);
+				$(select).closest('.day_root').find('.full_des').text(data.full_des);
 
 	 		},    
 	 		error : function() {   
@@ -456,7 +460,7 @@
 
 
 	 $(document).ready(function() {
-	 	
+	 	$('.site_select').imagepicker({ hide_select : true });
 
 	 });
 	 </script>

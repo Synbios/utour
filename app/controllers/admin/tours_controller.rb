@@ -1,14 +1,14 @@
 class Admin::ToursController < ApplicationController
 
   def create
-    @tour = Tour.new
-    @tour.name = params[:tour][:name]
-    @tour.description = params[:tour][:description]
+    @tour = Tour.new(tour_params)
     @tour.content = params[:tour][:content]
     @tour.tour_group = UserGroup.convert_name_string_to_id_string(params[:tour][:tour_group])
     @tour.tour_type = params[:tour][:tour_type]
-    @tour.account_id = current.id
+    @tour.account_id = current_user.id
+
     if @tour.save
+      @tour.generate_itinerary
       redirect_to '/admin#admin/index_tour.html'
     else
       redirect_to :back
@@ -23,10 +23,14 @@ class Admin::ToursController < ApplicationController
       @tour.content = params[:tour][:content]
       @tour.tour_group = UserGroup.convert_name_string_to_id_string(params[:tour][:tour_group])
       @tour.tour_type = params[:tour][:tour_type]
-      if @tour.save
-        redirect_to '/admin#admin/index_tour.html'
-      else
-        redirect_to :back
+      respond_to do |format|
+        if @tour.update(tour_params)
+          format.html { redirect_to '/admin#admin/index_tour.html' }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to :back }
+          format.json { render json: @fee.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -41,6 +45,6 @@ class Admin::ToursController < ApplicationController
   def tour_params
     params.require(:tour).permit(:identifier, :name, :description, :include, :exclude, :transportations, :notes, :visa, 
       :days_attributes => [:id, :tour_id, :number, :accommodation, :breakfast, :lunch, :dinner, :itinerary, :_destroy, 
-      :activities_attributes => [:id, :day_id, :time, :active_type, :site_id, :image_id, :short_des, :full_des, :_destroy] ] )
+        :activities_attributes => [:id, :day_id, :time, :active_type, :site_id, :image_id, :short_des, :full_des, :_destroy] ] )
   end
 end
