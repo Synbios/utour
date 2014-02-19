@@ -11,12 +11,23 @@ class Day < ActiveRecord::Base
 		end
 	end
 
+	def generate_title(force=false)
+		if self.title.blank? || force
+			text = self.des_by_site_names(" - ")
+			self.update_attributes(:title => text)
+		end
+	end
+
 	def des_by_site_names(sep="~")
 		names = self.activities.where("site_id IS NOT NULL").map{ |activity| activity.site.name }.join(sep)
 		if names.empty?
 			names = self.itinerary
 		end
 		names
+	end
+
+	def sites
+		self.activities.where("site_id IS NOT NULL")
 	end
 
 

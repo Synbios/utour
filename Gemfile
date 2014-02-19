@@ -60,6 +60,14 @@ gem "paperclip", "~> 3.0"
 
 gem "nested_form"
 
+#gem 'wkhtmltopdf-binary'
+
+#gem 'wicked_pdf'
+
+gem 'prawn'
+
+gem 'prawn-rails'
+
 group :development do
   gem 'rails_layout'
   gem 'capistrano'
