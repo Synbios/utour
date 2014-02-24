@@ -1,0 +1,9 @@
+<% if @price.present? %>
+<%= render partial: "admin/prices/form", locals: { tour: @tour, departure: @departure, price: @price } %>
+<% elsif @departure.present? %>
+<%= render partial: "admin/prices/index", locals: { tour: @tour, departure: @departure } %>
+<% elsif @tour.present? %>
+<%= render partial: "admin/departures/index", locals: { tour: @tour } %>
+<% else %>
+<%= render partial: "admin/tours/index_with_date", locals: { tours: @tours } %>
+<% end %>

@@ -114,6 +114,7 @@ $(document).ready(function(){
       $('#new_user_group_form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
       $('#new_user_group_modal').modal('hide');
       $('.alert alert-danger').html('');
+      reload_user_group_table();
 
       }).bind('ajax:complete', function(evt, xhr, status){
 

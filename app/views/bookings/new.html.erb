@@ -16,7 +16,7 @@
       <div class="alert alert-warning info_text">错误：无法获取预订信息</div>
     <% else %>
       <p class="head_text"><%= @tour.name %></p>
-      <div class="alert alert-warning info_text">出发日期: <%= @date_and_price.departure_date %> - 团号:<%= @tour.id %> </div>
+      <div class="alert alert-warning info_text">出发日期: <%= @price.departure.date %> - 团号:<%= @tour.id %> </div>
     <% end %>
     
 

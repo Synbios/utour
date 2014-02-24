@@ -8,10 +8,12 @@ class UserGroup < ActiveRecord::Base
 
   # return a hash of user group hierarchy
   # note: this method requires polynomial database lookups avoid using it when possible
-  def self.get_tree
+  def self.get_tree(user_group_id)
+    root_name = "root"
+    root_name = UserGroup.find_by_id(user_group_id).name if UserGroup.find_by_id(user_group_id)
     tree = {
-      :name => "root",
-      :id => 0,
+      :name => root_name,
+      :id => user_group_id,
       :members => []
     }
     stack = [tree]
@@ -47,14 +49,14 @@ class UserGroup < ActiveRecord::Base
   end
 
   def self.sub_tree(start_node_id)
-    tree = UserGroup.get_tree
+    tree = UserGroup.get_tree(start_node_id)
     return tree if start_node_id == :root
     node = nil
     stack = [tree]
     until !node.nil? || stack.empty?
       expand = stack.pop
       if expand[:id] == start_node_id
-        node = expandw
+        node = expand
       else
         expand[:members].each do |member|
           stack.push member
@@ -64,8 +66,8 @@ class UserGroup < ActiveRecord::Base
     node
   end
 
-  def self.to_admin_list(start_node_id = :root)
-    tree = self.sub_tree(start_node_id)
+  def self.to_admin_list(start_user_group_id = 0)
+    tree = self.get_tree(start_user_group_id)
     out = ""
     unless tree.nil?
       out += "<ul>"

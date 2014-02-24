@@ -11,7 +11,7 @@
     <div class="content" style="100%">
       <p style="margin-left: 20px">亲爱的<%= @staff.name %>：</p>
       <p style="margin-left: 20px">
-        客户<%= @customer.name %>(<%= "同行" if @customer.trade? %><%= "直客" if @customer.customer? %>)预订了<%= @booking.date_and_price.departure_date %> <%= @booking.date_and_price.tour.name %>, 预订人数为大人<%= @booking.number_of_adults %>人，小孩<%= @booking.number_of_children %>人, 请尽快处理.
+        客户<%= @customer.name %>(<%= "同行" if @customer.trade? %><%= "直客" if @customer.customer? %>)预订了<%= @booking.price.departure.date.strftime("%b %d, %Y") %> <%= @booking.price.departure.tour.name %>, 预订人数为大人<%= @booking.number_of_adults %>人，小孩<%= @booking.number_of_children %>人, 请尽快处理.
       </p>
         <br />
         <h4>预订信息</h4>
@@ -27,14 +27,14 @@
           </tr>
           <tr>
             <td><%= @booking.id %></td>
-            <td><strong>【团号: <%= @booking.date_and_price.tour.id %>】</strong>@booking.date_and_price.tour.name</td>
+            <td><strong>【团号: <%= @booking.price.departure.tour.id %>】</strong>@booking.price.departure.tour.name</td>
             <td>大人 <%= @booking.number_of_adults %>, 小孩 <%= @booking.number_of_children %></td>
-            <td><%= @booking.date_and_price.departure_date %></td>
+            <td><%= @booking.price.departure.date.strftime("%b %d, %Y") %></td>
             <td><%= @booking.created_at %></td>
             <% if @customer.trade? %>
-              <td><%= @booking.date_and_price.trade_price %> (同行)</td>
+              <td><%= @booking.price.price %> (同行)</td>
             <% else %>
-            <td><%= @booking.date_and_price.retail_price %></td>
+            <td><%= @booking.price.price %></td>
             <% end %>
             <td>
               <% if @booking.comment.present? %>

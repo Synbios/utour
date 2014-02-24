@@ -11,7 +11,11 @@ class BookingsController < ApplicationController
       store_location
       redirect_to :controller=> 'sessions', :action => 'new'
     else
+      
+
       @bookings = @account.bookings
+      @tours = @bookings.map { |booking| booking.price.departure.tour }.uniq { |tour| tour.id }
+      puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> #{@account.id} #{@bookings} #{@tours}"
     end
   end
 
@@ -21,15 +25,18 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   # GET /bookings/1.json
   def show
+
   end
 
   # GET /bookings/new
   def new
     @booking = Booking.new
-    if params[:date_and_price_id].present?
-      @booking.date_and_price_id = params[:date_and_price_id]
-      @date_and_price = DateAndPrice.find_by_id(params[:date_and_price_id])
-      @tour = Tour.find_by_id(@date_and_price.tour_id)
+    if params[:price_id].present?
+      #@booking.date_and_price_id = params[:date_and_price_id]
+      @booking.price_id = params[:price_id]
+      #@date_and_price = DateAndPrice.find_by_id(params[:date_and_price_id])
+      @price = Price.find_by_id(params[:price_id])
+      @tour = Tour.find_by_id(@price.departure.tour_id)
     end
   end
 
@@ -48,11 +55,12 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.save
         # WexchatMailer.booking_notice(@booking.account)
-        WexchatMailer.booking_notice_staff(@booking.account, Account.find_by_id(15), Booking.first).deliver
-        format.html { render action: 'index', notice: '预订成功' }
+        # WexchatMailer.booking_notice_staff(@booking.account, Account.find_by_id(15), @booking).deliver
+        format.html { redirect_to bookings_path, notice: '预订成功' }
         format.json { render action: 'index' }
       else
-        format.html { redirect_to action: 'new', date_and_price_id: @booking.date_and_price_id }
+        puts ">>>>>>>>>>>>>>>>>#{@booking.errors.full_messages}"
+        format.html { redirect_to action: 'new', price_id: @booking.price_id }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end
@@ -89,7 +97,7 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:number_of_adults, :number_of_children, :date_and_price_id, :comment)
+      params.require(:booking).permit(:number_of_adults, :number_of_children, :price_id, :comment)
     end
 
     def check_login

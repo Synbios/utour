@@ -42,6 +42,10 @@ class WechatWebsController < ApplicationController
     end
   end
 
+  #出团视频
+  def video
+  end
+
   # 我的众信
   def booking
   end
@@ -60,10 +64,19 @@ class WechatWebsController < ApplicationController
 
   # 特别推荐
   def sale
-    @tours = Tour.all
-    @root = JSON.parse Shelf.find_by_name("特惠行程").rack
-    @set = ["特惠行程"]
-    render 'group_travel'
+    account = trade_or_staff?
+    puts ">>>>>>>>>>>>>>> #{account}"
+    if account.nil? # 要求登录
+      redirect_to :controller=> 'sessions', :action => 'new', :user_class => 'trade'
+    else
+      redirect_to '/images/dm.jpg'
+      #puts ">>>>>>>>>>>>>>>>>>#{account.active} >>>>>>>>>>>>>>>>>>>#{activate_show_account_path(account)}"
+      #redirect_to activate_show_account_path(account) if account.active == false # 要求注册码激活
+    end
+    # @tours = Tour.all
+    # @root = JSON.parse Shelf.find_by_name("特惠行程").rack
+    # @set = ["特惠行程"]
+    # render 'group_travel'
   end
 
   def contact

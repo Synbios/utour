@@ -38,8 +38,8 @@
             <th>编号</th>
             <th>状态</th>
             <th>创建人</th>
-            <th>预设用户组</th>
-            <th>预设标签权限</th>
+            <th>类别</th>
+            <th>销售对应微信</th>
             <th>过期时间</th>
             <th>注册码</th>
           </tr>
@@ -94,7 +94,7 @@
                 <% end %>
               </td>
               <td><%= Account.find_by_id(code.issued_by).name %></td>
-              <td><%= code.user_class_id %></td>
+              <td>同行<%#= code.user_class_id %></td>
               <td><%= code.user_group.name unless code.user_group.nil? %></td>
               <td><%= code.created_at %></td>
               <td><%= code.code %></td>

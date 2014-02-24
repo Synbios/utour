@@ -34,7 +34,9 @@
         无用户组
       <% else %>
       <div class="tree">
-        <%= UserGroup.to_admin_list(:root).html_safe %>
+        <%#= UserGroup.to_admin_list(:root).html_safe %>
+        <% user_group_id = current_user.admin? ? 0 : current_user.user_group_id %>
+        <%= UserGroup.to_admin_list(user_group_id).html_safe %>
       </div>
       <% end %>
     </div><!-- end widget content -->

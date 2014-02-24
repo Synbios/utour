@@ -1,0 +1,7 @@
+<% if !@departure.nil? %>
+<%= render partial: "admin/departures/form", locals: { tour: @tour, departure: @departure } %>
+<% elsif !@tour.nil? %>
+<%= render partial: "admin/departures/index", locals: { tour: @tour } %>
+<% else %>
+<%= render partial: "admin/tours/index_with_date", locals: { tours: @tours } %>
+<% end %>

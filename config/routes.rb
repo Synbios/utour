@@ -1,14 +1,26 @@
 Utour::Application.routes.draw do
-  get "image_and_sites/create"
-  get "image_and_sites/destroy"
-  get "sites/create"
-  get "sites/edit"
-  get "sites/destroy"
-  get "sites/index"
-  get "images/index"
-  get "images/show"
-  get "images/create"
-  get "images/destroy"
+  # get "prices/index"
+  # get "prices/new"
+  # get "prices/create"
+  # get "prices/destroy"
+  # get "prices/update"
+  # get "prices/edit"
+  # get "departures/index"
+  # get "departures/new"
+  # get "departures/create"
+  # get "departures/destroy"
+  # get "departures/update"
+  # get "departures/edit"
+  # get "image_and_sites/create"
+  # get "image_and_sites/destroy"
+  # get "sites/create"
+  # get "sites/edit"
+  # get "sites/destroy"
+  # get "sites/index"
+  # get "images/index"
+  # get "images/show"
+  # get "images/create"
+  # get "images/destroy"
   resources :date_and_prices
 
   resources :tours do
@@ -23,6 +35,10 @@ Utour::Application.routes.draw do
     get 'activate_show', on: :member
     post 'activate', on: :member
   end
+
+  resources :agents
+
+
 
   #resources :user_groups
 
@@ -62,6 +78,7 @@ Utour::Application.routes.draw do
   match '/lion/group_travel', to: 'wechat_webs#group_travel', via: 'get'
   match '/lion/visa', to: 'wechat_webs#visa', via: 'get'
   match '/lion/trade', to: 'wechat_webs#trade', via: 'get'
+  match '/lion/video', to: 'wechat_webs#video', via: 'get'
   match '/lion/contact', to: 'wechat_webs#contact', via: 'get'
   match '/lion/feedback', to: 'wechat_webs#feedback', via: 'post'
   match '/lion/diy', to: 'wechat_webs#diy', via: 'get'
@@ -119,7 +136,13 @@ Utour::Application.routes.draw do
   #   end
 
   namespace :admin do |admin|
+    
     resources :accounts
+    resources :admins
+    resources :operators
+    resources :sales
+    resources :agents
+
     resources :tours
     resources :bookings
     resources :user_groups
@@ -133,6 +156,9 @@ Utour::Application.routes.draw do
     resources :sites
     resources :activities
     resources :days
+
+    resources :departures, only: [:new, :create, :destroy, :index]
+    resources :prices, only: [:new, :create, :destroy, :index]
 
     resources :invitation_codes do |invitation_code|
       get 'cancel', on: :member
@@ -166,6 +192,9 @@ Utour::Application.routes.draw do
 
     get '/get_image_url', to: 'images#get_image_url'
     get '/get_image_list_by_site_id', to: 'sites#get_image_list_by_site_id'
+
+    get '/departure_admin', to: 'plateforms#departure_admin'
+    get '/price_admin', to: 'plateforms#price_admin'
 
       match '/signup',  to: 'accounts#new', via: 'get'
       match '/signin',  to: 'sessions#new', via: 'get'

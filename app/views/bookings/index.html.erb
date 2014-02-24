@@ -1,41 +1,72 @@
 <div class="container lion">
   <div id="booking_list">
     <div class="booking_list_head">
-      <h2>我的订单</h2>
+      <h2>我的众信</h2>
     </div>
+    
     <% if @bookings.nil? || @bookings.empty? %>
+    
     <div class="alert alert-warning">
-      <h4>没有订单</h4>
+      <h4><i class="fa fa-exclamation-triangle"></i> 您还没有订单！</h4>
     </div>
+    
     <% else %>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>单号</th>
-          <th>出发日期</th>
-          <th>团对名称</th>
-          <th></th>
-        </tr>
-      </thead>
 
-      <tbody>
-        <% @bookings.each do |booking| %>
-        <% date_and_price = DateAndPrice.find_by_id(booking.date_and_price_id) %>
-        <% tour = Tour.find_by_id(date_and_price.tour_id) %>
-        <tr>
-          <td><%= booking.id %></td>
-          <td><%= date_and_price.departure_date.strftime("%m/%d/%y") %></td>
-          <td><%= link_to trim_name(tour.name), 'javascript:void(0)', onclick: "$('##{booking.id}_modal').modal('show')" %></td>
-          <td>
-            <%= link_to "取消", booking_path(booking), method: "delete", data: { confirm: "确定删除订单吗?"}, class: "btn btn-sm btn-primary" %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
+    <% @tours.each do |tour| %>
+    <%# 标题 %>
+    <table data-toggle="collapse" data-target="#<%= tour.object_id %>">
+      <tr>
+        <td>
+          <%= image_tag Image.first.photo.url(:thumb), class: "tour_icon" %>
+        </td>
+        <td class="tour_title">
+          <h4><%= tour.name %><br/><small>1 个出发日期 <%= @bookings.size %>个预订</small></h4>
+
+        </td>
+      </tr>
     </table>
-    <% end %>
-  </div>
 
+    <%# 预订内容 %>
+    <div id="<%= tour.object_id %>" class="booking_control_div collapse">
+    
+    <% @bookings.each do |booking| %>
+    <% if booking.price.departure.tour.id == tour.id %>
+      
+      <div class="booking_detail row">
+        <div class="col-xs-4">
+          <%= link_to "#{booking.price.departure.date.strftime("%m/%d/%y")} 团", "javascript:void(0)", class: "booking_label btn btn-sm btn-default" %>
+        </div>
+        
+        <div class="col-xs-4">
+          <% if booking.price.departure.visa_status == "未送签" %>
+          <%= link_to "未送签", "", class: "booking_label btn btn-sm btn-warning" %>
+          <% elsif booking.price.departure.visa_status == "已送签" %>
+          <%= link_to "已送签", "", class: "booking_label btn btn-sm btn-warning" %>
+          <% elsif booking.price.departure.visa_status == "正常出签" %>
+          <%= link_to "正常出签", "", class: "booking_label btn btn-sm btn-success" %>
+          <% elsif booking.price.departure.visa_status == "签证异常" %>
+          <%= link_to "签证异常", "", class: "booking_label btn btn-sm btn-danger" %>
+          <% else %>
+          <%= link_to "#{booking.price.departure.visa_status}","javascript:void(0)", class: "booking_label btn btn-sm btn-warning" %>
+          <% end %>
+        </div>
+        
+        <div class="col-xs-2">
+          <%= link_to "查看", "javascript:void(0)", class: "booking_label btn btn-sm btn-info", onclick: "$('##{booking.id}_modal').modal('show')" %>
+        </div>
+        
+        <div class="col-xs-2">
+          <%= link_to "取消", booking_path(booking), method: "delete", data: { confirm: "确定删除订单吗?"}, class: "booking_label btn btn-sm btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+    <% end %>
+    </div>
+    <% end # tour loop %>
+    <% end # end if %>
+ 
+
+  <% if @bookings.present? %>
   <% @bookings.each do |booking| %>
   <!-- Modal -->
   <div class="modal fade" id="<%= booking.id %>_modal" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
@@ -57,27 +88,27 @@
 
           <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>团队编号</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.date_and_price.tour.id %></div>
+            <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.price.departure.tour.id %></div>
           </div>
 
           <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>团队名称</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.date_and_price.tour.name %></div>
+            <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.price.departure.tour.name %></div>
           </div>
 
           <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>出发日期</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.date_and_price.departure_date.strftime("%m/%d/%Y") %></div>
+            <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.price.departure.date.strftime("%m/%d/%Y") %></div>
           </div>
 
           <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>预计价格</strong></div>
             <div class="col-xs-8 col-sm-8 col-md-8">
-              <% if inspect_right(booking.date_and_price.tour) == :trade %>
-              <span class="label label-danger">同行 <i class="fa fa-rmb"></i><%= booking.date_and_price.retail_price %>/人</span><br/>
-              <span class="label label-primary">直客 <i class="fa fa-rmb"></i><%= booking.date_and_price.trade_price %>/人</span>              
+              <% if inspect_right(booking.price.departure.tour) == :trade %>
+              <span class="label label-danger">同行 <i class="fa fa-rmb"></i> <%= booking.price.price %>/人</span><br/>
+              <span class="label label-primary">直客 <i class="fa fa-rmb"></i> <%= booking.price.price %>/人</span>              
               <% else %>
-              <span class="label label-primary"><i class="fa fa-rmb"></i><%= booking.date_and_price.retail_price %>/人</span>
+              <span class="label label-primary"><i class="fa fa-rmb"></i> <%= booking.price.price %>/人</span>
               <% end %>
             </div>
           </div>
@@ -94,16 +125,18 @@
           </div>
 
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">了解</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">了解</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <% end %>
+  <% end %>
 
-    <%= link_to "返回主页", root_path, class: "btn btn-sm btn-default" %>
-  </div>
+  <div style="margin: 30px auto 10px auto; text-align: center"><%= link_to "返回主页", root_path, class: "btn btn-sm btn-default" %></div>
+  
+</div>
 
 

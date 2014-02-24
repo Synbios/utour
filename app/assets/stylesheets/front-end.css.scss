@@ -131,11 +131,27 @@
 }
 
 #booking_list {
+  table { margin: 10px }
+  .booking_list_head { margin: 0 0 25px 0;}
   h2 {
     text-align: center;
   }
 
-  table td { vertical-align: middle; }
+  .tour_icon {
+    width: 60px;
+  }
+  .tour_title {
+    h4 { margin-top: 0}
+    padding: 0 10px;
+  }
+
+  #table td { vertical-align: middle; }
+
+  .booking_detail {
+    margin: 5px 10px;
+    div { padding: 0 5px }
+    .booking_label { width: 100% }
+  }
 }
 
 /* lion.css */

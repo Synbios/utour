@@ -19,7 +19,7 @@ class Admin::AccountsController < ApplicationController
     if !invitation_code.nil? && invitation_code.applicable?(@account)
       respond_to do |format|
         if @account.save
-          WexchatMailer.staff_welcome_email(@account).deliver
+ #         WexchatMailer.staff_welcome_email(@account).deliver
           format.html {
             invitation_code.use(@account)
             sign_in @account

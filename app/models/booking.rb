@@ -1,9 +1,12 @@
 class Booking < ActiveRecord::Base
-  validates :date_and_price_id, :presence => true
+  validates :price_id, :presence => true
   validate :check_number_of_booked_people
   
   belongs_to :date_and_price
   belongs_to :account
+  belongs_to :price 
+#  has_many :departures, :through => :price 
+#  has_many :tours, :through => :departure
 
   private
   	def check_number_of_booked_people

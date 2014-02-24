@@ -1,0 +1,90 @@
+<div class="jarviswidget jarviswidget-color-blue" id="new_date_and_price_form" data-widget-editbutton="false">
+
+  <header>
+    <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+    <h2>添加价格</h2>
+
+  </header>
+
+
+  <div><!-- widget div-->
+
+
+    <div class="jarviswidget-editbox"><!-- widget edit box --><!-- This area used as dropdown edit box -->
+
+
+    </div><!-- end widget edit box -->
+
+
+    <div class="widget-body"><!-- widget content -->
+      <%= form_for [:admin, price], :html => {:role => "form", :id => 'xform', :class => "smart-form"} do |f| %>
+      <fieldset>
+
+        <section>
+          <div class="row">
+            <%= f.label :departure_id, '出发日期编号', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input"></i>
+                <%= f.text_field :departure_id, value: departure.id, readonly: true %>
+              </label>
+            </div>
+          </div>
+         </section>  
+
+         <section>
+          <div class="row">
+            <label class="label col col-2">出发日期</label>
+            <div class="col col-10">
+              <label class="input"></i>
+                <input type="text" name="fname" placeholder="First name" value="<%= departure.date.strftime("%b %d, %Y") %>" readonly="" >
+              </label>
+            </div>
+          </div>          
+        </section>
+
+        <section>
+          <div class="row">
+            <%= f.label :price, '价格', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input">
+                <%= f.text_field :price, placeholder: "例如 6666.00" %>
+              </label>
+            </div>
+          </div>
+        </section>
+
+      </fieldset>
+
+      <fieldset>
+        <section>
+          <div class="row">
+            <%= f.label :user_group_id, '权限组', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input">
+                <%= f.collection_select(:user_group_id,  @user_groups, :id, :name, { :prompt   => "选择用户组" }, { :class => ''} ) %>
+              </label>
+            </div>
+          </div>
+        </section>
+
+
+
+      </fieldset>
+
+      <footer>
+        <%= f.submit "提交", :class => "btn btn-primary" %>
+        <%= link_to "返回", "javascript:history.back()", :class => "btn btn-default" %>
+      </footer>
+      <% end %>
+
+      
+    </div><!-- end widget content -->
+
+  </div><!-- end widget div -->
+
+
+</div>
+<script type="text/javascript">
+
+
+</script>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219015037) do
+ActiveRecord::Schema.define(version: 20140220051807) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20140219015037) do
     t.datetime "updated_at"
     t.integer  "user_class_id"
     t.boolean  "active"
+    t.string   "type"
   end
 
   create_table "activities", force: true do |t|
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140219015037) do
     t.integer  "number_of_adults"
     t.string   "comment"
     t.integer  "account_id"
+    t.integer  "price_id"
   end
 
   create_table "date_and_prices", force: true do |t|
@@ -76,6 +78,18 @@ ActiveRecord::Schema.define(version: 20140219015037) do
     t.string   "dinner"
     t.text     "itinerary"
     t.string   "title"
+  end
+
+  create_table "departures", force: true do |t|
+    t.integer  "tour_id"
+    t.date     "date"
+    t.string   "visa_status"
+    t.string   "notification"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "number_of_seats"
+    t.integer  "user_group_id"
+    t.integer  "account_id"
   end
 
   create_table "feature_tag_connections", force: true do |t|
@@ -124,6 +138,15 @@ ActiveRecord::Schema.define(version: 20140219015037) do
     t.boolean  "cancelled"
   end
 
+  create_table "prices", force: true do |t|
+    t.integer  "departure_id"
+    t.decimal  "price",         precision: 10, scale: 0
+    t.integer  "user_group_id"
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "shelves", force: true do |t|
     t.string   "name"
     t.text     "rack"
@@ -155,6 +178,7 @@ ActiveRecord::Schema.define(version: 20140219015037) do
     t.text     "transportations"
     t.text     "notes"
     t.text     "visa"
+    t.integer  "user_group_id"
   end
 
   create_table "user_group_permission_hashes", force: true do |t|

@@ -147,6 +147,44 @@ class Admin::PlateformsController < ApplicationController
     end
   end
 
+  def departure_admin
+    if params[:departure_id] == "new"
+      @departure = Departure.new
+    else
+      @departure = Departure.find_by_id(params[:departure_id])
+    end
+    @tour = Tour.find_by_id(params[:tour_id])
+    @tours = Tour.all
+    @user_groups = UserGroup.all
+    respond_to do |format|
+      format.html { render :layout=>false }
+    end
+  end
+
+  def price_admin
+    if params[:price_id] == "new"
+      @price = Price.new
+      @departure = Departure.find_by_id(params[:departure_id])
+      @tour = @departure.tour
+    elsif params[:price_id].present?
+      @price = Price.find_by_id(params[:price_id])
+      @departure = @price.departure
+      @tour = @departure.tour
+    elsif params[:departure_id].present?
+      @departure = Departure.find_by_id(params[:departure_id])
+      @tour = @departure.tour
+    elsif params[:tour_id].present?
+      @tour = Tour.find_by_id(params[:tour_id])
+    end
+    
+    
+    @tours = Tour.all
+    @user_groups = UserGroup.all
+    respond_to do |format|
+      format.html { render :layout=>false }
+    end
+  end
+
   private
     def check_login
       redirect_to admin_signin_path unless staff_signed_in?

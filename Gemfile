@@ -68,6 +68,8 @@ gem 'prawn'
 
 gem 'prawn-rails'
 
+gem 'carrierwave'
+
 group :development do
   gem 'rails_layout'
   gem 'capistrano'

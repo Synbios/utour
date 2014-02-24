@@ -6,7 +6,12 @@ class Admin::UserGroupsController < ApplicationController
   # GET /user_groups.json
   def index
     @user_groups = UserGroup.all
-    @tree = UserGroup.get_tree
+    if current_user.admin?
+      @user_group_id = 0
+    else
+      @user_group_id = current_user.id
+    end
+    @tree = UserGroup.get_tree(@user_group_id)
   end
 
   # GET /user_groups/1

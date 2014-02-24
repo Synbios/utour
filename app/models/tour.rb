@@ -3,9 +3,12 @@ class Tour < ActiveRecord::Base
 	has_many :days, :dependent => :destroy
 	has_many :activities, through: :days
 
+	has_many :departures, :dependent => :destroy
+
 	accepts_nested_attributes_for :days, :reject_if => lambda { |a| a[:number].blank? }, :allow_destroy => true
 
 	belongs_to :account
+	belongs_to :user_group
 
 	def generate_itinerary(force=false)
 		self.days.each do |day|
@@ -25,6 +28,12 @@ class Tour < ActiveRecord::Base
 				lowest_trade = price.trade_price if price.trade_price < lowest_trade
 			end
 			return { trade: lowest_trade, retail: lowest_retail }
+		end
+	end
+
+	def generate_title
+		self.days.each do |day|
+			day.generate_title
 		end
 	end
 

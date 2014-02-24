@@ -1,12 +1,12 @@
 <%= form_for @booking, :html => {:role => "form", :class => "form-horizontal"} do |f| %>
 
 <div class="form-group">
-  <%= f.label :date_and_price_id, '预订号', :class => "col-xs-3 col-sm-3 control-label" %>
+  <%= f.label :price_id, '预订号', :class => "col-xs-3 col-sm-3 control-label" %>
   
   <div class="col-xs-9 col-sm-8">
-    <%= f.text_field :date_and_price_id, :class => "form-control" %>
-    <% if @booking.present? && @booking.errors[:date_and_price_id] %>
-    <% @booking.errors[:date_and_price_id].each do |msg| %>
+    <%= f.text_field :price_id, :class => "form-control" %>
+    <% if @booking.present? && @booking.errors[:price_id] %>
+    <% @booking.errors[:price_id].each do |msg| %>
     <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
     <% end %>
     <% end %>
