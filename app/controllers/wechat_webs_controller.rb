@@ -1,5 +1,6 @@
 class WechatWebsController < ApplicationController
-  before_action :store_location, only: [:trade]
+  #before_action :store_location, only: [:trade]
+  before_action :check_login, only: [:group_travel, :diy, :trade, :booking, :sale]
 	layout "lion"
   
   def tiger
@@ -91,5 +92,6 @@ class WechatWebsController < ApplicationController
   end
 
   private
+  
 
 end

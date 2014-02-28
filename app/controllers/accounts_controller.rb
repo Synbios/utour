@@ -1,9 +1,7 @@
 class AccountsController < ApplicationController
 
   before_action :set_account, only: [:show, :edit, :update, :destroy, :activate_show]
-  before_action :signin_filter, except: [:new, :create]
-  before_action :self_filter, except: [:new, :create]
-  before_action :privilege_filter, except: [:new, :create]
+  before_action :check_login, except: [:new, :create]
 
   # GET /accounts
   # GET /accounts.json
@@ -32,6 +30,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/activate_show
   def activate_show
+    @contact = Account.sale_contact
     unless @account.active
       render 'activate_show'
     end
@@ -55,10 +54,18 @@ class AccountsController < ApplicationController
       # elsif Date.today > code.expire_time
       #   @account.errors.add(:activation_code, '该邀请码已过期请重新申请') 
       #   render activate_show_account_path(account)
+      elsif code.user_class_id != @account.user_class_id
+        @account.errors.add(:activation_code, "该邀请码非同业注册邀请码")
+        render 'activate_show'
       else
+        @account.update_attribute(:sale_channel, code.sale_channel)
+        @account.update_attribute(:active, true)
+
+        SaleAgent.new(sale_id: code.account.id, agent_id: @account.id).save
+        
         code.use(@account)
         flash.now[:notice] = "账户验证成功"
-        redirect_to root_url
+        redirect_back_or_default
       end
     else
       render text: "WECHAT_ID #{params[:wechat_id]} not found"
@@ -71,46 +78,42 @@ class AccountsController < ApplicationController
 
   # POST /accounts
   # POST /accounts.json
+  # 注册同行账号
   def create
     @account = Account.new(account_params)
-    @account.user_group_id = 0
     if @account.gender == 2
       @account.gender = "女"
     else
       @account.gender = "男"
     end
-    if @account.is_trade == "1"
-      @account.active = false
-      @account.set_trade
-    else
-      @account.active = true
-      @account.set_customer
-    end
+    @account.user_class_id = 5 # 5 = 同行
+
+    # if @account.is_trade == "1"
+    #   @account.active = false
+    #   @account.set_trade
+    # else
+    #   @account.active = true
+    #   @account.set_customer
+    # end
 
     respond_to do |format|
       if @account.save
-        # if @account.is_trade == "1"
-        #   WexchatMailer.trader_welcome_email(@account).deliver
-        # else
-        #   WexchatMailer.customer_welcome_email(@account).deliver
-        # end
+       # if @account.is_trade == "1"
+          WexchatMailer.trader_welcome_email(@account).deliver
+       # else
+       #   WexchatMailer.customer_welcome_email(@account).deliver
+       # end
         format.html {
           sign_in @account
           #puts ">>>>>>>>>> #{@account.user_class_id} #{@account.user_class_id == 3} #{@account.user_class_id == '3'} #{@account.trade?} >>>>>>>>>>>> #{activate_show_account_path(@account)} "
-          if @account.trade?
+          redirect_to activate_show_account_path(@account), notice: '新用户申请成功'
+          # if @account.trade?
 
-            redirect_to activate_show_account_path(@account), notice: '新用户申请成功'
-          else
-            # address = session.delete(:return_to)
-            # unless address.nil?
-            #   redirect_to address
-            # else
-            #   redirect_to root_url
-            # end 
+          #   redirect_to activate_show_account_path(@account), notice: '新用户申请成功'
+          # else
             
-            #redirect_to root_url
-            redirect_back_or_default
-          end
+          #   redirect_back_or_default
+          # end
         }
         #format.json { render action: 'show', status: :created, location: @account }
       else
@@ -161,16 +164,6 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:name, :mobile, :email, :gender, :wechat_id, :password, :password_confirmation, :memory_token, :is_trade)
-    end
-
-    def signin_filter
-      redirect_to signin_url, notice: "用户请登录，新用户请先注册！" unless signed_in?
-    end
-
-    def self_filter
-    end
-
-    def privilege_filter
+      params.require(:account).permit(:company_name, :name, :mobile, :email, :gender, :wechat_id, :password, :password_confirmation, :memory_token)
     end
 end

@@ -2,10 +2,18 @@ class UserGroup < ActiveRecord::Base
   validates :name, :presence => { :message => "用户组名为必填" }, :uniqueness => { :message => "此用户组已存在" }
   validate :check_parent_id
 
-  has_many :user_group_permission_hashes
+  #has_many :user_group_permission_hashes
   has_many :accounts
   has_many :invitation_codes
+  belongs_to :user_group, :foreign_key => "parent_id"
 
+  has_many :m, :class_name => 'UserGroupMap', :foreign_key => 'up'
+  #has_many :down_user_groups, :through => :down_user_group_maps, :foreign_key => 'down'
+  has_many :up_relations, :class_name => 'UserGroupMap', :foreign_key => 'down'
+
+
+  #has_many :agent_sales, :class_name => 'SaleAgent', :foreign_key => 'agent_id'
+  #has_many :sales, :through => :agent_sales, :foreign_key => 'sale_id'
   # return a hash of user group hierarchy
   # note: this method requires polynomial database lookups avoid using it when possible
   def self.get_tree(user_group_id)
@@ -34,48 +42,52 @@ class UserGroup < ActiveRecord::Base
     tree
   end
 
-  def self.hash_tree_to_list(hash, out="")
-    members = hash[:members]
-    unless members.empty?
-      out += "<ul>"
-      members.each do |member|
-        out += "<li><a ref='' class=\"btn btn-primary\">#{member[:name]}</a>"
-        out = self.hash_tree_to_list(member, out)
-        out += "</li>"
-      end
-      out += "</ul>"
+  def self.get_trees
+    roots = UserGroup.where("parent_id = 0")
+    trees = []
+    roots.each do |root|
+      trees.push self.get_tree2 root
     end
-    out
+    trees
   end
 
-  def self.sub_tree(start_node_id)
-    tree = UserGroup.get_tree(start_node_id)
-    return tree if start_node_id == :root
-    node = nil
+  def self.get_tree2(root=nil)
+    #puts "INSIDE>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    return "" if root.nil?
+    #puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+
+    tree = {
+      :name => root.name,
+      :object => root,
+      :id => root.id,
+      :parent_id => root.parent_id,
+      :parent_name => root.parent_id == 0 ? "行政树顶层" : root.user_group.name,
+      :members => []
+    }
+    #puts ">>>>>>>>>> #{tree}"
     stack = [tree]
-    until !node.nil? || stack.empty?
+
+    until stack.empty?
       expand = stack.pop
-      if expand[:id] == start_node_id
-        node = expand
-      else
-        expand[:members].each do |member|
-          stack.push member
-        end
+      recruits = UserGroup.where "parent_id = ?", expand[:id]
+      recruits.each do |recruit|
+        hash = {
+          :name => recruit.name,
+          :id => recruit.id,
+          :members => [],
+          :parent_id => expand[:id],
+          :parent_name => expand[:name],
+          :object => recruit
+        }
+        expand[:members].push hash
+        stack.push hash
       end
     end
-    node
+    puts tree
+    tree
   end
 
-  def self.to_admin_list(start_user_group_id = 0)
-    tree = self.get_tree(start_user_group_id)
-    out = ""
-    unless tree.nil?
-      out += "<ul>"
-      out += self.render_tree_list(tree)
-      out += "</ul>"
-    end
-    out
-  end
+  
   
 
   def self.convert_name_string_to_id_string(name_string)
@@ -105,32 +117,5 @@ private
     elsif parent_id != 0 && UserGroup.find_by_id(parent_id).nil?
       errors.add(:parent_id, "上级用户组(parent_id = #{parent_id})不存在")
     end
-  end
-
-  def self.render_tree_list(hash, out="")
-    unless hash.nil?
-      out += "<li>"
-      if hash[:members].empty?
-        out += "<span> #{hash[:name]}</span>"
-      else
-        out += "<span><i class=\"fa fa-lg fa-minus-circle\"></i> #{hash[:name]}</span>"
-      end
-      
-      #<a href=\"admin/user_groups/new?parent_id=#{hash[:id]}\">新建</a>
-      if hash[:id] == 0
-        out += " <button onclick=\"new_user_group(#{hash[:id]}, '#{hash[:name]}')\", class=\"btn btn-primary btn-sm\">添加</button>"
-      else
-        out += " <button onclick=\"new_user_group(#{hash[:id]}, '#{hash[:name]}')\", class=\"btn btn-primary btn-sm\">添加</button> <a href='/admin/user_groups/#{hash[:id]}' rel=\"nofollow\" data-method=\"delete\" class=\"btn btn-danger btn-sm\">删除</a>"
-      end
-      unless hash[:members].empty?
-        out += "<ul>"
-        hash[:members].each do |member|
-          out = self.render_tree_list(member, out)
-        end
-        out += "</ul>"
-      end
-      out += "</li>"
-    end
-    out
   end
 end

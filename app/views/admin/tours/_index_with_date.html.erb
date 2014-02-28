@@ -22,7 +22,7 @@
           <tr>
             <th>编号</th>
             <th>名称</th>
-            <th>权限组</th>
+            <th>销售渠道</th>
             <th>创建人</th>
             <th>出发日期</th>
             <th>操作</th>
@@ -33,7 +33,7 @@
           <tr>
             <td><%= tour.id %></td>
             <td><%= tour.name %></td>
-            <td><%#= tour.user_group.name%></td>
+            <td><%= tour.sale_channel.name%></td>
             <td><%= tour.account.name%></td>
             <td><%= link_to "/admin#admin/price_admin.html?tour_id=#{tour.id}" do %>现有<%= tour.departures.count %>个<% end %></td>
             <td><%= link_to "添加出发日期", "/admin#admin/departure_admin.html?tour_id=#{tour.id}&departure_id=new" %></td>

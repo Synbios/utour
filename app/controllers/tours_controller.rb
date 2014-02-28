@@ -2,6 +2,7 @@ class ToursController < ApplicationController
   layout "lion"
   #before_action :store_location, except: [:show]
   before_action :set_tour, only: [:show]
+  before_action :check_login, except: [:show]
 
   # GET /tours
   # GET /tours.json

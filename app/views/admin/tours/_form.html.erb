@@ -45,10 +45,10 @@
         <fieldset>
           <section>
             <div class="form-group">
-              <%= f.label :tour_group, '权限组', :class => "col-md-2 control-label" %>
+              <%= f.label :sale_channel_id, '销售渠道', :class => "col-md-2 control-label" %>
               <div class="col-md-10">
                 <div class="input-group">
-                  <%= f.text_field :tour_group, :placeholder => "目前只支持手工收入用户组, 不同权限请用空格隔开, 如 \"成都同行 重庆同行 内江同行\", 不能识别的名字将自动忽略", :value => UserGroup.convert_id_string_to_name_string(@tour.tour_group), class: "form-control" %>
+                  <%= f.collection_select(:sale_channel_id,  SaleChannel.all, :id, :name, { :prompt   => "选择渠道" }, { :class => 'form-control'}) %>
                   <span class="input-group-addon"><i class="fa fa-warning"></i></span>
                 </div>
               </div>

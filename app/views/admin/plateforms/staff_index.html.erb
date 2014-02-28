@@ -1,0 +1,52 @@
+<!-- Widget ID (each widget will need unique ID)-->
+<div class="jarviswidget jarviswidget-color-blueDark" data-widget-editbutton="false">
+  <%# widget options:
+
+  usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+        
+  data-widget-colorbutton="false"
+  data-widget-editbutton="false"
+  data-widget-togglebutton="false"
+  data-widget-deletebutton="false"
+  data-widget-fullscreenbutton="false"
+  data-widget-custombutton="false"
+  data-widget-collapsed="true"
+  data-widget-sortable="false"
+        
+  %>
+  <header>
+   <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+   <h2>员工列表</h2>
+
+  </header>
+ 
+  <div><!-- widget div-->
+    
+    <div class="jarviswidget-editbox"><!-- widget edit box --><!-- This area used as dropdown edit box -->
+
+    </div><!-- end widget edit box -->
+    
+    <div class="widget-body no-padding"><!-- widget content -->
+      <div id="account_table"></div>
+    </div><!-- end widget content -->
+
+  </div><!-- end widget div -->
+
+</div><!-- end widget -->
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+  function reload_account_table(){
+    $.ajax({url: '/admin/accounts.js?type=staff',
+     success: function(data) {
+
+     }
+   });
+  };
+
+  reload_account_table();
+});
+
+</script>

@@ -22,7 +22,7 @@
           <tr>
             <th>编号</th>
             <th>价格</th>
-            <th>客户组</th>
+            <th>销售渠道</th>
             <th>添加人</th>
          </tr>
         </thead>
@@ -32,11 +32,7 @@
             <td><%= price.id %></td>
             <td><%= price.price  %></td>
             <td>
-              <% if price.user_group_id.blank? %>
-              <em>所有客户可见</em>
-              <% else %>
-              <%= price.user_group.name %>
-              <% end %>
+              <%= price.sale_channel.name %>
             </td>
             <td><%= price.account.name %></td>
           </tr>          

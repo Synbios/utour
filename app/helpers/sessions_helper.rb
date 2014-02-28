@@ -73,7 +73,17 @@ module SessionsHelper
 
   def store_location   
     session[:return_to] = request.original_url
-  end  
+  end
+
+  def check_login
+    if !signed_in?
+      store_location
+      redirect_to :controller=> 'sessions', :action => 'new'
+    elsif current_user.active != true
+      store_location
+      redirect_to activate_show_account_path(current_user)
+    end
+  end
   
   # Redirect to the URI stored by the most recent store_location call or  
   # to the passed default.  

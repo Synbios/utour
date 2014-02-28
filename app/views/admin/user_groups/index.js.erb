@@ -1,4 +1,4 @@
-$('#user_group_index').html("<%= escape_javascript( render( partial: 'index', locals: { user_groups: @user_groups, tree: @tree }) )  %>");
+$('#user_group_index').html("<%= escape_javascript( render( partial: 'index', locals: { trees: @trees }) )  %>");
 
 $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
 $('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function(e) {

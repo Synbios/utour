@@ -1,64 +1,80 @@
 class Admin::PlateformsController < ApplicationController
   before_action :check_login
 
+  layout false
+
   def dashboard
     @account = current_user
-    render 'dashboard', :layout => false
+
   end
 
   def home
-    render 'home', :layout => false
+
   end
 
   def inbox
-    respond_to do |format|
-      format.js { render :layout=>false }
-      format.html { render :layout=>false }
-    end
+
   end
 
   def email_list
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
+
   end
 
   def email_compose
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
+
   end
 
   def calendar
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
+
   end
 
   def invitation_code_control
-    respond_to do |format|
-      format.html { render :layout=>false }
+    if current_user.user_class_id == 1 #
+      @user_classes = UserClass.all
+    elsif current_user.user_class_id == 2
+      @user_classes = [ UserClass.find_by_id(2), UserClass.find_by_id(3), UserClass.find_by_id(4), UserClass.find_by_id(5) ]
+    elsif current_user.user_class_id == 3
+      @user_classes = [ UserClass.find_by_id(3) ]
+    elsif current_user.user_class_id == 4
+      @user_classes = [ UserClass.find_by_id(5) ]
     end
+
+    @user_groups = UserGroupMap.desc_sale_channels(current_user.user_group_id)
+    @sale_channels = SaleChannelMap.desc_sale_channels(current_user.sale_channel_id)
   end
 
   def account_control
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
+    @user_groups = UserGroup.all
   end
 
-  def account_admin
-    respond_to do |format|
-      format.html { render :layout=>false }
+  def staff_index
+    #@staff = Account.where("user_class_id <= 4")
+  end
+
+  def agent_index
+    #@agents = Account.where("user_class_id = 5")
+  end
+
+  def booking_index
+    @bookings = current_user.in_orders # 自己收到的订单
+#    @codes.each do |code|
+#      puts "self code ids >>> #{code.id}"
+#    end
+    maps = UserGroupMap.where(:up => current_user.user_group_id) # user_group ids
+    maps.each do |map|
+      user_group = UserGroup.find_by_id(map.down)
+#      puts "map #{map} === #{user_group.name}"
+      user_group.accounts.each do |account|
+#        puts "  has a member = #{account.name} with #{account.invitation_codes.count} codes"
+        @bookings += account.in_orders
+      end
     end
+    #@bookings = Booking.all
   end
 
   def new_tour
     @tour = Tour.new
     @sites = Site.all
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
   end
 
   def edit_tour
@@ -66,46 +82,28 @@ class Admin::PlateformsController < ApplicationController
     @sites = Site.all
     @images = Image.all
     @tour = Tour.find_by_id(params[:id])
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
   end
 
   def index_tour
     @tours = Tour.all
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
   end
 
   def new_shelf
     @shelf = Shelf.new
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
   end
 
   def edit_shelf
     @shelves = Shelf.all
     @shelf = Shelf.find_by_id(params[:id])
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
   end
 
   def index_shelf
     @shelves = Shelf.all
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
   end
 
   def tag_control
     @feature_tag = FeatureTag.new
     @feature_tags = FeatureTag.all
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
   end
 
   def date_and_price_control
@@ -116,35 +114,23 @@ class Admin::PlateformsController < ApplicationController
     end
     @tour = Tour.find_by_id(params[:tour_id])
     @tours = Tour.all
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
   end
 
   def image_admin
     @image = Image.new
     @images = Image.all
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
   end
 
   def new_site_admin
     @site = Site.new
     @images = Image.all
     1.times { @site.image_and_sites.build }
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
   end
 
   def site_admin
     @site = Site.find_by_id(params[:id])
     @sites = Site.all
     @images = Image.all
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
   end
 
   def departure_admin
@@ -156,9 +142,6 @@ class Admin::PlateformsController < ApplicationController
     @tour = Tour.find_by_id(params[:tour_id])
     @tours = Tour.all
     @user_groups = UserGroup.all
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
   end
 
   def price_admin
@@ -180,9 +163,24 @@ class Admin::PlateformsController < ApplicationController
     
     @tours = Tour.all
     @user_groups = UserGroup.all
-    respond_to do |format|
-      format.html { render :layout=>false }
-    end
+  end
+
+  def sale_channels_admin
+    @sale_channels = SaleChannel.all
+  end
+
+  def agents
+    @agents = current_user.agents
+  end
+
+  def bookings_admin
+    @bookings = current_user.in_orders
+  end
+
+  def my_invitation_code
+    @user_classes = [ UserClass.find_by_id(5) ]
+    @user_groups = UserGroupMap.desc_sale_channels(current_user.user_group_id)
+    @sale_channels = SaleChannelMap.desc_sale_channels(current_user.sale_channel_id)
   end
 
   private

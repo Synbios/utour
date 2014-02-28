@@ -1,0 +1,69 @@
+$('#account_table').html("<%= escape_javascript( render( partial: 'agent_index', locals: { user_class_id: 1, accounts: @accounts }) )  %>");
+
+
+
+loadDataTableScripts();
+function loadDataTableScripts() {
+
+  loadScript("javascripts/plugin/datatables/jquery.dataTables-cust.min.js", dt_2);
+
+  function dt_2() {
+    loadScript("javascripts/plugin/datatables/ColReorder.min.js", dt_3);
+  }
+
+  function dt_3() {
+    loadScript("javascripts/plugin/datatables/FixedColumns.min.js", dt_4);
+  }
+
+  function dt_4() {
+    loadScript("javascripts/plugin/datatables/ColVis.min.js", dt_5);
+  }
+
+  function dt_5() {
+    loadScript("javascripts/plugin/datatables/ZeroClipboard.js", dt_6);
+  }
+
+  function dt_6() {
+    loadScript("javascripts/plugin/datatables/media/js/TableTools.min.js", dt_7);
+  }
+
+  function dt_7() {
+    loadScript("javascripts/plugin/datatables/DT_bootstrap.js", runDataTables);
+  }
+
+}
+
+function runDataTables() {
+
+
+  /* Add the events etc before DataTables hides a column */
+  $(".account_table thead input").keyup(function() {
+    oTable.fnFilter(this.value, oTable.oApi._fnVisibleToColumnIndex(oTable.fnSettings(), $("thead input").index(this)));
+  });
+
+  $(".account_table thead input").each(function(i) {
+    this.initVal = this.value;
+  });
+  $(".account_table thead input").focus(function() {
+    if (this.className == "search_init") {
+      this.className = "";
+      this.value = "";
+    }
+  });
+  $(".account_table thead input").blur(function(i) {
+    if (this.value == "") {
+      this.className = "search_init";
+      this.value = this.initVal;
+    }
+  });   
+
+
+  var oTable = $('.account_table').dataTable({
+    "sDom" : "<'dt-top-row'><'dt-wrapper't><'dt-row dt-bottom-row'<'row'<'col-sm-6'i><'col-sm-6 text-right'p>>",
+    "oLanguage" : {
+     "sSearch" : "Search all columns:"
+   },
+   "bSortCellsTop" : true
+ });   
+
+}

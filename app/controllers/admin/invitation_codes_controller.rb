@@ -8,19 +8,14 @@ class Admin::InvitationCodesController < ApplicationController
   end
 
   def create
-  	#@code = InvitationCode.new(invitation_code_params)
-    @code = InvitationCode.new
-    if params[:invitation_code][:user_group_id] =~ /\A[0-9]+\Z/
-      @code.user_group_id = params[:invitation_code][:user_group_id]
-    elsif params[:invitation_code][:user_group_id].present?
-      user_group = UserGroup.find_by_name(params[:invitation_code][:user_group_id])
-      @code.user_group_id = user_group.id if user_group.present? 
-    end
-    @code.user_class_id = params[:invitation_code][:user_class_id]
+  	@code = InvitationCode.new(invitation_code_params)
+    #@code = InvitationCode.new
+    
     @code.issued_by = current_user.id
     @code.used_by = nil
     @code.used_at = nil
     @code.cancelled = false
+
     #@code.code = SecureRandom.hex(4)
     @code.code = (rand * 10000000000).to_i.to_s
     @code.expire_time = Time.now + 7.days 
@@ -43,7 +38,7 @@ class Admin::InvitationCodesController < ApplicationController
         flash.now[:error] = "注册码取消错误: 请勿重复取消"
       else
         @code.cancelled = true
-         if @code.save
+        if @code.save
           flash.now[:notice] = "注册已码取消"
         else
           flash.now[:error] = "注册码取消错误: 数据未保存"
@@ -68,15 +63,27 @@ class Admin::InvitationCodesController < ApplicationController
   end
 
   def index
-    @codes = InvitationCode.all
-    # @return = Jbuilder.encode do |json|
-    #   json.iTotalRecords @codes.count
-    #   json.iTotalDisplayRecords @codes.count
-    #   json.sEcho params[:sEcho]
-      
-    #   json.aaData @codes, :user_class_id, :created_at, :user_group_id, :expire_time, :account_id, :used, :code
 
-    # end
+    if params[:type] == "self"
+      @codes = current_user.invitation_codes # 自己建的注册码 
+    else
+      # 只看目前行政权限下人员所建的验证码
+      @codes = current_user.invitation_codes # 自己建的注册码
+      # @codes.each do |code|
+      # puts "self code ids >>> #{code.id}"
+      # end
+      maps = UserGroupMap.where(:up => current_user.user_group_id) # user_group ids
+      maps.each do |map|
+        user_group = UserGroup.find_by_id(map.down)
+        # puts "map #{map} === #{user_group.name}"
+        user_group.accounts.each do |account|
+          # puts "  has a member = #{account.name} with #{account.invitation_codes.count} codes"
+          @codes += account.invitation_codes
+        end
+      end
+    end
+
+
     respond_to do |format|
       format.json { render json: @return }
       format.js
@@ -85,7 +92,7 @@ class Admin::InvitationCodesController < ApplicationController
   end
 
   private
-    def invitation_code_params
-      params.require(:invitation_code).permit(:user_class_id, :user_group_id)
-    end
+  def invitation_code_params
+    params.require(:invitation_code).permit(:user_class_id, :user_group_id, :sale_channel_id)
+  end
 end

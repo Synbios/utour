@@ -3,8 +3,10 @@ class Booking < ActiveRecord::Base
   validate :check_number_of_booked_people
   
   belongs_to :date_and_price
-  belongs_to :account
   belongs_to :price 
+
+  belongs_to :agent, :class_name => 'Account', :foreign_key => 'agent_id'
+  belongs_to :sale, :class_name => 'Account', :foreign_key => 'sale_id'
 #  has_many :departures, :through => :price 
 #  has_many :tours, :through => :departure
 

@@ -5,13 +5,18 @@ class Admin::UserGroupsController < ApplicationController
   # GET /user_groups
   # GET /user_groups.json
   def index
-    @user_groups = UserGroup.all
-    if current_user.admin?
-      @user_group_id = 0
+    #@user_groups = UserGroup.all
+    if current_user.user_class_id == 1
+      @trees = UserGroup.get_trees
     else
-      @user_group_id = current_user.id
+      @trees = [UserGroup.get_tree2(UserGroup.last.user_group)]#[UserGroup.get_tree2(current_user.user_group)]
     end
-    @tree = UserGroup.get_tree(@user_group_id)
+    # if current_user.admin?
+    #   @user_group_id = 0
+    # else
+    #   @user_group_id = current_user.id
+    # end
+    #@tree = UserGroup.get_tree(@user_group_id)
   end
 
   # GET /user_groups/1
@@ -35,7 +40,7 @@ class Admin::UserGroupsController < ApplicationController
 
     respond_to do |format|
       if @user_group.save
-        rebuild_permission_hash
+        UserGroupMap.reload
         format.json { render json: @code, status: :ok }
         format.html { redirect_to '/admin#admin/account_control.html', notice: '成功建立新用户组' }
         #format.json { render action: 'show', status: :created, location: @user_group }
@@ -65,7 +70,7 @@ class Admin::UserGroupsController < ApplicationController
   # DELETE /user_groups/1.json
   def destroy
     @user_group.destroy
-    rebuild_permission_hash
+    UserGroupMap.reload
     respond_to do |format|
       format.html { redirect_to '/admin#admin/account_control.html', notice: '成功删除新用户组' }
       format.json { head :no_content }
@@ -81,9 +86,5 @@ class Admin::UserGroupsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_group_params
       params.require(:user_group).permit(:name, :parent_id)
-    end
-
-    def rebuild_permission_hash
-      UserGroupPermissionHash.reload
     end
 end

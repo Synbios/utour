@@ -1,7 +1,11 @@
 class InvitationCode < ActiveRecord::Base
 
-  belongs_to :account, primary_key: :issued_by
+
+  belongs_to :account, foreign_key: :issued_by
+
   belongs_to :user_group
+  belongs_to :sale_channel
+  belongs_to :user_class
   # check the code's current status
   # ok, used, expired, cancelled and a chinese message
   def status
@@ -28,12 +32,9 @@ class InvitationCode < ActiveRecord::Base
     true
   end
   def use(account)
-    return false unless applicable?(account)
-    account.update_columns(user_group_id: user_group_id)
-    account.update_columns(user_class_id: user_class_id)
-    account.update_columns(active: true)
-    self.update_columns(used_by: account.id)
-    self.update_columns(used_at: Time.now)
+    return false unless self.valid?
+    self.update_attribute(:used_by, account.id)
+    self.update_attribute(:used_at, Time.now)
     return true
   end
 end

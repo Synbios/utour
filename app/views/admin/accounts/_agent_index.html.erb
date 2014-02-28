@@ -1,0 +1,64 @@
+<table class="table table-striped table-bordered smart-form account_table">
+  <thead>
+    <tr>
+      <th>客户编号</th>
+      <th>客户姓名</th>
+      <th>客户渠道</th>
+      <th>客户电话</th>
+      <th>客户订单</th>
+      <th>客户状态</th>
+    </tr>
+    <tr class="second">
+      <td>
+        <label class="input">
+          <input type="text" name="search_id" value="过滤" class="search_init">
+        </label>
+      </td>
+      <td>
+        <label class="input">
+          <input type="text" name="search_used" value="过滤" class="search_init">
+        </label>  
+      </td>
+      <td>
+        <label class="input">
+          <input type="text" name="search_account_id" value="过滤" class="search_init">
+        </label>  
+      </td>
+      <td>
+        <label class="input">
+          <input type="text" name="search_user_class_id" value="过滤" class="search_init">
+        </label>  
+      </td>
+      <td>
+        <label class="input">
+          <input type="text" name="search_user_group_id" value="过滤" class="search_init">
+        </label>  
+      </td>
+      <td>
+        <label class="input">
+          <input type="text" name="search_created_at" value="过滤" class="search_init">
+        </label>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <% accounts.each do |account| %>
+    <tr>
+      <td><%= account.id %></td>
+      <td><%= account.name %></td>
+      <td><%= account.user_group.name %></td>
+      <td><%= account.mobile %></td>
+      <td>
+        共计<%= account.out_orders.count %>单 <%= link_to "查看", "/admin#admin/agents_admin.html?agent_id=#{account.id}" %>
+      </td>
+      <td>
+        <% if account.active %>
+        <i class="fa fa-check"></i> 已验证
+        <% else %>
+        <i class="fa fa-exclamation-triangle"></i> 尚未验证
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

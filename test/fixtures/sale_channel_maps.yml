@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  up: 1
+  down: 1
+  distance: 1
+
+two:
+  up: 1
+  down: 1
+  distance: 1

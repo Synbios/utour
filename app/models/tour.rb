@@ -8,7 +8,7 @@ class Tour < ActiveRecord::Base
 	accepts_nested_attributes_for :days, :reject_if => lambda { |a| a[:number].blank? }, :allow_destroy => true
 
 	belongs_to :account
-	belongs_to :user_group
+	belongs_to :sale_channel
 
 	def generate_itinerary(force=false)
 		self.days.each do |day|

@@ -1,49 +1,46 @@
-<!-- widget options:
-                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-        
-                data-widget-colorbutton="false"
-                data-widget-editbutton="false"
-                data-widget-togglebutton="false"
-                data-widget-deletebutton="false"
-                data-widget-fullscreenbutton="false"
-                data-widget-custombutton="false"
-                data-widget-collapsed="true"
-                data-widget-sortable="false"
-        
--->
-<div class="jarviswidget jarviswidget-color-blue" id="wid-user_group_tree" data-widget-editbutton="false">
-
-  <header>
-    <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
-    <h2>权限标签图</h2>
-
-  </header>
 
 
-  <div><!-- widget div-->
+<div class="tree">
+  <ul>
+    <% trees.each do |tree| %>
 
+    <% nodes_to_visit = [tree] %>
+    <% while !nodes_to_visit.empty? %>
+    <% current = nodes_to_visit.shift %>
+    <% if current.class == String %>
+    <%= current.html_safe %>
+    <% next %>
+    <% end # if %>
 
-    <div class="jarviswidget-editbox"><!-- widget edit box --><!-- This area used as dropdown edit box -->
-
-
-    </div><!-- end widget edit box -->
-
-
-    <div class="widget-body"><!-- widget content -->
-      <% if tree.nil? %>
-        无用户组
+    <li>
+      <% if current[:object].parent_id == 0 # 第一层 %>
+      <span><i class="fa fa-lg fa-map-marker"></i> <%= current[:name] %></span> 
+      <% elsif !current[:members].empty? %>
+      <span><i class="fa fa-lg fa-minus-circle"></i> <%= current[:name] %></span>
       <% else %>
-      <div class="tree">
-        <%#= UserGroup.to_admin_list(:root).html_safe %>
-        <% user_group_id = current_user.admin? ? 0 : current_user.user_group_id %>
-        <%= UserGroup.to_admin_list(user_group_id).html_safe %>
-      </div>
+      <span> <%= current[:name] %></span>
       <% end %>
-    </div><!-- end widget content -->
+      <% if current_user.user_class_id <= 2 %>
+      &ndash;
+      <button class="btn btn-sm btn-primary" onclick="new_user_group(<%= current[:id] %>, '<%= current[:name] %>');">添加</button>
+      <a href='/admin/user_groups/<%= current[:id] %>' rel="nofollow" data-method="delete" class="btn btn-danger btn-sm">删除</a>
+      <% end %>
+      <% if current[:members].empty? %>
+      <% nodes_to_visit.unshift '</li>' %>
+      <% else %>
+
+      <ul>
+        <% nodes_to_visit.unshift '</li>' %>
+        <% nodes_to_visit.unshift '</ul>' %>
+        <% current[:members].each do |member| %>
+        <% nodes_to_visit.unshift member %>
+        <% end %>
+        <% end # if %>
 
 
-  </div><!-- end widget div -->
+        <% end # while %>
 
-
-</div>
+        <% end # trees.each %>
+      </ul>
+    </div>
 

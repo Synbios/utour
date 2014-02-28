@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
-  before_action :check_login, only: [:new]
+  before_action :check_login
 
 
   # GET /bookings
@@ -13,7 +13,7 @@ class BookingsController < ApplicationController
     else
       
 
-      @bookings = @account.bookings
+      @bookings = @account.out_orders
       @tours = @bookings.map { |booking| booking.price.departure.tour }.uniq { |tour| tour.id }
       puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> #{@account.id} #{@bookings} #{@tours}"
     end
@@ -32,9 +32,8 @@ class BookingsController < ApplicationController
   def new
     @booking = Booking.new
     if params[:price_id].present?
-      #@booking.date_and_price_id = params[:date_and_price_id]
       @booking.price_id = params[:price_id]
-      #@date_and_price = DateAndPrice.find_by_id(params[:date_and_price_id])
+      @sales = current_user.sales #Account.get_sales(params[:price_id], current_user.id)
       @price = Price.find_by_id(params[:price_id])
       @tour = Tour.find_by_id(@price.departure.tour_id)
     end
@@ -50,12 +49,13 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.number_of_adults = 0 if @booking.number_of_adults.nil?
     @booking.number_of_children = 0 if @booking.number_of_children.nil?
-    @booking.account_id = current_user.id
+    @booking.agent = current_user
+
 
     respond_to do |format|
       if @booking.save
         # WexchatMailer.booking_notice(@booking.account)
-        # WexchatMailer.booking_notice_staff(@booking.account, Account.find_by_id(15), @booking).deliver
+        WexchatMailer.booking_notice_staff(@booking.agent, @booking.sale, @booking).deliver
         format.html { redirect_to bookings_path, notice: '预订成功' }
         format.json { render action: 'index' }
       else
@@ -97,13 +97,6 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:number_of_adults, :number_of_children, :price_id, :comment)
-    end
-
-    def check_login
-      unless signed_in?
-        store_location
-        redirect_to :controller=> 'sessions', :action => 'new'
-      end
+      params.require(:booking).permit(:number_of_adults, :number_of_children, :price_id, :sale_id, :agent_id, :comment)
     end
 end

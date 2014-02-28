@@ -1,4 +1,5 @@
 class WechatsController < ApplicationController
+  include WechatsHelper
   skip_before_filter :verify_authenticity_token
   before_filter :check_signature, :except => [:debug]
 

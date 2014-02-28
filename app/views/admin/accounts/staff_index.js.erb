@@ -1,7 +1,5 @@
-$('#admin_table').html("<%= escape_javascript( render( partial: 'index', locals: { user_class_id: 1, accounts: @admin_accounts }) )  %>");
-$('#staff_table').html("<%= escape_javascript( render( partial: 'index', locals: { user_class_id: 2, accounts: @staff_accounts }) )  %>");
-$('#trade_table').html("<%= escape_javascript( render( partial: 'index', locals: { user_class_id: 3, accounts: @trade_accounts }) )  %>");
-$('#customer_table').html("<%= escape_javascript( render( partial: 'index', locals: { user_class_id: 4, accounts: @customer_accounts }) )  %>");
+$('#account_table').html("<%= escape_javascript( render( partial: 'staff_index', locals: { user_class_id: 1, accounts: @accounts }) )  %>");
+
 
 
 loadDataTableScripts();

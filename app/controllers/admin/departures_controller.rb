@@ -30,6 +30,6 @@ class Admin::DeparturesController < ApplicationController
 
   private
   def departure_params
-    params.require(:departure).permit(:tour_id, :date, :number_of_seats, :user_group_id)
+    params.require(:departure).permit(:tour_id, :date, :number_of_seats, :sale_channel_id)
   end
 end

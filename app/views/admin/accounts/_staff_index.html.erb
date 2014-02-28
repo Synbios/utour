@@ -1,0 +1,68 @@
+<table class="table table-striped table-bordered smart-form account_table">
+  <thead>
+    <tr>
+      <th>员工编号</th>
+      <th>员工姓名</th>
+      <th>员工类型</th>
+      <th>行政权限</th>
+      <th>渠道权限</th>
+      <th>电子邮箱</th>
+    </tr>
+    <tr class="second">
+      <td>
+        <label class="input">
+          <input type="text" name="search_id" value="过滤" class="search_init">
+        </label>
+      </td>
+      <td>
+        <label class="input">
+          <input type="text" name="search_used" value="过滤" class="search_init">
+        </label>  
+      </td>
+      <td>
+        <label class="input">
+          <input type="text" name="search_account_id" value="过滤" class="search_init">
+        </label>  
+      </td>
+      <td>
+        <label class="input">
+          <input type="text" name="search_user_class_id" value="过滤" class="search_init">
+        </label>  
+      </td>
+      <td>
+        <label class="input">
+          <input type="text" name="search_user_group_id" value="过滤" class="search_init">
+        </label>  
+      </td>
+      <td>
+        <label class="input">
+          <input type="text" name="search_created_at" value="过滤" class="search_init">
+        </label>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <% accounts.each do |account| %>
+    <tr>
+      <td><%= account.id %></td>
+      <td><%= account.name %></td>
+      <td><%= account.user_class.name %></td>
+      <td>
+        <% if account.user_group_id == 0 %>
+        <em>系统管理员组</em>
+        <% else %>
+        <%= account.user_group.name %>
+        <% end %>
+      </td>
+      <td>
+        <% if account.sale_channel_id == 0 %>
+        <em>系统管理员组</em>
+        <% else %>
+        <%= account.sale_channel.name %>
+        <% end %>
+      </td>
+      <td><%= account.email %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

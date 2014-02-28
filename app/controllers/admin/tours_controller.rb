@@ -3,7 +3,7 @@ class Admin::ToursController < ApplicationController
   def create
     @tour = Tour.new(tour_params)
     @tour.content = params[:tour][:content]
-    @tour.tour_group = UserGroup.convert_name_string_to_id_string(params[:tour][:tour_group])
+    #@tour.tour_group = UserGroup.convert_name_string_to_id_string(params[:tour][:tour_group])
     @tour.tour_type = params[:tour][:tour_type]
     @tour.account_id = current_user.id
 
@@ -22,7 +22,7 @@ class Admin::ToursController < ApplicationController
       @tour.name = params[:tour][:name]
       @tour.description = params[:tour][:description]
       @tour.content = params[:tour][:content]
-      @tour.tour_group = UserGroup.convert_name_string_to_id_string(params[:tour][:tour_group])
+     #@tour.tour_group = UserGroup.convert_name_string_to_id_string(params[:tour][:tour_group])
       @tour.tour_type = params[:tour][:tour_type]
       respond_to do |format|
         if @tour.update(tour_params)
@@ -44,7 +44,7 @@ class Admin::ToursController < ApplicationController
 
   private
   def tour_params
-    params.require(:tour).permit(:identifier, :name, :description, :include, :exclude, :transportations, :notes, :visa, 
+    params.require(:tour).permit(:identifier, :name, :description, :sale_channel_id, :include, :exclude, :transportations, :notes, :visa, 
       :days_attributes => [:id, :tour_id, :number, :accommodation, :breakfast, :lunch, :dinner, :title, :itinerary, :_destroy, 
         :activities_attributes => [:id, :day_id, :time, :active_type, :site_id, :image_id, :short_des, :full_des, :_destroy] ] )
   end

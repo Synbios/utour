@@ -1,0 +1,229 @@
+<div class="jarviswidget jarviswidget-color-blue" data-widget-editbutton="false">
+
+  <header>
+    <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+    <h2>渠道分类图</h2>
+
+  </header>
+
+
+  <div><!-- widget div-->
+
+
+    <div class="jarviswidget-editbox"><!-- widget edit box --><!-- This area used as dropdown edit box -->
+
+
+    </div><!-- end widget edit box -->
+
+
+    <div class="widget-body"><!-- widget content -->
+
+      <div id="sale_channel_index"></div>
+
+
+    </div><!-- end widget content -->
+
+
+  </div><!-- end widget div -->
+
+
+</div>
+
+<div class="jarviswidget jarviswidget-color-blue" data-widget-editbutton="false">
+
+  <header>
+    <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+    <h2>渠道列表</h2>
+
+  </header>
+
+
+  <div><!-- widget div-->
+
+
+    <div class="jarviswidget-editbox"><!-- widget edit box --><!-- This area used as dropdown edit box -->
+
+
+    </div><!-- end widget edit box -->
+
+
+    <div class="widget-body"><!-- widget content -->
+
+
+    </div><!-- end widget content -->
+
+
+  </div><!-- end widget div -->
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="new_sale_channel_modal" tabindex="-1" role="dialog" aria-labelledby="modal-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="modal-1">
+          <%= image_tag "plateform_logo_dark.png", alt: "picture", width: "150" %>
+        </h4>
+      </div>
+      <div class="modal-body no-padding">
+
+        <%= form_for [:admin, SaleChannel.new], :remote => true, :html => {:role => "form", :class => "smart-form", :id => 'new_sale_channel_form',  :'data-type' => 'json'} do |f| %>
+
+        <fieldset>
+          <section>
+            <div class="row">
+              <%= f.label :parent_id, '上层渠道编号', :class => "label col col-2" %>
+              <div class="col col-10">
+                <label class="input"></i>
+                  <%= f.number_field :parent_id, id: "parent_sale_channel_id", class: "form-control", :readonly => true %>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="row">
+              <label class="label col col-2">上层渠道名称</label>
+              <div class="col col-10">
+                <label class="input"></i>
+                  <input type="text" id="parent_sale_channel_name" value="" class="form-control", readonly="">
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="row">
+              <%= f.label :name, '新渠道名称', :class => "label col col-2" %>
+              <div class="col col-10">
+                <label class="input"> <i class="icon-append fa fa-user"></i>
+                  <%= f.text_field :name, :placeholder => "请填入新渠道名称" %>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="row">
+              <%= f.label :abb, '新渠道缩写', :class => "label col col-2" %>
+              <div class="col col-10">
+                <label class="input"> <i class="icon-append fa fa-user"></i>
+                  <%= f.text_field :abb, :placeholder => "英文字母大写且不能重复" %>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <div class="modal_form_errors"></div>
+        </fieldset>
+
+
+
+        <footer>
+          <%= f.submit "新建", :class => "btn btn-primary" %>
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            取消
+          </button>
+
+        </footer>
+        <% end %>
+
+
+        
+
+
+
+
+
+        
+
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<script type="text/javascript">
+
+function reload_sale_channel_tree(){
+  $.ajax({
+    type : "GET",
+    url: '/admin/sale_channels.js',
+    success: function(data) {
+
+    }
+  });
+}
+function new_sale_channel(parent_id, parent_name){
+  $('#new_sale_channel_modal').modal('show');
+  $('#parent_sale_channel_id').val(parent_id);
+  $('#parent_sale_channel_name').val(parent_name);
+}
+
+function delete_sale_channel(target_id){
+  $.ajax({
+    type : "DELETE",
+    url: '/admin/sale_channels/' + target_id,
+    dataType: 'json',
+    success: function(data) {
+      reload_sale_channel_tree();
+    }
+  }); 
+}
+
+$(document).ready(function(){
+  //pageSetUp();
+  reload_sale_channel_tree();
+
+
+
+
+    if ( $('#new_sale_channel_form').length )
+    {
+
+      $('#new_sale_channel_form').bind("ajax:beforeSend", function(evt, xhr, settings){
+
+      //alert("beforeSend !");
+
+
+    }).bind("ajax:success", function(evt, data, status, xhr){
+
+      //alert("success !");
+      $('#new_sale_channel_form').find('input:text, input:password, input:file, select, textarea').val('');
+      $('#new_sale_channel_form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
+      $('#new_sale_channel_modal').modal('hide');
+      $('.alert alert-danger').html('');
+      reload_sale_channel_tree();
+
+    }).bind('ajax:complete', function(evt, xhr, status){
+
+      //alert("complete !");
+
+    }).bind("ajax:error", function(evt, xhr, status, error){
+      //alert("error!")
+      var responseObject = $.parseJSON(xhr.responseText),
+      errors = $('<div class="alert alert-danger" style="padding-left:5px"><ul>');
+
+      $.each(responseObject, function(){
+        errors.append('<li>' + this + '</li>');
+      })
+      errors.append('</ul></div>')
+
+      $(this).find('.modal_form_errors').html(errors);
+
+    });
+
+  }
+
+
+
+
+});
+</script>

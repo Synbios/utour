@@ -1,4 +1,10 @@
 Utour::Application.routes.draw do
+  get "sale_channel_maps/create"
+  get "sale_channel_maps/destroy"
+  get "sale_channels/create"
+  get "sale_channels/index"
+  get "sale_channels/destroy"
+  get "sale_channels/update"
   # get "prices/index"
   # get "prices/new"
   # get "prices/create"
@@ -166,6 +172,9 @@ Utour::Application.routes.draw do
     
     resources :sessions, only: [:new, :create, :destroy]
 
+    resources :sale_channels, only: [:create, :destroy, :update, :index]
+    resources :sale_channel_maps, only: [:create, :destroy]
+
     get '/', to: 'plateforms#dashboard'
     get '/home', to: 'plateforms#home'
     get '/inbox', to: 'plateforms#inbox'
@@ -175,7 +184,9 @@ Utour::Application.routes.draw do
     get '/invitation_code_control', to: 'plateforms#invitation_code_control'
     get '/account_control', to: 'plateforms#account_control'
 
-    get '/account_admin', to: 'plateforms#account_admin'
+    get '/staff_index', to: 'plateforms#staff_index'
+    get '/agent_index', to: 'plateforms#agent_index'
+    get '/booking_index', to: 'plateforms#booking_index'
     get '/new_tour', to: 'plateforms#new_tour'
     get '/edit_tour', to: 'plateforms#edit_tour'
     get '/index_tour', to: 'plateforms#index_tour'
@@ -195,6 +206,11 @@ Utour::Application.routes.draw do
 
     get '/departure_admin', to: 'plateforms#departure_admin'
     get '/price_admin', to: 'plateforms#price_admin'
+
+    get '/sale_channels_admin', to: 'plateforms#sale_channels_admin'
+    get '/agents_admin', to: 'plateforms#agents'
+    get '/bookings_admin', to: 'plateforms#bookings_admin'
+    get '/my_invitation_code', to: 'plateforms#my_invitation_code'
 
       match '/signup',  to: 'accounts#new', via: 'get'
       match '/signin',  to: 'sessions#new', via: 'get'

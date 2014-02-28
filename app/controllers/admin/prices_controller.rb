@@ -33,6 +33,6 @@ class Admin::PricesController < ApplicationController
 
   private
   def price_params
-    params.require(:price).permit(:departure_id, :price, :number_of_seats, :user_group_id)
+    params.require(:price).permit(:departure_id, :price, :number_of_seats, :sale_channel_id)
   end
 end

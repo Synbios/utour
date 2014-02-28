@@ -1,3 +1,4 @@
+
 <% tours.each do |tour| %>
 <%# content = JSON.parse tour.content %>
 <div class="list-group-item">
@@ -5,11 +6,7 @@
     <div class="col-xs-9 col-sm-9 col-md-10" style="padding:5px">
       <h4 class="list-group-item-heading"><%= tour.name %></h4>
 
-      <% if !tour.date_and_prices.empty? && inspect_right(tour) == :trade %>
-        <span style="color: red">同行 <i class="fa fa-rmb"></i> <%= tour.lowest_readable_price(current_user)[:trade] %>起</span>
-      <% elsif !tour.date_and_prices.empty? %>
-        <span style="color: red"><i class="fa fa-rmb"></i> <%= tour.lowest_readable_price(current_user)[:retail] %>起</span>
-      <% end %>
+      <%# 价格 xxx 起 %>
       
       <p class="list-group-item-text"><%= tour.description %></p>
     </div>
@@ -25,10 +22,21 @@
 </div>
 
 <div id="<%= tour.object_id %>" class="panel panel-default collapse" style="padding: 5px;">
-  <%# if tour.date_and_prices.empty? %>
-  <% if tour.departures.empty? %>
+  <%# filtered by sale channel %>
+  <% departures = tour.departures %>
+  <% array = [] %>
+  <% departures.each do |departure| %>
+
+  <% if departure.sale_channel_id == current_user.sale_channel_id || SaleChannelMap.where(up: departure.sale_channel_id, down: current_user.sale_channel_id).count > 0 %>
+  <% array.push departure %>
+  <% end # end if %>
+
+  <% end # end each %>
+  <% departures = array %>
+  
+  <% if departures.empty? %>
   出团日期和价格敬请期待...
-  <% else %>
+  <% else # end if %>
 
 
   <table class="table table-striped date_and_price_table" style="background-color: white; padding: 5px;">
@@ -37,23 +45,40 @@
       <th>单人价</th>
       <th>余位数</th>
     </tr>
-    <%# tour.date_and_prices.each do |date_and_price| %>
-    <% tour.departures.each do |departure| %>
-    <% departure.prices.each do |price| %>
+  
+    <% departures.each do |departure| %>
+
+    <% prices = departure.prices %>
+    <% array = [] %>
+    <% prices.each do |price| %>
+
+    <% if price.sale_channel_id == current_user.sale_channel_id || SaleChannelMap.where(up: price.sale_channel_id, down: current_user.sale_channel_id).count > 0 %>
+    <% array.push price %>
+    <% end # end if %>
+
+    <% end # end price each %>
+    <% prices = array %>
+    
+    <% if !prices.empty? %>
+
+    <% price = prices.first %>
+    <% prices.each do |p| %>
+    <% if SaleChannelMap.where(up: price.sale_channel_id, down: p.sale_channel_id).count > 0 %>
+    <% price = p %>
+    <% end # price if %>
+    <% end # if %>
+
     <tr>
-      <td><%= departure.date.strftime("%m.%d.%y") %></td>
-       <% if inspect_right(tour) == :trade %>
-        <td class="price"><span style="color: red">同行 <i class="fa fa-rmb"></i> <%= price.price %>/人</span><br/>
-        <span>直客 <i class="fa fa-rmb"></i> <%= price.price %>/人</span>
-        </td>         
-        <% else %>
-        <td class="price"><span style="color: red"><i class="fa fa-rmb"></i> <%= price.price %>/人</span></td>
-        <% end %>
+      <td><%= departure.date.strftime("%Y.%m.%d") %></td>
+      <td class="price"><span style="color: red"><i class="fa fa-rmb"></i> <%= price.price %>/人</span></td>
       <td><%= link_to "报名", new_booking_path(price_id: price.id) %></td>
     </tr>
-    <% end %>
-    <% end %>
-    <%# end %>
+
+    <% end # prices each %>
+    
+
+    <% end # departure each %>
+    
   </table>
 
   <% end %>

@@ -1,6 +1,12 @@
 class Account < ActiveRecord::Base
   attr_accessor :password, :activation_code, :is_trade
 
+  has_attached_file :portray, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :portray, :content_type => /\Aimage\/.*\Z/
+
+  has_attached_file :qr_code, :styles => { :medium => "300x300>", :thumb => "100x100" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :qr_code, :content_type => /\Aimage\/.*\Z/
+
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i
   MOBILE_REGEX = /\A\d{11}\z/
   validates :name, :presence => { :message => "姓名为必填" }, :length => { :in => 1..20, :message => "姓名过长" }
@@ -10,14 +16,31 @@ class Account < ActiveRecord::Base
   validates :wechat_id, :presence => { :message => "微信号为必填" }, :uniqueness => { :message => "该微信号已被注册" }, :length => { :in => 6..30, :message => "微信号至少6位" }
 #  validates :user_group_id, :presence => true
 
+
+
   validates :password, :presence => { :message => "密码为必填" }, :confirmation => { :message => "密码不一致" }, :length => { :minimum => 6, :message => "密码至少6位" }
   before_save :encrypt_password
   after_save :clear_password
 
   has_many :invitation_codes, foreign_key: :issued_by
-  has_many :bookings
+
   has_many :tours
-  has_one :user_group
+
+
+  has_many :sale_agents, :class_name => 'SaleAgent', :foreign_key => 'sale_id'
+  has_many :agents, :through => :sale_agents, :foreign_key => 'agent_id'
+
+  has_many :agent_sales, :class_name => 'SaleAgent', :foreign_key => 'agent_id'
+  has_many :sales, :through => :agent_sales, :foreign_key => 'sale_id'
+
+  has_many :in_orders, :class_name => 'Booking', :foreign_key => 'sale_id'
+  has_many :out_orders, :class_name => 'Booking', :foreign_key => 'agent_id'
+
+  belongs_to :user_class
+  belongs_to :user_group
+  belongs_to :sale_channel
+
+  #has_many :down_user_group_maps, :class_name => 'UserGroupMap', :through => :user_group, :foreign_key => 'agent_id'
 
   def encrypt_password
     if password.present?
@@ -140,4 +163,24 @@ class Account < ActiveRecord::Base
     false
   end
 
+  def self.sale_contact
+    sales = Account.where(user_class_id: 4)
+    if !sales.empty?
+      return sales.sample.mobile
+    else
+      return GLOBAL["default_sale_phone"]
+    end
+  end
+
+  # 根据团队和客户判定所需列举的销售
+  def self.get_sales(price_id, agent_id)
+    price = Price.find_by_id(price_id)
+    agent = Account.find_by_id(agent_id)
+    price_sale_channel = price.sale_channel
+
+    sales = agent.sales
+    sales.map do |sale|
+
+    end
+  end
 end

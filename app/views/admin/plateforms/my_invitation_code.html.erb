@@ -1,4 +1,42 @@
-<div id="invitation_code_index"></div>
+<!-- Widget ID (each widget will need unique ID)-->
+<div class="jarviswidget jarviswidget-color-blueDark" id="invitation_code_table" data-widget-editbutton="false">
+  <%# widget options:
+
+  usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+        
+  data-widget-colorbutton="false"
+  data-widget-editbutton="false"
+  data-widget-togglebutton="false"
+  data-widget-deletebutton="false"
+  data-widget-fullscreenbutton="false"
+  data-widget-custombutton="false"
+  data-widget-collapsed="true"
+  data-widget-sortable="false"
+        
+  %>
+  <header>
+   <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+   <h2>注册码列表 </h2>
+
+  </header>
+ 
+  <!-- widget div-->
+  <div>
+
+    <!-- widget edit box -->
+    <div class="jarviswidget-editbox">
+    <!-- This area used as dropdown edit box -->
+
+    </div><!-- end widget edit box -->
+
+    <!-- widget content -->
+    <div class="widget-body no-padding">
+      <div id="invitation_code_index"></div>
+    </div><!-- end widget content -->
+
+  </div><!-- end widget div -->
+
+</div><!-- end widget -->
 
 <!-- Button trigger modal -->
 <a data-toggle="modal" href="#new_invitation_code_form_modal" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i>新建邀请码</a>
@@ -21,10 +59,10 @@
         <fieldset>
           <section>
             <div class="row">
-              <%= f.label :user_class_id, '邀请账户类型', :class => "label col col-2" %>
+              <%= f.label :user_class_id, '用户类型', :class => "label col col-2" %>
               <div class="col col-10">
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                  <%= f.text_field :user_class_id %>
+                <label class="input">
+                  <%= f.collection_select(:user_class_id,  @user_classes, :id, :name, { :prompt   => "选择用户类型" }, { :class => 'form-control'}) %>
                 </label>
               </div>
             </div>
@@ -32,10 +70,21 @@
 
           <section>
             <div class="row">
-              <%= f.label :user_group_id, '邀请账户权限', :class => "label col col-2" %>
+              <%= f.label :user_group_id, '用户行政权限', :class => "label col col-2" %>
               <div class="col col-10">
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                  <%= f.text_field :user_group_id %>
+                <label class="input">
+                  <%= f.collection_select(:user_group_id,  @user_groups, :id, :name, { :prompt   => "选择用户行政权限" }, { :class => 'form-control'}) %>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="row">
+              <%= f.label :sale_channel_id, '用户渠道', :class => "label col col-2" %>
+              <div class="col col-10">
+                <label class="input">
+                  <%= f.collection_select(:sale_channel_id,  @sale_channels, :id, :name, { :prompt   => "选择用户渠道" }, { :class => 'form-control'}) %>
                 </label>
               </div>
             </div>
@@ -69,7 +118,7 @@ $(document).ready(function(){
   function reload_invitation_code_table(){
     $.ajax({
       type : "GET",
-      url: '/admin/invitation_codes.js',
+      url: '/admin/invitation_codes.js?type=self',
       success: function(data) {
 
       }
@@ -94,6 +143,7 @@ $(document).ready(function(){
       $('#xform').find('input:text, input:password, input:file, select, textarea').val('');
       $('#xform').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
       $('#new_invitation_code_form_modal').modal('hide');
+      reload_invitation_code_table();
 
 
       }).bind('ajax:complete', function(evt, xhr, status){

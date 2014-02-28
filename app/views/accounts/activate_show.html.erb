@@ -1,5 +1,4 @@
 <% content_for :stylesheet do %>
-<%= stylesheet_link_tag "accounts", media: "all", "data-turbolinks-track" => true %>
 <% end %>
 <div class="container trade_activation">
   <% if @account.active %>
@@ -12,8 +11,13 @@
   <h2>您的账户尚未激活！</h2>
   
   <div class="alert alert-warning">
-    <p>您需要激活账户才能访问同业页面。当本公司审核您的资料后会向您发送激活码。如果您已有激活码请现在输入即可激活账号。<br/>
-      注意：激活码只在一定时间内有效<strong>请在其过期前使用</strong>。</p>    
+    <p>感谢您的注册，我们的售将会根据您所提交的信息尽快与您联系并给您一个<strong>邀请码</strong>。如果您已有激活码请现在输入即可激活账号。
+      您也可以主动与我们的销售联系:</p>
+    <p style="text-align: center">
+      <a href="tel:+86<%= @contact %>" class="btn btn-small btn-danger">点我拨打: <%= @contact %></a><br/>
+    </p>
+
+      <p>注意：激活码只在一定时间内有效<strong>请在其过期前使用</strong>。</p>    
     </div>
 
     <%= form_for @account, :url => {:action => "activate"}, :method => "post", :html => {:role => "form", :class => "form-horizontal"} do |f| %>

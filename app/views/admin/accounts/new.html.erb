@@ -49,6 +49,17 @@
 
                 <fieldset>
                   <section>
+                    <label class="input">
+                      <%= f.collection_select(:user_class_id,  UserClass.all, :id, :name, { :prompt   => "请选择用户类型" }, { :class => 'form-control'}) %>
+                    </label>
+                    <% if @account.present? && @account.errors[:name] %>
+                    <% @account.errors[:name].each do |msg| %>
+                    <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+                    <% end %>
+                    <% end %>
+                  </section>
+
+                  <section>
                     <label class="input"> <i class="icon-append fa fa-user"></i>
                       <%= f.text_field :name, :placeholder => "用户名" %>
                       <b class="tooltip tooltip-bottom-right">请用真实姓名</b>
