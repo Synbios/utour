@@ -24,6 +24,8 @@
             <th>价格</th>
             <th>销售渠道</th>
             <th>添加人</th>
+            <th>有效期至</th>
+            <th>操作</th>
          </tr>
         </thead>
         <tbody>
@@ -35,6 +37,11 @@
               <%= price.sale_channel.name %>
             </td>
             <td><%= price.account.name %></td>
+            <td>
+              <%= price.expire_date.strftime("%b %d, %Y") %>
+              <%= " <em>已过期</em>".html_safe if price.expire_date < Time.now %>
+            </td>
+            <td></td>
           </tr>          
           <% end %>
         </tbody>
@@ -45,9 +52,11 @@
 
 
     </div><!-- end widget content -->
-
-
   </div><!-- end widget div -->
-
-
 </div>
+
+
+
+<script type="text/javascript">
+
+</script>

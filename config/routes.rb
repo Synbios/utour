@@ -193,6 +193,7 @@ Utour::Application.routes.draw do
 
     get '/new_shelf', to: 'plateforms#new_shelf'
     get '/edit_shelf', to: 'plateforms#edit_shelf'
+    get '/decorate_tour', to: 'plateforms#decorate_tour'
     get '/index_shelf', to: 'plateforms#index_shelf'
 
     get '/tag_control', to: 'plateforms#tag_control'

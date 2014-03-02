@@ -1,13 +1,15 @@
+<% content_for :left_links do %>
+<% render "wechat_webs/left_links" %>
+<% end %>
 <% content_for :stylesheet do %>
-<%= stylesheet_link_tag "tours", media: "all", "data-turbolinks-track" => true %>
+<%#= stylesheet_link_tag "tours", media: "all", "data-turbolinks-track" => true %>
 <% end %>
 
 <div class="container classic_tour_view">
-  <%= image_tag "japan.jpg", class: "head_img" %>
-  <%= image_tag "countries/japan_square_icon_256.png", class: "head_icon pull-right" %>
+  <%= image_tag @cover_img, class: "head_img" %>
+  <%= image_tag @icon_img, class: "head_icon pull-right" %>
   <div class="content">
     <h3><%= @tour.name %></h3>
-
     <% @tour.days.each do |day| %>
     <div class="day" style="width: 100%">
       <table style="width: 100%">
@@ -42,5 +44,12 @@
   
 </div>
 
-
+<script type="text/javascript">
+$(document).ready(function ($) {
+  $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+    event.preventDefault();
+    return $(this).ekkoLightbox();
+  });
+});
+</script>
 

@@ -18,3 +18,4 @@
 //= require slidebars.min
 //= require jquery.mobile.touch.min
 //= require metro.min.js
+//= require ekko-lightbox

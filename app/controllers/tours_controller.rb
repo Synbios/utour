@@ -13,7 +13,16 @@ class ToursController < ApplicationController
   # GET /tours/1
   # GET /tours/1.json
   def show
-
+    if @tour.cover_img.nil?
+      @cover_img = "default_tour_cover.jpg"
+    else
+      @cover_img = @tour.cover_img.photo.url(:original)
+    end
+    if @tour.icon_img.nil?
+      @icon_img = "default_tour_icon.png"
+    else
+      @icon_img = @tour.icon_img.photo.url(:original)
+    end
   end
 
   def legacy

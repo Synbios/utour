@@ -1,7 +1,6 @@
 <% content_for :stylesheet do %>
 <%= stylesheet_link_tag "metro-bootstrap", media: "all", "data-turbolinks-track" => true %>
 <% end %>
-
 <div class="container lion">
 
   <div class="head">
@@ -9,33 +8,23 @@
 
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
+        <% if @slides.empty? %>
         <div class="item active">
-          <%= image_tag "legacy/carousel/le_0.jpg", alt: "picture1", style:"width:100%" %>
+          <%= image_tag "default_slide.jpg", alt: "欢迎访问UTOUR-众信旅游微信分销平台", style:"width:100%" %>
         </div>
-
+        <% else %>
+        <% @slides.each do |slide| %>
+        <% if slide == @slides.first %>
+        <div class="item active">
+          <%= image_tag slide.photo.url( :original ), alt: slide.name, style:"width:100%" %>
+        </div>
+        <% else %>
         <div class="item">
-          <%= image_tag "legacy/carousel/le_1.jpg", alt: "picture", style:"width:100%"%>
+          <%= image_tag slide.photo.url( :original ), alt: slide.name, style:"width:100%"%>
         </div>
-
-        <div class="item">
-          <%= image_tag "legacy/carousel/le_2.jpg", alt: "picture", style:"width:100%"%>
-        </div>
-
-        <div class="item">
-          <%= image_tag "legacy/carousel/le_3.jpg", alt: "picture", style:"width:100%"%>
-        </div>
-
-        <div class="item">
-          <%= image_tag "legacy/carousel/le_4.jpg", alt: "picture", style:"width:100%"%>
-        </div>
-
-        <div class="item">
-          <%= image_tag "legacy/carousel/le_5.jpg", alt: "picture", style:"width:100%"%>
-        </div>
-
-        <div class="item">
-          <%= image_tag "legacy/carousel/le_6.jpg", alt: "picture", style:"width:100%"%>
-        </div>
+        <% end # end if %>
+        <% end # end each %>
+        <% end # end if %>
       </div>
 
       <!-- Controls -->
@@ -47,7 +36,13 @@
       </a>
     </div>
     <div style="width: 100%; height:20px; background-color: #000">
-      <p id="carousel-text" style="color: #fff;text-align: center">欢迎访问UTOUR-众信旅游微信分销平台</p>
+      <p id="carousel-text" style="color: #fff;text-align: center">
+        <% if @slides.empty? %>
+        欢迎访问UTOUR-众信旅游微信分销平台
+        <% else %>
+        <%= @slides.first.description %>
+        <% end %>
+      </p>
     </div>
   </div>
 
@@ -132,16 +127,17 @@
 
 </div>
 
-<script>
-$('#legacy-home-carousel').bind('slide.bs.carousel', function(e) {
-
-});
+<script type="text/javascript">
 $(document).ready(function() {  
  $("#legacy-home-carousel").swiperight(function() {  
   $(this).carousel('prev');  
 });  
  $("#legacy-home-carousel").swipeleft(function() {  
   $(this).carousel('next');  
-});  
+});
+
+$('#legacy-home-carousel').on('slid.bs.carousel', function () {
+  $('#carousel-text').text($('.active img').attr("alt"));
+});
 });  
 </script>

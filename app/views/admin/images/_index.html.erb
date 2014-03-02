@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th class="col-md-1">编号</th>
+      <th class="col-md-1">类别</th>
       <th class="col-md-3">名称</th>
       <th class="col-md-3">简介</th>
       <th class="col-md-4">图片预览</th>
@@ -12,6 +13,7 @@
     <% images.each do |image| %>
     <tr>
       <td><%= image.id %></td>
+      <td><%= image.image_type %></td>
       <td><%= trim_name(image.name, 30) %></td>
       <td><%= trim_name(image.description, 30) %></td>
       <td><%= image_tag image.photo.url(:thumb) %></td>

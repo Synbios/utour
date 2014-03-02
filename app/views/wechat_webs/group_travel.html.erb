@@ -6,7 +6,8 @@
 
 <div class="container lion">
   <div class="head">
-    <%= image_tag "legacy/carousel/le_0.jpg", alt: "picture", style: "width:100%" %>
+    <% header = Image.where(image_type: "海报").to_a.sample %>
+    <%= image_tag header.nil? ? "default_slide.jpg" : header.photo.url(:original) , alt: "picture", style: "width:100%" %>
   </div>
 
 

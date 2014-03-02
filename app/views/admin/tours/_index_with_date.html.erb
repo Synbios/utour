@@ -21,10 +21,12 @@
         <thead>
           <tr>
             <th>编号</th>
+            <th>航班</th>
             <th>名称</th>
             <th>销售渠道</th>
             <th>创建人</th>
             <th>出发日期</th>
+            <th>过期时间</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -32,10 +34,15 @@
           <% tours.each do |tour| %>
           <tr>
             <td><%= tour.id %></td>
+            <td><%= tour.flights %></td>
             <td><%= tour.name %></td>
             <td><%= tour.sale_channel.name%></td>
             <td><%= tour.account.name%></td>
             <td><%= link_to "/admin#admin/price_admin.html?tour_id=#{tour.id}" do %>现有<%= tour.departures.count %>个<% end %></td>
+            <td>
+              <%= tour.expire_date.strftime("%b %d, %Y") %>
+              <%= " <em>已过期</em>".html_safe if tour.expire_date < Time.now %>
+            </td>
             <td><%= link_to "添加出发日期", "/admin#admin/departure_admin.html?tour_id=#{tour.id}&departure_id=new" %></td>
           </tr>
           <% end %>

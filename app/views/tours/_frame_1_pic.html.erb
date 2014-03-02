@@ -1,5 +1,7 @@
 <div class="row">
-	<div class="col-xs-12">
-		<%= image_tag activities.first.image.photo.url(:medium) %>
-	</div>
+  <div class="col-xs-12">
+    <a href="<%= activities.first.image.photo.url(:original) %>" data-toggle="lightbox" data-gallery="multiimages" data-footer="<%= activities.first.full_des %>" data-title="<%= activities.first.site.present? ? activities.first.site.name : '' %>">
+      <%= image_tag activities.first.image.photo.url(:medium) %>
+    </a>  
+  </div>
 </div>

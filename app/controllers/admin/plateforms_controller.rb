@@ -75,11 +75,21 @@ class Admin::PlateformsController < ApplicationController
   def new_tour
     @tour = Tour.new
     @sites = Site.all
+    @covers = Image.where(image_type: "团队封面")
+    @icons = Image.where(image_type: "团队图标")
   end
 
   def edit_tour
     @tours = Tour.all
     @sites = Site.all
+    @images = Image.where(image_type: "景点照片")
+    @covers = Image.where(image_type: "团队封面")
+    @icons = Image.where(image_type: "团队图标")
+    @tour = Tour.find_by_id(params[:id])
+  end
+
+  def decorate_tour
+    @tours = Tour.all
     @images = Image.all
     @tour = Tour.find_by_id(params[:id])
   end
@@ -123,7 +133,7 @@ class Admin::PlateformsController < ApplicationController
 
   def new_site_admin
     @site = Site.new
-    @images = Image.all
+    @images = Image.where(image_type: "景点照片")
     1.times { @site.image_and_sites.build }
   end
 

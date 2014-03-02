@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140227062327) do
+ActiveRecord::Schema.define(version: 20140301165652) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20140227062327) do
     t.integer  "price_id"
     t.integer  "agent_id"
     t.integer  "sale_id"
+    t.integer  "progress_id"
+    t.text     "response"
   end
 
   create_table "date_and_prices", force: true do |t|
@@ -106,6 +108,7 @@ ActiveRecord::Schema.define(version: 20140227062327) do
     t.integer  "number_of_seats"
     t.integer  "sale_channel_id"
     t.integer  "account_id"
+    t.datetime "expire_date"
   end
 
   create_table "feature_tag_connections", force: true do |t|
@@ -139,6 +142,7 @@ ActiveRecord::Schema.define(version: 20140227062327) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "image_type"
   end
 
   create_table "invitation_codes", force: true do |t|
@@ -162,6 +166,7 @@ ActiveRecord::Schema.define(version: 20140227062327) do
     t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "expire_date"
   end
 
   create_table "sale_agents", force: true do |t|
@@ -205,7 +210,6 @@ ActiveRecord::Schema.define(version: 20140227062327) do
   create_table "tours", force: true do |t|
     t.string   "identifier"
     t.string   "name"
-    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
@@ -219,6 +223,10 @@ ActiveRecord::Schema.define(version: 20140227062327) do
     t.text     "notes"
     t.text     "visa"
     t.integer  "sale_channel_id"
+    t.string   "flights"
+    t.datetime "expire_date"
+    t.integer  "cover_img_id"
+    t.integer  "icon_img_id"
   end
 
   create_table "user_classes", force: true do |t|

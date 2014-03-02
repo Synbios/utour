@@ -1,14 +1,14 @@
 class Tour < ActiveRecord::Base
-	has_many :date_and_prices
+
 	has_many :days, :dependent => :destroy
 	has_many :activities, through: :days
-
 	has_many :departures, :dependent => :destroy
-
-	accepts_nested_attributes_for :days, :reject_if => lambda { |a| a[:number].blank? }, :allow_destroy => true
-
 	belongs_to :account
 	belongs_to :sale_channel
+	belongs_to :cover_img, :class_name => 'Image', :foreign_key => :cover_img_id
+	belongs_to :icon_img, :class_name => 'Image', :foreign_key => :icon_img_id
+
+	accepts_nested_attributes_for :days, :reject_if => lambda { |a| a[:number].blank? }, :allow_destroy => true
 
 	def generate_itinerary(force=false)
 		self.days.each do |day|

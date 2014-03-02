@@ -1,16 +1,24 @@
 <div class="row">
-	<div class="col-xs-4">
-		<%= image_tag activities[0].image.photo.url(:thumb), style: "width: 100%" %>
-	</div>
   <div class="col-xs-4">
-    <%= image_tag activities[1].image.photo.url(:thumb), style: "width: 100%" %>
+    <a href="<%= activities[0].image.photo.url(:original) %>" data-toggle="lightbox" data-gallery="multiimages" data-footer="<%= activities[0].full_des %>" data-title="<%= activities[0].site.present? ? activities[0].site.name : '' %>">
+      <%= image_tag activities[0].image.photo.url(:thumb), style: "width: 100%" %>
+    </a>
+  </div>
+  <div class="col-xs-4">
+    <a href="<%= activities[1].image.photo.url(:original) %>" data-toggle="lightbox" data-gallery="multiimages" data-footer="<%= activities[1].full_des %>" data-title="<%= activities[1].site.present? ? activities[1].site.name : '' %>">
+      <%= image_tag activities[1].image.photo.url(:thumb), style: "width: 100%" %>
+    </a>
   </div>
 </div>
 <div class="row">
-	<div class="col-xs-4">
-    <%= image_tag activities[2].image.photo.url(:thumb), style: "width: 100%" %>
+  <div class="col-xs-4">
+    <a href="<%= activities[2].image.photo.url(:original) %>" data-toggle="lightbox" data-gallery="multiimages" data-footer="<%= activities[2].full_des %>" data-title="<%= activities[2].site.present? ? activities[2].site.name : '' %>">
+      <%= image_tag activities[2].image.photo.url(:thumb), style: "width: 100%" %>
+    </a>
   </div>
-	<div class="col-xs-4">
-		<%= image_tag activities[3].image.photo.url(:thumb), style: "width: 100%" %>
-	</div>
+  <div class="col-xs-4">
+    <a href="<%= activities[3].image.photo.url(:original) %>" data-toggle="lightbox" data-gallery="multiimages" data-footer="<%= activities[3].full_des %>" data-title="<%= activities[3].site.present? ? activities[3].site.name : '' %>">
+      <%= image_tag activities[3].image.photo.url(:thumb), style: "width: 100%" %>
+    </a>
+  </div>
 </div>

@@ -1,9 +1,10 @@
 <div class="sb-slidebar sb-left">
 	<nav>
-		<ul class="list-unstyled sb-nav">
-			<li><%= image_tag "sidebar_logo.png", alt: "我的头像", width: "120" %></li>
-			<%= yield :left_links %>
-			<li><small>微信分销网 &copy; 2014 <a href="/lion">成都众信</a></small></li>
-		</ul>
-	</nav>
-</div
+    <!-- Lists in Slidebars -->
+    <ul class="sb-menu">
+      <li><%= image_tag "sidebar_logo.png", alt: "我的头像", width: "120" %></li>
+      <%= yield :left_links %>
+      <li><small>微信分销网 &copy; 2014 成都众信</small></li>
+    </ul>
+ </nav>
+ </div

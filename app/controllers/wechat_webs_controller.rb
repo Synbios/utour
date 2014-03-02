@@ -8,6 +8,7 @@ class WechatWebsController < ApplicationController
   end
 
   def lion
+    @slides = Image.where(image_type: "海报")
     render 'lion', layout: "application"
   end
 
