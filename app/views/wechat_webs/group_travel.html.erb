@@ -47,6 +47,9 @@
                   <div class="panel-body menu_body_2" style="padding: 0">
                     <%# 除去不符合标签的团队 %>
                     <% tours = @tours.select { |tour| (@set & tour.tour_type.split) == @set } %>
+
+                    <%# 除去过期的团队 !!! filter moved to controller level !!! %>
+                    <%# tours = tours.select { |tour| tour.expire_date > Time.now } %>                    
                     
                     <%# 除去没有权限查看的团队 %>
                     <% array = [] %>

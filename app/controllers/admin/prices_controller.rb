@@ -25,9 +25,9 @@ class Admin::PricesController < ApplicationController
   def update
     @price = Price.find_by_id(params[:id])
     if @price.update(price_params)
-      redirect_to "/admin#admin/price_admin.html?tour_id=#{@price.departure.id}&departure_id=#{params[:price][:departure_id]}"
+      redirect_to "/admin#" + admin_tour_departure_prices_path(@price.departure.tour, @price.departure)
     else
-      redirect_to :back
+      render partial: "form", locals: { tour: @tour, departure: @departure, price: @price }, layout: false
     end
   end
 
@@ -35,9 +35,9 @@ class Admin::PricesController < ApplicationController
     @price = Price.new(price_params)
     @price.account = current_user
     if @price.save
-      redirect_to "/admin#admin/price_admin.html?tour_id=#{@price.departure.id}&departure_id=#{params[:price][:departure_id]}"
+      redirect_to "/admin#" + admin_tour_departure_prices_path(@price.departure.tour, @price.departure)
     else
-      redirect_to :back
+      render partial: "form", locals: { tour: @tour, departure: @departure, price: @price }, layout: false
     end
   end
 

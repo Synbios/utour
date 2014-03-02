@@ -43,8 +43,14 @@
               <%= departure.sale_channel.name %>
             </td>
             <td><%= link_to "现有#{departure.prices.count}个", "/admin#" + admin_tour_departure_prices_path(tour, departure) %></td>
-            <td></td>
-            <td><em>无</em></td>
+            <td><%= departure.visa_status %></td>
+            <td>
+              <% if departure.group_notice.url == "missing" %>
+              <em>未上传</em>
+              <% else %>
+              <%= link_to "下载", departure.group_notice.url %>
+              <% end %>
+            </td>
             <td>
               <%= departure.expire_date.strftime("%b %d, %Y") %>
               <%= " <em>已过期</em>".html_safe if departure.expire_date < Time.now %>

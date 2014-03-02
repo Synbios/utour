@@ -3,6 +3,8 @@ class Tour < ActiveRecord::Base
 	has_many :days, :dependent => :destroy
 	has_many :activities, through: :days
 	has_many :departures, :dependent => :destroy
+	has_many :prices, :through => :departures
+	has_many :bookings, :through => :prices
 	belongs_to :account
 	belongs_to :sale_channel
 	belongs_to :cover_img, :class_name => 'Image', :foreign_key => :cover_img_id

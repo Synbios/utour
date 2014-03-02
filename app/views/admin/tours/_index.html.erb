@@ -27,6 +27,7 @@
             <th>创建人</th>
             <th>销售渠道</th>
             <th>过期时间</th>
+            <th>查看</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -43,7 +44,14 @@
               <%= tour.expire_date.strftime("%b %d, %Y") %>
               <%= " <em>已过期</em>".html_safe if tour.expire_date < Time.now %>
             </td>
-            <td><a href="/admin#admin/edit_tour.html?id=<%= tour.id %>">修改</a> <%= link_to "删除", admin_tour_path(tour), :method => :delete %></td>
+            <td>
+              <%= link_to "手机", tour_path(tour), :target => "_blank" %>
+              <%= link_to "PDF", tour_path(tour, :format => :pdf), :target => "_blank" %>
+              <%= link_to "Word", tour_path(tour), :format => :docx, :target => "_blank" %>
+            </td>
+            <td>
+              <a href="/admin#admin/edit_tour.html?id=<%= tour.id %>">修改</a>
+              <%= link_to "删除", admin_tour_path(tour), :method => :delete %></td>
           </tr>
           <% end %>
         </tbody>

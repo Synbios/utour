@@ -19,14 +19,14 @@ class WechatWebsController < ApplicationController
 
   # 团队行程
   def group_travel
-  	@tours = Tour.all
+  	@tours = Tour.where("expire_date > ?", Time.now)
     @root = JSON.parse Shelf.find_by_name("团队行程").rack
     @set = ["团队行程"]
   end
 
   # 自由行
   def diy
-    @tours = Tour.all
+    @tours = Tour.where("expire_date > ?", Time.now)
     @root = JSON.parse Shelf.find_by_name("自由行").rack
     @set = ["自由行"]
     render 'group_travel'

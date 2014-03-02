@@ -50,7 +50,7 @@ class BookingsController < ApplicationController
     @booking.number_of_adults = 0 if @booking.number_of_adults.nil?
     @booking.number_of_children = 0 if @booking.number_of_children.nil?
     @booking.agent = current_user
-
+    @booking.progress = "未处理"
 
     respond_to do |format|
       if @booking.save
@@ -97,6 +97,6 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:number_of_adults, :number_of_children, :price_id, :sale_id, :agent_id, :comment)
+      params.require(:booking).permit(:number_of_adults, :number_of_children, :price_id, :sale_id, :agent_id, :comment, :progress, :response)
     end
 end

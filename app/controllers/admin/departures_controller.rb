@@ -16,7 +16,9 @@ class Admin::DeparturesController < ApplicationController
   def update
     @departure = Departure.find_by_id(params[:id])
     if @departure.update(departure_params)
+      redirect_to "/admin#" + admin_tour_departures_path(@departure.tour)
     else
+      render partial: "form", locals: { tour: @tour, departure: @departure }, layout: false
     end
   end
 
@@ -30,14 +32,14 @@ class Admin::DeparturesController < ApplicationController
     @departure = Departure.new(departure_params)
     @departure.account = current_user
     if @departure.save
-      redirect_to "/admin#admin/departure_admin.html?tour_id=#{params[:departure][:tour_id]}"
+      redirect_to "/admin#" + admin_tour_departures_path(@departure.tour)
     else
-      redirect_to :back
+      render partial: "form", locals: { tour: @tour, departure: @departure }, layout: false
     end
   end
 
   private
   def departure_params
-    params.require(:departure).permit(:tour_id, :date, :number_of_seats, :sale_channel_id, :expire_date, :visa_status)
+    params.require(:departure).permit(:tour_id, :date, :number_of_seats, :sale_channel_id, :expire_date, :visa_status, :group_notice)
   end
 end

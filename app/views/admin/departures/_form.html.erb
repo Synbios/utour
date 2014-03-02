@@ -17,7 +17,7 @@
 
 
     <div class="widget-body"><!-- widget content -->
-      <%= form_for [:admin, tour, departure], :html => {:role => "form", :id => 'xform', :class => "smart-form"} do |f| %>
+      <%= form_for [:admin, tour, departure], :html => {:role => "form", :multipart => true, :class => "smart-form"} do |f| %>
       <fieldset>
 
         <section>
@@ -89,6 +89,9 @@
           </div>
         </section>
 
+      </fieldset>
+
+      <fieldset>
         <section>
           <div class="row">
             <%= f.label :visa_status, '签证状态', :class => "label col col-2" %>
@@ -104,6 +107,16 @@
           </div>
         </section>
 
+        <section>
+          <div class="row">
+            <%= f.label :group_notice, '出团通知', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input">
+                <%= f.file_field :group_notice %>
+              </label>
+            </div>
+          </div>
+        </section>
       </fieldset>
 
       <footer>

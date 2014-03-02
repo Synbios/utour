@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301165652) do
+ActiveRecord::Schema.define(version: 20140302145038) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -67,8 +67,8 @@ ActiveRecord::Schema.define(version: 20140301165652) do
     t.integer  "price_id"
     t.integer  "agent_id"
     t.integer  "sale_id"
-    t.integer  "progress_id"
     t.text     "response"
+    t.string   "progress"
   end
 
   create_table "date_and_prices", force: true do |t|
@@ -109,6 +109,10 @@ ActiveRecord::Schema.define(version: 20140301165652) do
     t.integer  "sale_channel_id"
     t.integer  "account_id"
     t.datetime "expire_date"
+    t.string   "group_notice_file_name"
+    t.string   "group_notice_content_type"
+    t.integer  "group_notice_file_size"
+    t.datetime "group_notice_updated_at"
   end
 
   create_table "feature_tag_connections", force: true do |t|

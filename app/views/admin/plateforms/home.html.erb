@@ -1,1 +1,7 @@
-<%= render :partial => 'home' %>
+<h2><%= current_user.name %> <small><%= current_user.user_class.name%></small></h2>
+<dl>
+  <dt>渠道</dt>
+  <dd><%= current_user.sale_channel.name if current_user.sale_channel.present? %></dd>
+  <dt>权限</dt>
+  <dd><%= current_user.user_group.name if current_user.user_group.present? %></dd>
+</dl>

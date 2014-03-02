@@ -69,6 +69,7 @@ class Admin::PlateformsController < ApplicationController
         @bookings += account.in_orders
       end
     end
+    render 'admin/bookings/index'
     #@bookings = Booking.all
   end
 
@@ -192,6 +193,7 @@ class Admin::PlateformsController < ApplicationController
 
   def bookings_admin
     @bookings = current_user.in_orders
+    render 'admin/bookings/index'
   end
 
   def my_invitation_code

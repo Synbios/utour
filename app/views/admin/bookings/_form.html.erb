@@ -1,0 +1,125 @@
+<div class="jarviswidget jarviswidget-color-blue" id="new_date_and_price_form" data-widget-editbutton="false">
+
+  <header>
+    <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+    <h2>处理订单</h2>
+
+  </header>
+
+
+  <div><!-- widget div-->
+
+
+    <div class="jarviswidget-editbox"><!-- widget edit box --><!-- This area used as dropdown edit box -->
+
+
+    </div><!-- end widget edit box -->
+
+
+    <div class="widget-body"><!-- widget content -->
+      <%= form_for [:admin, booking], :html => {:role => "form", :class => "form-horizontal"} do |f| %>
+      <fieldset>
+        <div class="form-group">
+          <label class="col-xs-3 col-sm-3 control-label">订单编号</label>
+          <div class="col-xs-9 col-sm-8">
+            <input type="text" class="form-control" readonly="" value="<%= booking.price_id %>"></input>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 col-sm-3 control-label">客户名称</label>
+          <div class="col-xs-9 col-sm-8">
+            <input type="text" class="form-control" readonly="" value="<%= booking.agent.name %>"></input>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 col-sm-3 control-label">客户渠道</label>
+          <div class="col-xs-9 col-sm-8">
+            <input type="text" class="form-control" readonly="" value="<%= booking.agent.sale_channel.name %>"></input>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 col-sm-3 control-label">客户电话</label>
+          <div class="col-xs-9 col-sm-8">
+            <input type="text" class="form-control" readonly="" value="<%= booking.agent.mobile %>"></input>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 col-sm-3 control-label">对口销售</label>
+          <div class="col-xs-9 col-sm-8">
+            <input type="text" class="form-control" readonly="" value="<%= booking.sale.name %>"></input>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label class="col-xs-3 col-sm-3 control-label">所申请成人数</label>
+          <div class="col-xs-9 col-sm-8">
+            <input type="number" class="form-control" readonly="" value="<%= booking.number_of_adults %>"></input>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 col-sm-3 control-label">所申请儿童数</label>
+          <div class="col-xs-9 col-sm-8">
+            <input type="number" class="form-control" readonly="" value="<%= booking.number_of_children %>"></input>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 col-sm-3 control-label">客户备注</label>
+          <div class="col-xs-9 col-sm-8">
+            <textarea rows="10" class="form-control" readonly="" ><%= booking.comment %></textarea>
+          </div>
+        </div>
+      </fieldset>
+      
+      <fieldset>
+        <div class="form-group">
+          <%= f.label :progress, '订单状态', :class => "col-xs-3 col-sm-3 control-label" %>
+          <div class="col-xs-9 col-sm-8">
+            <%= f.select :progress, 
+            "<option value='处理中'>处理中</option>
+            <option value='已处理'>已处理</option>
+            ".html_safe, {}, { class: "form-control" } %>
+          </div>
+        </div>
+        
+
+        <div class="form-group">
+          <%= f.label :response, '回复', :class => "col-xs-3 col-sm-3 control-label" %>
+          <div class="col-xs-9 col-sm-8">
+            <%= f.text_area :response, rows: 10, placeholder: "对该订单的回复，如预订多少人，请在几号前交钱等。", class: "form-control" %>
+          </div>
+        </div>
+
+      </fieldset>
+
+
+      
+
+      
+
+      <div class="form-group">
+        <div class="col-xs-9 col-xs-offset-3 col-sm-9 col-sm-offset-3">
+          <%= f.submit "提交订单", :class => "btn btn-default btn-success full_width" %>
+        </div>
+      </div>
+
+      <% end %>
+
+
+      
+    </div><!-- end widget content -->
+
+  </div><!-- end widget div -->
+
+
+</div>
+<script type="text/javascript">
+
+
+</script>

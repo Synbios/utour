@@ -24,6 +24,10 @@
 <div id="<%= tour.object_id %>" class="panel panel-default collapse" style="padding: 5px;">
   <%# filtered by sale channel %>
   <% departures = tour.departures %>
+  
+  <%# 除去过期的日期 %>
+  <% departures = departures.select { |departure| departure.expire_date > Time.now } %> 
+  
   <% array = [] %>
   <% departures.each do |departure| %>
 
@@ -49,6 +53,10 @@
     <% departures.each do |departure| %>
 
     <% prices = departure.prices %>
+
+    <%# 除去过期的价格 %>
+    <% prices = prices.select { |price| price.expire_date > Time.now } %>
+
     <% array = [] %>
     <% prices.each do |price| %>
 
@@ -71,7 +79,13 @@
     <tr>
       <td><%= departure.date.strftime("%Y.%m.%d") %></td>
       <td class="price"><span style="color: red"><i class="fa fa-rmb"></i> <%= price.price %>/人</span></td>
-      <td><%= link_to "报名", new_booking_path(price_id: price.id) %></td>
+      <td>
+        <% if departure.number_of_seats > 0 %>
+        <%= link_to "报名", new_booking_path(price_id: price.id) %>
+        <% else %>
+        <span class="label label-danger">已满</span>
+        <% end %>
+      </td>
     </tr>
 
     <% end # prices each %>
