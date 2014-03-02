@@ -17,7 +17,7 @@
 
 
     <div class="widget-body"><!-- widget content -->
-      <%= form_for [:admin, price], :html => {:role => "form", :id => 'xform', :class => "smart-form"} do |f| %>
+      <%= form_for [:admin, tour, departure, price], :html => {:role => "form", :id => 'xform', :class => "smart-form"} do |f| %>
       <fieldset>
 
         <section>
@@ -42,16 +42,6 @@
           </div>          
         </section>
 
-        <section>
-          <div class="row">
-            <%= f.label :price, '价格', :class => "label col col-2" %>
-            <div class="col col-10">
-              <label class="input">
-                <%= f.text_field :price, placeholder: "例如 6666.00" %>
-              </label>
-            </div>
-          </div>
-        </section>
 
       </fieldset>
 
@@ -67,13 +57,33 @@
           </div>
         </section>
 
+        <section>
+          <div class="row">
+            <%= f.label :price, '价格', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input">
+                <%= f.text_field :price, placeholder: "例如 6666.00" %>
+              </label>
+            </div>
+          </div>
+        </section>
 
+        <section>
+          <div class="row">
+            <%= f.label :expire_date, '有效期至', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input">
+                <%= f.date_field :expire_date %>
+              </label>
+            </div>
+          </div>
+        </section>
 
       </fieldset>
 
       <footer>
         <%= f.submit "提交", :class => "btn btn-primary" %>
-        <%= link_to "返回", "javascript:history.back()", :class => "btn btn-default" %>
+        <%= link_to "返回价格列表", "admin#" + admin_tour_departure_prices_path(tour, departure), :class => "btn btn-default" %>
       </footer>
       <% end %>
 

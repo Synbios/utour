@@ -149,7 +149,11 @@ Utour::Application.routes.draw do
     resources :sales
     resources :agents
 
-    resources :tours
+    resources :tours do
+      resources :departures do 
+        resources :prices
+      end
+    end
     resources :bookings
     resources :user_groups
     resources :date_and_prices
@@ -163,8 +167,8 @@ Utour::Application.routes.draw do
     resources :activities
     resources :days
 
-    resources :departures, only: [:new, :create, :destroy, :index]
-    resources :prices, only: [:new, :create, :destroy, :index]
+    
+    
 
     resources :invitation_codes do |invitation_code|
       get 'cancel', on: :member

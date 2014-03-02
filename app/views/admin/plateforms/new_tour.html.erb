@@ -93,141 +93,151 @@
 											</div>
 										</div>
 
-
-									</section>
-
-								</fieldset>
-
-								<fieldset>
-									<section>
-										<div class="form-group">
-											<%= f.label :sale_channel_id, '销售渠道', :class => "col-md-2 control-label" %>
-											<div class="col-md-10">
-												<div class="input-group">
-													<%= f.collection_select(:sale_channel_id,  SaleChannel.all, :id, :name, { :prompt   => "选择渠道" }, { :class => 'form-control'}) %>
-													<span class="input-group-addon"><i class="fa fa-warning"></i></span>
-												</div>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<%= f.label :tour_type, '销售标签', :class => "col-md-2 control-label" %>
-											<div class="col-md-10">
-												<div class="input-group">
-													<%= f.text_field :tour_type, :placeholder => "目前只支持手工收入标签, 不同标签请用空格隔开, 如 \"日本 夕阳红 大城小镇\", 不能识别的名字将自动忽略", class: "form-control" %>
-													<span class="input-group-addon"><i class="fa fa-warning"></i></span>
-												</div>
-											</div>
-										</div>
-									</section>
-								</fieldset>
-
-                <fieldset>
-                  <div class="form-group">
-                    <%= f.label :cover_img_id, '封面图片', :class => "col-md-2 control-label" %>
-                    <div class="col-md-10">
-                      <div class="input-group">
-                        <%= f.collection_select(:cover_img_id,  @covers, :id, :name, { :prompt   => "选择封面图片" }, { :class => 'form-control' }) %>
+                    <div class="form-group">
+                      <%= f.label :expire_date, '有效期截止日期', :class => "col-md-2 control-label" %>
+                      <div class="col-md-10">
+                        <div class="input-group">
+                          <%= f.date_field :expire_date, class: "form-control" %>
+                          <span class="input-group-addon"><i class="fa fa-warning"></i></span>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="form-group">
-                    <%= f.label :icon_img_id, '封面图标', :class => "col-md-2 control-label" %>
-                    <div class="col-md-10">
-                      <div class="input-group">
-                        <%= f.collection_select(:icon_img_id,  @icons, :id, :name, { :prompt   => "选择封面图标" }, { :class => 'form-control' }) %>
-                      </div>
-                    </div>
-                  </div>
+
+                  </section>
+
                 </fieldset>
 
-              </div>
-
-              <div class="step-pane" id="step2">
-                <h3><strong>第 2 步 </strong> - 设计行程</h3>
-
-                <%= f.fields_for :days do |day| %>
                 <fieldset>
+                 <section>
+                  <div class="form-group">
+                   <%= f.label :sale_channel_id, '销售渠道', :class => "col-md-2 control-label" %>
+                   <div class="col-md-10">
+                    <div class="input-group">
+                     <%= f.collection_select(:sale_channel_id,  SaleChannel.all, :id, :name, { :prompt   => "选择渠道" }, { :class => 'form-control'}) %>
+                     <span class="input-group-addon"><i class="fa fa-warning"></i></span>
+                   </div>
+                 </div>
+               </div>
 
-                 <div class="form-group">
-                  <%= day.label :number, '天数', :class => "col-md-2 control-label" %>
-                  <div class="col-md-10">
-                   <div class="input-group">
-                    <%= day.text_field :number, class: "form-control", placeholder: "填入第几天(非常重要)" %>
-                    <span class="input-group-addon" style="background-color: #ee1111"><%= day.link_to_remove "点我删除", data: { confirm: "删除该天将同时删除该天所有的活动?" }, style: "color: white; text-decoration:none;" %></span>
-                  </div>
-                </div>
-              </div>
+               <div class="form-group">
+                 <%= f.label :tour_type, '销售标签', :class => "col-md-2 control-label" %>
+                 <div class="col-md-10">
+                  <div class="input-group">
+                   <%= f.text_field :tour_type, :placeholder => "目前只支持手工收入标签, 不同标签请用空格隔开, 如 \"日本 夕阳红 大城小镇\", 不能识别的名字将自动忽略", class: "form-control" %>
+                   <span class="input-group-addon"><i class="fa fa-warning"></i></span>
+                 </div>
+               </div>
+             </div>
+           </section>
+         </fieldset>
 
-              <div class="form-group">
-                <div class="col-md-10 col-md-offset-2">
-                 <div class="well well-sm">
-                  <%= day.fields_for :activities do |activity| %>
-                  <div class="day_root">
-                   <div class="form-group">
-                    <%= activity.label :time, '活动时间', :class => "col-md-2 control-label" %>
-                    <div class="col-md-10">
-                     <div class="input-group">
-                      <%= activity.text_field :time, class: "form-control", placeholder: "非常重要 - 不填写次活动将不保存", onmouseover: "$(this).clockface({format: 'H:mm'});" %>
-                      <span class="input-group-addon" style="background-color: #ee1111"><%= activity.link_to_remove "删除本活动", data: { confirm: "确定要删除该活动?" }, style: "color: white; text-decoration:none;" %></span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <%= activity.label :active_type, '活动类型', :class => "col-md-2 control-label" %>
-                  <div class="col-md-10">
-                   <div class="input-group">
-                    <%= activity.select :active_type, "<option value='1'>景点</option><option value='2'>交通</option><option value='3'>购物</option><option value='4'>吃饭</option>".html_safe, {}, { class: "form-control" } %>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <%= activity.label :site_id, '景点', :class => "col-md-2 control-label" %>
-                <div class="col-md-10">
-                 <div class="input-group">
-                  <%= activity.collection_select(:site_id,  @sites, :id, :name, { :prompt   => "选择景点" }, { :class => 'form-control', :id => "#{activity.object_id}", :onchange => "init_image_select(this)"}) %>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <%= activity.label :image_id, '图片', :class => "col-md-2 control-label" %>
-              <div class="col-md-10">
-               <div class="input-group">
-
-                <%= activity.collection_select(:image_id,  Array.new, :id, :name, { :prompt   => "请先选择景点" }, { :class => 'form-control site_select', :onchange => ""}) %>
+         <fieldset>
+          <div class="form-group">
+            <%= f.label :cover_img_id, '封面图片', :class => "col-md-2 control-label" %>
+            <div class="col-md-10">
+              <div class="input-group">
+                <%= f.collection_select(:cover_img_id,  @covers, :id, :name, { :prompt   => "选择封面图片" }, { :class => 'form-control' }) %>
               </div>
             </div>
           </div>
 
           <div class="form-group">
-            <%= activity.label :short_des, '活动简短描述', :class => "col-md-2 control-label" %>
+            <%= f.label :icon_img_id, '封面图标', :class => "col-md-2 control-label" %>
+            <div class="col-md-10">
+              <div class="input-group">
+                <%= f.collection_select(:icon_img_id,  @icons, :id, :name, { :prompt   => "选择封面图标" }, { :class => 'form-control' }) %>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+      </div>
+
+      <div class="step-pane" id="step2">
+        <h3><strong>第 2 步 </strong> - 设计行程</h3>
+
+        <%= f.fields_for :days do |day| %>
+        <fieldset>
+
+         <div class="form-group">
+          <%= day.label :number, '天数', :class => "col-md-2 control-label" %>
+          <div class="col-md-10">
+           <div class="input-group">
+            <%= day.text_field :number, class: "form-control", placeholder: "填入第几天(非常重要)" %>
+            <span class="input-group-addon" style="background-color: #ee1111"><%= day.link_to_remove "点我删除", data: { confirm: "删除该天将同时删除该天所有的活动?" }, style: "color: white; text-decoration:none;" %></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+         <div class="well well-sm">
+          <%= day.fields_for :activities do |activity| %>
+          <div class="day_root">
+           <div class="form-group">
+            <%= activity.label :time, '活动时间', :class => "col-md-2 control-label" %>
             <div class="col-md-10">
              <div class="input-group">
-              <%= activity.text_area :short_des, class: "form-control short_des", placeholder: "非常重要", rows: 3 %>
-              <span class="input-group-addon" ><i class="fa fa-warning"></i></span>
+              <%= activity.text_field :time, class: "form-control", placeholder: "非常重要 - 不填写次活动将不保存", onmouseover: "$(this).clockface({format: 'H:mm'});" %>
+              <span class="input-group-addon" style="background-color: #ee1111"><%= activity.link_to_remove "删除本活动", data: { confirm: "确定要删除该活动?" }, style: "color: white; text-decoration:none;" %></span>
             </div>
           </div>
         </div>
 
         <div class="form-group">
-          <%= activity.label :full_des, '景点详细描述', :class => "col-md-2 control-label" %>
+          <%= activity.label :active_type, '活动类型', :class => "col-md-2 control-label" %>
           <div class="col-md-10">
            <div class="input-group">
-            <%= activity.text_area :full_des, class: "form-control full_des", placeholder: "非常重要", rows: 5 %>
-            <span class="input-group-addon" ><i class="fa fa-warning"></i></span>
+            <%= activity.select :active_type, "<option value='1'>景点</option><option value='2'>交通</option><option value='3'>购物</option><option value='4'>吃饭</option>".html_safe, {}, { class: "form-control" } %>
           </div>
         </div>
       </div>
 
+      <div class="form-group">
+        <%= activity.label :site_id, '景点', :class => "col-md-2 control-label" %>
+        <div class="col-md-10">
+         <div class="input-group">
+          <%= activity.collection_select(:site_id,  @sites, :id, :name, { :prompt   => "选择景点" }, { :class => 'form-control', :id => "#{activity.object_id}", :onchange => "init_image_select(this)"}) %>
+        </div>
+      </div>
     </div>
-    <hr />
-    <% end %>
-    <%= day.link_to_add "添加新活动", :activities, class: "btn btn-success btn-sm" %>
+
+    <div class="form-group">
+      <%= activity.label :image_id, '图片', :class => "col-md-2 control-label" %>
+      <div class="col-md-10">
+       <div class="input-group">
+
+        <%= activity.collection_select(:image_id,  Array.new, :id, :name, { :prompt   => "请先选择景点" }, { :class => 'form-control site_select', :onchange => ""}) %>
+      </div>
+    </div>
   </div>
+
+  <div class="form-group">
+    <%= activity.label :short_des, '活动简短描述', :class => "col-md-2 control-label" %>
+    <div class="col-md-10">
+     <div class="input-group">
+      <%= activity.text_area :short_des, class: "form-control short_des", placeholder: "非常重要", rows: 3 %>
+      <span class="input-group-addon" ><i class="fa fa-warning"></i></span>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= activity.label :full_des, '景点详细描述', :class => "col-md-2 control-label" %>
+  <div class="col-md-10">
+   <div class="input-group">
+    <%= activity.text_area :full_des, class: "form-control full_des", placeholder: "非常重要", rows: 5 %>
+    <span class="input-group-addon" ><i class="fa fa-warning"></i></span>
+  </div>
+</div>
+</div>
+
+</div>
+<hr />
+<% end %>
+<%= day.link_to_add "添加新活动", :activities, class: "btn btn-success btn-sm" %>
+</div>
 
 </div>
 </div>
@@ -412,12 +422,17 @@
 	 			},
 	 			"tour[description]": {
 	 				required: true
-	 			}
+	 			},
+        "tour[expire_date]": {
+          required: true
+        }
 	 		},
 
 	 		messages: {
 	 			"tour[name]": "请输入团队名称",
-	 			"tour[description]": "请输入团队简介"
+	 			"tour[description]": "请输入团队简介",
+        "tour[expire_date]": "请输入截止日期"
+
 	 		},
 
 	 		highlight: function (element) {

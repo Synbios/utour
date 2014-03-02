@@ -38,12 +38,12 @@
             <td><%= tour.name %></td>
             <td><%= tour.sale_channel.name%></td>
             <td><%= tour.account.name%></td>
-            <td><%= link_to "/admin#admin/price_admin.html?tour_id=#{tour.id}" do %>现有<%= tour.departures.count %>个<% end %></td>
+            <td><%= link_to "/admin#" + admin_tour_departures_path(tour) do %>现有<%= tour.departures.count %>个<% end %></td>
             <td>
               <%= tour.expire_date.strftime("%b %d, %Y") %>
               <%= " <em>已过期</em>".html_safe if tour.expire_date < Time.now %>
             </td>
-            <td><%= link_to "添加出发日期", "/admin#admin/departure_admin.html?tour_id=#{tour.id}&departure_id=new" %></td>
+            <td><%= link_to "添加出发日期", "/admin#" + new_admin_tour_departure_path(tour) %></td>
           </tr>
           <% end %>
         </tbody>

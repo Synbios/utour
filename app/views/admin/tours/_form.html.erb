@@ -46,6 +46,16 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <%= f.label :expire_date, '有效期截止日期', :class => "col-md-2 control-label" %>
+              <div class="col-md-10">
+                <div class="input-group">
+                  <%= f.date_field :expire_date, class: "form-control" %>
+                  <span class="input-group-addon"><i class="fa fa-warning"></i></span>
+                </div>
+              </div>
+            </div>
+
 
           </section>
 

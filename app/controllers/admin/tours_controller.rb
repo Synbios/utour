@@ -34,6 +34,11 @@ class Admin::ToursController < ApplicationController
     end
   end
 
+  def index
+    @tours = Tour.all
+    render partial: "admin/tours/index_with_date", locals: { tours: @tours }, layout: false
+  end
+
   def destroy
     @tour = Tour.find_by_id(params[:id])
     @tour.destroy
@@ -42,7 +47,7 @@ class Admin::ToursController < ApplicationController
 
   private
   def tour_params
-    params.require(:tour).permit(:identifier, :flights, :cover_img_id, :icon_img_id, :name, :description, :sale_channel_id, :include, :exclude, :transportations, :notes, :visa, 
+    params.require(:tour).permit(:identifier, :flights, :expire_date, :cover_img_id, :icon_img_id, :name, :description, :sale_channel_id, :include, :exclude, :transportations, :notes, :visa, 
       :days_attributes => [:id, :tour_id, :number, :accommodation, :breakfast, :lunch, :dinner, :title, :itinerary, :_destroy, 
         :activities_attributes => [:id, :day_id, :time, :active_type, :site_id, :image_id, :short_des, :full_des, :_destroy] ] )
   end

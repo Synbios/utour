@@ -155,17 +155,24 @@ class Admin::PlateformsController < ApplicationController
   end
 
   def price_admin
-    if params[:price_id] == "new"
-      @price = Price.new
-      @departure = Departure.find_by_id(params[:departure_id])
-      @tour = @departure.tour
-    elsif params[:price_id].present?
-      @price = Price.find_by_id(params[:price_id])
-      @departure = @price.departure
-      @tour = @departure.tour
+    if params[:price_id].present?
+      if params[:price_id] == "new" # 新建价格
+        @price = Price.new
+        @departure = Departure.find_by_id(params[:departure_id])
+        @tour = @departure.tour
+      else # 修改价格
+        @price = Price.find_by_id(params[:price_id])
+        @departure = @price.departure
+        @tour = @departure.tour
+      end
     elsif params[:departure_id].present?
-      @departure = Departure.find_by_id(params[:departure_id])
-      @tour = @departure.tour
+      if params[:departure_id] == "new" # 新团期
+        @departure = Departure.new
+        @tour = Tour.find_by_id(params[:tour_id])
+      else
+        @departure = Departure.find_by_id(params[:departure_id])
+        @tour = @departure.tour
+      end
     elsif params[:tour_id].present?
       @tour = Tour.find_by_id(params[:tour_id])
     end

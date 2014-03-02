@@ -42,7 +42,7 @@
             <td>
               <%= departure.sale_channel.name %>
             </td>
-            <td><%= link_to "现有#{departure.prices.count}个", "/admin#admin/price_admin.html?tour_id=#{tour.id}&departure_id=#{departure.id}" %></td>
+            <td><%= link_to "现有#{departure.prices.count}个", "/admin#" + admin_tour_departure_prices_path(tour, departure) %></td>
             <td></td>
             <td><em>无</em></td>
             <td>
@@ -50,16 +50,16 @@
               <%= " <em>已过期</em>".html_safe if departure.expire_date < Time.now %>
             </td>
             <td>
-              <%= link_to "修改参数", "/admin#admin/price_admin.html?tour_id=#{tour.id}&departure_id=#{departure.id}&price_id=new" %>
-              <%= link_to "添加价格", "/admin#admin/price_admin.html?tour_id=#{tour.id}&departure_id=#{departure.id}&price_id=new" %>
+              <%= link_to "修改团期", "/admin#" + edit_admin_tour_departure_path(tour, departure) %>
+              <%= link_to "添加价格", "/admin#" + new_admin_tour_departure_price_path(tour, departure) %>
             </td>
           </tr>      
           <% end %>
         </tbody>
       </table>
       <br/>
-      <%= link_to "返回团队列表", "/admin#admin/departure_admin.html", class: "btn btn-warning" %>
-      <%= link_to "添加新团期", "/admin#admin/departure_admin.html?tour_id=#{tour.id}&departure_id=new", class: "btn btn-primary" %>
+      <%= link_to "返回团队列表", "/admin#" + admin_tours_path, class: "btn btn-warning" %>
+      <%= link_to "添加新团期", "/admin#" + new_admin_tour_departure_path(tour), class: "btn btn-primary" %>
 
 
     </div><!-- end widget content -->

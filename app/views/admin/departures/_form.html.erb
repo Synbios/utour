@@ -17,21 +17,34 @@
 
 
     <div class="widget-body"><!-- widget content -->
-      <%= form_for [:admin, @departure], :html => {:role => "form", :id => 'xform', :class => "smart-form"} do |f| %>
+      <%= form_for [:admin, tour, departure], :html => {:role => "form", :id => 'xform', :class => "smart-form"} do |f| %>
       <fieldset>
 
         <section>
           <div class="row">
-            <%= f.label :tour_id, '团队编号', :class => "label col col-2" %>
+            <label class="label col col-2">团队编号</label>
             <div class="col col-10">
               <label class="input"></i>
-                <%= f.text_field :tour_id, value: tour.id, readonly: true %>
+                <input type="number" value="<%= tour.id %>" readonly=""></input>
               </label>
-              <h4 style="margin-top: 5px">名称: <%= tour.name %></h4>
             </div>
           </div>
         </section>
 
+        <section>
+          <div class="row">
+            <label class="label col col-2">团队名称</label>
+            <div class="col col-10">
+              <label class="input"></i>
+                <input type="text" value="<%= tour.name %>" readonly=""></input>
+              </label>
+            </div>
+          </div>
+        </section>
+
+      </fieldset>
+
+      <fieldset>
         <section>
           <div class="row">
             <%= f.label :date, '出发日期', :class => "label col col-2" %>
@@ -45,7 +58,7 @@
 
         <section>
           <div class="row">
-            <%= f.label :number_of_seats, '座位数', :class => "label col col-2" %>
+            <%= f.label :number_of_seats, '余位数', :class => "label col col-2" %>
             <div class="col col-10">
               <label class="input">
                 <%= f.number_field :number_of_seats, placeholder: "额定收客人数" %>
@@ -54,9 +67,6 @@
           </div>
         </section>
 
-      </fieldset>
-
-      <fieldset>
         <section>
           <div class="row">
             <%= f.label :user_group_id, '权限组', :class => "label col col-2" %>
@@ -68,13 +78,37 @@
           </div>
         </section>
 
+        <section>
+          <div class="row">
+            <%= f.label :expire_date, '有效期至', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input">
+                <%= f.date_field :expire_date %>
+              </label>
+            </div>
+          </div>
+        </section>
 
+        <section>
+          <div class="row">
+            <%= f.label :visa_status, '签证状态', :class => "label col col-2" %>
+            <div class="col col-10">
+              <label class="input"></i>
+                <%= f.select :visa_status, 
+                "<option value='未送签'>未送签</option>
+                <option value='已送签'>已送签</option>
+                <option value='正常出签'>正常出签</option>
+                <option value='异常出签'>异常出签</option>".html_safe, {}, { class: "form-control" } %>
+              </label>
+            </div>
+          </div>
+        </section>
 
       </fieldset>
 
       <footer>
         <%= f.submit "提交", :class => "btn btn-primary" %>
-        <%= link_to "返回", "javascript:history.back()", :class => "btn btn-default" %>
+        <%= link_to "返回团期列表", "admin#" + admin_tour_departures_path(tour), :class => "btn btn-default" %>
       </footer>
       <% end %>
 
