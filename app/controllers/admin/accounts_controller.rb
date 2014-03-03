@@ -16,8 +16,10 @@ class Admin::AccountsController < ApplicationController
     end
     
     invitation_code = InvitationCode.find_by_code(params[:invitation_code])
-
-    if invitation_code.user_class_id != @account.user_class_id
+    if invitation_code.nil?
+      @account.errors[:invitation_code] = "注册码无效"
+      render 'new', layout: false
+    elsif invitation_code.user_class_id != @account.user_class_id
       @account.errors[:invitation_code] = "该注册码不匹配所申请注册用户类型"
       render 'new', layout: false
     elsif invitation_code.status[:state] != :ok
