@@ -30,13 +30,15 @@ class Admin::AccountsController < ApplicationController
       @account.user_group_id = invitation_code.user_group_id
       @account.sale_channel_id = invitation_code.sale_channel_id
       if @account.save
-        invitation_code.use(self)
+        invitation_code.use(@account)
         WexchatMailer.staff_welcome_email(@account).deliver
-        format.html {
-          invitation_code.use(@account)
-          sign_in @account
-          redirect_to '/admin#admin/home.html'
-        }
+        respond_to do |format|
+          format.html {
+            invitation_code.use(@account)
+            sign_in @account
+            redirect_to '/admin#admin/home.html'
+          }
+        end
       else
         render 'new', layout: false
       end
