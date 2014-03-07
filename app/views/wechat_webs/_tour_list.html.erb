@@ -8,7 +8,7 @@
 
       <%# 价格 xxx 起 %>
       
-      <p class="list-group-item-text"><%= tour.description %></p>
+      <p class="list-group-item-text"><%= trim_name(tour.description, 30) %></p>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-2" style="padding:5px">
       <%#= link_to "行程", legacy_tour_path(tour), {class: "btn btn-warning btn-sm", style: "width: 100%; margin-bottom: 2px; color: white; padding: 5px 2px"} %>

@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
 
   before_action :set_account, only: [:show, :edit, :update, :destroy, :activate_show]
-  before_action :check_login, except: [:new, :create]
+  before_action :check_login, except: [:new, :create, :activate, :activate_show]
 
   # GET /accounts
   # GET /accounts.json

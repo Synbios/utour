@@ -17,7 +17,7 @@ class Admin::ShelvesController < ApplicationController
     	@shelf.rack = params[:shelf][:rack]
 
       if @shelf.save
-        redirect_to '/admin#admin/shelf_tour.html'
+        redirect_to '/admin#admin/index_shelf.html'
       else
         redirect_to :back
       end

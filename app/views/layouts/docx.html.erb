@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "UTOUR成都众信" %>">
+  <title><%= content_for?(:title) ? yield(:title) : "UTOUR成都众信" %></title>
+  <%= stylesheet_link_tag "front-end", media: "all", "data-turbolinks-track" => true %>
+  <%= yield(:stylesheet) %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container">
+    <%= yield %>
+  </div>
+</body>
+</html>

@@ -38,7 +38,7 @@
             <td><%= tour.flights %></td>
             <td><%= tour.name %></td>
             <td><%= tour.tour_type %></td>
-            <td><%= Account.find_by_id(tour.account_id).name %></td>
+            <td><%= tour.account.name %></td>
             <td><%= tour.sale_channel.name %><%#= UserGroup.convert_id_string_to_name_string(tour.tour_group) %></td>
             <td>
               <%= tour.expire_date.strftime("%b %d, %Y") %>

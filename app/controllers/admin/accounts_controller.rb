@@ -26,6 +26,7 @@ class Admin::AccountsController < ApplicationController
       @account.errors[:invitation_code] = "注册码#{invitation_code.status[:message]}"
       render 'new', layout: false
     else
+      @account.active = true
       @account.user_class_id = invitation_code.user_class_id
       @account.user_group_id = invitation_code.user_group_id
       @account.sale_channel_id = invitation_code.sale_channel_id

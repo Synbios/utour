@@ -1,8 +1,8 @@
 class ToursController < ApplicationController
   layout "lion"
   #before_action :store_location, except: [:show]
-  before_action :set_tour, only: [:show]
-  before_action :check_login, except: [:show]
+  before_action :set_tour, only: [:show, :show_docx]
+  before_action :check_login, except: [:show, :show_docx]
 
   # GET /tours
   # GET /tours.json
@@ -23,6 +23,16 @@ class ToursController < ApplicationController
     else
       @icon_img = @tour.icon_img.photo.url(:original)
     end
+    @xml = Nokogiri::XML(@tour.erp_info)
+    @features = Nokogiri::XML(@tour.erp_features).xpath('//feature').children.select{|e| e.cdata?}
+    @itineraries = Nokogiri::XML(@tour.erp_info).xpath('//itineraryDay') 
+    render layout: "front30"
+  end
+
+  # 为word转换而简化的html格式
+  def show_docx
+    @cover_img = "default_tour_cover.jpg"
+    render layout: "docx"
   end
 
   def legacy

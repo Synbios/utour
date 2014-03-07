@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140302145038) do
+ActiveRecord::Schema.define(version: 20140306074204) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -231,6 +231,11 @@ ActiveRecord::Schema.define(version: 20140302145038) do
     t.datetime "expire_date"
     t.integer  "cover_img_id"
     t.integer  "icon_img_id"
+    t.text     "other_options"
+    t.text     "terms"
+    t.text     "erp_info"
+    t.string   "departure_city"
+    t.text     "erp_features"
   end
 
   create_table "user_classes", force: true do |t|

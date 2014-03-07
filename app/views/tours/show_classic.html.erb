@@ -1,0 +1,55 @@
+<% content_for :left_links do %>
+<% render "wechat_webs/left_links" %>
+<% end %>
+<% content_for :stylesheet do %>
+<%#= stylesheet_link_tag "front-end", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+
+<div class="container classic_tour_view">
+  <%= image_tag @cover_img, class: "head_img" %>
+  <%= image_tag @icon_img, class: "head_icon pull-right" %>
+  <div class="content">
+    <h3><%= @tour.name %></h3>
+    <% @tour.days.each do |day| %>
+    <div class="day" style="width: 100%">
+      <table style="width: 100%">
+        <tr>
+          <td style="vertical-align: top; width: 40px">
+            <i class="fa fa-calendar fa-3x"></i>
+          </td>
+          <td class="day_content" style="vertical-align: top">
+            <h4>第<%= day.number %>天 <small></small></h4>
+            <p><%= day.des_by_site_names %></p>
+            <% activities = day.activities.where("image_id IS NOT NULL") %>
+            <% size = activities.size %>
+            <%= render partial: 'frame_1_pic', locals: { activities: activities } if size == 1 %>
+            <%= render partial: 'frame_2_pic', locals: { activities: activities } if size == 2 %>
+            <%= render partial: 'frame_3_pic', locals: { activities: activities } if size == 3 %>
+            <%= render partial: 'frame_4_pic', locals: { activities: activities } if size == 4 %>
+            <%= render partial: 'frame_5_pic', locals: { activities: activities } if size == 5 %>
+            <%= render partial: 'frame_6_pic', locals: { activities: activities } if size == 6 %>
+            <%= render partial: 'frame_7_pic', locals: { activities: activities } if size == 7 %>
+            <%= render partial: 'frame_8_pic', locals: { activities: activities } if size == 8 %>
+            <%= render partial: 'frame_9_pic', locals: { activities: activities } if size >= 9 %>
+            <h4><small><%= "住宿: #{day.accommodation}" if day.accommodation.present? %></small></h4>
+          </td>
+        </tr>
+      </table>
+    </div>
+    
+    
+    <% end %>    
+  </div>
+
+  
+</div>
+
+<script type="text/javascript">
+$(document).ready(function ($) {
+  $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+    event.preventDefault();
+    return $(this).ekkoLightbox();
+  });
+});
+</script>
+

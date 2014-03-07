@@ -1,55 +1,272 @@
-<% content_for :left_links do %>
-<% render "wechat_webs/left_links" %>
+<% content_for :javascripts do %>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <% end %>
-<% content_for :stylesheet do %>
-<%#= stylesheet_link_tag "tours", media: "all", "data-turbolinks-track" => true %>
-<% end %>
+      
+      <!-- Inner Page Content // Start -->
+      
+      <div class="inner-page">
+        <div class="container">
+          <div class="page-mainbar landing">
+            <!-- Landing Content -->
+            <div class="landing-content">
+              <!-- Landing Hero -->
+              <div class="landing-logo" style="width: 100%; margin-top:0">
+                <!-- Logo Icon - removed -->
+                <!-- Image -->
+                <%= image_tag @cover_img, class: "img-responsive" %>
+                <br/>
+                <h3><%= @tour.name %></h3>
+              </div>
 
-<div class="container classic_tour_view">
-  <%= image_tag @cover_img, class: "head_img" %>
-  <%= image_tag @icon_img, class: "head_icon pull-right" %>
-  <div class="content">
-    <h3><%= @tour.name %></h3>
-    <% @tour.days.each do |day| %>
-    <div class="day" style="width: 100%">
-      <table style="width: 100%">
-        <tr>
-          <td style="vertical-align: top; width: 40px">
-            <i class="fa fa-calendar fa-3x"></i>
-          </td>
-          <td class="day_content" style="vertical-align: top">
-            <h4>第<%= day.number %>天 <small></small></h4>
-            <p><%= day.des_by_site_names %></p>
-            <% activities = day.activities.where("image_id IS NOT NULL") %>
-            <% size = activities.size %>
-            <%= render partial: 'frame_1_pic', locals: { activities: activities } if size == 1 %>
-            <%= render partial: 'frame_2_pic', locals: { activities: activities } if size == 2 %>
-            <%= render partial: 'frame_3_pic', locals: { activities: activities } if size == 3 %>
-            <%= render partial: 'frame_4_pic', locals: { activities: activities } if size == 4 %>
-            <%= render partial: 'frame_5_pic', locals: { activities: activities } if size == 5 %>
-            <%= render partial: 'frame_6_pic', locals: { activities: activities } if size == 6 %>
-            <%= render partial: 'frame_7_pic', locals: { activities: activities } if size == 7 %>
-            <%= render partial: 'frame_8_pic', locals: { activities: activities } if size == 8 %>
-            <%= render partial: 'frame_9_pic', locals: { activities: activities } if size >= 9 %>
-            <h4><small><%= "住宿: #{day.accommodation}" if day.accommodation.present? %></small></h4>
-          </td>
-        </tr>
-      </table>
-    </div>
+              <!-- Button Links -->
+              <div class="landing-button">
+                <a href="#" class="btn btn-danger btn-lg"><i class="fa fa-download"></i> 下载行程</a> &nbsp;
+                <a href="#" class="btn btn-info btn-lg"><i class="fa fa-cloud"></i> 返回报名</a>
+              </div>
+
+              <!-- Landing Content Item -->
+              <% colors = ['red', 'green', 'lblue', 'purple', 'yellow', 'pink'] %>
+              <% boot_colors = ['danger', 'primary', 'warning', 'success', 'info'] %>
+              <% icons = ['fi6', 'fi7', 'fi8', 'fi9', 'fi10', 'fi11', 'fi12'] %>
+              <% @features.each_with_index do |feature, i| %>
+              <%# feature.text =~ /\A.([^\s,\:,，：]+).(.+\z)/ %>
+
+                <% if i % 3 == 0 %>
+                  <div class="row">
+
+
+                <% end %>
+                  <div class="col-md-4 col-sm-4">
+                    <!-- Landing Item -->
+                    <div class="landing-item br-<%= colors[i%6] %>">
+                      <!-- Icon -->
+                      <img src="/img/flat-icon/<%= icons[i%6] %>.png" class="img-responsive visible-md" alt="" />
+                      <!-- Heading -->
+                      <!-- <h4></h4> -->
+                      <!-- Paragraph -->
+                      <h4 style="text-align: left"><%= feature.text %></h4>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+
+
+                <% if i % 3 == 2 || i == @features.size - 1 %>
+
+                  </div>
+                <% end %>                
+
+              <% end %>
+              
+             
+            </div>
+          </div>
+
+          <!-- Main-bar Column -->
+            <div class="col-md-12">
+              <div class="page-mainbar blog">
+                <!-- Heading -->
+
+                <h3 style="margin-top: 40px">行程图片</h3>
+                <!-- Portfolio Content -->
+                <div class="portfolio-content">
+                  <div class="img-portfolio">
+                    <p>
+                      <!-- Add filter names inside "data-filter". For example ".web-design", ".seo", etc., Filter names are used to filter the below images. -->
+                      <ul id="filters">
+                        <li><a href="#" data-filter="*" class="btn btn-default">全部</a></li>
+                        <% @itineraries.each_with_index do |itinerary, i| %>
+                          <% if !itinerary.xpath("./spotImgname").empty? %>
+                            <li><a href="#" data-filter=".d<%= itinerary["day"] %>" class="btn btn-<%= boot_colors[i%5] %>">天<%= itinerary["day"] %></a></li>
+                          <% end %>
+                        <% end %>
+                      </ul>
+                    </p>
+                  
+                    <div id="portfolio">
+                      <!-- Add the above used filter names inside div tag. You can add more than one filter names. For image lightbox you need to include "a" tag pointing to image link, along with the class "prettyphoto". -->                        
+                      
+                      <% @itineraries.each do |itinerary| %>
+                        <% next if itinerary.xpath("./spotImgname").empty? %>
+                        <% photo_names = itinerary.xpath("./spotImgname").first.children.first.text.split("\|").compact %>
+                        <% itinerary.xpath("./spotImgname").first["photourl"].split("\|").compact.each_with_index do |url, i| %>
+                        
+                      <div class="element d<%= itinerary["day"] %>">
+                        <%= link_to url, class: "prettyphoto" do %>
+                        <%= image_tag url %>
+                          <!-- Portfolio caption -->
+                          <div class="pcap br-<%= colors[rand(100)%6] %>">
+                            <h4><%= photo_names[i] %></h4>
+                            
+                          </div>
+                        <% end %>
+                      </div>
+                          
+                        <% end %>
+                      <% end %>
+                      
+                    </div>
+                  </div>
+                </div>
+
+                <h3 style="margin-top: 35px">每日行程</h3>
+
+                <!-- Blog Page Content -->
+                <div class="blog-content">
+                  <div class="row">
+                    <div class="col-md-8 col-sm-8">
+
+                      <!-- The new post done by user's all in the post block -->
+                      <div class="blog-post">
+                        <% @itineraries.each do |itinerary| %>
+                        <% photos = itinerary["photoinfo"].split("\|").compact %>
+                        <!-- Entry is the one post for each user -->
+                        <div class="entry">
+                          <% if !photos.empty? %>
+                          <%= image_tag photos.sample, class: "img-responsive", style: "margin-bottom: 20px; width: 100%"%>
+                          <% end %>
+                          <!-- Meta for this block -->
+                          <div class="meta br-green">
+                            <!-- Date -->
+                            <div class="post-date"><span>第<%= itinerary["day"] %>天</span><%= itinerary["accommodation"] %></div>
+                            <!-- Post Information -->
+                            <div class="meta-info"><i style="font-style: normal">早</i> <span><%= itinerary["breakfast"].blank? ? "请自理" : itinerary["breakfast"] %></span></div>
+                            <div class="meta-info"><i style="font-style: normal">中</i> <span><%= itinerary["lunch"].blank? ? "请自理" : itinerary["lunch"] %></span></div>
+                            <div class="meta-info"><i style="font-style: normal">晚</i> <span><%= itinerary["dinner"].blank? ? "请自理" : itinerary["dinner"] %></span></div>
+                          </div>
+                          
+                          <!-- Heading of the  post -->
+                          <h4><a href="blog-single.html"><%= itinerary["title"] %></a></h4>
+                          <!-- Para -->
+                          <% itinerary.children.select{|e| e.cdata?}.each do |des| %>
+                          <p class="grey"><%= des.text.html_safe %></p>
+                          <% end %>
+                          <div class="clearfix"></div>
+                        </div>
+                        <% end %>
+                      </div>
+                      
+                      
+                      <div class="clearfix"></div>
+                      <!-- Blog post End -->
+
+                    </div>
+
+
+
+                    <div class="col-md-4 col-sm-4">
+                      <div class="blog-sidebar">
+                        <!-- Sidebar widget -->
+                        <!-- First -->
+                        
+                        <!-- Second -->
+                        <% pkg_incls = @tour.include.split(/[；;]\s*\d+\.?、?/).compact %>
+                        <% if !pkg_incls.empty? %>
+                        <div class="side-widget br-yellow">
+                          <h4>服务费用包含</h4>
+                          <div class="widget-content">
+                            <ol>
+                              <% pkg_incls.each do |i| %>
+                              <li><%= i %></li>
+                              <% end %>
+                            </ol>
+                          </div>
+                        </div>
+                        <% end %>
+                        <!-- Third -->
+                        <% pkg_excls = @tour.exclude.split(/[；;]\s*\d+\.?、?/).compact %>
+                        <% if !pkg_excls.empty? %>
+                        <div class="side-widget br-pink">
+                          <h4>服务费用不包含</h4>
+                          <div class="widget-content">
+                            <ol>
+                              <% pkg_excls.each do |i| %>
+                              <li><%= i %></li>
+                              <% end %>
+                            </ol>
+                          </div>
+                        </div>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+      
+      <!-- Inner Page Content // End -->
+      
+      <!-- Footer Start -->
+      
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-sm-6">
+              <!-- Footer Widget -->
+              <div class="footer-widget">
+                <!-- Heading -->
+                <h5><i class="fa fa-location-arrow br-lblue"></i> Location</h5>
+                <!-- Google Map -->
+                <div class="map">
+                  <!-- Image -->
+                  <img src="/img/map.png" class="img-responsive" alt="" />
+                  <!-- Map Marker -->
+                  <i class="fa fa-map-marker marker india lblue"></i>
+                  <i class="fa fa-map-marker marker usa orange"></i>
+                  <i class="fa fa-map-marker marker africa green"></i>
+                </div>
+                <span class="location-name">
+                  <i class="fa fa-map-marker br-lblue"></i> India &nbsp;&nbsp;
+                  <i class="fa fa-map-marker br-orange"></i> USA &nbsp;&nbsp;
+                  <i class="fa fa-map-marker br-green"></i> Africa
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- Footer Copyright -->
+          <div class="footer-copyright">
+            <p>&copy; Copyright 2014 <a href="#">UTOUR 众信旅游微信</a></p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer End -->
+      
+ 
+    <!-- Footer End -->
+    
+    <!-- Scroll to top -->
+    <span class="totop"><a href="#"><i class="fa fa-angle-up"></i></a></span> 
+
     
     
-    <% end %>    
-  </div>
+    
+    
+    <script type="text/javascript" >
+      /* prettyPhoto Gallery */
 
-  
-</div>
+      jQuery(".prettyphoto").prettyPhoto({
+        overlay_gallery: false, social_tools: false
+      });
+    
+      /* Isotype */
 
-<script type="text/javascript">
-$(document).ready(function ($) {
-  $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
-    event.preventDefault();
-    return $(this).ekkoLightbox();
-  });
-});
-</script>
-
+      // cache container
+      var $container = $('#portfolio');
+      // initialize isotope
+      $container.isotope({
+        // options...
+      });
+      
+      // filter items when filter link is clicked
+      $('#filters a').click(function(){
+        var selector = $(this).attr('data-filter');
+        $container.isotope({ filter: selector });
+        return false;
+      });       
+      // Type your codde here
+    </script>
+  </body> 
+</html>

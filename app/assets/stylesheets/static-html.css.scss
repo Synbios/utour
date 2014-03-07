@@ -1,0 +1,41 @@
+$ryans: #ef0171;
+
+#static-html {
+  width: 800px;
+  h3 {
+    text-align: center;
+    color: $ryans;
+  }
+
+  #features {
+    padding: 50px;
+  }
+
+  .important {
+    color: red;
+  }
+
+  .day-table {
+    width: 100%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: $ryans;
+    th, td {
+      padding: 20px 5px;
+      border-style: solid;
+      border-color: $ryans;
+      border-width: 1px;
+    }
+    td.day-number {
+      width: 100px;
+      text-align: center;
+      background-color: #ef0171;
+      color: #fff;
+    }
+    td.day-title {
+      color: #ef0171;
+    }
+  }
+}
+
+

@@ -31,6 +31,7 @@ Utour::Application.routes.draw do
 
   resources :tours do
     get 'legacy', on: :member
+    get 'show_docx', on: :member
   end
 
   resources :bookings do
@@ -54,7 +55,7 @@ Utour::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'wechat_webs#lion'
+  root 'front30#home'
 
   match '/signup',  to: 'accounts#new', via: 'get'
   match '/signin',  to: 'sessions#new', via: 'get'
@@ -90,6 +91,10 @@ Utour::Application.routes.draw do
   match '/lion/diy', to: 'wechat_webs#diy', via: 'get'
   match '/lion/sale', to: 'wechat_webs#sale', via: 'get'
   match '/lion/guide', to: 'wechat_webs#guide', via: 'get'
+
+  # Front30
+
+  get '/front30/home', to: 'front30#home'
 
 
   # Example of regular route:

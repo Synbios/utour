@@ -1,0 +1,145 @@
+<% content_for :stylesheet do %>
+<%= stylesheet_link_tag "static-html", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+<div class="container">
+  <%#= image_tag @cover_img, class: "head_img" %>
+  <%#= image_tag @icon_img, class: "head_icon pull-right" %>
+  <div id="static-html" class="content">
+    <h3><%= @tour.name %></h3>
+    <p style="background-color: #ef0171; color: #fff; padding: 5px">行程特色</p>
+
+    <div id="features">
+      <p>北京桃花節 賞桃花、梨花等(賞花期約每年的04/01~05/05)</p>
+      <p>北京植物園通過大量春季開花的植物花卉，以及經過精心設計的景區、花鏡、花帶、花壇、特色小品等展示北京明媚的春光。從4月1日到5月5日期間，從番紅花、迎春、山桃、玉蘭到海棠、梅花、丁香、鬱金香、碧桃、牡丹等，每一時期都有不同品種。</p>
+      <div class="row">
+        <div class="col-xs-4">
+          <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+        </div>
+        <div class="col-xs-4">
+          <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+        </div>
+        <div class="col-xs-4">
+          <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4">
+          <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+        </div>
+        <div class="col-xs-4">
+          <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+        </div>
+        <div class="col-xs-4">
+          <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+        </div>
+      </div>
+      <p>註：花期時間極其短暫，如遇大自然天候等因素(下雨、颱風、氣溫)其凋謝或未綻開仍會依往原景點純欣賞，賞花景觀依實際現場為主，請見諒！</p>
+
+      <h4>【行程特色】</h4>
+      <ol>
+        <li>慕田峪長城(含來回纜車)：慕田峪長城歷史悠久、文化燦爛，據文獻考證，是明朝朱元璋手下大將徐達在北齊長城遺址上督建而成，是萬里長城的精華所在。慕田峪長城1987年被評為新北京十六景之一，1992年被評為北京旅遊世界之最</li>
+        <li>參觀為中國現存最大的古建築群～紫禁城：1987年，北京故宮(紫禁城)被登錄為世界文化遺產。</li>
+        <li>造訪中外園林藝術史上有極高地位～頤和園：1998年被評為世界文化遺產。</li>
+        <li>船遊慈禧水道頤和園帶你親身體驗聖母皇太后乘舟遊覽頤和園的御用水道著名的慈禧水道。</li>
+        <li>參觀明清歷代皇帝祈求五穀豐收之地～天壇公園：1998年，北京天壇被列為世界文化遺產。</li>
+        <li>乘坐三輪車胡同遊～參觀北京古老的四合院間建築。</li>
+        <li>什剎海酒吧街～有北京蘭桂坊之稱，欣賞美麗湖景及下午茶，可放鬆心情的享受一番</li>
+        <li>特別贈送：每日一瓶礦泉水／什剎海下午茶(2種點心以及紅茶或咖啡一杯)。</li>
+        <li>購物安排：珍珠／絲綢／茶葉。(全程3站)</li>
+        <li>風味美食：東來順涮羊肉／北京全聚德烤鴨／魚師父虹鱒魚風味／巴國布衣川菜+變臉秀／老北京風味／花家怡園私家菜。</li>
+        <div class="row">
+          <div class="col-xs-3">
+            <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+          </div>
+          <div class="col-xs-3">
+            <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+          </div>
+          <div class="col-xs-3">
+            <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+          </div>
+          <div class="col-xs-3">
+            <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+          </div>
+        </div>
+        <li>酒店介紹</li>
+        <p>北京萬豪酒店：北京萬豪酒店是北京的地標建築物之一，緊鄰明城牆遺址，距紫禁城、天安門廣場和秀水市場僅五分鐘車程，而到達建國門地鐵站只需步行兩分鐘，地理位置十分方便。</p>
+        <div class="row">
+          <div class="col-xs-4">
+            <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+          </div>
+          <div class="col-xs-4">
+            <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+          </div>
+          <div class="col-xs-4">
+            <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+          </div>
+        </div>
+
+        <p>香格里拉上東盛貿飯店 飯店的設計現代而時尚，擁有寬敞的空間和完備的設施，可滿足賓客的各種需求，飯店位於最新的使館區，毗鄰望京高科技園，距北京首都國際機場僅20分鐘車程，交通十分便利，酒店周圍遍佈各知名文化景點，是商務休閒旅遊的絕佳之地</p>
+        <div class="row">
+          <div class="col-xs-4">
+            <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+          </div>
+          <div class="col-xs-4">
+            <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+          </div>
+          <div class="col-xs-4">
+            <%= image_tag @cover_img, class: "head_img", width: "100%" %>
+          </div>
+        </div>
+      </ol>
+
+      <h4 class="important">【特別說明】</h4>
+      <ol class="important">
+        <li>為考量旅客自身之旅遊安全並顧及同團其它團員之旅遊權益，凡年滿70歲以上或行動不便之貴賓，需有家人或友人同行，方始接受報名，不便之處，尚祈鑑諒。</li>
+        <li>團體旅遊需多方顧及全體旅客，時間的安排也需相互配合，故若有嬰幼兒同行時，可能無法妥適兼顧，所以煩請貴賓於報名時，多方考量帶嬰幼兒同行可能產生的不便，以避免造成您的不悅與困擾。</li>
+        <li>素食：因各地風俗民情不同，國外的素食習慣大多是可以食用蔥、薑、蒜、蛋、奶等，多數僅能以蔬菜、豆腐等食材料理為主；若為飯店內用餐或一般餐廳使用自助餐，亦多數以蔬菜、漬物、水果等佐以白飯或麵食類。故敬告素食貴賓，海外團體素食餐之安排，無法如同在台灣般豐富且多變化，故建議素食貴賓能多多鑑諒並自行準備素食罐頭或泡麵等，以備不時之需。</li>
+        <li>飯店房間均提供兩小床房型，若您指定大床房型，需視飯店提供為主，並無法保證一定有大床房
+          型或三人一室加床(須另外加價)，因區域酒店構築限制，造成不便敬請見諒。
+        </li>
+        <li>本行程設定為團體旅遊行程，故為顧及旅客於出遊期間之人身安全及相關問題，於旅遊行程期間
+          ，恕無法接受脫隊之要求；若因此而無法滿足您的旅遊需求，建議您另行選購團體自由行或航空公
+          司套裝自由行，不便之處，尚祈鑒諒。
+        </li>
+      </ol>
+
+    </div>
+
+    <p style="background-color: #ef0171; color: #fff; padding: 5px">行程安排</p>
+
+
+
+    <% @tour.days.each_with_index do |day, i| %>
+    <table class="day-table">
+      <tr>
+        <td class="day-number">第0<%= day.number %>天</td>
+        <td class="day-title">
+          <%= day.des_by_site_names %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+        <% if day.sites.empty? %>
+        <p><%= day.itinerary %></p>
+        <% else %>
+        <% day.sites.each do |activity| %>
+        <p><strong><%= activity.site.name %>:</strong> <%= activity.full_des %></p>
+        <% end %>
+        <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+        <p>餐食：（早餐） <%= day.breakfast.blank? ? "自理" : day.breakfast %>&nbsp;&nbsp;（午餐） <%= day.lunch.blank? ? "自理" : day.breakfast %>&nbsp;&nbsp;（晚餐） <%= day.dinner.blank? ? "自理" : day.breakfast %></p>
+        <p>住宿: <%= " #{day.accommodation}" if day.accommodation.present? %></p>
+      </td>  
+      </tr>
+    </table>
+    <% end %>    
+  </div>
+
+  <p style="background-color: #ef0171; color: #fff; padding: 5px">簽證說明</p>
+  
+</div>
+

@@ -149,12 +149,12 @@ class Account < ActiveRecord::Base
 
 
   def staff?
-    return true if self.user_class_id == 2
+    return true if self.user_class_id < 5
     false
   end
 
-  def customer?
-    return true if self.user_class_id == 4
+  def agent?
+    return true if self.user_class_id == 5
     false
   end
 
