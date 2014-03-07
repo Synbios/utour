@@ -6,6 +6,7 @@ production:
   qr_code_show_url: https://mp.weixin.qq.com/cgi-bin/showqrcode
   secret_key: oTi3k4qW82
   default_sale_phone: 2861648069
+  erp_word_url: http://118.144.76.28/upload/team/linesDoc/
 
 development:
   appid: wx11903ac9cdd1fdfb

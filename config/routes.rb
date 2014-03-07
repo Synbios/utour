@@ -1,4 +1,5 @@
 Utour::Application.routes.draw do
+  get "images/show"
   get "sale_channel_maps/create"
   get "sale_channel_maps/destroy"
   get "sale_channels/create"
@@ -45,7 +46,7 @@ Utour::Application.routes.draw do
 
   resources :agents
 
-
+  resources :images, only: [:show]
 
   #resources :user_groups
 
@@ -92,11 +93,15 @@ Utour::Application.routes.draw do
   match '/lion/sale', to: 'wechat_webs#sale', via: 'get'
   match '/lion/guide', to: 'wechat_webs#guide', via: 'get'
 
+  get '/landing_page', to: 'front30#landing_page'
   # Front30
 
   get '/front30/home', to: 'front30#home'
-
-
+  get '/front30/contact_about', to: 'front30#contact_about'
+  get '/front30/about', to: 'front30#about'
+  get '/front30/dm', to: 'front30#dm'
+  get '/front30/video', to: 'front30#video'
+  get '/front30/travel_guide', to: 'front30#travel_guide'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

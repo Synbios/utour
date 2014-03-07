@@ -58,97 +58,85 @@
 
         <div class="box box-md animated">
           <div class="box-content box-gallery padd-zero">
-            <div class="img-details box-hover-black">
-              <span class="hover-icon">进入</span>        
-            </div>
             <!-- Box Link -->
-          <a href="/lion/visa">
-            <!-- Box Link Content -->
-            <div class="box-content navigation">
-              <!-- Box Icon -->
-              
-              <!-- Box Title -->
-              <span class="box-title" style="font-size: 33px">签证</span>
+            <a href="/lion/visa">
+              <!-- Box Link Content -->
+              <div class="box-content navigation">
+                <!-- Box Icon -->
+
+                <!-- Box Title -->
+                <span class="box-title" style="font-size: 33px">签证</span>
+              </div>
+            </a>
+            <!-- Image -->
+            <img src="/images/front30_2.jpg" class="img-responsive box-gallery-img" alt="" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <!-- Box Outer Layer [ Box 4 ] -->
+        <div class="box box-md animated">
+          <div class="box-content box-gallery padd-zero">
+
+            <!-- Image -->
+            <%= image_tag @img2x1s.empty? ? "/images/front30_1.jpg" : @img2x1s.sample.photo.url, class: "img-responsive box-gallery-img" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-6">
+
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <!-- Box Outer Layer [ Box 1 ] -->
+            <div class="box box-md br-purple animated">
+              <!-- Box Hover Effect -->
+              <div class="box-hover box-hover-black">
+                <!-- Hover Icon -->
+                <span class="hover-icon">进入</span>
+              </div>
+              <!-- Box Link -->
+              <a href="aboutus.html">
+                <!-- Box Link Content -->
+                <div class="box-content navigation">
+                  <!-- Box Icon -->
+                  <i class="fa fa-shopping-cart"></i>
+                  <!-- Box Title -->
+                  <span class="box-title" style="font-size: 33px">特价专区</span>
+                </div>
+              </a>
+            </div>  
+          </div>
+
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <!-- Box Outer Layer [ Box 2 ] -->
+            <div class="box box-md br-yellow animated">
+              <!-- Box Hover Effect -->
+              <div class="box-hover box-hover-black">
+                <!-- Hover Icon -->
+                <span class="hover-icon">进入</span>
+              </div>
+              <!-- Box Link -->
+              <a href="/front30/dm">
+                <!-- Box Link Content -->
+                <div class="box-content navigation">
+                  <!-- Box Icon -->
+                  <i class="fa fa-file-text"></i>
+                  <!-- Box Title -->
+                  <span class="box-title" style="font-size: 33px">同业计划</span>
+                </div>
+              </a>
             </div>
-          </a>
-          <!-- Image -->
-          <img src="/images/front30_2.jpg" class="img-responsive box-gallery-img" alt="" />
+          </div>
         </div>
       </div>
-
     </div>
+
   </div>
-
-  <div class="row">
-    <div class="col-md-6 col-sm-6">
-      <!-- Box Outer Layer [ Box 4 ] -->
-      <div class="box box-md animated">
-        <div class="box-content box-gallery padd-zero">
-         <div class="img-details box-hover-black">
-          <!-- Heading -->
-          <h3>美丽与您同在</h3>
-          <!-- Paragraph -->
-          <p>欢迎关注众信微信</p>
-          <!-- View Next Button -->
-          <!-- <div class="view-button">
-           <a href="portfolio.html" class="btn btn-danger">View More <i class="fa fa-angle-right"></i></a>
-         </div> -->
-       </div>
-       <!-- Image -->
-       <%= image_tag @img2x1s.empty? ? "/images/front30_1.jpg" : @img2x1s.sample.photo.url, class: "img-responsive box-gallery-img" %>
-     </div>
-   </div>
- </div>
-
- <div class="col-md-6 col-sm-6">
-
-  <div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-6">
-      <!-- Box Outer Layer [ Box 1 ] -->
-      <div class="box box-md br-lblue animated">
-        <!-- Box Hover Effect -->
-        <div class="box-hover box-hover-black">
-          <!-- Hover Icon -->
-          <span class="hover-icon">进入</span>
-        </div>
-        <!-- Box Link -->
-        <a href="aboutus.html">
-          <!-- Box Link Content -->
-          <div class="box-content navigation">
-            <!-- Box Icon -->
-            <i class="fa fa-shopping-cart"></i>
-            <!-- Box Title -->
-            <span class="box-title" style="font-size: 33px">特价专区</span>
-          </div>
-        </a>
-      </div>  
-    </div>
-
-    <div class="col-md-6 col-sm-6 col-xs-6">
-      <!-- Box Outer Layer [ Box 2 ] -->
-      <div class="box box-md br-yellow animated">
-        <!-- Box Hover Effect -->
-        <div class="box-hover box-hover-black">
-          <!-- Hover Icon -->
-          <span class="hover-icon">进入</span>
-        </div>
-        <!-- Box Link -->
-        <a href="/lion/sale">
-          <!-- Box Link Content -->
-          <div class="box-content navigation">
-            <!-- Box Icon -->
-            <i class="fa fa-file-text"></i>
-            <!-- Box Title -->
-            <span class="box-title" style="font-size: 33px">同业计划</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-</div>
 </div>
 <div style="height: 7px; width: 100%"></div>
 <!-- Slider Start -->
@@ -211,7 +199,7 @@ data-captionhidden="off"><img src="img/slider/s21.png" class="img-responsive" al
 <!-- SLIDE  -->
 <li data-transition="zoomout" data-slotamount="7" data-masterspeed="1500" >
   <!-- MAIN IMAGE -->
-  <img src="/images/slide1.jpg"  alt="slidebg1"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+  <img src="/images/xixili_slide.jpg"  alt="slidebg1"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
   <!-- LAYERS -->
   <!-- LAYERS NR. 1 // Logo Image -->
   <div class="tp-caption lfl"
@@ -277,7 +265,7 @@ data-start="4200"
 data-easing="Power4.easeOut"
 data-endspeed="300"
 data-endeasing="Linear.easeNone"
-data-captionhidden="off"><a href="#" class="btn btn-info btn-lg btn-circle">Download Now <i class="fa fa-angle-right"></i></a>
+data-captionhidden="off"><a href="/landing_page" class="btn btn-info btn-lg btn-circle">点击进入 <i class="fa fa-angle-right"></i></a>
 </div>
 </li>
 <!-- SLIDE  -->
@@ -406,14 +394,14 @@ data-captionhidden="off">Mobile Phone
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-6">
             <!-- Box Outer Layer [ Box 1 ] -->
-            <div class="box box-md br-green animated">
+            <div class="box box-md br-red animated">
               <!-- Box Hover Effect -->
               <div class="box-hover box-hover-black">
                 <!-- Hover Icon -->
                 <span class="hover-icon">进入</span>
               </div>
               <!-- Box Link -->
-              <a href="/lion/sale">
+              <a href="/front30/travel_guide">
                 <!-- Box Link Content -->
                 <div class="box-content navigation">
                   <!-- Box Icon -->
@@ -434,7 +422,7 @@ data-captionhidden="off">Mobile Phone
                 <span class="hover-icon">进入</span>
               </div>
               <!-- Box Link -->
-              <a href="/lion/video">
+              <a href="/front30/video">
                 <!-- Box Link Content -->
                 <div class="box-content navigation">
                   <!-- Box Icon -->
@@ -454,7 +442,7 @@ data-captionhidden="off">Mobile Phone
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-6">
             <!-- Box Outer Layer [ Box 12 ] -->
-            <div class="box box-md animated">
+            <div class="box box-md br-black animated">
               <div class="box-content slide-up box-gallery padd-zero">
                 <!-- Image -->
                 <%= image_tag @img1x1s.empty? ? "/images/front30_3.jpg" : @img1x1s.first.photo.url, class: "img-responsive box-gallery-img" %>
@@ -482,7 +470,7 @@ data-captionhidden="off">Mobile Phone
                   <!-- Box Icon -->
                   <i class="fa fa-th-list"></i>
                   <!-- Box Title -->
-                  <span class="box-title" style="font-size: 33px">我的众信</span>
+                  <span class="box-title" style="font-size: 33px">我的订单</span>
                 </div>
               </a>
             </div>
@@ -513,7 +501,7 @@ data-captionhidden="off">Mobile Phone
                 <!-- Box Icon -->
                 <i class="fa fa-envelope"></i>
                 <!-- Box Title -->
-                <span class="box-title" style="font-size: 33px">联系我们</span>
+                <span class="box-title" style="font-size: 33px">电子杂志</span>
               </div>
             </a>
           </div>  
@@ -540,20 +528,19 @@ data-captionhidden="off">Mobile Phone
       <!-- Box Outer Layer [ Box 4 ] -->
       <!-- Box Outer Layer [ Box 1 ] -->
       <div class="box box-md br-lblue animated">
-
         <!-- Box Hover Effect -->
         <div class="box-hover box-hover-black">
           <!-- Hover Icon -->
           <span class="hover-icon">进入</span>
         </div>
         <!-- Box Link -->
-        <a href="aboutus.html">
+        <a href="/front30/contact_about">
           <!-- Box Link Content -->
           <div class="box-content navigation">
             <!-- Box Icon -->
-            <i class="fa fa-comments"></i>
+            <%= image_tag "logo.png", style: "width: 50px" %>
             <!-- Box Title -->
-            <span class="box-title" style="font-size: 33px">关于我们</span>
+            <span class="box-title" style="font-size: 33px">联系我们</span>
           </div>
         </a>
       </div> 

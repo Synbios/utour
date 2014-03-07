@@ -14,7 +14,7 @@ class WechatWebsController < ApplicationController
 
   # 签证资料
   def visa
-
+    
   end
 
   # 团队行程
@@ -60,8 +60,12 @@ class WechatWebsController < ApplicationController
   def info
   end
 
+  # 签证攻略
+  def visa_guide
+  end
+
   # 出行攻略
-  def guide
+  def travel_guide
   end
 
   # 特别推荐
