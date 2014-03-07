@@ -59,7 +59,7 @@ Utour::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += %w( front-end.css front-end.js back-end.css back-end.js )
+  config.assets.precompile += %w( front-end.css front-end.js back-end.css back-end.js front30.css front30.js )
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
