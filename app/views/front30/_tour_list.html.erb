@@ -1,0 +1,108 @@
+
+<% tours.each do |tour| %>
+<%# content = JSON.parse tour.content %>
+<div class="list-group-item">
+  <div class="row">
+    <div class="col-xs-9 col-sm-9 col-md-10" style="padding:5px">
+      <h4 class="list-group-item-heading"><%= tour.name %></h4>
+
+      <%# 价格 xxx 起 %>
+      
+      <p class="list-group-item-text"><%= trim_name(tour.description, 30) %></p>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-2" style="padding:5px">
+      <%#= link_to "行程", legacy_tour_path(tour), {class: "btn btn-warning btn-sm", style: "width: 100%; margin-bottom: 2px; color: white; padding: 5px 2px"} %>
+      <%= link_to "行程", "/tours/#{tour.id}", {class: "btn btn-warning btn-sm", style: "width: 100%; margin-bottom: 2px; color: white; padding: 5px 2px"} %>
+      <%= link_to "下载", "/tours/#{tour.id}.pdf", {class: "btn btn-success btn-sm", style: "width: 100%; margin-bottom: 2px; color: white; padding: 5px 2px"} %>
+      <%#= link_to "下载", "/word_and_pdf/#{content["word"]}", {class: "btn btn-success btn-sm", style: "width: 100%; margin-bottom: 2px; color: white; padding: 5px 2px"} %>
+      <button class="btn btn-info btn-sm" data-toggle="collapse" data-target="#<%= tour.object_id %>" style="width:100%;color: white; padding: 5px 2px">预订</button>
+
+    </div>
+  </div>
+</div>
+
+<div id="<%= tour.object_id %>" class="panel panel-default collapse" style="padding: 5px;">
+  <%# filtered by sale channel %>
+  <% departures = tour.departures %>
+  
+  <%# 除去过期的日期 %>
+  <% departures = departures.select { |departure| departure.expire_date > Time.now } %> 
+  
+  <% array = [] %>
+  <% departures.each do |departure| %>
+
+  <% if departure.sale_channel_id == current_user.sale_channel_id || SaleChannelMap.where(up: departure.sale_channel_id, down: current_user.sale_channel_id).count > 0 %>
+  <% array.push departure %>
+  <% end # end if %>
+
+  <% end # end each %>
+  <% departures = array %>
+  
+  <% if departures.empty? %>
+  出团日期和价格敬请期待...
+  <% else # end if %>
+
+
+  <table class="table table-striped date_and_price_table" style="background-color: white; padding: 5px;">
+    <tr>
+      <th>出发日期</th>
+      <th>单人价</th>
+      <th>余位数</th>
+    </tr>
+  
+    <% departures.each do |departure| %>
+
+    <% prices = departure.prices %>
+
+    <%# 除去过期的价格 %>
+    <% prices = prices.select { |price| price.expire_date > Time.now } %>
+
+    <% array = [] %>
+    <% prices.each do |price| %>
+
+    <% if price.sale_channel_id == current_user.sale_channel_id || SaleChannelMap.where(up: price.sale_channel_id, down: current_user.sale_channel_id).count > 0 %>
+    <% array.push price %>
+    <% end # end if %>
+
+    <% end # end price each %>
+    <% prices = array %>
+    
+    <% if !prices.empty? %>
+
+    <% price = prices.first %>
+    <% prices.each do |p| %>
+    <% if SaleChannelMap.where(up: price.sale_channel_id, down: p.sale_channel_id).count > 0 %>
+    <% price = p %>
+    <% end # price if %>
+    <% end # if %>
+
+    <tr>
+      <td><%= departure.date.strftime("%Y.%m.%d") %></td>
+      <td class="price"><span style="color: red"><i class="fa fa-rmb"></i> <%= price.price %>/人</span></td>
+      <td>
+        <% if departure.number_of_seats > 0 %>
+        <%= link_to "报名", new_booking_path(price_id: price.id) %>
+        <% else %>
+        <span class="label label-danger">已满</span>
+        <% end %>
+      </td>
+    </tr>
+
+    <% end # prices each %>
+    
+
+    <% end # departure each %>
+    
+  </table>
+
+  <% end %>
+  
+  <div class="row" style="margin: 5px 0; padding: 0">
+    <%#= link_to "Word/PDF版本", "/word_and_pdf/#{content["word"]}", {class: "col-xs-4 col-xs-offset-1 btn btn-success btn-sm", style: "padding: 5px"} %>
+    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+      <a class="btn btn-default btn-sm" style="padding: 5px 15px; width: 100%">预订协议</a>
+    </div>
+    
+  </div>
+</div>
+<% end %>

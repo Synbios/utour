@@ -18,27 +18,48 @@
   </head>
   
   <body>
-    
+    <%= yield(:nav_bar) %>
     <!-- Body Wrapper -->
-    <div class="wrapper white">
-    
+    <!-- Your main site content. -->
+    <!-- Classes Examples -->
+    <div id="sb-site" class="wrapper white">
 
-      <!-- Header End -->
-      
-      <!-- Inner Page Content // Start -->
-      
-      <%= yield %>
-      
-      <!-- Inner Page Content // End -->
-      
-      <!-- Footer Start -->
-      
-      <br/>
-    <!-- Footer End -->
+    <%= yield %>
+      <span class="totop"><a href="#"><i class="fa fa-angle-up"></i></a></span> 
     </div>
+
+
+    <div class="sb-slidebar sb-left">
+      <!-- Your left Slidebar content. -->
+      <%= render "layouts/lion_sidebar_left" %>
+    </div>
+
+    <div class="sb-slidebar sb-right">
+      <!-- Your right Slidebar content. -->
+      <%= render "layouts/lion_sidebar_right" %>
+    </div>    
+
+    <!-- Header End -->
+      
+    <!-- Inner Page Content // Start -->
+        
+    <!-- Inner Page Content // End -->
+      
+    <!-- Footer Start -->
+      
+     
+    <!-- Footer End -->
+    
     <!-- Scroll to top -->
-    <span class="totop"><a href="#"><i class="fa fa-angle-up"></i></a></span> 
+    
 
     <%= yield(:javascripts) %>
+    <script type="text/javascript">
+      (function($) {
+        $(document).ready(function() {
+        $.slidebars();
+      });
+      }) (jQuery);
+    </script>
   </body> 
 </html>

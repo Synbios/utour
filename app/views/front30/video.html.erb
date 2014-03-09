@@ -2,7 +2,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <% end %>
 
+<% content_for :nav_bar do %>
+<%= render "layouts/lion_nav" %>
+<% end %>
 
+<% content_for :left_links do %>
+<% render "left_links" %>
+<% end %>
 
 <!-- Inner Page Content // Start -->
 

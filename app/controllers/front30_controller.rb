@@ -30,4 +30,15 @@ class Front30Controller < ApplicationController
   def video
 
   end
+
+  def group
+    @tours = Tour.where("expire_date > ? AND departure_city = ?", Time.now, "北京")
+    @root = JSON.parse Shelf.find_by_name("团队行程").rack
+    @set = ["跟团游"]
+  end
+
+  def free
+  end
+
+
 end

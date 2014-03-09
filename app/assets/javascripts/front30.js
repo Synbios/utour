@@ -31,3 +31,4 @@
 
 //= require ./flatMania-js/jquery.themepunch.plugins.min
 //= require ./flatMania-js/jquery.themepunch.revolution.min
+//= require slidebars.min

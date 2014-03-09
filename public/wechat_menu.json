@@ -4,7 +4,7 @@
     {	
       "type":"view",
       "name":"微分销官网",
-      "url":"http://23.92.27.216/legacy/home"
+      "url":"http://23.92.27.216"
     },
     {
       "type":"view",
@@ -15,6 +15,6 @@
 }
 {"button":[{"type":"view","name":"微分销官网","url":"http://23.92.27.216/legacy/home"},{"type":"view","name":"签到有奖","url":"http://23.92.27.216/register/customer"}]}
 
-curl -d '{"button":[{"type":"view","name":"微分销官网","url":"http://23.92.27.216/legacy/home"},{"type":"view","name":"签到有奖","url":"http://23.92.27.216/register/customer"}]}' "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=R77CmS8Qb15MwJfurjVNQNAPc5dI0Jf0AwHZCafUOHhqGCVxunMRp1WT0wDgwqZdc5cSAGoGpyvh_L9efOcVCGIXtzh_3rraDRxtGsmI0wmB_Veivg6QqJHe4NkBM1smsJs0ntaNewZ6u4D0qX9KyQ"
+curl -d '{"button":[{"type":"view","name":"微分销官网","url":"http://23.92.27.216"},{"type":"view","name":"签到有奖","url":"http://23.92.27.216/register/customer"}]}' "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=R77CmS8Qb15MwJfurjVNQNAPc5dI0Jf0AwHZCafUOHhqGCVxunMRp1WT0wDgwqZdc5cSAGoGpyvh_L9efOcVCGIXtzh_3rraDRxtGsmI0wmB_Veivg6QqJHe4NkBM1smsJs0ntaNewZ6u4D0qX9KyQ"
 
 https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxcc8008bab99d53df&secret=84d403e687d37248dd02154172b02a4e
