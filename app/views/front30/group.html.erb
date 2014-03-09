@@ -10,6 +10,7 @@
 <% render "left_links" %>
 <% end %>
 
+<% cwheel = ["lblue", "green", "purple", "red", "yellow"] %>
 <!-- Inner Page Content // Start -->
 
 <div class="inner-page">
@@ -39,10 +40,10 @@
         <div class="panel-group" id="accordion">
 
 
-          <% @root["members"].each do |one| # 第一层开始 %>
+          <% @root["members"].each_with_index do |one, i| # 第一层开始 %>
           <% @set.push one["name"] %>
           <div class="panel panel-default">
-            <div class="panel-heading br-lblue">
+            <div class="panel-heading br-<%= cwheel[i % cwheel.size] %>">
               <h4 class="panel-title">
                 <!-- Faq title -->
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<%= one.object_id %>">
@@ -52,7 +53,7 @@
             </div>
             <div id="<%= one.object_id %>" class="panel-collapse collapse">
               <!-- faq details -->
-              <div class="panel-body br-lblue">
+              <div class="panel-body br-<%= cwheel[i % cwheel.size] %>">
 
 
 
@@ -61,16 +62,17 @@
 
                   <% one["members"].each do |two| # 第二层开始 %>
                   <% @set.push two["name"] %>
-                  <div class="panel panel-success">
-                    <div class="panel-heading whole_heading_link">                  
-                      <a data-toggle="collapse" data-parent="#<%= one["members"].object_id %>" href="#<%= two.object_id %>">
-                        <h3 class="panel-title">
-                          <%= two["name"] %>                    
-                        </h3>
-                      </a>
+                  <div class="panel panel-default">
+                    <div class="panel-heading br-<%= cwheel[(i+2) % cwheel.size] %>">
+                      <h5 class="panel-title" style="padding: 0">
+                        <!-- Faq title -->
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#<%= one["members"].object_id %>" href="#<%= two.object_id %>">
+                          <h5><i class="fa fa-angle-right"></i>&nbsp; <%= two["name"] %></h5>
+                        </a>
+                      </h5>
                     </div>
                     <div id="<%= two.object_id %>" class="panel-collapse collapse">
-                      <div class="panel-body menu_body_2" style="padding: 0">
+                      <div class="panel-body br-<%= cwheel[(i+2) % cwheel.size] %> menu_body_2" style="padding: 0; color: #222">
                         <%# 除去不符合标签的团队 %>
                         <% tours = @tours.select { |tour| (@set & tour.tour_type.split) == @set } %>
 
@@ -94,7 +96,10 @@
                         <% if !tours.empty? %>
                         <%= render partial: 'tour_list', locals: { tours: tours } %>
                         <% else %>
-                        暂无
+                        <div class="panel panel-default" style="padding: 15px; color: #fff">
+                          暂无
+                        </div>
+                        
                         <% end %>
 
                       </div>
