@@ -96,6 +96,7 @@ class WechatWebsController < ApplicationController
     render 'contact'
   end
 
+
   private
   
 

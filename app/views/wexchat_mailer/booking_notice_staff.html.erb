@@ -11,7 +11,7 @@
     <div class="content" style="100%">
       <p style="margin-left: 20px">亲爱的<%= @staff.name %>：</p>
       <p style="margin-left: 20px">
-        客户<%= @customer.name %>(<%= "同行" if @customer.trade? %><%= "直客" if @customer.customer? %>)预订了<%= @booking.price.departure.date.strftime("%b %d, %Y") %> <%= @booking.price.departure.tour.name %>, 预订人数为大人<%= @booking.number_of_adults %>人，小孩<%= @booking.number_of_children %>人, 请尽快处理.
+        客户<%= @customer.name %>预订了<%= @booking.price.departure.date.strftime("%b %d, %Y") %> <%= @booking.price.departure.tour.name %>, 预订人数为大人<%= @booking.number_of_adults %>人，小孩<%= @booking.number_of_children %>人, 请尽快处理.
       </p>
         <br />
         <h4>预订信息</h4>

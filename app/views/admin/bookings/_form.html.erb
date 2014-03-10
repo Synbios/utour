@@ -76,6 +76,36 @@
           </div>
         </div>
       </fieldset>
+
+      <fieldset>
+        <div class="form-group">
+          <label class="col-xs-3 col-sm-3 control-label">所报团队名称</label>
+          <div class="col-xs-9 col-sm-8">
+            <input type="text" class="form-control" readonly="" value="<%= booking.price.departure.tour.name %>"></input>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 col-sm-3 control-label">所报出发日期</label>
+          <div class="col-xs-9 col-sm-8">
+            <input type="text" class="form-control" readonly="" value="<%= booking.price.departure.date %>"></input>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 col-sm-3 control-label">开放座位数</label>
+          <div class="col-xs-9 col-sm-8">
+            <input type="text" class="form-control" readonly="" value="<%= booking.price.departure.number_of_seats %>"></input>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 col-sm-3 control-label">已确认座位数</label>
+          <div class="col-xs-9 col-sm-8">
+            <input type="text" class="form-control" readonly="" value="<%= booking.price.departure.confirmed_seats %>"></input>
+          </div>
+        </div>
+      </fieldset>
       
       <fieldset>
         <div class="form-group">
@@ -88,6 +118,17 @@
           </div>
         </div>
         
+        <div class="form-group">
+          <%= f.label :confirmed_seats, '确认人数', :class => "col-xs-3 col-sm-3 control-label" %>
+          <% if booking.present? && booking.errors[:confirmed_seats] %>
+          <% booking.errors[:confirmed_seats].each do |msg| %>
+          <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+          <% end %>
+          <% end %>
+          <div class="col-xs-9 col-sm-8">
+            <%= f.number_field :confirmed_seats, class: "form-control" %>
+          </div>
+        </div>
 
         <div class="form-group">
           <%= f.label :response, '回复', :class => "col-xs-3 col-sm-3 control-label" %>
@@ -100,9 +141,13 @@
 
 
       
-
-      
-
+      <% if flash[:error].present? %>
+      <div class="form-group">
+        <div class="col-xs-8 col-xs-offset-3 col-sm-8 col-sm-offset-3">
+          <div class="alert alert-danger">错误<%= flash[:error] %></div>
+        </div>
+      </div>
+      <% end %>
       <div class="form-group">
         <div class="col-xs-9 col-xs-offset-3 col-sm-9 col-sm-offset-3">
           <%= f.submit "提交订单", :class => "btn btn-default btn-success full_width" %>

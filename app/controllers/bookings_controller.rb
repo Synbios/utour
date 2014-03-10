@@ -51,7 +51,7 @@ class BookingsController < ApplicationController
     @booking.number_of_children = 0 if @booking.number_of_children.nil?
     @booking.agent = current_user
     @booking.progress = "未处理"
-
+    @booking.confirmed_seats = 0
     respond_to do |format|
       if @booking.save
         # WexchatMailer.booking_notice(@booking.account)
@@ -97,6 +97,6 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:number_of_adults, :number_of_children, :price_id, :sale_id, :agent_id, :comment, :progress, :response)
+      params.require(:booking).permit(:number_of_adults, :number_of_children, :price_id, :sale_id, :agent_id, :comment, :progress)
     end
 end

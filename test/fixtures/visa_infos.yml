@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  country: MyString
+  requirements: MyText
+  notes: MyText
+
+two:
+  country: MyString
+  requirements: MyText
+  notes: MyText

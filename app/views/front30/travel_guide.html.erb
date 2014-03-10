@@ -1,8 +1,133 @@
 <% content_for :javascripts do %>
-<meta name="viewport" content="width=850">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <% end %>
 
+<% content_for :nav_bar do %>
+<%= render "layouts/lion_nav" %>
+<% end %>
 
+<% content_for :left_links do %>
+<% render "left_links" %>
+<% end %>
+
+<div class="inner-page">
+  <div class="container">
+
+    <div class="page-mainbar landing">
+
+      <div class="landing-content">
+
+        <div class="landing-logo">
+
+          <%= image_tag "logoabout.png", style: "width: 160px; margin: 10px auto" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-mainbar faq">
+      <h3>旅游攻略</h3>
+      <div class="faq-content">
+
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading br-yellow">
+              <h4 class="panel-title">                
+                <a href="http://dp.sina.cn/dpool/tools/flight/index.php?pos=81&vt=4">
+                  <h5 style="color: #fff"><i class="fa fa-angle-right"></i>&nbsp; 航班动态</h5>
+                </a>
+              </h4>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading br-pink">
+              <h4 class="panel-title">                
+                <a href="http://dp.sina.cn/dpool/tools/forex/index.php?vt=4&pos=95&cid=768">
+                  <h5 style="color: #fff"><i class="fa fa-angle-right"></i>&nbsp; 货币兑换</h5>
+                </a>
+              </h4>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+
+            <div class="panel-heading br-blue">
+              <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" href="#maps">
+                  <h5 style="color: #fff"><i class="fa fa-angle-right"></i>&nbsp; 世界地图</h5>
+                </a>
+              </h4>
+            </div>
+            <div id="maps" class="panel-collapse collapse" style="background-color: #222; padding: 7px">
+              <div class="row">
+                <div class="col-xs-4">
+                  <div class="box box-md br-orange animated" style="height: 100px">
+                    <a href="/maps/europe.pdf">
+                      <div class="box-content navigation">
+                        <h4 style="color: #fff">欧洲地图</h4>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-xs-4">
+                  <div class="box box-md br-brown animated" style="height: 100px">
+                    <a href="/maps/america.pdf">
+                      <div class="box-content navigation">
+                        <h4 style="color: #fff">美洲地图</h4>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-xs-4">
+                  <div class="box box-md br-lblue animated" style="height: 100px">
+                    <a href="/maps/austrilia.pdf">
+                      <div class="box-content navigation">
+                        <h4 style="color: #fff">澳洲地图</h4>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading br-pink">
+              <h4 class="panel-title">                
+                <a href="http://fanyi.baidu.com/#auto/en/">
+                  <h5><i class="fa fa-angle-right"></i>&nbsp; 语言翻译</h5>
+                </a>
+              </h4>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading br-red">
+              <h4 class="panel-title">                
+                <a href="http://m.mafengwo.cn/mdd/">
+                  <h5><i class="fa fa-angle-right"></i>&nbsp; 旅游攻略</h5>
+                </a>
+              </h4>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading br-green">
+              <h4 class="panel-title">                
+                <a href="http://weather1.sina.cn/?vt=4">
+                  <h5><i class="fa fa-angle-right"></i>&nbsp; 世界天气</h5>
+                </a>
+              </h4>
+            </div>
+          </div>      
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 
 <div class="box-wrapper" style="margin-top: 0; padding-bottom: 30px; padding-top: 30px">
 
   <div class="container">
@@ -12,14 +137,14 @@
       <div class="col-md-6 col-sm-6">
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-6">
-            <!-- Box Outer Layer [ Box 3 ] -->
+
             <div class="box box-md animated" style="background-color: #e3a21a">
 
             </div>  
           </div>
 
           <div class="col-md-6 col-sm-6 col-xs-6">
-            <!-- Box Outer Layer [ Box 4 ] -->
+
             <div class="box box-md animated" style="background-color: #2b5797">
 
             </div>
@@ -33,17 +158,15 @@
 
 
           <div class="box-content box-gallery padd-zero">
-            <!-- Box Link -->
-            <a href="http://dp.sina.cn/dpool/tools/flight/index.php?pos=81&vt=4">
-              <!-- Box Link Content -->
-              <div class="box-content navigation">
-                <!-- Box Icon -->
 
-                <!-- Box Title -->
+            <a href="http://dp.sina.cn/dpool/tools/flight/index.php?pos=81&vt=4">
+
+              <div class="box-content navigation">
+
                 <span class="box-title" style="font-size: 50px; text-shadow:0px 2px 5px rgba(0, 0, 0, 0.5);">航班动态</span>
               </div>
             </a>
-            <!-- Image -->
+
             <img src="/images/front30_hangban.jpg" class="img-responsive box-gallery-img" alt="" />
           </div>
 
@@ -70,17 +193,15 @@
 
           <div class="box-content box-gallery padd-zero">
 
-            <!-- Box Link -->
-            <a href="http://dp.sina.cn/dpool/tools/forex/index.php?vt=4&pos=95&cid=768">
-              <!-- Box Link Content -->
-              <div class="box-content navigation">
-                <!-- Box Icon -->
 
-                <!-- Box Title -->
+            <a href="http://dp.sina.cn/dpool/tools/forex/index.php?vt=4&pos=95&cid=768">
+
+              <div class="box-content navigation">
+
                 <span class="box-title" style="font-size: 50px; text-shadow:0px 2px 5px rgba(0, 0, 0, 0.5);">货币兑换</span>
               </div>
             </a>
-            <!-- Image -->
+
             <img src="/images/front30_huobi.jpg" class="img-responsive box-gallery-img" alt="" />
           </div>
 
@@ -98,14 +219,14 @@
     <%# ROW 3 %>
     <div class="row">
       <div class="col-md-3 col-sm-3">
-        <!-- Box Outer Layer [ Box 7 ] -->
+
         <div class="box box-md animated pull-up-sm" style="background-color: #da532c">
 
         </div>
       </div>
 
       <div class="col-md-3 col-sm-3 col-sm-offset-6">
-        <!-- Box Outer Layer [ Box 8 ] -->
+
         <div class="box box-lg animated br-lblue pull-up-sm">
 
         </div>
@@ -116,21 +237,19 @@
     <%# ROW 4 %>
     <div class="row">
       <div class="col-md-6 col-sm-6">
-        <!-- Box Outer Layer [ Box 7 ] -->
+
         <div class="box box-md animated pull-up-sm" style="background-color: #da532c">
           <div class="box-content box-gallery padd-zero">
 
-            <!-- Box Link -->
-            <a href="http://bcs.duapp.com/voice23/0129%E6%AC%A7%E6%B4%B2%E5%9C%B0%E5%9B%BE%E6%AD%A3%E9%9D%A2%E6%9C%80%E7%BB%88%E7%89%88-01.jpg?sign=MBO:C41a385558fb142f4fa2074e99b55e48:jMWXzP%2BN0SGedpwdhKF0083Lt%2F0%3D">
-              <!-- Box Link Content -->
-              <div class="box-content navigation">
-                <!-- Box Icon -->
 
-                <!-- Box Title -->
+            <a href="http://bcs.duapp.com/voice23/0129%E6%AC%A7%E6%B4%B2%E5%9C%B0%E5%9B%BE%E6%AD%A3%E9%9D%A2%E6%9C%80%E7%BB%88%E7%89%88-01.jpg?sign=MBO:C41a385558fb142f4fa2074e99b55e48:jMWXzP%2BN0SGedpwdhKF0083Lt%2F0%3D">
+
+              <div class="box-content navigation">
+
                 <span class="box-title" style="font-size: 50px; text-shadow:0px 2px 5px rgba(0, 0, 0, 0.5);">世界地图</span>
               </div>
             </a>
-            <!-- Image -->
+
             <img src="/images/front30_ditu.jpg" class="img-responsive box-gallery-img" alt="" />
             
             
@@ -140,7 +259,7 @@
       </div>
 
       <div class="col-md-3 col-sm-3">
-        <!-- Box Outer Layer [ Box 8 ] -->
+
         <div class="box box-md animated pull-up-sm" style="background-color: #99b433">
 
         </div>
@@ -153,14 +272,14 @@
       <div class="col-md-6 col-sm-6">
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-6">
-            <!-- Box Outer Layer [ Box 3 ] -->
+
             <div class="box box-md animated" style="background-color: #e3a21a">
 
             </div>  
           </div>
 
           <div class="col-md-6 col-sm-6 col-xs-6">
-            <!-- Box Outer Layer [ Box 4 ] -->
+
             <div class="box box-md animated" style="background-color: #da532c">
 
             </div>
@@ -175,17 +294,15 @@
 
           <div class="box-content box-gallery padd-zero">
 
-            <!-- Box Link -->
-            <a href="http://fanyi.baidu.com/#auto/en/">
-              <!-- Box Link Content -->
-              <div class="box-content navigation">
-                <!-- Box Icon -->
 
-                <!-- Box Title -->
+            <a href="http://fanyi.baidu.com/#auto/en/">
+
+              <div class="box-content navigation">
+
                 <span class="box-title" style="font-size: 50px; text-shadow:0px 2px 5px rgba(0, 0, 0, 0.5);">语言翻译</span>
               </div>
             </a>
-            <!-- Image -->
+
             <img src="/images/front30_yuyan.jpg" class="img-responsive box-gallery-img" alt="" />
           </div>
 
@@ -199,21 +316,18 @@
     <%# ROW 6 %>
     <div class="row">
       <div class="col-md-6 col-sm-6">
-        <!-- Box Outer Layer [ Box 7 ] -->
+
         <div class="box box-md animated pull-up-sm" style="background-color: #2b5797">
           <div class="box-content box-gallery padd-zero">
 
-            <!-- Box Link -->
-            <a href="http://m.mafengwo.cn/mdd/">
-              <!-- Box Link Content -->
-              <div class="box-content navigation">
-                <!-- Box Icon -->
 
-                <!-- Box Title -->
+            <a href="http://m.mafengwo.cn/mdd/">
+              <div class="box-content navigation">
+
                 <span class="box-title" style="font-size: 50px; text-shadow:0px 2px 5px rgba(0, 0, 0, 0.5);"></span>
               </div>
             </a>
-            <!-- Image -->
+
             <img src="/images/front30_lvyou.jpg" class="img-responsive box-gallery-img" alt="" />
           </div>
         </div>
@@ -234,17 +348,15 @@
 
 
           <div class="box-content box-gallery padd-zero">
-            <!-- Box Link -->
-            <a href="/http://weather1.sina.cn/?vt=4">
-              <!-- Box Link Content -->
-              <div class="box-content navigation">
-                <!-- Box Icon -->
 
-                <!-- Box Title -->
+            <a href="http://weather1.sina.cn/?vt=4">
+
+              <div class="box-content navigation">
+
                 <span class="box-title" style="font-size: 50px; text-shadow:0px 2px 5px rgba(0, 0, 0, 0.5);">世界天气</span>
               </div>
             </a>
-            <!-- Image -->
+
             <img src="/images/front30_tianqi.jpg" class="img-responsive box-gallery-img" alt="" />
             
           </div>
@@ -265,11 +377,6 @@
     </div>
 
 
-
-
-    
-    
-
   </div>
 
-</div>
+</div> -->

@@ -20,8 +20,8 @@
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th>编号</th>
             <th>价格</th>
+            <th>确认报名</th>
             <th>销售渠道</th>
             <th>添加人</th>
             <th>有效期至</th>
@@ -31,10 +31,10 @@
         <tbody>
           <% departure.prices.each do |price| %>
           <tr>
-            <td><%= price.id %></td>
             <td><%= price.price  %></td>
+            <td><%= price.confirmed_seats  %></td>
             <td>
-              <%= price.sale_channel.name %>
+              <%= price.sale_channel.name if price.sale_channel.present? %>
             </td>
             <td><%= price.account.name %></td>
             <td>

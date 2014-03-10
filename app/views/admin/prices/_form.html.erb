@@ -81,6 +81,16 @@
 
       </fieldset>
 
+      <% if flash[:error].present? %>
+      <div class="row">
+
+        <div class="col col-12">
+          <div class="alert alert-danger">错误: <%= flash[:error] %></div>
+        </div>
+      </div>
+
+      <% end %>
+
       <footer>
         <%= f.submit "提交", :class => "btn btn-primary" %>
         <%= link_to "返回价格列表", "admin#" + admin_tour_departure_prices_path(tour, departure), :class => "btn btn-default" %>

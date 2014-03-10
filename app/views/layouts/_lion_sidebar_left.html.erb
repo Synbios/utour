@@ -3,6 +3,7 @@
     <!-- Lists in Slidebars -->
     <ul class="sb-menu">
       <li><%= image_tag "sidebar_logo.png", alt: "我的头像", width: "120" %></li>
+      <li><%= link_to "主页", root_path %></li>
       <%= yield :left_links %>
       <li><small>微信分销网 &copy; 2014 成都众信</small></li>
     </ul>

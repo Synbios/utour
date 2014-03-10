@@ -10,7 +10,8 @@ class Admin::BookingsController < ApplicationController
     if @booking.update(booking_params)
       redirect_to "/admin#admin/bookings_admin.html"
     else
-      render partial: "form", locals: { booking: @booking }
+      redirect_to "/admin#" + edit_admin_booking_path(@booking), :flash => { :error => @booking.errors.full_messages.to_sentence }
+      #render partial: "form", locals: { booking: @booking }
     end
   end
 
@@ -25,6 +26,6 @@ class Admin::BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:number_of_adults, :number_of_children, :price_id, :sale_id, :agent_id, :comment, :progress, :response)
+      params.require(:booking).permit(:number_of_adults, :number_of_children, :price_id, :sale_id, :agent_id, :comment, :progress, :response, :confirmed_seats)
     end
 end

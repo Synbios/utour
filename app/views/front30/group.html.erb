@@ -22,7 +22,7 @@
         <!-- Landing Hero -->
         <div class="landing-logo">
           <!-- Logo Icon -->
-          <%= image_tag "logoabout.png", style: "width: 200px; margin: 10px auto" %>
+          <%= image_tag "logoabout.png", style: "width: 160px; margin: 10px auto" %>
         </div>
       </div>
     </div>
@@ -75,7 +75,8 @@
                       <div class="panel-body br-<%= cwheel[(i+2) % cwheel.size] %> menu_body_2" style="padding: 0; color: #222">
                         <%# 除去不符合标签的团队 %>
                         <% tours = @tours.select { |tour| (@set & tour.tour_type.split) == @set } %>
-
+                        <%# puts @set %>
+                        <%# tours.each {|t| puts t.name} %>
                         <%# 除去过期的团队 !!! filter moved to controller level !!! %>
                         <%# tours = tours.select { |tour| tour.expire_date > Time.now } %>                    
 

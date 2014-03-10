@@ -13,7 +13,7 @@
           <div class="box-content box-gallery padd-zero">
 
             <!-- Box Link -->
-            <a href="/lion/visa">
+            <%= link_to Image.where("image_type = ?", "非洲DM").first do %>
               <!-- Box Link Content -->
               <div class="box-content navigation">
                 <!-- Box Icon -->
@@ -21,7 +21,7 @@
                 <!-- Box Title -->
                 <span class="box-title" style="font-size: 50px">非洲同业计划</span>
               </div>
-            </a>
+            <% end %>
             <!-- Image -->
             <img src="/images/front30_africa.jpg" class="img-responsive box-gallery-img" alt="" />
           </div>
@@ -59,7 +59,7 @@
           <div class="box box-lg br-black animated pull-up-sm">
             <div class="box-content box-gallery padd-zero">
             <!-- Box Link -->
-            <a href="/lion/visa">
+            <%= link_to Image.where("image_type = ?", "美洲DM").first do %>
               <!-- Box Link Content -->
               <div class="box-content navigation">
                 <!-- Box Icon -->
@@ -67,7 +67,7 @@
                 <!-- Box Title -->
                 <span class="box-title" style="font-size: 50px">美洲同业计划</span>
               </div>
-            </a>
+            <% end %>
             <!-- Image -->
             <img src="/images/front30_america.jpg" class="img-responsive box-gallery-img" alt="" />
           </div>
@@ -105,7 +105,7 @@
           <div class="box-content box-gallery padd-zero">
 
             <!-- Box Link -->
-            <a href="/lion/visa">
+            <%= link_to Image.where("image_type = ?", "澳新DM").first do %>
               <!-- Box Link Content -->
               <div class="box-content navigation">
                 <!-- Box Icon -->
@@ -113,7 +113,7 @@
                 <!-- Box Title -->
                 <span class="box-title" style="font-size: 50px">澳新同业计划</span>
               </div>
-            </a>
+            <% end %>
             <!-- Image -->
             <img src="/images/front30_austrilia.jpg" class="img-responsive box-gallery-img" alt="" />
           </div>
@@ -151,7 +151,7 @@
             <div class="box-content box-gallery padd-zero">
 
             <!-- Box Link -->
-            <a href="/lion/visa">
+            <%= link_to Image.where("image_type = ?", "欧洲DM").first do %>
               <!-- Box Link Content -->
               <div class="box-content navigation">
                 <!-- Box Icon -->
@@ -159,7 +159,7 @@
                 <!-- Box Title -->
                 <span class="box-title" style="font-size: 50px">欧洲同业计划</span>
               </div>
-            </a>
+            <% end %>
             <!-- Image -->
             <img src="/images/front30_europe.jpg" class="img-responsive box-gallery-img" alt="" />
           </div>
@@ -207,7 +207,7 @@
           <div class="box-content box-gallery padd-zero">
 
             <!-- Box Link -->
-            <a href="/lion/visa">
+            <%= link_to Image.where("image_type = ?", "亚洲DM").first do %>
               <!-- Box Link Content -->
               <div class="box-content navigation">
                 <!-- Box Icon -->
@@ -215,7 +215,7 @@
                 <!-- Box Title -->
                 <span class="box-title" style="font-size: 50px">亚洲同业计划</span>
               </div>
-            </a>
+            <% end %>
             <!-- Image -->
             <img src="/images/front30_asia.jpg" class="img-responsive box-gallery-img" alt="" />
           </div>

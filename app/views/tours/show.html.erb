@@ -139,6 +139,7 @@
                           <!-- Para -->
                           <% itinerary.children.select{|e| e.cdata?}.each do |des| %>
                           <p class="grey"><%= des.text.html_safe %></p>
+                          <% break # !!! removed extra description %>
                           <% end %>
                           <div class="clearfix"></div>
                         </div>

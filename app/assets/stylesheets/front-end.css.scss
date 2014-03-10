@@ -94,7 +94,7 @@
 }
 */
 
-/* booking.css */
+/* bookings.css */
 #booking_page {
   .booking_head {
     background-color: #F2F2F2;
@@ -133,7 +133,7 @@
 }
 
 #booking_list {
-  table { margin: 10px }
+  table { margin: 5px }
   .booking_list_head { margin: 0 0 25px 0;}
   h2 {
     text-align: center;
@@ -150,7 +150,7 @@
   #table td { vertical-align: middle; }
 
   .booking_detail {
-    margin: 5px 10px;
+    margin: 5px 0;
     div { padding: 0 5px }
     .booking_label { width: 100% }
   }

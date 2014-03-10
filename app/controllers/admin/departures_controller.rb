@@ -16,9 +16,11 @@ class Admin::DeparturesController < ApplicationController
   def update
     @departure = Departure.find_by_id(params[:id])
     if @departure.update(departure_params)
+      @departure.update_attribute(:expire_date, @departure.tour.expire_date) if @departure.expire_date > @departure.tour.expire_date
       redirect_to "/admin#" + admin_tour_departures_path(@departure.tour)
     else
-      render partial: "form", locals: { tour: @tour, departure: @departure }, layout: false
+      redirect_to "/admin#" + edit_admin_tour_departure_path(@departure.tour, @departure), :flash => { :error => @departure.errors.full_messages.to_sentence }
+      #render partial: "form", locals: { tour: @tour, departure: @departure }, layout: false
     end
   end
 
@@ -30,10 +32,13 @@ class Admin::DeparturesController < ApplicationController
 
   def create
     @departure = Departure.new(departure_params)
+    @departure.expire_date = @departure.tour.expire_date if @departure.expire_date > @departure.tour.expire_date
+    @departure.tour = Tour.find params[:tour_id]
     @departure.account = current_user
     if @departure.save
       redirect_to "/admin#" + admin_tour_departures_path(@departure.tour)
     else
+      redirect_to "/admin#" + new_admin_tour_departure_path(@departure.tour), :flash => { :error => @departure.errors.full_messages.to_sentence }
       render partial: "form", locals: { tour: @tour, departure: @departure }, layout: false
     end
   end

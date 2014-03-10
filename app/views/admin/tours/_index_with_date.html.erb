@@ -20,8 +20,8 @@
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th>编号</th>
-            <th>航班</th>
+            <th>ERP编号</th>
+            <!-- <th>航班</th> -->
             <th>名称</th>
             <th>销售渠道</th>
             <th>创建人</th>
@@ -33,8 +33,8 @@
         <tbody>
           <% tours.each do |tour| %>
           <tr>
-            <td><%= tour.id %></td>
-            <td><%= tour.flights %></td>
+            <td><%= tour.identifier %></td>
+            <!-- <td><%#= tour.flights %></td> -->
             <td><%= tour.name %></td>
             <td><%= tour.sale_channel.name%></td>
             <td><%= tour.account.name%></td>

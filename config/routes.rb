@@ -1,33 +1,5 @@
 Utour::Application.routes.draw do
-  get "images/show"
-  get "sale_channel_maps/create"
-  get "sale_channel_maps/destroy"
-  get "sale_channels/create"
-  get "sale_channels/index"
-  get "sale_channels/destroy"
-  get "sale_channels/update"
-  # get "prices/index"
-  # get "prices/new"
-  # get "prices/create"
-  # get "prices/destroy"
-  # get "prices/update"
-  # get "prices/edit"
-  # get "departures/index"
-  # get "departures/new"
-  # get "departures/create"
-  # get "departures/destroy"
-  # get "departures/update"
-  # get "departures/edit"
-  # get "image_and_sites/create"
-  # get "image_and_sites/destroy"
-  # get "sites/create"
-  # get "sites/edit"
-  # get "sites/destroy"
-  # get "sites/index"
-  # get "images/index"
-  # get "images/show"
-  # get "images/create"
-  # get "images/destroy"
+
   resources :date_and_prices
 
   resources :tours do
@@ -51,6 +23,8 @@ Utour::Application.routes.draw do
   #resources :user_groups
 
   resources :sessions, only: [:new, :create, :destroy]
+
+  resources :visa_infos, only: [:show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -81,6 +55,7 @@ Utour::Application.routes.draw do
 
   # Tiger
   match '/tiger', to: 'wechat_webs#tiger', via: 'get'
+  # lion
   match '/lion', to: 'wechat_webs#lion', via: 'get'
   match '/tiger/group_travel', to: 'wechat_webs#group_travel', via: 'get'
   match '/lion/group_travel', to: 'wechat_webs#group_travel', via: 'get'
@@ -92,6 +67,7 @@ Utour::Application.routes.draw do
   match '/lion/diy', to: 'wechat_webs#diy', via: 'get'
   match '/lion/sale', to: 'wechat_webs#sale', via: 'get'
   match '/lion/guide', to: 'wechat_webs#guide', via: 'get'
+  get '/lion/visa_detail', to: 'wechat_webs#visa_detail'
 
   get '/landing_page', to: 'front30#landing_page'
   # Front30
@@ -178,7 +154,7 @@ Utour::Application.routes.draw do
     resources :activities
     resources :days
 
-    
+    resources :visa_infos, only: [:new, :create, :destroy, :index]
     
 
     resources :invitation_codes do |invitation_code|

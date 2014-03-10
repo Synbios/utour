@@ -1,4 +1,5 @@
 class Front30Controller < ApplicationController
+  before_action :check_login, only: [:dm, :group, :free]
   layout "front30"
 
   def home
@@ -8,7 +9,8 @@ class Front30Controller < ApplicationController
 
   # 企华页
   def landing_page 
-  	@page = "/images/xixili.jpg"
+  	 @page = "/images/#{params[:page]}"
+     @routid = params[:routid]
   end
 
   # 出行攻略
@@ -32,7 +34,8 @@ class Front30Controller < ApplicationController
   end
 
   def group
-    @tours = Tour.where("expire_date > ? AND departure_city = ?", Time.now, "北京")
+    @tours = Tour.where("expire_date > ? AND departure_city = ?", Time.now, "上海")
+    #puts @tours
     @root = JSON.parse Shelf.find_by_name("团队行程").rack
     @set = ["跟团游"]
   end

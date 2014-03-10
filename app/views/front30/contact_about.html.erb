@@ -1,53 +1,86 @@
 <% content_for :javascripts do %>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <% end %>
-<div class="box-wrapper">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-6">
-        <!-- Box Outer Layer [ Box 1 ] -->
-        <div class="box box-md br-yellow animated">
-          <!-- Box Hover Effect -->
-          <div class="box-hover box-hover-black">
-            <!-- Hover Icon -->
-            <span class="hover-icon">进入</span>
-          </div>
-          <!-- Box Link -->
-          <a href="/front30/about">
-            <!-- Box Link Content -->
-            <div class="box-content navigation">
-              <!-- Box Icon -->
-              <i class="fa fa-users fa-5x"></i>
-              <!-- Box Title -->
-              <span class="box-title">关于众信</span>
-            </div>
-          </a>
-        </div>
-      </div>
 
-      <div class="col-xs-6">
-        <!-- Box Outer Layer [ Box 2 ] -->
-        <div class="box box-md br-lblue animated">
-          <!-- Box Hover Effect -->
-          <div class="box-hover box-hover-black">
-            <!-- Hover Icon -->
-            <span class="hover-icon">进入</span>
-          </div>
-          <!-- Box Link -->
-          <a href="/lion/contact">
-            <!-- Box Link Content -->
-            <div class="box-content navigation">
-              <!-- Box Icon -->
-              <i class="fa fa-users fa-5x"></i>
-              <!-- Box Title -->
-              <span class="box-title">联系我们</span>
-            </div>
-          </a>
+
+<% content_for :nav_bar do %>
+<%= render "layouts/lion_nav" %>
+<% end %>
+
+<% content_for :left_links do %>
+<% render "left_links" %>
+<% end %>
+
+
+<div class="inner-page">
+  <div class="container">
+
+    <div class="page-mainbar landing">
+      <!-- Landing Content -->
+      <div class="landing-content">
+        <!-- Landing Hero -->
+        <div class="landing-logo">
+          <!-- Logo Icon -->
+          <%= image_tag "logoabout.png", style: "width: 160px; margin: 10px auto" %>
         </div>
       </div>
     </div>
+
+    <div class="box-wrapper">
+
+      <div class="row">
+        <div class="col-xs-6">
+          <!-- Box Outer Layer [ Box 1 ] -->
+          <div class="box box-md br-yellow animated" style="height: 150px">
+            <!-- Box Hover Effect -->
+            <div class="box-hover box-hover-black">
+              <!-- Hover Icon -->
+              <span class="hover-icon">进入</span>
+            </div>
+            <!-- Box Link -->
+            <a href="/front30/about">
+              <!-- Box Link Content -->
+              <div class="box-content navigation">
+                <!-- Box Icon -->
+                <i class="fa fa-users fa-5x"></i>
+                <!-- Box Title -->
+                <span class="box-title">关于众信</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-xs-6">
+          <!-- Box Outer Layer [ Box 2 ] -->
+          <div class="box box-md br-lblue animated" style="height: 150px">
+            <!-- Box Hover Effect -->
+            <div class="box-hover box-hover-black">
+              <!-- Hover Icon -->
+              <span class="hover-icon">进入</span>
+            </div>
+            <!-- Box Link -->
+            <a href="/lion/contact">
+              <!-- Box Link Content -->
+              <div class="box-content navigation">
+                <!-- Box Icon -->
+                <i class="fa fa-users fa-5x"></i>
+                <!-- Box Title -->
+                <span class="box-title">联系我们</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
   </div>
 </div>
+
+
+
+
 
 
 <!-- <div class="box-wrapper">

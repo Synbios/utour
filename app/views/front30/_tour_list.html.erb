@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<div id="<%= tour.object_id %>" class="panel panel-default collapse" style="padding: 5px; background-color: #fff">
+<div id="<%= tour.object_id %>" class="panel panel-default collapse" style="padding: 5px; margin-bottom: 0; background-color: #fff">
   <%# filtered by sale channel %>
   <% departures = tour.departures %>
   
@@ -38,7 +38,7 @@
   <% departures = array %>
   
   <% if departures.empty? %>
-  出团日期和价格敬请期待...
+  <p style="text-align: center; color: red"><em>出团日期和价格敬请期待...</em></p>
   <% else # end if %>
 
 
@@ -80,9 +80,9 @@
       <td class="price"><span style="color: red"><i class="fa fa-rmb"></i> <%= price.price %>/人</span></td>
       <td>
         <% if departure.number_of_seats > 0 %>
-        <%= link_to "报名", new_booking_path(price_id: price.id) %>
+        <%= link_to "报名", new_booking_path(price_id: price.id), style: "color: blue" %>
         <% else %>
-        <span class="label label-danger">已满</span>
+        <span class="label label-danger">已关闭</span>
         <% end %>
       </td>
     </tr>
@@ -96,12 +96,5 @@
 
   <% end %>
   
-  <div class="row" style="margin: 5px 0; padding: 0">
-    <%#= link_to "Word/PDF版本", "/word_and_pdf/#{content["word"]}", {class: "col-xs-4 col-xs-offset-1 btn btn-success btn-sm", style: "padding: 5px"} %>
-    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
-      <a class="btn btn-success btn-sm" style="padding: 5px 15px; width: 100%">预订协议</a>
-    </div>
-    
-  </div>
 </div>
 <% end %>

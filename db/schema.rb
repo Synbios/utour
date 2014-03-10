@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140306074204) do
+ActiveRecord::Schema.define(version: 20140310150950) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20140306074204) do
     t.integer  "sale_id"
     t.text     "response"
     t.string   "progress"
+    t.integer  "confirmed_seats"
   end
 
   create_table "date_and_prices", force: true do |t|
@@ -264,6 +265,18 @@ ActiveRecord::Schema.define(version: 20140306074204) do
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "visa_infos", force: true do |t|
+    t.string   "country"
+    t.text     "requirements"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "form_file_name"
+    t.string   "form_content_type"
+    t.integer  "form_file_size"
+    t.datetime "form_updated_at"
   end
 
 end

@@ -24,20 +24,27 @@ class Admin::PricesController < ApplicationController
 
   def update
     @price = Price.find_by_id(params[:id])
+    params[:expire_date] = @price.departure.expire_date if params[:expire_date].present? &&  Date.new(params[:expire_date]) > @price.departure.expire_date
     if @price.update(price_params)
+      @price.update_attribute(:expire_date, @price.departure.expire_date) if @price.expire_date > @price.departure.expire_date
       redirect_to "/admin#" + admin_tour_departure_prices_path(@price.departure.tour, @price.departure)
     else
-      render partial: "form", locals: { tour: @tour, departure: @departure, price: @price }, layout: false
+      redirect_to "/admin#" + edit_admin_tour_departure_price_path(@price.departure.tour, @price.departure, @price), :flash => { :error => @price.errors.full_messages.to_sentence }
+      #render partial: "form", locals: { tour: @tour, departure: @departure, price: @price }, layout: false
     end
   end
 
   def create
+    @departure = Departure.find params[:departure_id]
     @price = Price.new(price_params)
+    @price.expire_date = @price.departure.expire_date if @price.expire_date > @price.departure.expire_date
+    @price.departure = @departure
     @price.account = current_user
     if @price.save
       redirect_to "/admin#" + admin_tour_departure_prices_path(@price.departure.tour, @price.departure)
     else
-      render partial: "form", locals: { tour: @tour, departure: @departure, price: @price }, layout: false
+      redirect_to "/admin#" + new_admin_tour_departure_price_path(@price.departure.tour, @price.departure), :flash => { :error => @price.errors.full_messages.to_sentence }
+      #render partial: "form", locals: { tour: @tour, departure: @departure, price: @price }, layout: false
     end
   end
 

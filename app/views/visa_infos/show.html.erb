@@ -1,0 +1,30 @@
+<div style="max-width: 800px; padding: 10px">
+  <h3 style="text-align: center"><%= @visa_info.country %>签证说明</h3>
+
+  <% if @visa_info.form.url != "missing" %>
+  <p style="text-align: center; margin: 20px auto"><%= link_to "签证申请表", @visa_info.form.url, class: "btn btn-primary" %></p>
+  <% end %>
+
+  <h4>提交材料</h4>
+  <ol style="padding-left: 25px">
+    <% @requirements.each do |requirement| %>
+    <% if requirement.start_with? "-" %>
+    <ul style="padding-left: 15px"><li style="line-height:150%; letter-spacing: 1px"><em><%= requirement.sub /\A-+/, '' %></em></li></ul>
+    <% else %>
+    <li style="line-height:200%"><%= requirement %></li>
+    <% end %>
+    <% end %>
+  </ol>
+
+
+  <h4>注意事项</h4>
+  <ol>
+    <% @notes.each do |note| %>
+    <% if note.start_with? "-" %>
+    <ul style="padding-left: 15px"><li style="line-height:150%; letter-spacing: 1px"><em><%= note.sub /\A-+/, '' %></em></li></ul>
+    <% else %>
+    <li style="line-height:200%"><%= note %></li>
+    <% end %>
+    <% end %>
+  </ol>
+</div>

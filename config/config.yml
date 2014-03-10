@@ -16,7 +16,7 @@ development:
   qr_code_show_url: https://mp.weixin.qq.com/cgi-bin/showqrcode
   secret_key: oTi3k4qW82
   default_sale_phone: 2861648069
-  erp_routes_index: http://www.utourworld.com/InternationLine/Qunar/index.html
+  erp_routes_index: http://www.utourworld.com/InternationLine/CdWfx/Cdindex.html#http://www.utourworld.com/InternationLine/Qunar/index.html
 test:
   appid: wx11903ac9cdd1fdfb
   secret: 9b98bef39a1999f5e64c829d041bb209
