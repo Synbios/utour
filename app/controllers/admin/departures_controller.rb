@@ -32,10 +32,10 @@ class Admin::DeparturesController < ApplicationController
 
   def create
     @departure = Departure.new(departure_params)
-    @departure.expire_date = @departure.tour.expire_date if @departure.expire_date > @departure.tour.expire_date
     @departure.tour = Tour.find params[:tour_id]
     @departure.account = current_user
     if @departure.save
+      @departure.update_attribute(:expire_date, @departure.tour.expire_date) if @departure.expire_date > @departure.tour.expire_date
       redirect_to "/admin#" + admin_tour_departures_path(@departure.tour)
     else
       redirect_to "/admin#" + new_admin_tour_departure_path(@departure.tour), :flash => { :error => @departure.errors.full_messages.to_sentence }

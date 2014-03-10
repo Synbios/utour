@@ -37,10 +37,10 @@ class Admin::PricesController < ApplicationController
   def create
     @departure = Departure.find params[:departure_id]
     @price = Price.new(price_params)
-    @price.expire_date = @price.departure.expire_date if @price.expire_date > @price.departure.expire_date
     @price.departure = @departure
     @price.account = current_user
     if @price.save
+      @price.update_attribute(:expire_date, @price.departure.expire_date) if @price.expire_date > @price.departure.expire_date
       redirect_to "/admin#" + admin_tour_departure_prices_path(@price.departure.tour, @price.departure)
     else
       redirect_to "/admin#" + new_admin_tour_departure_price_path(@price.departure.tour, @price.departure), :flash => { :error => @price.errors.full_messages.to_sentence }
