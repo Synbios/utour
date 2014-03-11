@@ -11,6 +11,7 @@ class Front30Controller < ApplicationController
   def landing_page 
   	 @page = "/images/#{params[:page]}"
      @routid = params[:routid]
+     @link = params[:link]
   end
 
   # 出行攻略

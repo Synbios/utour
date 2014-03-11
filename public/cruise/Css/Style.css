@@ -1,0 +1,178 @@
+@charset "utf-8";
+/* CSS Document */
+
+body
+{margin:0px; padding:0px; background-color:#0000FF;
+ font-family:Verdana, Arial, Helvetica, Sans-Serif,宋体; font-size:12px; color:#666;}
+
+img
+{border:0px;}
+ul
+{margin:0px; padding:0px;}
+
+/*通用链接默认值*/
+a:link{color:#0033FF;text-decoration: none;}
+a:visited{color:#0033FF;text-decoration: none;}
+a:hover,a:active{color:#0033FF;text-decoration:underline;}
+
+/*幻灯片主体*/
+#TheSlideDiv
+{width:986px; height:740px; overflow:hidden; margin:0px auto; position:relative;
+ font-family:Verdana, Arial, Helvetica, Sans-Serif,微软雅黑; background-color:#FFFFFF;}
+
+/*幻灯片-LOGO及线路*/
+#TheSlideDiv .logo
+{width:674px; height:223px; overflow:hidden; background:url(../Images/logo.png) no-repeat;}
+#TheSlideDiv .logo em
+{display:none;}
+#TheSlideDiv .line
+{width:auto; height:46px; overflow:hidden; position:absolute; left:18px; top:179px;
+ background:url(../Images/canjia.png) no-repeat;
+ text-indent:54px; line-height:46px; font-size:13px;}
+#TheSlideDiv .line a:link{color:#0265CB;text-decoration: none;}
+#TheSlideDiv .line a:visited{color:#0265CB;text-decoration: none;}
+#TheSlideDiv .line a:hover,#TheSlideDiv .line a:active{color:#0265CB;text-decoration:underline;}
+
+/*幻灯片-楼层*/
+#TheSlideDiv .floor
+{width:175px; height:315px; overflow:hidden; position:absolute; left:17px; top:265px;}
+#TheSlideDiv .floor ul
+{list-style:none;}
+#TheSlideDiv .floor ul li
+{width:175px; height:35px; overflow:hidden; position:relative; float:left;
+ text-indent:60px; line-height:35px; color:#9B999A;}
+#TheSlideDiv .floor ul li em
+{width:50px; height:30px; overflow:hidden; display:block; position:absolute; left:0px; top:2px;
+ background-image:url(../Images/floor_num_btn.png); background-repeat:no-repeat; cursor:pointer;}
+#TheSlideDiv .floor ul li em.num11{background-position:left 0px;}
+#TheSlideDiv .floor ul li em.num10{background-position:left -30px;}
+#TheSlideDiv .floor ul li em.num9{background-position:left -60px;}
+#TheSlideDiv .floor ul li em.num8{background-position:left -90px;}
+#TheSlideDiv .floor ul li em.num6{background-position:left -120px;}
+#TheSlideDiv .floor ul li em.num4{background-position:left -180px;}
+#TheSlideDiv .floor ul li em.num3{background-position:left -210px;}
+#TheSlideDiv .floor ul li em.num2{background-position:left -240px;}
+#TheSlideDiv .floor ul li em.num1{background-position:left -270px;}
+
+#TheSlideDiv .floor ul li em.num11_on{background-position:right 0px;}
+#TheSlideDiv .floor ul li em.num10_on{background-position:right -30px;}
+#TheSlideDiv .floor ul li em.num9_on{background-position:right -60px;}
+#TheSlideDiv .floor ul li em.num8_on{background-position:right -90px;}
+#TheSlideDiv .floor ul li em.num6_on{background-position:right -120px;}
+#TheSlideDiv .floor ul li em.num4_on{background-position:right -180px;}
+#TheSlideDiv .floor ul li em.num3_on{background-position:right -210px;}
+#TheSlideDiv .floor ul li em.num2_on{background-position:right -240px;}
+#TheSlideDiv .floor ul li em.num1_on{background-position:right -270px;}
+
+/*幻灯片-游轮部分*/
+#TheSlideDiv .ships
+{width:820px; height:310px; overflow:hidden; position:absolute; right:2px; top:0px;
+ background:url(../Images/b3-1-boat-costa-atl.png) no-repeat;}
+ 
+/*幻灯片-游轮每层的缩略图*/
+#TheSlideDiv .ships_floor
+{width:820px; height:310px; overflow:hidden; position:absolute; right:2px; top:0px;}
+#TheSlideDiv .ships_floor ul
+{list-style:none;}
+#TheSlideDiv .ships_floor ul li
+{width:820px; height:310px; overflow:hidden; position:absolute; left:0px; top:0px; display:none;}
+
+/*幻灯片-游轮每层的楼号*/
+#TheSlideDiv .ships_floor_num
+{width:820px; height:310px; overflow:hidden; position:absolute; right:2px; top:0px;}
+#TheSlideDiv .ships_floor_num ul
+{list-style:none;}
+#TheSlideDiv .ships_floor_num ul li
+{width:32px; height:32px; overflow:hidden;
+ background-image:url(../Images/floor_num_btn_s.png); background-repeat:no-repeat;
+ cursor:pointer;}/*186*/
+#TheSlideDiv .ships_floor_num ul li.num11{background-position:left 0px; position:absolute; left:125px; top:19px;}
+#TheSlideDiv .ships_floor_num ul li.num10{background-position:left -40px; position:absolute; left:286px; top:54px;}
+#TheSlideDiv .ships_floor_num ul li.num9{background-position:left -80px; position:absolute; left:321px; top:85px;}
+#TheSlideDiv .ships_floor_num ul li.num8{background-position:left -120px; position:absolute; left:361px; top:110px;}
+#TheSlideDiv .ships_floor_num ul li.num6{background-position:left -160px; position:absolute; left:396px; top:140px;}
+#TheSlideDiv .ships_floor_num ul li.num4{background-position:left -200px; position:absolute; left:437px; top:175px;}
+#TheSlideDiv .ships_floor_num ul li.num3{background-position:left -240px; position:absolute; left:476px; top:209px;}
+#TheSlideDiv .ships_floor_num ul li.num2{background-position:left -280px; position:absolute; left:531px; top:229px;}
+#TheSlideDiv .ships_floor_num ul li.num1{background-position:left -320px; position:absolute; left:506px; top:250px;}
+
+#TheSlideDiv .ships_floor_num ul li.num11_on{background-position:-40px 0px; position:absolute; left:125px; top:19px;}
+#TheSlideDiv .ships_floor_num ul li.num10_on{background-position:-40px -40px; position:absolute; left:286px; top:54px;}
+#TheSlideDiv .ships_floor_num ul li.num9_on{background-position:-40px -80px; position:absolute; left:321px; top:85px;}
+#TheSlideDiv .ships_floor_num ul li.num8_on{background-position:-40px -120px; position:absolute; left:361px; top:110px;}
+#TheSlideDiv .ships_floor_num ul li.num6_on{background-position:-40px -160px; position:absolute; left:396px; top:140px;}
+#TheSlideDiv .ships_floor_num ul li.num4_on{background-position:-40px -200px; position:absolute; left:437px; top:175px;}
+#TheSlideDiv .ships_floor_num ul li.num3_on{background-position:-40px -240px; position:absolute; left:476px; top:209px;}
+#TheSlideDiv .ships_floor_num ul li.num2_on{background-position:-40px -280px; position:absolute; left:531px; top:229px;}
+#TheSlideDiv .ships_floor_num ul li.num1_on{background-position:-40px -320px; position:absolute; left:506px; top:250px;}
+
+/*幻灯片-游轮每层的黑白图*/
+#TheSlideDiv .ships_floor_jt
+{width:820px; height:120px; overflow:hidden; position:absolute; right:2px; top:571px;}
+#TheSlideDiv .ships_floor_jt .content
+{width:820px; height:1080px; overflow:hidden; background:url(../Images/b1-1-map-floor-costa.png) no-repeat;}
+#TheSlideDiv .ships_floor_jt .content .list
+{width:820px; height:1080px; overflow:hidden;}
+#TheSlideDiv .ships_floor_jt .content .onefloor
+{width:820px; height:120px; overflow:hidden; position:relative;}
+#TheSlideDiv .ships_floor_jt .content .onefloor ul
+{list-style:none;}
+#TheSlideDiv .ships_floor_jt .content .onefloor ul li
+{position:absolute; padding:0px 3px;
+ background-color:rgb(0, 153, 204); line-height:21px; color:#fff; font-size:14px; cursor:pointer;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f11_1 {left:130px; top:53px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f11_2 {left:565px; top:23px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f11_3 {left:626px; top:40px;}
+
+#TheSlideDiv .ships_floor_jt .content .onefloor .f10_1 {left:220px; top:85px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f10_2 {left:220px; top:50px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f10_3 {left:300px; top:50px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f10_4 {left:360px; top:20px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f10_5 {left:420px; top:50px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f10_6 {left:640px; top:50px;}
+
+#TheSlideDiv .ships_floor_jt .content .onefloor .f9_1 {left:250px; top:20px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f9_2 {left:480px; top:50px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f9_3 {left:400px; top:50px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f9_4 {left:550px; top:50px;}
+
+#TheSlideDiv .ships_floor_jt .content .onefloor .f8_1 {left:290px; top:50px;}
+
+#TheSlideDiv .ships_floor_jt .content .onefloor .f6_1 {left:0px; top:17px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f6_2 {left:410px; top:49px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f6_3 {left:500px; top:26px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f6_4 {left:640px; top:18px;}
+
+#TheSlideDiv .ships_floor_jt .content .onefloor .f4_1 {left:180px; top:70px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f4_2 {left:290px; top:50px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f4_3 {left:680px; top:50px;}
+
+#TheSlideDiv .ships_floor_jt .content .onefloor .f3_1 {left:50px; top:50px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f3_2 {left:192px; top:30px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f3_3 {left:290px; top:50px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f3_4 {left:680px; top:50px;}
+
+#TheSlideDiv .ships_floor_jt .content .onefloor .f2_1 {left:160px; top:50px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f2_2 {left:680px; top:50px;}
+
+#TheSlideDiv .ships_floor_jt .content .onefloor .f1_1 {left:172px; top:20px;}
+#TheSlideDiv .ships_floor_jt .content .onefloor .f1_2 {left:680px; top:50px;}
+
+/*幻灯片-游轮每层的图片列表*/
+#TheSlideDiv .ships_floor_pic
+{width:760px; height:300px; overflow:hidden; position:absolute; right:2px; top:269px;}
+#TheSlideDiv .ships_floor_pic .content
+{width:760px; height:2700px; overflow:hidden;}
+#TheSlideDiv .ships_floor_pic .content .onefloor
+{width:760px; height:300px; overflow:hidden;}
+#TheSlideDiv .ships_floor_pic .content .onefloor ul
+{list-style:none;}
+#TheSlideDiv .ships_floor_pic .content .onefloor ul li
+{width:760px; height:300px; overflow:hidden; float:left; position:relative;}
+#TheSlideDiv .ships_floor_pic .content .onefloor ul li strong
+{width:760px; height:auto; overflow:hidden; display:block; position:absolute; left:0px; bottom:0px; background:url(../Images/hei.png);}
+#TheSlideDiv .ships_floor_pic .content .onefloor ul li strong th
+{width:190px; color:#fff; text-align:center;  line-height:180%; font-size:20px; font-weight:normal;}
+#TheSlideDiv .ships_floor_pic .content .onefloor ul li strong td
+{width:530px; color:#fff; line-height:180%; font-size:12px; font-weight:normal;}
+

@@ -4,6 +4,10 @@
 
 <%= image_tag @page, style: "width: 100%" %>
 <div style="position: fixed; bottom: 10px; z-index: 104400; width: 100%; text-align: center">
- <%= link_to "进入行程", tour_path(Tour.find_by_identifier @routid), class: "btn btn-danger btn-lg" %>
+	<% if @routid.present? %>
+  <%= link_to "进入行程", tour_path(Tour.find_by_identifier @routid), class: "btn btn-danger btn-lg" %>
+  <% elsif @link.present? %>
+  <%= link_to "进入行程", @link, class: "btn btn-danger btn-lg" %>
+  <% end %>
 </div>
 
