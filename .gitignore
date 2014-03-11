@@ -18,4 +18,3 @@
 # mac and database password
 /config/database.yml
 .DS_Store
-/public/cruise
