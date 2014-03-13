@@ -66,47 +66,7 @@
               <div class="page-mainbar blog">
                 <!-- Heading -->
 
-                <h3 style="margin-top: 40px">行程图片</h3>
-                <!-- Portfolio Content -->
-                <div class="portfolio-content">
-                  <div class="img-portfolio">
-                    <p>
-                      <!-- Add filter names inside "data-filter". For example ".web-design", ".seo", etc., Filter names are used to filter the below images. -->
-                      <ul id="filters">
-                        <li><a href="#" data-filter="*" class="btn btn-default">全部</a></li>
-                        <% @itineraries.each_with_index do |itinerary, i| %>
-                          <% if !itinerary.xpath("./spotImgname").empty? %>
-                            <li><a href="#" data-filter=".d<%= itinerary["day"] %>" class="btn btn-<%= boot_colors[i%5] %>">天<%= itinerary["day"] %></a></li>
-                          <% end %>
-                        <% end %>
-                      </ul>
-                    </p>
-                  
-                    <div id="portfolio">
-                      <!-- Add the above used filter names inside div tag. You can add more than one filter names. For image lightbox you need to include "a" tag pointing to image link, along with the class "prettyphoto". -->                        
-                      
-                      <% @itineraries.each do |itinerary| %>
-                        <% next if itinerary.xpath("./spotImgname").empty? %>
-                        <% photo_names = itinerary.xpath("./spotImgname").first.children.first.text.split("\|").compact %>
-                        <% itinerary.xpath("./spotImgname").first["photourl"].split("\|").compact.each_with_index do |url, i| %>
-                        
-                      <div class="element d<%= itinerary["day"] %>">
-                        <%= link_to url, class: "prettyphoto" do %>
-                        <%= image_tag url %>
-                          <!-- Portfolio caption -->
-                          <div class="pcap br-<%= colors[rand(100)%6] %>">
-                            <h4><%= photo_names[i] %></h4>
-                            
-                          </div>
-                        <% end %>
-                      </div>
-                          
-                        <% end %>
-                      <% end %>
-                      
-                    </div>
-                  </div>
-                </div>
+                
 
                 <h3 style="margin-top: 35px">每日行程</h3>
 
@@ -117,12 +77,17 @@
 
                       <!-- The new post done by user's all in the post block -->
                       <div class="blog-post">
-                        <% @itineraries.each do |itinerary| %>
+                        <% @itineraries.each_with_index do |itinerary, i| %>
                         <% photos = itinerary["photoinfo"].split("\|").compact %>
                         <!-- Entry is the one post for each user -->
                         <div class="entry">
                           <% if !photos.empty? %>
+                          
+                          <% if @images.size > 0 %> <%# 改用大图 %>
+                          <%= image_tag @images[i % @images.size].text, class: "img-responsive", style: "margin-bottom: 20px; width: 100%"%>
+                          <% else %>
                           <%= image_tag photos.sample, class: "img-responsive", style: "margin-bottom: 20px; width: 100%"%>
+                          <% end %>
                           <% end %>
                           <!-- Meta for this block -->
                           <div class="meta br-green">
@@ -137,8 +102,9 @@
                           <!-- Heading of the  post -->
                           <h4><a href="blog-single.html"><%= itinerary["title"] %></a></h4>
                           <!-- Para -->
+                          <p class="grey"><%= @trips[i].xpath('./content').text %></p>
                           <% itinerary.children.select{|e| e.cdata?}.each do |des| %>
-                          <p class="grey"><%= des.text.html_safe %></p>
+                          <p class="grey"><%#= des.text.html_safe %></p>
                           <% break # !!! removed extra description %>
                           <% end %>
                           <div class="clearfix"></div>

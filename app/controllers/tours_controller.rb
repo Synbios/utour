@@ -26,6 +26,8 @@ class ToursController < ApplicationController
     @xml = Nokogiri::XML(@tour.erp_info)
     @features = Nokogiri::XML(@tour.erp_features).xpath('//feature').children.select{|e| e.cdata?}
     @itineraries = Nokogiri::XML(@tour.erp_info).xpath('//itineraryDay') 
+    @trips = Nokogiri::XML(@tour.erp_more_info).xpath('//trip') 
+    @images = Nokogiri::XML(@tour.erp_more_info).xpath('//image') 
     render layout: "front30"
   end
 

@@ -1,4 +1,5 @@
 namespace :erp do
+  
   desc "Fetch NEW routes from ERP system and save to local database"
   task fetch_routes: :environment do
     puts "fetching route index"
@@ -28,6 +29,7 @@ namespace :erp do
       puts "fetch data from url = #{uri}"
       xml = Nokogiri::XML res.body
       xml.xpath('//item').each do |tour_xml|
+
         tour = Tour.find_or_create_by_identifier(tour_xml["lineid"])
         tour.name = tour_xml["title"]
         tour.description = tour_xml["sightSpot"][0..200].gsub(/\s\w+\s*$/,'...')
@@ -40,6 +42,12 @@ namespace :erp do
 
         if !tour_xml["continent"].blank? # 地区分类标签
           tour_xml["continent"].split(",").compact.each do |area|
+            feature_tags.push FeatureTag.find_or_create_by_name(area).name
+          end
+        end
+
+        if !tour_xml["country"].blank? # 国家分类标签
+          tour_xml["country"].split(",").compact.each do |area|
             feature_tags.push FeatureTag.find_or_create_by_name(area).name
           end
         end
@@ -58,10 +66,50 @@ namespace :erp do
         tour.account_id = 1
         tour.sale_channel_id = 1
         puts "Updating tour id = #{tour.id} tourid = #{tour.identifier} name = #{tour.name}"
-        tour.save
+
         
+        # 第2接口读取word文档和行程数据
+#        uri = URI.parse GLOBAL["erp_port"]
+#        params = { op: "WFX_GetLineDetailById", lineId: tour_xml["lineid"] }
+
+
+        query = <<-EOF
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <WFX_GetLineDetailById xmlns="http://tempuri.org/">
+      <tdid>#{tour_xml["lineid"]}</tdid>
+    </WFX_GetLineDetailById>
+  </soap:Body>
+</soap:Envelope>
+EOF
+
+        host = "www.utourworld.com"
+        http = Net::HTTP.new(host)
+        res = http.post(GLOBAL["erp_port"], query, { 'Content-Type' => 'text/xml; charset=utf-8' })
+        
+        puts "fetch alternative data"
+        #puts res.body
+        tour.erp_more_info = Nokogiri::XML(res.body).xpath('//line').to_xml
+
+        query = <<-EOF
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <WFX_getRouteUrl xmlns="http://tempuri.org/">
+      <tdid>#{tour_xml["lineid"]}</tdid>
+    </WFX_getRouteUrl>
+  </soap:Body>
+</soap:Envelope>
+EOF
+        res = http.post(GLOBAL["erp_port"], query, { 'Content-Type' => 'text/xml; charset=utf-8' })
+        #puts res.body
+
+        tour.word_url = Nokogiri::XML(res.body).xpath('//RouteUrl').text
+        puts "word url = #{tour.word_url}"
+        tour.save
+
       end
-      
 
       
     end
