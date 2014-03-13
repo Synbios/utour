@@ -7,21 +7,15 @@ set :application, "utour"
 set :repository,  "git@github.com:Synbios/utour.git"
 
 # deploy path
-#set :deploy_to, "/home/utour/utour"
-set :deploy_to, "/home/mike/wexin"
+set :deploy_to, "/home/chengdu/utour"
 
 # use git
 set :scm, :git
 set :branch, "master"
 
 # host information
-#server "23.92.27.216", :app, :web, :db, :primary => true
-#set :user, "utour"
-
-server "localhost", :app, :web, :db, :primary => true
-set :user, "mike"
-
-
+server "115.28.235.18", :app, :web, :db, :primary => true
+set :user, "chengdu"
 # not required if use a RSA
 # set :scm_passphrase, "password"
 set :use_sudo, false

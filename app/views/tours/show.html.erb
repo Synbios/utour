@@ -44,7 +44,7 @@
                       <!-- Heading -->
                       <!-- <h4></h4> -->
                       <!-- Paragraph -->
-                      <h4 style="text-align: left"><%= feature.text %></h4>
+                      <h5 style="text-align: left"><%= feature.text %></h5>
                       <div class="clearfix"></div>
                     </div>
                   </div>
@@ -92,7 +92,7 @@
                           <!-- Meta for this block -->
                           <div class="meta br-green">
                             <!-- Date -->
-                            <div class="post-date"><span>第<%= itinerary["day"] %>天</span><%= itinerary["accommodation"] %></div>
+                            <div class="post-date"><span style="font-size: 25px">第<%= itinerary["day"] %>天</span><%= itinerary["accommodation"] %></div>
                             <!-- Post Information -->
                             <div class="meta-info"><i style="font-style: normal">早</i> <span><%= itinerary["breakfast"].blank? ? "请自理" : itinerary["breakfast"] %></span></div>
                             <div class="meta-info"><i style="font-style: normal">中</i> <span><%= itinerary["lunch"].blank? ? "请自理" : itinerary["lunch"] %></span></div>
@@ -100,7 +100,7 @@
                           </div>
                           
                           <!-- Heading of the  post -->
-                          <h4><a href="blog-single.html"><%= itinerary["title"] %></a></h4>
+                          <h4 style="font-size: 25px"><%= itinerary["title"] %></h4>
                           <!-- Para -->
                           <p class="grey"><%= @trips[i].xpath('./content').text %></p>
                           <% itinerary.children.select{|e| e.cdata?}.each do |des| %>
