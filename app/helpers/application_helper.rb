@@ -15,4 +15,14 @@ module ApplicationHelper
       content.html_safe
     end
   end
+
+  def chinese_date(date)
+    m = date.mon
+    d = date.day
+    if date.year != Time.now.year
+      "#{date.year}年#{m}月#{d}日"
+    else
+      "#{m}月#{d}日"
+    end
+  end
 end

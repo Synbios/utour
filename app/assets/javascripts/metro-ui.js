@@ -10,11 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require bootstrap
-//= require bootstrap-switch
+
+//= require metro-ui/index
+
 //= require slidebars.min
-//= require jquery.mobile.touch.min
-//= require ekko-lightbox

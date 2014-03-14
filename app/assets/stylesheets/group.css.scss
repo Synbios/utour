@@ -1,0 +1,21 @@
+
+#sb-site{
+  background-color: #fff;
+}
+.navicon-line{
+  background-color: #000; 
+}
+/**** Isotope filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+.date_row{
+  margin: 10px 0;
+}

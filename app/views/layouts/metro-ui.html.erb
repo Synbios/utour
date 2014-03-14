@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "UTOUR成都众信" %>">
+    <meta name="keywords" content="出境游,旅游,上市公司,欧洲,美洲,非洲,日本,韩国">
+    <meta name="author" content="You Zhou">
+    <title><%= content_for?(:title) ? yield(:title) : "UTOUR成都众信" %></title>
+    <%= stylesheet_link_tag "metro-ui", media: "all", "data-turbolinks-track" => true %>
+    
+    <%= javascript_include_tag "/javascripts/metro-ui/jquery.min", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "/javascripts/metro-ui/jquery.widget.min", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "/javascripts/slidebars.min", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "/javascripts/metro.min", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "/javascripts/isotope.pkgd.min", media: "all", "data-turbolinks-track" => true %>
+    <%= yield(:head) %>
+    <%= csrf_meta_tags %>
+    <!--[if IE ]><link rel="stylesheet" href="css/settings-ie8.css"><![endif]-->
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="#">
+  </head>
+  
+  <body>
+    <%= yield(:nav_bar) %>
+    <!-- Body Wrapper -->
+    <!-- Your main site content. -->
+    <!-- Classes Examples -->
+    <div id="sb-site" class="wrapper white metro">
+
+    <%= yield %>
+      <span class="totop"><a href="#"><i class="fa fa-angle-up"></i></a></span> 
+    </div>
+
+
+    <div class="sb-slidebar sb-left">
+      <!-- Your left Slidebar content. -->
+      <%= render "layouts/lion_sidebar_left" %>
+    </div>
+
+    <div class="sb-slidebar sb-right">
+      <!-- Your right Slidebar content. -->
+      <%= render "layouts/lion_sidebar_right" %>
+    </div>    
+
+    <!-- Header End -->
+      
+    <!-- Inner Page Content // Start -->
+        
+    <!-- Inner Page Content // End -->
+      
+    <!-- Footer Start -->
+      
+     
+    <!-- Footer End -->
+    
+    <!-- Scroll to top -->
+    
+
+    <%= yield(:javascripts) %>
+    <script type="text/javascript">
+      (function($) {
+        $(document).ready(function() {
+        $.slidebars();
+      });
+      }) (jQuery);
+    </script>
+  </body> 
+</html>

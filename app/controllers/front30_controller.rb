@@ -39,6 +39,7 @@ class Front30Controller < ApplicationController
     #puts @tours
     @root = JSON.parse Shelf.find_by_name("团队行程").rack
     @set = ["跟团游"]
+    render layout: "metro-ui"
   end
 
   def free

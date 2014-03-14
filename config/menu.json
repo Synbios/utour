@@ -1,6 +1,4 @@
- {
-     "button":[
-     {  
+ {"button":[{  
           "type":"view",
           "name":"分销首页",
           "url":"http://115.28.235.18"
@@ -8,7 +6,7 @@
       {
            "type":"view",
            "name":"关于众信",
-           "url":"http://115.28.235.18/group"
+           "url":"http://115.28.235.18/front30/about"
       },
       {
            "name":"快速查询",
@@ -16,12 +14,14 @@
            {  
                "type":"view",
                "name":"跟团游",
-               "url":"http://115.28.235.18/group"
+               "url":"http://115.28.235.18/front30/group"
             },
             {
                "type":"view",
                "name":"自由行",
-               "url":"http://115.28.235.18/front30/about"
+               "url":"http://115.28.235.18/front30/group"
             }]
        }]
  }
+
+ //curl -d '{"button":[{"type":"view","name":"分销首页","url":"http://115.28.235.18"},{"type":"view","name":"关于众信","url":"http://115.28.235.18/front30/about"},{"name":"快速查询","sub_button":[{"type":"view","name":"跟团游","url":"http://115.28.235.18/front30/group"},{"type":"view","name":"自由行","url":"http://115.28.235.18/front30/group"}]}]}' "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=Xuzsd3q3Cz6N9yQcA08O-HxyAWUglgBoH104Qr0FYxoXoZM-3O4LcGEDA_jv-6bGqZ6beqBermDwzgAl6kg68xmT6vHleL7Y2GpVRhaqQV_QisYVeCpBhS4yYF6EOXEx5gZ4WfHri3xUVvVqqv6ERg"
