@@ -5,6 +5,7 @@
       <!-- Inner Page Content // Start -->
       
       <div class="inner-page">
+        <%= image_tag @cover_img, class: "img-responsive", style: "width: 100%" %>
         <div class="container">
           <div class="page-mainbar landing">
             <!-- Landing Content -->
@@ -13,15 +14,19 @@
               <div class="landing-logo" style="width: 100%; margin-top:0">
                 <!-- Logo Icon - removed -->
                 <!-- Image -->
-                <%= image_tag @cover_img, class: "img-responsive" %>
+                
                 <br/>
                 <h3><%= @tour.name %></h3>
               </div>
 
               <!-- Button Links -->
               <div class="landing-button">
-                <a href="#" class="btn btn-danger btn-lg"><i class="fa fa-download"></i> 下载行程</a> &nbsp;
-                <a href="#" class="btn btn-info btn-lg"><i class="fa fa-cloud"></i> 返回报名</a>
+                <% if !@tour.erp_word_url.blank? %>
+                  <%= link_to "#{@tour.erp_word_url}", class: "btn btn-danger btn-lg" do %><i class="fa fa-download"></i> 下载行程<% end %>
+                <%else%>
+                  <a class="btn btn-danger btn-lg disabled"><i class="fa fa-download"></i> 下载行程</a>
+                <% end %>
+                 <%= link_to front30_quick_booking_path(tour_id: @tour.id), class: "btn btn-info btn-lg" do %><i class="fa fa-cloud"></i> 我要报名<% end %>
               </div>
 
               <!-- Landing Content Item -->
@@ -38,7 +43,7 @@
                 <% end %>
                   <div class="col-md-4 col-sm-4">
                     <!-- Landing Item -->
-                    <div class="landing-item br-<%= colors[i%6] %>">
+                    <div class="landing-item br-<%= colors[i%6] %>" style="margin-top: 15px">
                       <!-- Icon -->
                       <img src="/img/flat-icon/<%= icons[i%6] %>.png" class="img-responsive visible-md" alt="" />
                       <!-- Heading -->

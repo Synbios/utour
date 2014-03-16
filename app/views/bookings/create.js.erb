@@ -1,0 +1,29 @@
+var el = $('#booing_form');
+
+<% if @booking.errors.any? %>
+  // Create a list of errors
+  var errors = $('<ul />');
+
+  <% @booking.errors.each do |key, value| %>
+    errors.append('<li><%= escape_javascript( value ) %></li>');
+  <% end %>
+
+  // Display errors on form
+  $('#booking_errors').html(errors);
+
+<% else %>
+
+  // Clear form
+  $('#booing_form').find('input:text, input:password, input:file, select, textarea').val('');
+  $('#booing_form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
+  $('#booking_errors').empty();
+  
+  // alert user
+  alert("您的订单已提交。查询请点左侧目录中【我的订单】选项。");
+
+  // close modal
+  $('#booking_modal').modal('hide');
+
+  
+
+<% end %>

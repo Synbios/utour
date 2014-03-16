@@ -42,4 +42,10 @@ class Tour < ActiveRecord::Base
 	def readable_date_and_prices(account=nil)
 		self.date_and_prices
 	end
+
+	# return feature tags for isotope filtering
+	def isotope_tags
+		return "" if self.tour_type.blank?
+		self.tour_type.split(/\s+/).map { |tag| "tag#{FeatureTag.find_by_name(tag).id}" }.join(" ")
+	end
 end

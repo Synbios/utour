@@ -18,11 +18,14 @@
   </head>
   
   <body>
+    <%# modal placeholder (will not work below sb-site) %>
+    <%= yield(:modal) %>
+    
     <%= yield(:nav_bar) %>
     <!-- Body Wrapper -->
     <!-- Your main site content. -->
     <!-- Classes Examples -->
-    <div id="sb-site" class="wrapper white">
+    <div id="sb-site" class="wrapper white" style="margin-top: -20px">
 
     <%= yield %>
       <span class="totop"><a href="#"><i class="fa fa-angle-up"></i></a></span> 
@@ -36,8 +39,9 @@
 
     <div class="sb-slidebar sb-right">
       <!-- Your right Slidebar content. -->
-      <%= render "layouts/lion_sidebar_right" %>
-    </div>    
+      <%= yield(:right_sidebar) %>
+    </div>
+
 
     <!-- Header End -->
       

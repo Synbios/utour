@@ -14,6 +14,8 @@
     <%= javascript_include_tag "/javascripts/metro-ui/jquery.widget.min", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "/javascripts/slidebars.min", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "/javascripts/metro.min", media: "all", "data-turbolinks-track" => true %>
+    <%#= javascript_include_tag "/javascripts/metro-ui/metro-accordion", media: "all", "data-turbolinks-track" => true %>
+    <%#= javascript_include_tag "/javascripts/metro-ui/bootstrap-collapse", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "/javascripts/isotope.pkgd.min", media: "all", "data-turbolinks-track" => true %>
     <%= yield(:head) %>
     <%= csrf_meta_tags %>
@@ -41,7 +43,7 @@
 
     <div class="sb-slidebar sb-right">
       <!-- Your right Slidebar content. -->
-      <%= render "layouts/lion_sidebar_right" %>
+      <%= render "right_sidebar" %>
     </div>    
 
     <!-- Header End -->

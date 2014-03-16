@@ -3,6 +3,8 @@ namespace :erp do
   desc "Fetch NEW routes from ERP system and save to local database"
   task fetch_routes: :environment do
     puts "fetching route index"
+    # 从马欣端口得到所有在售行程的ID
+    # 该端口为一组URL列表
     uri = URI.parse GLOBAL["erp_routes_index"]
     params = {}
     uri.query = URI.encode_www_form params
@@ -17,6 +19,7 @@ namespace :erp do
       return
     end
 
+    # 根据列表分别获取XML文档
     routes = index_page.css("a").map { |a| a["href"] }
     routes.each do |route|
       uri = URI.parse route
@@ -28,6 +31,8 @@ namespace :erp do
       end
       puts "fetch data from url = #{uri}"
       xml = Nokogiri::XML res.body
+
+      # 分析XML文档
       xml.xpath('//item').each do |tour_xml|
 
         tour = Tour.find_or_create_by_identifier(tour_xml["lineid"])
@@ -66,11 +71,10 @@ namespace :erp do
         tour.account_id = 1
         tour.sale_channel_id = 1
         puts "Updating tour id = #{tour.id} tourid = #{tour.identifier} name = #{tour.name}"
-
+        tour.save
         
-        # 第2接口读取word文档和行程数据
-#        uri = URI.parse GLOBAL["erp_port"]
-#        params = { op: "WFX_GetLineDetailById", lineId: tour_xml["lineid"] }
+        # 根据王媛媛接口 读取团号(用来获取出团通知和word文档), 价格和图片(没有标题和相关行程)
+        # 注意!!! 该接口用SOAP XML POST
 
 
         query = <<-EOF
@@ -90,24 +94,63 @@ EOF
         
         puts "fetch alternative data"
         #puts res.body
+        # 内容以XML格式直接储存(图片URL显示时候再从XML分析)
         tour.erp_more_info = Nokogiri::XML(res.body).xpath('//line').to_xml
 
-        query = <<-EOF
+        # 添加出发日期(departure)和价格(price)
+        # 注意 departure 用erp的团号区分, 价格在erp内无编号, 默认为同行价(一个departure只有一个同行价)
+
+        dep_array = []
+        Nokogiri::XML(res.body).xpath('//promotionItem').each do |item|
+          puts "build departure #{item["tdid"]}"
+          departure = Departure.find_or_create_by_identifier item["tdid"]
+
+          dep_array.push departure
+          departure.date = item["ctdate"]
+          departure.tour = tour
+          departure.visa_status = "未送签" if departure.visa_status.blank?
+          departure.expire_date = tour.expire_date
+          departure.number_of_seats = 9 if departure.number_of_seats.blank?
+          departure.sale_channel_id = 0 if departure.sale_channel_id.blank?
+          departure.account_id = 1
+
+
+          price = Price.where("departure_id = ? AND kind = ?", departure.id, "同业").first
+          if price.nil?
+            price = Price.new
+            price.departure = departure
+            price.kind = "同业"
+          end
+
+          price.sale_channel_id = 0 if price.sale_channel_id.blank?
+          price.price = item["price"][/\d+/]
+          price.account_id = 1 if price.account_id.blank?
+          price.expire_date = departure.expire_date
+          price.save
+        
+
+          query = <<-EOF
 <?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
     <WFX_getRouteUrl xmlns="http://tempuri.org/">
-      <tdid>#{tour_xml["lineid"]}</tdid>
+      <tdid>#{departure.identifier}</tdid>
     </WFX_getRouteUrl>
   </soap:Body>
 </soap:Envelope>
 EOF
-        res = http.post(GLOBAL["erp_port"], query, { 'Content-Type' => 'text/xml; charset=utf-8' })
-        #puts res.body
+          res = http.post(GLOBAL["erp_port"], query, { 'Content-Type' => 'text/xml; charset=utf-8' })
+          #puts res.body
+          if !Nokogiri::XML(res.body).xpath('//RouteUrl').text.blank?
+            tour.erp_word_url = Nokogiri::XML(res.body).xpath('//RouteUrl').text
+            tour.save
+          end
+          puts "word url = #{tour.erp_word_url}"
 
-        tour.word_url = Nokogiri::XML(res.body).xpath('//RouteUrl').text
-        puts "word url = #{tour.word_url}"
-        tour.save
+          departure.erp_group_notice_url = Nokogiri::XML(res.body).xpath('//CtInform').text
+          departure.save
+          puts "group notice url = #{departure.erp_group_notice_url}"
+        end
 
       end
 

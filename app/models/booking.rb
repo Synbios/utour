@@ -13,7 +13,7 @@ class Booking < ActiveRecord::Base
 
   private
   	def check_number_of_booked_people
-  		errors.add(:number_of_adults, "至少要订一个大人") if number_of_adults + number_of_children == 0
+  		errors.add(:number_of_adults, "至少要订一个大人") if number_of_adults + number_of_children <= 0
   	end
 
     def check_confirmed_seats

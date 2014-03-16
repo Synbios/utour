@@ -1,7 +1,7 @@
 <%= form_for :account, url: accounts_path, :html => {:role => "form", :class => "form-horizontal"} do |f| %>
 
 <div class="form-group">
-  <%= f.label :company_name, '公司名称'%>
+  <%= f.label :company_name, '公司名称(可选)'%>
   <% if @account.present? && @account.errors[:name] %>
   <% @account.errors[:name].each do |msg| %>
   <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>

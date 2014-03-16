@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
 
   before_action :set_account, only: [:show, :edit, :update, :destroy, :activate_show]
-  before_action :check_login, except: [:new, :create, :activate, :activate_show]
+  before_action :check_login, except: [:new, :create]
 
   # GET /accounts
   # GET /accounts.json
@@ -31,14 +31,13 @@ class AccountsController < ApplicationController
   # GET /accounts/activate_show
   def activate_show
     @contact = Account.sale_contact
-    unless @account.active
-      render 'activate_show'
-    end
+    @sales = current_user.sales
   end
 
   # POST /accounts/activate
   def activate
-    @account = Account.find_by_wechat_id(params[:account][:wechat_id])
+    @account = current_user
+    @sales = current_user.sales
     if @account.present?
       code = InvitationCode.find_by_code(params[:account][:activation_code])
       if code.present? == false
@@ -64,8 +63,8 @@ class AccountsController < ApplicationController
         SaleAgent.new(sale_id: code.account.id, agent_id: @account.id).save
         
         code.use(@account)
-        flash.now[:notice] = "账户验证成功"
-        redirect_back_or_default
+        flash.now[:notice] = "添加新销售成功"
+        render 'activate_show'
       end
     else
       render text: "WECHAT_ID #{params[:wechat_id]} not found"

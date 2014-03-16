@@ -1,7 +1,11 @@
 <li><a href="/front30/group">团队行程</a></li>
 <li><a href="/front30/free">自由行程</a></li>
-<li><a href="/lion/visa">签证</a></li>
-<li><a href="/lion/sale">精品推荐</a></li>
+<li><a href="/bookings">我的订单</a></li>
+<li><a href="http://erp.utourworld.com/admin/ba/visa/visaSearchMobile.asp">签证</a></li>
+<li><a href="/front30/onsale">特价专区</a></li>
 <li><a href="/front30/travel_guide">出行攻略</a></li>
+<% if current_user.present? %>
+<li><%= link_to "添加对口销售", activate_show_account_path(current_user) %></li>
 <li><a href="/front30/dm">同业DM单</a></li>
-<li><a href="/front30/contact">联系我们</a></li>
+<% end %>
+<li><a href="/lion/contact">联系我们</a></li>

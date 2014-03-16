@@ -28,6 +28,7 @@
 //= require ./flatMania-js/respond.min
 //= require ./flatMania-js/html5shiv
 //= require ./flatMania-js/custom
+//= require jquery_ujs
 
 //= require ./flatMania-js/jquery.themepunch.plugins.min
 //= require ./flatMania-js/jquery.themepunch.revolution.min

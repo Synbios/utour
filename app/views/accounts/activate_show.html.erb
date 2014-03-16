@@ -1,66 +1,76 @@
 <% content_for :stylesheet do %>
 <% end %>
 <div class="container trade_activation">
-  <% if @account.active %>
-  
-  <%= image_tag "umonster.png", alt: "", class: "actived_img" %>
-  <h2>您的账户已成功激活</h2>
 
-  <%#= link_to "我要注册", new_account_path(user_class: "trade"), class: "btn btn-warning full_width" %>
-  <% else %>
-  <h2>您的账户尚未激活！</h2>
-  
+  <h2>同业对口销售注册</h2>
   <div class="alert alert-warning">
-    <p>感谢您的注册，我们的售将会根据您所提交的信息尽快与您联系并给您一个<strong>邀请码</strong>。如果您已有激活码请现在输入即可激活账号。
-      您也可以主动与我们的销售联系:</p>
-    <p style="text-align: center">
-      <a href="tel:+86<%= @contact %>" class="btn btn-small btn-danger">点我拨打: <%= @contact %></a><br/>
-    </p>
-
-      <p>注意：激活码只在一定时间内有效<strong>请在其过期前使用</strong>。</p>    
-    </div>
-
-    <%= form_for @account, :url => {:action => "activate"}, :method => "post", :html => {:role => "form", :class => "form-horizontal"} do |f| %>
-
-    <div class="form-group">
-      <%= f.label :name, '姓名', :class => "col-xs-4 col-sm-2 control-label" %>
-      <div class="col-xs-8 col-sm-10">
-        <%= f.text_field :name, :value => @account.name, :class => "form-control", :readonly => true %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :wechat_id, '微信号', :class => "col-xs-4 col-sm-2 control-label" %>
-      <div class="col-xs-8 col-sm-10">
-        <%= f.text_field :wechat_id, :value => @account.wechat_id, :class => "form-control", :readonly => true %>
-      </div>
-    </div>
-
-
-    <div class="form-group">
-      <%= f.label :activation_code, '邀请码', :class => "col-xs-4 col-sm-2 control-label" %>
-      <div class="col-xs-8 col-sm-10">
-        <% if @account.present? && @account.errors[:activation_code] %>
-        <% @account.errors[:activation_code].each do |msg| %>
-        
-        <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
-
-        <% end %>
-        <% end %>
-        <%= f.text_field :activation_code, :placeholder => "输入您的邀请码", :class => "form-control" %>
-      </div>
-    </div>
-    
-    
-    
-    <div class="form-group">
-      <div class="col-xs-8 col-xs-offset-4 col-sm-10 col-sm-offset-2">
-        <%= f.submit "激活账户", :class => "btn btn-success full_width" %>
-      </div>
-    </div>
-
-    <% end %>
-
-    
-    <% end %>
+    <p>注意: 该页面仅供旅行社同业交流使用!</p>
   </div>
+  <div class="alert alert-warning">
+    <p>感谢您的关注! 如果您还没有对口销售我们将会根据您所提交的信息尽快与您联系。您也可以主动与我们的销售联系:</p>
+    <p style="text-align: center">
+      <a href="tel:+86<%= @contact %>" class="btn btn-small btn-danger">点我拨打: <%= @contact %></a>
+    </p>
+    <br />
+    <p>如果您需要添加销售请现在输入他/她提供的<strong邀请码></strong邀请码>。</p>
+
+    <p>注意：激活码只在一定时间内有效<strong>请在其过期前使用</strong>。</p>    
+  </div>
+  <% if @sales.size == 0 %>
+  <h4 class="text-center"><i class="fa fa-exclamation-triangle"></i> 您还没有对口销售!</h4>
+  <% else %>
+  <h4>您目前有<%= @sales.size %>名对口销售</h4>
+  <ul class="media-list">
+    <% @sales.each do |sale| %>
+    <li class="media">
+      <a class="pull-left" href="#">
+        <%= image_tag sale.portray.url(:thumb), class: "media-object" %>
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"><%= sale.name %></h4>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+  <% end %>
+  <hr />
+  <h4>添加新的对口销售</h4>
+  <%= form_for @account, :url => {:action => "activate"}, :method => "post", :html => {:role => "form", :class => "form-horizontal"} do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name, '你的姓名', :class => "col-xs-4 col-sm-2 control-label" %>
+    <div class="col-xs-8 col-sm-10">
+      <%= f.text_field :name, :value => @account.name, :class => "form-control", :readonly => true %>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :activation_code, '新邀请码', :class => "col-xs-4 col-sm-2 control-label" %>
+    <div class="col-xs-8 col-sm-10">
+      <%= f.text_field :activation_code, :placeholder => "输入您的邀请码", :class => "form-control" %>
+      <% if @account.present? && @account.errors[:activation_code] %>
+      <% @account.errors[:activation_code].each do |msg| %>
+
+      <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+
+      <% end %>
+      <% end %>
+      
+    </div>
+  </div>
+
+
+
+  <div class="form-group">
+    <div class="col-xs-8 col-xs-offset-4 col-sm-10 col-sm-offset-2 text-right">
+      <%= link_to "返回首页", root_path, class: "btn btn-default" %>
+      <%= f.submit "添加销售", :class => "btn btn-success" %>
+    </div>
+  </div>
+
+  <% end %>
+
+
+
+</div>

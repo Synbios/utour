@@ -6,7 +6,7 @@
 <% render "front30/left_links" %>
 <% end %>
 
-<div class="lion">
+<div class="container">
   <div id="booking_list">
     <div class="booking_list_head">
       <h2>我的众信</h2>
@@ -32,7 +32,10 @@
           <% end %>
         </td>
         <td class="tour_title">
-          <h4><%= tour.name %><br/><small><%= @bookings.size %>个预订</small></h4>
+          <h4><%= tour.name %><br/><small>
+            <%= tour.bookings.where("bookings.agent_id = ?", current_user.id ).select("departures.id").uniq.count %>个出发日期 - 
+            <%= tour.bookings.where("bookings.agent_id = ?", current_user.id ).count %>个预订
+          </small></h4>
 
         </td>
       </tr>
@@ -46,7 +49,7 @@
       
       <div class="booking_detail row">
         <div class="col-xs-4">
-          <%= link_to "#{booking.price.departure.date.strftime("%m/%d/%y")} 团", "javascript:void(0)", class: "booking_label btn btn-sm btn-default" %>
+          <%= link_to "#{booking.price.departure.date.strftime("%Y-%m-%d")}", "javascript:void(0)", class: "booking_label btn btn-sm btn-default" %>
         </div>
         
         <div class="col-xs-3">
@@ -163,10 +166,12 @@
           <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>出团通知</strong></div>
             <div class="col-xs-8 col-sm-8 col-md-8">
-              <% if booking.price.departure.group_notice.url  == "missing" %>
-              <em>尚未发布</em>
-              <% else %>
+              <% if booking.price.departure.group_notice.url  != "missing" %>
               <%= link_to "点击查看出团通知书", booking.price.departure.group_notice.url %>
+              <% elsif !booking.price.departure.erp_group_notice_url.blank? %>
+              <%= link_to "点击查看出团通知书", "#{booking.price.departure.erp_group_notice_url}" %>
+              <% else %>
+              <em>尚未发布</em>
               <% end %>
             </div>
           </div>          

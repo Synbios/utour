@@ -1,0 +1,42 @@
+<div class="container">
+  <h4 class="text-center" style="margin: 20px 0">日期过滤</h4>
+  <form class="form-horizontal" role="form">
+    
+
+    <div class="form-group">
+      <label class="col-xs-3 control-label">开始</label>
+      <div class="col-xs-9">
+        <input type="text" class="form-control dateselect" id="date_start" value="<%= Time.now.strftime("%Y年%m月%d日") %>" readonly="">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-xs-3 control-label">结束</label>
+      <div class="col-xs-9">
+        <input type="text" class="form-control dateselect" id="date_end" value="" readonly="">
+      </div>
+    </div>
+  </form>
+
+
+  <h4 class="text-center" style="margin: 20px 0">目的地过滤</h4>
+  <div id="filters">
+    <a href="#" class="btn btn-primary" role="button" data-filter="*">全部</a>
+    <h5>美洲</h5>
+    <a href="#" class="btn btn-primary" data-filter=".tag57" style="background-color: #00a300">美国</a>
+    <a href="#" class="btn btn-primary" data-filter=".tag66" style="background-color: #ff0097">加拿大</a>
+    <h5>亚洲</h5>
+    <a href="#" class="btn btn-primary" data-filter=".tag8" style="background-color: #9f00a7">日本</a>
+    <a href="#" class="btn btn-primary" data-filter=".tag9" style="background-color: #1e7145">韩国</a>
+    <a href="#" class="btn btn-primary" data-filter=".tag38" style="background-color: #00aba9">台湾</a>
+    <a href="#" class="btn btn-primary" data-filter=".tag1:not(.tag8, .tag9, .tag38)" style="background-color: #2d89ef">其他</a>
+    <h5>欧洲</h5>
+    <a href="#" class="btn btn-primary" data-filter=".tag61" style="background-color: #00a300">英国</a>
+    <a href="#" class="btn btn-primary" data-filter=".tag42, .tag43, .tag44, .tag45" style="background-color: #ff0097">德法瑞意</a>
+    <a href="#" class="btn btn-primary" data-filter=".tag2:not(.tag42, .tag43, .tag44, .tag45, .tag61)" style="background-color: #9f00a7">其他</a>
+    <h5>其他</h5>
+    <a href="#" class="btn btn-primary" data-filter=".tag36" style="background-color: #1e7145">中东非</a>
+    <a href="#" class="btn btn-primary" data-filter=".tag0" style="background-color: #00aba9">游轮</a>
+  </div>
+</div>
+

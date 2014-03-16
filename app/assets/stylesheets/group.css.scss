@@ -1,6 +1,10 @@
 
 #sb-site{
   background-color: #fff;
+  .metro {
+    margin: 0 auto;
+    max-width: 400px;
+  }
 }
 .navicon-line{
   background-color: #000; 
@@ -19,3 +23,6 @@
 .date_row{
   margin: 10px 0;
 }
+
+
+a.list:last-of-type { border-bottom:none }

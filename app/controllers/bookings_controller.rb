@@ -57,11 +57,15 @@ class BookingsController < ApplicationController
         # WexchatMailer.booking_notice(@booking.account)
         WexchatMailer.booking_notice_staff(@booking.agent, @booking.sale, @booking).deliver
         format.html { redirect_to bookings_path, notice: '预订成功' }
-        format.json { render action: 'index' }
+        format.js { render :status => :created, :location => @booking, :layout => false }
       else
         puts ">>>>>>>>>>>>>>>>>#{@booking.errors.full_messages}"
         format.html { redirect_to action: 'new', price_id: @booking.price_id }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
+        format.js { 
+          puts "booking save error processing js"
+          render :status => :unprocessable_entity, :layout => false
+
+        }
       end
     end
   end

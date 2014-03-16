@@ -7,6 +7,7 @@ production:
   secret_key: oTi3k4qW82
   default_sale_phone: 2861648069
   erp_word_url: http://118.144.76.28/upload/team/linesDoc/
+  departure_city: 成都
 
 development:
   appid: wx11903ac9cdd1fdfb
@@ -18,6 +19,7 @@ development:
   default_sale_phone: 2861648069
   erp_routes_index: http://www.utourworld.com/InternationLine/CdWfx/Cdindex.html#http://www.utourworld.com/InternationLine/Qunar/index.html
   erp_port: http://www.utourworld.com/Admin/WebService/CdWfxWebService.asmx
+  departure_city: 成都
 test:
   appid: wx11903ac9cdd1fdfb
   secret: 9b98bef39a1999f5e64c829d041bb209

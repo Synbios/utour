@@ -79,6 +79,9 @@ Utour::Application.routes.draw do
   get '/front30/video', to: 'front30#video'
   get '/front30/travel_guide', to: 'front30#travel_guide'
   get '/front30/group', to: 'front30#group'
+  get '/front30/free', to: 'front30#free'
+  get '/front30/onsale', to: 'front30#onsale'
+  get '/front30/quick_booking', to: 'front30#quick_booking'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

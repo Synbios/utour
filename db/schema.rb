@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140311074543) do
+ActiveRecord::Schema.define(version: 20140315180316) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -114,6 +114,8 @@ ActiveRecord::Schema.define(version: 20140311074543) do
     t.string   "group_notice_content_type"
     t.integer  "group_notice_file_size"
     t.datetime "group_notice_updated_at"
+    t.string   "identifier"
+    t.string   "erp_group_notice_url"
   end
 
   create_table "feature_tag_connections", force: true do |t|
@@ -172,6 +174,7 @@ ActiveRecord::Schema.define(version: 20140311074543) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "expire_date"
+    t.string   "kind"
   end
 
   create_table "sale_agents", force: true do |t|
@@ -239,6 +242,7 @@ ActiveRecord::Schema.define(version: 20140311074543) do
     t.text     "erp_features"
     t.text     "erp_more_info"
     t.string   "word_url"
+    t.string   "erp_word_url"
   end
 
   create_table "user_classes", force: true do |t|
