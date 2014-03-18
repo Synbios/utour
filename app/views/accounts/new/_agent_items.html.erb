@@ -1,0 +1,9 @@
+<div class="form-group">
+  <%= f.label :company_name, '公司名称'%>
+  <% if @account.present? && @account.errors[:name] %>
+  <% @account.errors[:name].each do |msg| %>
+  <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+  <% end %>
+  <% end %>
+  <%= f.text_field :company_name, :placeholder => "请填写您的公司/门店名称", :class => "form-control" %>
+</div>

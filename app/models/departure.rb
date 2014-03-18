@@ -29,13 +29,13 @@ class Departure < ActiveRecord::Base
     prices = prices.select { |price| price.expire_date > Time.now }
 
     # 除去权限
-    prices = prices.select { |price| price.sale_channel_id == sale_channel_id || SaleChannelMap.where(up: price.sale_channel_id, down: sale_channel_id).count > 0 } if sale_channel_id.present?
+    prices = prices.select { |price| price.sale_channel_id == sale_channel_id || SaleChannelMap.where(up_id: price.sale_channel_id, down_id: sale_channel_id).count > 0 } if sale_channel_id.present?
     
     price = prices.first
     # 找出覆盖后的价格
     if !prices.empty?
       prices.each do |p|
-        if SaleChannelMap.where(up: price.sale_channel_id, down: p.sale_channel_id).count > 0
+        if SaleChannelMap.where(up_id: price.sale_channel_id, down_id: p.sale_channel_id).count > 0
           price = p
         end
       end

@@ -72,7 +72,7 @@ class Admin::InvitationCodesController < ApplicationController
       # @codes.each do |code|
       # puts "self code ids >>> #{code.id}"
       # end
-      maps = UserGroupMap.where(:up => current_user.user_group_id) # user_group ids
+      maps = UserGroupMap.where(:up_id => current_user.user_group_id) # user_group ids
       maps.each do |map|
         user_group = UserGroup.find_by_id(map.down)
         # puts "map #{map} === #{user_group.name}"

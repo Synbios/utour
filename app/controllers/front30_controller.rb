@@ -32,7 +32,7 @@ class Front30Controller < ApplicationController
     @tours = Tour.where("expire_date > ? AND departure_city = ? AND tour_type LIKE '%特价%' ", Time.now, GLOBAL["departure_city"])
 
     # 过滤无权限浏览的团队
-    @tours = @tours.select {|tour| tour.sale_channel_id == @sale_channel_id || SaleChannelMap.where(up: tour.sale_channel_id, down: @sale_channel_id).count > 0 } if @sale_channel_id.present?
+    @tours = @tours.select {|tour| tour.sale_channel_id == @sale_channel_id || SaleChannelMap.where(up_id: tour.sale_channel_id, down_id: @sale_channel_id).count > 0 } if @sale_channel_id.present?
     render 'group'
   end
 
@@ -49,7 +49,8 @@ class Front30Controller < ApplicationController
     @tours = Tour.where("expire_date > ? AND departure_city = ? AND tour_type LIKE '%跟团游%' ", Time.now, GLOBAL["departure_city"])
 
     # 过滤无权限浏览的团队
-    @tours = @tours.select {|tour| tour.sale_channel_id == @sale_channel_id || SaleChannelMap.where(up: tour.sale_channel_id, down: @sale_channel_id).count > 0 } if @sale_channel_id.present?
+    @tours = @tours.select {|tour| tour.sale_channel_id == @sale_channel_id || SaleChannelMap.where(up_id: tour.sale_channel_id, down_id: @sale_channel_id).count > 0 } if @sale_channel_id.present?
+
   end
 
   def free
@@ -57,7 +58,7 @@ class Front30Controller < ApplicationController
     @tours = Tour.where("expire_date > ? AND departure_city = ? AND tour_type LIKE '%自由行%' ", Time.now, GLOBAL["departure_city"])
 
     # 过滤无权限浏览的团队
-    @tours = @tours.select {|tour| tour.sale_channel_id == @sale_channel_id || SaleChannelMap.where(up: tour.sale_channel_id, down: @sale_channel_id).count > 0 } if @sale_channel_id.present?
+    @tours = @tours.select {|tour| tour.sale_channel_id == @sale_channel_id || SaleChannelMap.where(up_id: tour.sale_channel_id, down_id: @sale_channel_id).count > 0 } if @sale_channel_id.present?
     render 'group'
   end
 
@@ -73,8 +74,8 @@ class Front30Controller < ApplicationController
     @sale_channel_id = nil
     if current_user.present?
       @sale_channel_id = current_user.sale_channel_id
-    elsif SaleChannel.find_by_name("默认渠道").present?
-      @sale_channel_id = SaleChannelId.find_by_name("默认渠道").id
+    elsif SaleChannel.find_by_name("直客渠道").present?
+      @sale_channel_id = SaleChannel.find_by_name("直客渠道").id
     end
   end
 

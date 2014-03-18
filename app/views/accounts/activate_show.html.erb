@@ -9,12 +9,12 @@
   <div class="alert alert-warning">
     <p>感谢您的关注! 如果您还没有对口销售我们将会根据您所提交的信息尽快与您联系。您也可以主动与我们的销售联系:</p>
     <p style="text-align: center">
-      <a href="tel:+86<%= @contact %>" class="btn btn-small btn-danger">点我拨打: <%= @contact %></a>
+      <a href="tel:+86<%= @contact %>" class="btn btn-small btn-danger">点我拨打: <%= GLOBAL["default_contact"] %></a>
     </p>
     <br />
     <p>如果您需要添加销售请现在输入他/她提供的<strong邀请码></strong邀请码>。</p>
 
-    <p>注意：激活码只在一定时间内有效<strong>请在其过期前使用</strong>。</p>    
+    <p>注意：激活码只在一定时间内有效<strong>请在其过期前使用</strong>。</p>
   </div>
   <% if @sales.size == 0 %>
   <h4 class="text-center"><i class="fa fa-exclamation-triangle"></i> 您还没有对口销售!</h4>
@@ -24,7 +24,7 @@
     <% @sales.each do |sale| %>
     <li class="media">
       <a class="pull-left" href="#">
-        <%= image_tag sale.portray.url(:thumb), class: "media-object" %>
+        <%= image_tag sale.portray.url(:thumb), class: "media-object", style: "width: 56px" %>
       </a>
       <div class="media-body">
         <h4 class="media-heading"><%= sale.name %></h4>

@@ -1,16 +1,6 @@
 <%= form_for :account, url: accounts_path, :html => {:role => "form", :class => "form-horizontal"} do |f| %>
 
 <div class="form-group">
-  <%= f.label :company_name, '公司名称(可选)'%>
-  <% if @account.present? && @account.errors[:name] %>
-  <% @account.errors[:name].each do |msg| %>
-  <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
-  <% end %>
-  <% end %>
-  <%= f.text_field :company_name, :placeholder => "请填写您的公司/门店名称", :class => "form-control" %>
-</div>
-
-<div class="form-group">
   <%= f.label :name, '姓名'%>
   <% if @account.present? && @account.errors[:name] %>
   <% @account.errors[:name].each do |msg| %>
@@ -40,16 +30,6 @@
   <%= f.text_field :email, :placeholder => "例如: 12345@qq.com", :type => "email", :class => "form-control" %>
 </div>
 
-<div class="form-group">
-  <%= f.label :wechat_id, '微信号码' %>
-  <% if @account.present? && @account.errors[:wechat_id] %>
-  <% @account.errors[:wechat_id].each do |msg| %>
-  <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
-  <% end %>
-  <% end %>
-  <%= f.text_field :wechat_id, :placeholder => "微信号码", :class => "form-control" %>
-</div>
-
 <div class="form-group" >
   <%= f.label :gender, '性别' %>
   <% if params[:account].nil? %>
@@ -58,6 +38,24 @@
   <%= f.check_box :gender, :checked => params[:account][:gender] == "0" ? false : true, :class => "switch", :"data-on-label" => "男", :"data-off-label" => "女", :"data-on" => "primary", :"data-off" => "danger", :"data-label-icon" => "glyphicon glyphicon-cog" %>
   <% end %>
 </div>
+
+
+<%#= render partial: "accounts/new/agent_items" if role == "agent" %>
+<%#= render partial: "accounts/new/retail_items" if role == "retail" %>
+
+<% if role=="agent" %>
+<div class="form-group">
+  <%= f.label :company_name, '公司名称'%>
+  <% if @account.present? && @account.errors[:name] %>
+  <% @account.errors[:name].each do |msg| %>
+  <%= render inline: "<span class=\"inline_error_message\">#{msg}</span><br/>" %>
+  <% end %>
+  <% end %>
+  <%= f.text_field :company_name, :placeholder => "请填写您的公司/门店名称", :class => "form-control" %>
+</div>
+<% end %>
+
+
 
 <!-- <div class="form-group" >
   <%#= f.check_box :is_trade %>

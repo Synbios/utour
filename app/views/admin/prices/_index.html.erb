@@ -23,6 +23,7 @@
             <th>价格</th>
             <th>确认报名</th>
             <th>销售渠道</th>
+            <th>价格组</th>
             <th>添加人</th>
             <th>有效期至</th>
             <th>操作</th>
@@ -36,6 +37,7 @@
             <td>
               <%= price.sale_channel.name if price.sale_channel.present? %>
             </td>
+            <td><%= price.kind %></td>
             <td><%= price.account.name %></td>
             <td>
               <%= price.expire_date.strftime("%b %d, %Y") %>

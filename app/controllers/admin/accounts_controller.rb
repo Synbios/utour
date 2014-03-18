@@ -46,6 +46,18 @@ class Admin::AccountsController < ApplicationController
     end
   end
 
+  def update
+    respond_to do |format|
+      if @account.update(account_params)
+        format.html { redirect_to @account, notice: 'Account was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @account.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def destroy
     @account = Account.find_by_id(params[:id])
     @account.destroy
@@ -63,7 +75,7 @@ class Admin::AccountsController < ApplicationController
           #puts ">>>>>>>>#{@accounts.count}"
           @accounts.map! do |account|
             #puts "account = #{account.name}"
-            if account.id == current_user.id || UserGroupMap.where(up: current_user.user_group_id, down: account.user_group_id).count > 0
+            if account.id == current_user.id || UserGroupMap.where(up_id: current_user.user_group_id, down_id: account.user_group_id).count > 0
               #puts "OK"
               account
             else
@@ -78,7 +90,7 @@ class Admin::AccountsController < ApplicationController
           @accounts = Account.where("user_class_id > 4")
           @accounts.map! do |account|
             #puts "account = #{account.name}"
-            if account.id == current_user.id || UserGroupMap.where(up: current_user.user_group_id, down: account.user_group_id).count > 0
+            if account.id == current_user.id || UserGroupMap.where(up_id: current_user.user_group_id, down_id: account.user_group_id).count > 0
               #puts "OK"
               account
             else

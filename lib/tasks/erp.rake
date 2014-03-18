@@ -68,8 +68,8 @@ namespace :erp do
         tour.erp_info = tour_xml.xpath('./miscellaneous').to_xml
         tour.erp_features = tour_xml.xpath('./features').to_xml
 
-        tour.account_id = 1
-        tour.sale_channel_id = 1
+        tour.account = Account.find_by_email("youz@ualberta.ca")
+        tour.sale_channel = SaleChannel.find_by_name("微分销")
         puts "Updating tour id = #{tour.id} tourid = #{tour.identifier} name = #{tour.name}"
         tour.save
         
@@ -110,23 +110,42 @@ EOF
           departure.tour = tour
           departure.visa_status = "未送签" if departure.visa_status.blank?
           departure.expire_date = tour.expire_date
-          departure.number_of_seats = 9 if departure.number_of_seats.blank?
-          departure.sale_channel_id = 0 if departure.sale_channel_id.blank?
-          departure.account_id = 1
+          departure.number_of_seats = 9 #if departure.number_of_seats.blank?
+          departure.sale_channel = SaleChannel.find_by_name("微分销") #if departure.sale_channel_id.blank?
+          departure.account = Account.find_by_email("youz@ualberta.ca")
 
 
-          price = Price.where("departure_id = ? AND kind = ?", departure.id, "同业").first
-          if price.nil?
-            price = Price.new
-            price.departure = departure
-            price.kind = "同业"
+          # 添加价格 (反读马欣)
+          price_node = tour_xml.xpath("//routeDate[@tdid=#{departure.identifier}]").first
+          
+          if price_node.present?
+            agent_price = Price.where("departure_id = ? AND kind = ?", departure.id, "同业").first
+            if agent_price.nil?
+              agent_price = Price.new
+              agent_price.departure = departure
+              agent_price.kind = "同业"
+            end
+            agent_price.sale_channel = SaleChannel.find_by_name("会员渠道") #if price.sale_channel_id.blank?
+            agent_price.price = price_node["agentPrice"]
+            agent_price.account = Account.find_by_email("youz@ualberta.ca") #if price.account_id.blank?
+            agent_price.expire_date = departure.expire_date
+            puts "add agent price = #{agent_price.price}"
+            agent_price.save
+
+            retail_price = Price.where("departure_id = ? AND kind = ?", departure.id, "直客").first
+            if retail_price.nil?
+              retail_price = Price.new
+              retail_price.departure = departure
+              retail_price.kind = "直客"
+            end
+            retail_price.sale_channel = SaleChannel.find_by_name("微分销") #if price.sale_channel_id.blank?
+            retail_price.price = price_node["price"]
+            retail_price.account = Account.find_by_email("youz@ualberta.ca") #if price.account_id.blank?
+            retail_price.expire_date = departure.expire_date
+            puts "add retail price = #{retail_price.price}"
+            retail_price.save
           end
-
-          price.sale_channel_id = 0 if price.sale_channel_id.blank?
-          price.price = item["price"][/\d+/]
-          price.account_id = 1 if price.account_id.blank?
-          price.expire_date = departure.expire_date
-          price.save
+          
         
 
           query = <<-EOF

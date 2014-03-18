@@ -23,7 +23,7 @@
     <% end %>
     
 
-    <%= render 'form' %>
+    <%= render partial: 'form', locals: { booking: @booking, sales: @sales } %>
     <div class="booking_links">
       <%= link_to_function "返回", "history.back()", :class => "btn btn-info btn-sm" %>
       <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#booking_info">预订说明</button>

@@ -40,7 +40,11 @@
             <td><%= departure.confirmed_seats %></td>
             <td><%= departure.account.name %></td>
             <td>
+              <% if departure.sale_channel_id != 0 %>
               <%= departure.sale_channel.name %>
+              <% else %>
+              <em>所有渠道</em>
+              <% end %>
             </td>
             <td><%= link_to "现有#{departure.prices.count}个", "/admin#" + admin_tour_departure_prices_path(tour, departure) %></td>
             <td><%= departure.visa_status %></td>

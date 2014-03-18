@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "UTOUR成都众信" %>">
+    <meta name="keywords" content="出境游,旅游,上市公司,欧洲,美洲,非洲,日本,韩国">
+    <meta name="author" content="ResponsiveWebInc">
+    <title><%= content_for?(:title) ? yield(:title) : "UTOUR众信旅游" %></title>
+    <%= yield(:head) %>
+    <%= csrf_meta_tags %>
+    <!--[if IE ]><link rel="stylesheet" href="css/settings-ie8.css"><![endif]-->
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="#">
+  </head>
+  
+  <body>
+    <%= yield %>
+    <%= yield(:javascripts) %>
+  </body> 
+</html>

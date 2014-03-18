@@ -1,6 +1,6 @@
 class UserGroupMap < ActiveRecord::Base
-  belongs_to :up, class_name: "UserGroup", :foreign_key => :up
-  belongs_to :down, class_name: "UserGroup", :foreign_key => :down
+  belongs_to :up, class_name: "UserGroup", :foreign_key => :up_id
+  belongs_to :down, class_name: "UserGroup", :foreign_key => :down_id
 
   
 
@@ -23,14 +23,18 @@ class UserGroupMap < ActiveRecord::Base
   end
 
   def self.desc_sale_channels(user_group_id)
-    UserGroupMap.where(up: user_group_id).map { |record| UserGroup.find_by_id(record.down) }.compact
+    UserGroupMap.where(up_id: user_group_id).map { |record| UserGroup.find_by_id(record.down) }.compact
   end
 
   private
   def self.insert_new_permissions(node, ancestors)
     ancestors.each do |ancestor|
-      self.new( up: ancestor[:id], down: node[:id] ).save
-      #puts "insert new record: #{node[:id]} -> #{ancestor[:id]}"
+      puts "insert new record: #{node[:id]} -> #{ancestor[:id]}"
+      usergroupmap = UserGroupMap.new
+      usergroupmap.up_id = ancestor[:id]
+      usergroupmap.down_id = node[:id]
+      usergroupmap.save
+      
     end
     unless node[:members].empty?
       ancestors.push node

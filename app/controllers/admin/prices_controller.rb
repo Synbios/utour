@@ -8,6 +8,7 @@ class Admin::PricesController < ApplicationController
   def new
     @price = Price.new
     @departure = Departure.find_by_id(params[:departure_id])
+    @price.expire_date = @departure.expire_date
     @tour = @departure.tour
     render partial: "form", locals: { tour: @tour, departure: @departure, price: @price }, layout: false
   end
@@ -50,6 +51,6 @@ class Admin::PricesController < ApplicationController
 
   private
   def price_params
-    params.require(:price).permit(:departure_id, :price, :number_of_seats, :sale_channel_id, :expire_date)
+    params.require(:price).permit(:departure_id, :price, :number_of_seats, :sale_channel_id, :expire_date, :kind)
   end
 end

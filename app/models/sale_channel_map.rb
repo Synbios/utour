@@ -1,6 +1,6 @@
 class SaleChannelMap < ActiveRecord::Base
-  belongs_to :up, class_name: "SaleChannel", :foreign_key => :up
-  belongs_to :down, class_name: "SaleChannel", :foreign_key => :down
+  belongs_to :up, class_name: "SaleChannel", :foreign_key => :up_id
+  belongs_to :down, class_name: "SaleChannel", :foreign_key => :down_id
   # rebuild the hash from SaleChannel table
   def self.reload
     # delete everything in the table
@@ -18,13 +18,13 @@ class SaleChannelMap < ActiveRecord::Base
   end
 
   def self.desc_sale_channels(sale_channel_id)
-    SaleChannelMap.where(up: sale_channel_id).map { |record| SaleChannel.find_by_id(record.down) }
+    SaleChannelMap.where(up_id: sale_channel_id).map { |record| SaleChannel.find_by_id(record.down) }
   end
 
   private
    def self.insert_new_permissions(node, ancestors)
     ancestors.each do |ancestor|
-      self.new( up: ancestor[:id], down: node[:id] ).save
+      self.new( up_id: ancestor[:id], down_id: node[:id] ).save
       #puts "insert new record: #{node[:id]} -> #{ancestor[:id]}"
     end
     unless node[:members].empty?

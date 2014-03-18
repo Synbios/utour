@@ -7,6 +7,7 @@ class Admin::DeparturesController < ApplicationController
   def new
     @departure = Departure.new
     @tour = Tour.find_by_id(params[:tour_id])
+    @departure.expire_date = @tour.expire_date
     render partial: "form", locals: { tour: @tour, departure: @departure }, layout: false
   end
 

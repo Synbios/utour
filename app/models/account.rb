@@ -13,7 +13,7 @@ class Account < ActiveRecord::Base
   validates :mobile, :presence => { :message => "手机号为必填" }, :uniqueness => { :message => "该手机号码已被注册" }, :format => { :with => MOBILE_REGEX, :message => "国内手机号须为11位数字" }
   validates :email, :presence => { :message => "电子邮箱为必填" }, :uniqueness => { :message => "该电子邮箱已被注册" }, :format => { :with => EMAIL_REGEX, :message => "电子邮箱格式非法" } 
   validates :gender, :presence => true, :inclusion => { :in => ["男", "女"], :message => "合法输入为”男“或”女“" }
-  validates :wechat_id, :presence => { :message => "微信号为必填" }, :uniqueness => { :message => "该微信号已被注册" }, :length => { :in => 6..30, :message => "微信号至少6位" }
+  #validates :wechat_id, :presence => { :message => "微信号为必填" }, :uniqueness => { :message => "该微信号已被注册" }, :length => { :in => 6..30, :message => "微信号至少6位" }
 #  validates :user_group_id, :presence => true
 
 

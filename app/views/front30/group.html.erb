@@ -26,14 +26,14 @@
 <%= render "right_sidebar" %>
 <% end %>
 
-<% cwheel = ['#00a300', '#ff0097', '#9f00a7', '#1e7145', '#00aba9', '#2d89ef'] %>
+<% cwheel = ['#f55233', '#fa791b', '#fbd72f', '#9fd05d', '#4ab35a', '#4fbdd6', '#c949a8'] %>
 <div class="container" style="max-width: 600px">
 
   <label for="mydate">Some Date</label>
 
 
 
-  <h3 class="text-center" style="line-height: 40px">点击右上 <i class="fa fa-bars"></i> 查询</h3>
+  <h3 class="text-center" style="line-height: 40px;);">点击右上 <i class="fa fa-bars"></i> 查询</h3>
   <% if @tours.empty? %>
   <h4 class="text-center"><i class="fa fa-exclamation-triangle"></i> 抱歉, 没有可显示的行程!</h4>
   <% end %>
@@ -46,11 +46,11 @@
           <h4 class="panel-title">
             <div class="row">
               <div class="col-xs-9">
-                <h4 style="color: #fff"><%= tour.name %></h4>
+                <h4 style="color: #fff; "><%= tour.name %></h4>
               </div>
               <div class="col-xs-3">
                 <%= link_to "行程", "/tours/#{tour.id}", {class: "btn btn-warning btn-sm", style: "width: 100%; margin-bottom: 2px; color: white; padding: 5px 2px"} %>
-                <%= link_to "日期", "##{tour.object_id}", {class: "btn btn-info btn-sm toggle-departure", "data-toggle" => "collapse", style: "width: 100%; margin-bottom: 2px; color: white; padding: 5px 2px"} %>
+                <%= link_to "日期", "##{tour.object_id}", {class: "btn btn-sm btn-info toggle-departure", "data-toggle" => "collapse", style: "width: 100%; margin-bottom: 2px; color: white; padding: 5px 2px"} %>
               </div>
             </div>
             <a class="accordion-toggle" href="#">
@@ -69,7 +69,7 @@
             <%# 除去过期的日期 %>
             <% departures = departures.select { |departure| departure.expire_date > Time.now } %> 
             <%# 出去权限以外的日期 %>
-            <% departures = departures.select { |departure| departure.sale_channel_id == @sale_channel_id || SaleChannelMap.where(up: departure.sale_channel_id, down: @sale_channel_id).count > 0 } if @sale_channel_id.present? %>
+            <% departures = departures.select { |departure| departure.sale_channel_id == @sale_channel_id || SaleChannelMap.where(up_id: departure.sale_channel_id, down_id: @sale_channel_id).count > 0 } if @sale_channel_id.present? %>
             
             
             <% if departures.empty? %>
@@ -77,42 +77,53 @@
             <% else # end if %>
 
             <% departures.each_with_index do |departure, d| %>
+            <%# prices = departure.prices %>
+            <%# 除去过期的价格 %>
+            <%# prices = prices.select { |price| price.expire_date > Time.now } %> 
+            <%# 出去权限以外的价格 %>
+            <%# prices = prices.select { |price| price.sale_channel_id == @sale_channel_id || SaleChannelMap.where(up: price.sale_channel_id, down: @sale_channel_id).count > 0 }  %>
+            <% retail_offer = departure.final_price("直客", @sale_channel_id) %>
+            <% puts "" %>
+            <% trade_offer = departure.final_price("同业", @sale_channel_id) %>
+            <% special_offer = departure.final_price("渠道", @sale_channel_id) %>
+            <% booking_offer = retail_offer %>
+            <% booking_offer = trade_offer if trade_offer.present? %>
+            <% booking_offer = special_offer if special_offer.present? %>
+            <% next if booking_offer.nil? %>
             <div data-departure="<%= departure.date.strftime("%Y%m%d") %>" class="departure" style="width: 100%; clear:both;">
               <h4 style="float: right; margin-top:0"><%= chinese_date(departure.date) %> <small><span class="text-danger"><%= GLOBAL["departure_city"]%></span>出发</small></h4>
-              <% retail_offer = departure.final_price("直客", @sale_channel_id) %>
-              <% trade_offer = departure.final_price("同业", @sale_channel_id) %>
-              <% special_offer = departure.final_price("渠道", @sale_channel_id) %>
-              <% booking_offer = retail_offer %>
-              <% booking_offer = trade_offer if trade_offer.present? %>
-              <% booking_offer = special_offer if special_offer.present? %>
+              
               <% if retail_offer.present? %>
-              <h3 style="width: 50%;<%= "text-decoration:line-through" if retail_offer != booking_offer %>"><small>微信</small> <strong class="text-primary"><%= retail_offer.price %></strong> <small>元</small></h3>
+              <h3 style="width: 50%"><small>微信</small> <strong class="text-primary" style="<%= "text-decoration:line-through" if retail_offer != booking_offer %>"><%= retail_offer.price %></strong> <small>元</small></h3>
               <% end %>
               <% if trade_offer.present? %>
-              <h3 style="width: 50%;<%= "text-decoration:line-through" if trade_offer != booking_offer %>"><small>同业</small> <strong class="text-primary"><%= trade_offer.price %></strong> <small>元</small></h3>
+              <h3 style="width: 50%"><small>同业</small> <strong class="text-primary" style="<%= "text-decoration:line-through" if trade_offer != booking_offer %>"><%= trade_offer.price %></strong> <small>元</small></h3>
               <% end %>
               
               <% if special_offer.present? %>  
-              <h3 style="width: 50%"><small>会员</small> <strong class="text-primary"><%= special_offer.price %></strong> <small>元</small></h3>
+              <h3 style="width: 50%"><small>会员</small> <strong class="text-danger"><%= special_offer.price %></strong> <small>元</small></h3>
               <% end %>
               
               <h4 style="text-align: right; clear: right">
                 <% if booking_offer.present? && current_user.nil? %>
-                   <%= link_to "注册+报名", new_booking_path(price_id: booking_offer.id), class: "btn btn-warning btn-lg" %>
+                  <%= link_to "登录", new_session_path, class: "btn btn-primary btn-lg" %>
+                  <%= link_to "注册+报名", new_booking_path(price_id: booking_offer.id), class: "btn btn-warning btn-lg" %>
                 <% else booking_offer.present? %>
-                  <button class="btn btn-primary btn-lg" onclick="new_booking('<%= booking_offer.id %>', '<%= departure.date %>', '<%= tour.name %>');">报名: <i class="fa fa-check"></i> (空位>9 )</button>
+                  <button class="btn btn-primary btn-lg" onclick="new_booking('<%= booking_offer.id %>', '<%= departure.date %>', '<%= tour.name %>', '<%= booking_offer.price %>', '');">报名: <i class="fa fa-check"></i> (空位>9 )</button>
                 <% end %>
               </h4>
               <% unless d == departures.size - 1 %>
               <hr style="margin:0; border: 0 none; border-top: 2px dashed #322f32; background: none; height:0;">
               <% end %>
             </div>
+
             <% end # departure %>
             
             <% end # tour %>
-            
+            <p class="text-center"><%= link_to "- 收起 -", "##{tour.object_id}", {class: "", "data-toggle" => "collapse", style: "color: #222"} %></p>
           </div>
         </div>
+
       </div>        
       
 
@@ -151,7 +162,8 @@
         </button>
         <h4 class="modal-title" id="modal-1" style="text-align: center">
           <span id="booking_name"></span><br />
-          <span>出发日期:</span> <span id="booking_date" class="text-danger"></span>
+          <span>出发日期:</span> <span id="booking_date" class="text-danger"></span><br />
+          <span>价格:</span> <small id="booking_price_kind"></small> <span id="booking_price" class="text-danger"></span> <small>元/人</small>
         </h4>
       </div>
       <div class="modal-body no-padding">
@@ -162,7 +174,7 @@
         </div>
 
         <%= form_for @booking, remote: true, :authenticity_token => true, :html => {:role => "form", :class => "form-horizontal", :id => "booking_form"} do |f| %>
-        <div class="form-group">
+        <div class="form-group" style="display: none">
           <%= f.label :price_id, '订单编号', :class => "col-xs-3 col-sm-3 control-label" %>
 
           <div class="col-xs-9 col-sm-8">
@@ -170,6 +182,7 @@
           </div>
         </div>
 
+        <% if @sales.size > 0 %>
         <div class="form-group">
           <%= f.label :sale_id, '对口销售', :class => "col-xs-3 col-sm-3 control-label" %>
 
@@ -177,6 +190,7 @@
             <%= f.collection_select(:sale_id,  @sales, :id, :name, {}, { :class => 'form-control'}) %>
           </div>
         </div>
+        <% end %>
 
 
         <div class="form-group">
@@ -234,12 +248,14 @@
 
 <script type="text/javascript">
 
-function new_booking(id, departure_date, tour_name){
+function new_booking(id, departure_date, tour_name, booking_price, booking_price_kind){
   $('#booking_modal').modal('show');
   $('#booking_name').text(tour_name);
   $('#booking_date').text(departure_date);
   $('#price_id').val(id);
   $('#booking_errors').empty();
+  $('#booking_price_kind').text(booking_price_kind);
+  $('#booking_price').text(booking_price);
 }
 
 function filter_dates(){

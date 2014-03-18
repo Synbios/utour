@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     # find by email, mobile phone number or wechat id
     @user = Account.find_by(email: params[:session][:identification_id].downcase)
     @user = Account.find_by(mobile: params[:session][:identification_id].downcase) if @user.nil?
-    @user = Account.find_by(wechat_id: params[:session][:identification_id].downcase) if @user.nil?
+    #@user = Account.find_by(wechat_id: params[:session][:identification_id].downcase) if @user.nil?
 
     if @user.nil?
       flash.now[:error] = '抱歉，您输入的用户名无法识别！'

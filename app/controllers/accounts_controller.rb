@@ -18,6 +18,7 @@ class AccountsController < ApplicationController
   # GET /accounts/new
   def new
     @account = Account.new
+    @role = params[:role]
     # if params[:user_class] == "trade"
     #   render 'accounts/new/trade', :locals => { "user_class_id" => Account.find_user_class_id_by_name(:trade) } 
     # elsif params[:user_class] == "staff"
@@ -86,6 +87,7 @@ class AccountsController < ApplicationController
       @account.gender = "男"
     end
     @account.user_class_id = 5 # 5 = 同行
+    @account.sale_channel = SaleChannel.find_by_name("直客渠道")
 
     # if @account.is_trade == "1"
     #   @account.active = false
@@ -105,7 +107,11 @@ class AccountsController < ApplicationController
         format.html {
           sign_in @account
           #puts ">>>>>>>>>> #{@account.user_class_id} #{@account.user_class_id == 3} #{@account.user_class_id == '3'} #{@account.trade?} >>>>>>>>>>>> #{activate_show_account_path(@account)} "
-          redirect_to activate_show_account_path(@account), notice: '新用户申请成功'
+          if !@account.company_name.blank?
+            redirect_to activate_show_account_path(@account), notice: '新用户申请成功'
+          else
+            redirect_back_or_default
+          end
           # if @account.trade?
 
           #   redirect_to activate_show_account_path(@account), notice: '新用户申请成功'

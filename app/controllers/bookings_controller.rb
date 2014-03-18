@@ -31,6 +31,8 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
+    @booking.number_of_adults = 0
+    @booking.number_of_children = 0
     if params[:price_id].present?
       @booking.price_id = params[:price_id]
       @sales = current_user.sales #Account.get_sales(params[:price_id], current_user.id)
@@ -47,9 +49,9 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
-    @booking.number_of_adults = 0 if @booking.number_of_adults.nil?
-    @booking.number_of_children = 0 if @booking.number_of_children.nil?
     @booking.agent = current_user
+    # 直客报名
+    @booking.sale = Account.find_by_id(GLOBAL["default_retail_sale_id"]) if params[:booking][:sale_id].nil?
     @booking.progress = "未处理"
     @booking.confirmed_seats = 0
     respond_to do |format|
@@ -60,7 +62,12 @@ class BookingsController < ApplicationController
         format.js { render :status => :created, :location => @booking, :layout => false }
       else
         puts ">>>>>>>>>>>>>>>>>#{@booking.errors.full_messages}"
-        format.html { redirect_to action: 'new', price_id: @booking.price_id }
+        format.html { 
+          @sales = current_user.sales
+          @price = @booking.price
+          @tour = @booking.price.departure.tour
+          render 'new', price_id: @booking.price_id
+        }
         format.js { 
           puts "booking save error processing js"
           render :status => :unprocessable_entity, :layout => false

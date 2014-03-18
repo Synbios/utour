@@ -72,7 +72,7 @@
             <%= f.label :user_group_id, '权限组', :class => "label col col-2" %>
             <div class="col col-10">
               <label class="input">
-                <%= f.collection_select(:sale_channel_id,  SaleChannel.all, :id, :name, { :prompt   => "选择渠道" }, { :class => 'form-control'}) %>
+                <%= f.collection_select(:sale_channel_id,  SaleChannel.all, :id, :name, {  }, { :class => 'form-control'}) %>
               </label>
             </div>
           </div>
