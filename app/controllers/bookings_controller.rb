@@ -31,8 +31,8 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
-    @booking.number_of_adults = 0
-    @booking.number_of_children = 0
+    #@booking.number_of_adults = 0
+    #@booking.number_of_children = 0
     if params[:price_id].present?
       @booking.price_id = params[:price_id]
       @sales = current_user.sales #Account.get_sales(params[:price_id], current_user.id)
@@ -50,6 +50,9 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.agent = current_user
+
+    @booking.number_of_adults = 0 if params[:booking][:number_of_adults].blank?
+    @booking.number_of_children = 0 if params[:booking][:number_of_children].blank?
     # 直客报名
     @booking.sale = Account.find_by_id(GLOBAL["default_retail_sale_id"]) if params[:booking][:sale_id].nil?
     @booking.progress = "未处理"

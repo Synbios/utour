@@ -29,8 +29,6 @@
 <% cwheel = ['#f55233', '#fa791b', '#fbd72f', '#9fd05d', '#4ab35a', '#4fbdd6', '#c949a8'] %>
 <div class="container" style="max-width: 600px">
 
-  <label for="mydate">Some Date</label>
-
 
 
   <h3 class="text-center" style="line-height: 40px;);">点击右上 <i class="fa fa-bars"></i> 查询</h3>
@@ -197,7 +195,7 @@
           <%= f.label :number_of_adults, '成人数', :class => "col-xs-3 col-sm-3 control-label" %>
 
           <div class="col-xs-9 col-sm-8">
-            <%= f.number_field :number_of_adults, :class => "form-control", :value => "0" %>
+            <%= f.number_field :number_of_adults, :class => "form-control" %>
           </div>
         </div>
 
@@ -205,7 +203,7 @@
           <%= f.label :number_of_children, '儿童数', :class => "col-xs-3 col-sm-3 control-label" %>
 
           <div class="col-xs-9 col-sm-8">
-            <%= f.number_field :number_of_children, :class => "form-control", :value => "0" %>
+            <%= f.number_field :number_of_children, :class => "form-control" %>
           </div>
         </div>
 
