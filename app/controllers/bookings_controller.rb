@@ -54,7 +54,8 @@ class BookingsController < ApplicationController
     @booking.number_of_adults = 0 if params[:booking][:number_of_adults].blank?
     @booking.number_of_children = 0 if params[:booking][:number_of_children].blank?
     # 直客报名
-    @booking.sale = Account.find_by_id(GLOBAL["default_retail_sale_id"]) if params[:booking][:sale_id].nil?
+    #@booking.sale = Account.find_by_id(GLOBAL["default_retail_sale_id"]) if params[:booking][:sale_id].nil?
+    @booking.sale = 1 if params[:booking][:sale_id].blank?
     @booking.progress = "未处理"
     @booking.confirmed_seats = 0
     respond_to do |format|
