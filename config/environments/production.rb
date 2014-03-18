@@ -63,7 +63,24 @@ Utour::Application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = false
+  # ActionMailer 163 config
+  ActionMailer::Base.delivery_method = :smtp  
+  config.action_mailer.perform_deliveries = true  
+  #config.action_mailer.raise_delivery_errors = true  
+  config.action_mailer.default :charset => "utf-8"  
+  config.action_mailer.default_url_options = { :host => '115.28.235.18' }  
+  ActionMailer::Base.smtp_settings = {    
+    address: "smtp.163.com",  
+    port: 465,  
+    domain: "163.com",   
+    user_name: "utouradmin@163.com",  
+    password: "uxpm6eap",
+    ssl: true,
+    authentication: 'login',
+    openssl_verify_mode: 'none',
+    enable_starttls_auto: true
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).

@@ -61,7 +61,11 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.save
         # WexchatMailer.booking_notice(@booking.account)
-        WexchatMailer.booking_notice_staff(@booking.agent, @booking.sale, @booking).deliver
+        begin
+          WexchatMailer.booking_notice_staff(@booking.agent, @booking.sale, @booking).deliver
+        else  
+        end
+        
         format.html { redirect_to bookings_path, notice: '预订成功' }
         format.js { render :status => :created, :location => @booking, :layout => false }
       else
