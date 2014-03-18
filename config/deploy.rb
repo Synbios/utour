@@ -23,7 +23,7 @@ set :rails_env, "production"
 set :asset_env, "RAILS_GROUPS=assets DATABASE_URL=mysql2://user:root@127.0.0.1/."
 set :deploy_via, :copy
 # set :deploy_via, :remote_cache
-set :keep_releases, 1
+set :keep_releases, 3
 
 # SSH options
 ssh_options[:forward_agent] = true
