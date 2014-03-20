@@ -19,3 +19,4 @@
 /config/database.yml
 .DS_Store
 /public/system
+/wx1.0

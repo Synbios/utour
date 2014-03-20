@@ -177,4 +177,34 @@ EOF
     end
   end
 
+
+  desc "Fetch user data from weixin 1.0 and deposit to local database"
+  task fetch_old_weixin: :environment do
+    (1 .. 32 ).each do |i|
+      page = Nokogiri::HTML(open("wx1.0/#{i}.html"))
+      page.encoding = 'utf-8'
+      if !page.class.to_s.include? "HTML::Document"
+        puts "ERROR: API returned index page cannot be recognized (#{page.class})"
+        return
+      end
+
+      # 根据列表分别获取XML文档
+      rows = page.css(".dd_list tr")
+      details = rows.collect do |row|
+        detail = {}
+        [
+          [:name, 'td[2]/text()'],
+          [:group, 'td[3]/text()'],
+          [:phone, 'td[4]/text()']
+        ].each do |name, xpath|
+          detail[name] = row.at_xpath(xpath).to_s.strip
+        end
+        detail
+      end
+      details.each do |detail|
+        next if detail[:group] != "vip"
+        puts detail
+      end
+    end
+  end
 end
