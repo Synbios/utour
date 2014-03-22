@@ -1,4 +1,4 @@
-// Smart Notification (bootstraphunter.com)
+// Smart Notification 
 
 $(document).ready(function () {
 

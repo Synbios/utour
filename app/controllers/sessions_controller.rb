@@ -7,7 +7,11 @@ class SessionsController < ApplicationController
     # elsif params[:user_class] == "staff"
     #   render 'sessions/new/staff'
     # end
-    render 'sessions/new' # 同业和直客通用同一登录界面
+    if current_user.present?
+      redirect_to root_path 
+    else
+      render 'sessions/new' # 同业和直客通用同一登录界面
+    end
   end
 
   def create

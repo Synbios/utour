@@ -22,30 +22,36 @@
 
     <% @tours.each do |tour| %>
     <%# 标题 %>
-    <table data-toggle="collapse" data-target="#<%= tour.object_id %>">
-      <tr>
-        <td>
+    <ul class="media-list">
+      <li class="media">
+        <a class="pull-left" href="#<%= tour.object_id %>" data-toggle="collapse">
           <% if tour.cover_img.nil? %>
-          <%= image_tag "default_tour_icon.png", class: "tour_icon" %>
+          <%= image_tag "default_tour_icon.png", class: "media-object tour_icon" %>
           <% else %>
-          <%= image_tag tour.cover_img.photo.url(:thumb), class: "tour_icon" %>
+          <%= image_tag tour.cover_img.photo.url(:thumb), class: "media-object tour_icon" %>
           <% end %>
-        </td>
-        <td class="tour_title">
-          <h4><%= tour.name %><br/><small>
-            <%= tour.bookings.where("bookings.agent_id = ?", current_user.id ).select("departures.id").uniq.count %>个出发日期 - 
-            <%= tour.bookings.where("bookings.agent_id = ?", current_user.id ).count %>个预订
-          </small></h4>
+        </a>
+        <div class="media-body">
+          <a href="#<%= tour.object_id %>" data-toggle="collapse" style="text-decoration: none; color: #000">
+            <h4 class="media-heading" style="padding: 0px">
+                      <%= tour.name %><br/>
+                      <small>
+                      <%= tour.bookings.where("bookings.agent_id = ?", current_user.id ).select("departures.id").uniq.count %>个出发日期 - 
+                      <%= tour.bookings.where("bookings.agent_id = ?", current_user.id ).count %>个预订
+                      </small>
+                    </h4>
+          </a>
+        </div>
+      </li>
+    </ul>
 
-        </td>
-      </tr>
-    </table>
+
 
     <%# 预订内容 %>
     <div id="<%= tour.object_id %>" class="booking_control_div collapse">
-    
-    <% @bookings.each do |booking| %>
-    <% if booking.price.departure.tour.id == tour.id %>
+
+      <% @bookings.each do |booking| %>
+      <% if booking.price.departure.tour.id == tour.id %>
       
       <div class="booking_detail row">
         <div class="col-xs-4">
@@ -78,123 +84,123 @@
           <% end %>
         </div>
       </div>
-    <% end %>
-    <% end %>
+      <% end %>
+      <% end %>
     </div>
     <% end # tour loop %>
     <% end # end if %>
- 
 
-  <% if @bookings.present? %>
-  <% @bookings.each do |booking| %>
-  <!-- Modal -->
-  <div class="modal fade" id="<%= booking.id %>_modal" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="modal_label" style="text-align: center">订单信息</h4>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>订单号</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8"># <%= booking.id %></div>
-          </div>
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>提交日期</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.created_at.strftime("%Y-%m-%d") %></div>
-          </div>
 
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>团队编号</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.price.departure.tour.id %></div>
+    <% if @bookings.present? %>
+    <% @bookings.each do |booking| %>
+    <!-- Modal -->
+    <div class="modal fade" id="<%= booking.id %>_modal" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="modal_label" style="text-align: center">订单信息</h4>
           </div>
-
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>团队名称</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.price.departure.tour.name %></div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>出发日期</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.price.departure.date.strftime("%Y-%m-%d") %></div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>参考价格</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8">
-              <span class="label label-primary"><i class="fa fa-rmb"></i> <%= booking.price.price %>/人</span>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>订单号</strong></div>
+              <div class="col-xs-8 col-sm-8 col-md-8"># <%= booking.id %></div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>申请人数</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8">
-              <%= booking.number_of_adults %>大人 + <%= booking.number_of_children %>小孩
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>提交日期</strong></div>
+              <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.created_at.strftime("%Y-%m-%d") %></div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>备注</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8">
-              <% if booking.comment.present? && !booking.comment.blank? %>
-              <%= booking.comment %>
-              <% else %>
-              <em>无备注</em>
-              <% end %>
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>团队编号</strong></div>
+              <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.price.departure.tour.id %></div>
             </div>
-          </div>
-          <br/>
 
-          <div class="alert alert-danger">
-            <h4><i class="fa fa-exclamation-triangle"></i> 注意: 订单只代表申请占位成功，请等待销售与您联系，须缴定金以确认留位。</h4>
-          </div>
-
-          <hr/>
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>订单状态</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8">
-              <%= booking.progress %>
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>团队名称</strong></div>
+              <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.price.departure.tour.name %></div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>回复</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8">
-              <% if booking.response.present? && !booking.response.blank? %>
-              <span style="color: red"><%= booking.response %></span>
-              <% else %>
-              <em>暂无回复</em>
-              <% end %>
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>出发日期</strong></div>
+              <div class="col-xs-8 col-sm-8 col-md-8"><%= booking.price.departure.date.strftime("%Y-%m-%d") %></div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>出团通知</strong></div>
-            <div class="col-xs-8 col-sm-8 col-md-8">
-              <% if booking.price.departure.group_notice.url  != "missing" %>
-              <%= link_to "点击查看出团通知书", booking.price.departure.group_notice.url %>
-              <% elsif !booking.price.departure.erp_group_notice_url.blank? %>
-              <%= link_to "点击查看出团通知书", "#{booking.price.departure.erp_group_notice_url}" %>
-              <% else %>
-              <em>尚未发布</em>
-              <% end %>
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>参考价格</strong></div>
+              <div class="col-xs-8 col-sm-8 col-md-8">
+                <span class="label label-primary"><i class="fa fa-rmb"></i> <%= booking.price.price %>/人</span>
+              </div>
             </div>
-          </div>          
+
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>申请人数</strong></div>
+              <div class="col-xs-8 col-sm-8 col-md-8">
+                <%= booking.number_of_adults %>大人 + <%= booking.number_of_children %>小孩
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>备注</strong></div>
+              <div class="col-xs-8 col-sm-8 col-md-8">
+                <% if booking.comment.present? && !booking.comment.blank? %>
+                <%= booking.comment %>
+                <% else %>
+                <em>无备注</em>
+                <% end %>
+              </div>
+            </div>
+            <br/>
+
+            <div class="alert alert-danger">
+              <h4><i class="fa fa-exclamation-triangle"></i> 注意: 订单只代表申请占位成功，请等待销售与您联系，须缴定金以确认留位。</h4>
+            </div>
+
+            <hr/>
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>订单状态</strong></div>
+              <div class="col-xs-8 col-sm-8 col-md-8">
+                <%= booking.progress %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>回复</strong></div>
+              <div class="col-xs-8 col-sm-8 col-md-8">
+                <% if booking.response.present? && !booking.response.blank? %>
+                <span style="color: red"><%= booking.response %></span>
+                <% else %>
+                <em>暂无回复</em>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4" style="text-align: right"><strong>出团通知</strong></div>
+              <div class="col-xs-8 col-sm-8 col-md-8">
+                <% if booking.price.departure.group_notice.url  != "missing" %>
+                <%= link_to "点击查看出团通知书", booking.price.departure.group_notice.url %>
+                <% elsif !booking.price.departure.erp_group_notice_url.blank? %>
+                <%= link_to "点击查看出团通知书", "#{booking.price.departure.erp_group_notice_url}" %>
+                <% else %>
+                <em>尚未发布</em>
+                <% end %>
+              </div>
+            </div>          
 
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">了解</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  <% end %>
-  <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">了解</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <% end %>
+    <% end %>
 
-  <div style="margin: 30px auto 10px auto; text-align: center"><%= link_to "返回主页", root_path, class: "btn btn-sm btn-default" %></div>
-  
-</div>
+    <div style="margin: 30px auto 10px auto; text-align: center"><%= link_to "返回主页", root_path, class: "btn btn-sm btn-default" %></div>
+
+  </div>
 
 

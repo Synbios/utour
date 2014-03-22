@@ -7,9 +7,6 @@
  \______|    \/                    \/
 
  Copyright 2013 - SmartAdmin Template
-
- * This script is part of an item on wrapbootstrap.com
- * https://wrapbootstrap.com/user/myorange
  *
  * Date 	 : Jan 2014
  * Updated	 : 12/12/2013
@@ -18,7 +15,7 @@
  * ************************************************************* *
  *
  * Jarvis Widgets (AKA Power Widgets), is originally created by
- * Mark (www.creativemilk.net) and Sunny (bootstraphunter.com).
+ * Mark and Sunny.
  * This script may NOT be RESOLD or REDISTRUBUTED under any
  * circumstances, and is only to be used with this purchased
  * copy of SmartAdmin Template.
