@@ -75,3 +75,5 @@ group :development do
   gem 'capistrano'
   gem 'rvm-capistrano'
 end
+
+gem 'awesome_print', '~> 1.2.0'

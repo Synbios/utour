@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="description" content="example">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>EXAMPLE</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container" style="max-width: 800px">
+    <h2 class="text-center">微信前端界面代码说明 v0.1 </h2>
+
+    <h3>两侧水平滑动目录UI</h3>
+    <p>插件出处: <a href="http://plugins.adchsm.me/slidebars/">http://plugins.adchsm.me/slidebars</a></p>
+    <p>源文件地址: vendor/assets/stylesheets/slidebars.css 和 vendor/assets/javascripts/slidebars.min.js</p>
+    <p>使用方法如下:</p>
+    <ol>
+      <li>html文件头加入 meta viewport 设定</li>
+      <li>主页内容放在#sb-site里面</li>
+      <li>目录内容放在.sb-slidebar里面</li>
+      <li>用.sb-left和.sb-right区分左右目录</li>
+      <li>添加打开/关闭目录的控制键（.sb-toggle-left 和 .sb-toggle-right）</li>
+      <li>添加jquery, sidebars.css和sidebars.min.js（以及front30.css.scss）</li>
+      <li>javascript call $.slidebars()</li>
+    </ol>
+    <pre>
+      &lt;!doctype html&gt;
+      &lt;html&gt;
+      &lt;head&gt;
+      &lt;title&gt;标题&lt;/title&gt;
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;
+
+      &lt;!-- 引入 CSS --&gt;
+      &lt;link rel="stylesheet" href="path/to/slidebars.min.css"&gt;
+      &lt;/head&gt;
+
+      &lt;body&gt;
+      &lt;div id="sb-site"&gt;
+      &lt;!-- 主页内容 --&gt;
+      &lt;/div&gt;
+
+      &lt;div class="sb-slidebar sb-left"&gt;
+      &lt;!-- 左目录 --&gt;
+      &lt;/div&gt;
+
+      &lt;div class="sb-slidebar sb-right"&gt;
+      &lt;!-- 右目录 --&gt;
+      &lt;/div&gt;
+
+      &lt;!-- 引入 jQuery --&gt;
+      &lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"&gt;&lt;/script&gt;
+
+      &lt;!-- 引入 js --&gt;
+      &lt;script src="path/to/slidebars.min.js"&gt;&lt;/script&gt;
+      &lt;script&gt;
+      (function($) {
+      $(document).ready(function() {
+      $.slidebars();
+    });
+  }) (jQuery);
+  &lt;/script&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+
+</pre>
+<p class="alert alert-warning">注意: 手机页面左右角按钮的css在app/assets/front30.css.scss里面</p>
+<h3>前端黑底糖果框架</h3>
+<p>本界面以bootstrap和jquery为基础整合了多个js插件,其中css的代码在app/assets/stylesheets/flatMania-css里面, js代码在app/assets/javascripts/flatMania-js. 建议把他们全部添加。由于这些jquery插件的功能比较复而这里就不单独介绍，具体说明请google检索各自的帮助文件。这里主要对几个使用了的界面做说明。</p>
+<h4>关于方块拼图的说明</h4>
+<p>方块拼图主要用于首页, 所对应的‘静态’文件是app/views/front30/home.html.erb. （erb文件是嵌入代码的html文件). 方块分为文字和图片和幻灯片。排版使用bootstrap默认的12个格子（cell）为一行(row)的手机、平板、网页一体式<a href="http://v3.bootcss.com/css/#grid">栅格模型</a>。其中文字方块的格式如下：</p>
+
+<pre>
+
+  &lt;!-- 外框 --&gt;
+  &lt;div class="box box-md br-green animated"&gt;
+  &lt;!-- 鼠标进入方格后出现的半透明罩 --&gt;
+  &lt;div class="box-hover box-hover-black"&gt;
+  &lt;!-- 半透明罩上德图标 --&gt;
+  &lt;span class="hover-icon"&gt;进入&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;!-- 点击后的链接 --&gt;
+  &lt;a href="/front30/group"&gt;
+  &lt;!-- 链接内容 --&gt;
+  &lt;div class="box-content navigation"&gt;
+  &lt;!-- 方格上的图标 --&gt;
+  &lt;i class="fa fa-users fa-5x"&gt;&lt;/i&gt;
+  &lt;!-- 方格上德文字标签 --&gt;
+  &lt;span class="box-title" style="font-size: 33px"&gt;跟团游&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;/a&gt;
+  &lt;/div&gt;  
+</pre>
+
+<p class="alert alert-info">说明: 方块目前默认两种大小即中号(box-md)和大号(box-lg),大号的宽度是小号的2倍数。当然你也可以通过width和height手动改变方块的长宽。</p>
+<p class="alert alert-info">说明: 方块有几种默认颜色分别是 br-white br-black br-green br-red br-yellow br-blue br-brown br-lblue br-pink。其他颜色可以用background-color设定。</p>
+<p>图片方块于文字方块相似，只是内容略有不同</p>
+
+<pre>
+  &lt;!-- 外框 --&gt;
+  &lt;div class="box box-md animated"&gt;
+    &lt;div class="box-content box-gallery padd-zero"&gt;
+      &lt;!-- 图片所带链接 --&gt;
+      &lt;a href="http://erp.utourworld.com/admin/ba/visa/visaSearchMobile.asp"&gt;
+        &lt;!-- 链接内容（和文字方格中得图标，标题类似） --&gt;
+        &lt;div class="box-content navigation"&gt;
+
+          &lt;!-- 标题 --&gt;
+          &lt;span class="box-title" style="font-size: 33px"&gt;签证&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/a&gt;
+      &lt;!-- 背景图片 --&gt;
+      &lt;img src="/images/front30_2.jpg" class="img-responsive box-gallery-img" alt="" /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</pre>
+
+<p>幻灯片使用<a href="http://www.themepunch.com/codecanyon/revolution_wp/">revolution slider</a>插件,只是动态广告文字和多种切换效果, 但鉴于手机屏幕大小目前只是当成一般幻灯片插件使用。</p>
+
+<pre>
+  &lt;ul&gt;
+     &lt;!-- 一张幻灯片开头默认时间设置  --&gt;
+     &lt;li data-transition="zoomout" data-slotamount="7" data-masterspeed="500" &gt;
+      &lt;!-- 图片 --&gt;
+      &lt;img src="/images/slide1.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat"&gt;
+&lt;div class="tp-caption sfb"
+  data-x="50"
+  data-y="350"
+  data-speed="1500"
+  data-start="600"
+  data-easing="Power4.easeOut"
+  data-endspeed="300"
+  data-endeasing="Linear.easeNone"
+  data-captionhidden="off"&gt;&lt;a href="/landing_page?page=slide1_page.jpg&routid=30230" class="btn btn-info  btn-circle" style="width: 300px; line-height: 50px; font-size: 48px"&gt; 点我进入&lt;/a&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p class="alert alert-info">说明: 幻灯片以一般表单形成，由于revolution slider设置复杂建议更改时直接替换图片链接即可。</p>
+<h3>前端动态目录js插件(isotope)</h3>
+<p>该插件用于跟团游对团队的过滤。其中地点标签的过滤用的是<a href="http://isotope.metafizzy.co/">isotope</a> (代码地址: public/javascripts/jquery.isotope.min) 日期的过滤用的javascript在页面内（app/views/front30/group.html.erb）, 日历插件的代码在public/javascripts/bootstrap-datepicker.js, public/javascripts/bootstrap-datepicker.zh-CN.js 和public/stylesheets/datepicker3.css</p>
+<p>基本步骤</p>
+<ol>
+<li>引入上述的js文件</li>
+<li>入下图用javascript激活</li>
+</ol>
+
+<pre>
+&lt;div id="container"&gt; # 盒子
+  &lt;div class="item"&gt;...&lt;/div&gt; # 物品标签
+  &lt;div class="item"&gt;...&lt;/div&gt; # 物品标签
+  &lt;div class="item"&gt;...&lt;/div&gt; @ 物品标签
+  ...
+&lt;/div&gt;
+
+js激活代码
+
+$('#container').isotope({
+  // options
+  itemSelector : '.item', // 效果应用于该标签
+  layoutMode : 'straightDown' // 布局样式
+});
+</pre>
+
+<p class="alert alert-info">注意: isotope提供几种<a href="http://isotope.metafizzy.co/docs/layout-modes.html">布局方式</a>, 我们使用的是straightDown</p>
+
+<p>通过javascript可以实现过滤功能</p>
+<pre>
+&lt;div id="container"&gt;
+  &lt;div class="element a b"&gt;只显示a&lt;/div&gt; # 添加标签 a b
+  ...
+&lt;/div&gt;
+
+..
+
+// 过滤（只显示） 'a'
+$('#container').isotope({ filter: '.a' }); // 过滤后只剩下标签a的物品
+
+</pre>
+<p class="alert alert-info">说明: 其他功能请参考官网</p>
+<h3>前端白底色调框架</h3>
+<p>模板用于联系我们页面, 为单一的bootstrap + jquery模板。 使用方法请参见<a href="http://www.bootcss.com/">bootstrap中文版</a></p>
+
+
+<br/>
+<br/>
+<p class="text-center">2014年4月24日</p>
+</div>
+
+</body>
+</html>
