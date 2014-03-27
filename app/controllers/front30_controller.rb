@@ -29,7 +29,7 @@ class Front30Controller < ApplicationController
   # 特价专区
   def onsale
     # 过滤过期团队
-    @tours = Tour.where("expire_date > ? AND departure_city = ? AND tour_type LIKE '%特价%' ", Time.now, GLOBAL["departure_city"])
+    @tours = Tour.where("expire_date > ? AND sale_channel_id = ? AND tour_type LIKE '%特价%' ", Time.now, SaleChannel.find_by_name('商店').id)
 
     # 过滤无权限浏览的团队
     @tours = @tours.select {|tour| tour.sale_channel_id == @sale_channel_id || SaleChannelMap.where(up_id: tour.sale_channel_id, down_id: @sale_channel_id).count > 0 } if @sale_channel_id.present?
@@ -46,7 +46,7 @@ class Front30Controller < ApplicationController
 
   def group
     # 过滤过期团队
-    @tours = Tour.where("expire_date > ? AND departure_city = ? AND tour_type LIKE '%跟团游%' ", Time.now, GLOBAL["departure_city"])
+    @tours = Tour.where("expire_date > ? AND sale_channel_id = ? AND tour_type LIKE '%跟团游%' ", Time.now, SaleChannel.find_by_name('商店').id)
 
     # 过滤无权限浏览的团队
     @tours = @tours.select {|tour| tour.sale_channel_id == @sale_channel_id || SaleChannelMap.where(up_id: tour.sale_channel_id, down_id: @sale_channel_id).count > 0 } if @sale_channel_id.present?
@@ -55,7 +55,7 @@ class Front30Controller < ApplicationController
 
   def free
     # 过滤过期团队
-    @tours = Tour.where("expire_date > ? AND departure_city = ? AND tour_type LIKE '%自由行%' ", Time.now, GLOBAL["departure_city"])
+    @tours = Tour.where("expire_date > ? AND sale_channel_id = ? AND tour_type LIKE '%自由行%' ", Time.now, SaleChannel.find_by_name('商店').id)
 
     # 过滤无权限浏览的团队
     @tours = @tours.select {|tour| tour.sale_channel_id == @sale_channel_id || SaleChannelMap.where(up_id: tour.sale_channel_id, down_id: @sale_channel_id).count > 0 } if @sale_channel_id.present?

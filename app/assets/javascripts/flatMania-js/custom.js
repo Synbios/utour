@@ -7,7 +7,7 @@ $(document).ready(function(){
 	// Boxes Animation
 	$('.box').waypoint(function(down){
 		$(this).addClass('animation');
-		$(this).addClass('fadeInUp');
+		//$(this).addClass('fadeInUp');
 	}, { offset: '100%' });
 	
 	// Counter For Services Box

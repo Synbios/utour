@@ -69,7 +69,13 @@ namespace :erp do
         tour.erp_features = tour_xml.xpath('./features').to_xml
 
         tour.account = Account.find_by_email("youz@ualberta.ca")
-        tour.sale_channel = SaleChannel.find_by_name("微分销")
+        if tour.sale_channel.blank?
+          if GLOBAL["departure_cities"].include? tour.departure_city 
+            tour.sale_channel = SaleChannel.find_by_name("商店")
+          else
+            tour.sale_channel = SaleChannel.find_by_name("仓库")
+          end
+        end
         puts "Updating tour id = #{tour.id} tourid = #{tour.identifier} name = #{tour.name}"
         tour.save
         
@@ -111,7 +117,9 @@ EOF
           departure.visa_status = "未送签" if departure.visa_status.blank?
           departure.expire_date = tour.expire_date
           departure.number_of_seats = 9 #if departure.number_of_seats.blank?
-          departure.sale_channel = SaleChannel.find_by_name("微分销") #if departure.sale_channel_id.blank?
+          if departure.sale_channel.blank?
+            departure.sale_channel = tour.sale_channel #if departure.sale_channel_id.blank?
+          end
           departure.account = Account.find_by_email("youz@ualberta.ca")
 
 
@@ -125,7 +133,9 @@ EOF
               agent_price.departure = departure
               agent_price.kind = "同业"
             end
-            agent_price.sale_channel = SaleChannel.find_by_name("会员渠道") #if price.sale_channel_id.blank?
+            if agent_price.sale_channel.blank?
+              agent_price.sale_channel = departure.sale_channel #if price.sale_channel_id.blank?
+            end
             agent_price.price = price_node["agentPrice"]
             agent_price.account = Account.find_by_email("youz@ualberta.ca") #if price.account_id.blank?
             agent_price.expire_date = departure.expire_date
@@ -138,7 +148,10 @@ EOF
               retail_price.departure = departure
               retail_price.kind = "直客"
             end
-            retail_price.sale_channel = SaleChannel.find_by_name("微分销") #if price.sale_channel_id.blank?
+
+            if retail_price.sale_channel.blank?
+              retail_price.sale_channel = departure.sale_channel #if price.sale_channel_id.blank?
+            end
             retail_price.price = price_node["price"]
             retail_price.account = Account.find_by_email("youz@ualberta.ca") #if price.account_id.blank?
             retail_price.expire_date = departure.expire_date

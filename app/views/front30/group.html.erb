@@ -89,7 +89,7 @@
             <% booking_offer = special_offer if special_offer.present? %>
             <% next if booking_offer.nil? %>
             <div data-departure="<%= departure.date.strftime("%Y%m%d") %>" class="departure" style="width: 100%; clear:both;">
-              <h4 style="float: right; margin-top:0"><%= chinese_date(departure.date) %> <small><span class="text-danger"><%= GLOBAL["departure_city"]%></span>出发</small></h4>
+              <h4 style="float: right; margin-top:0"><%= chinese_date(departure.date) %> <small><span class="text-danger"><%= tour.departure_city %></span>出发</small></h4>
               
               <% if retail_offer.present? %>
               <h3 style="width: 50%"><small>微信</small> <strong class="text-primary" style="<%= "text-decoration:line-through" if retail_offer != booking_offer %>"><%= retail_offer.price %></strong> <small>元</small></h3>

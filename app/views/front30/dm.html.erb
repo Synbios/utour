@@ -1,256 +1,62 @@
 <% content_for :javascripts do %>
-<meta name="viewport" content="width=850">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <% end %>
-<div class="box-wrapper">
-  <div class="contain" style="margin:50px 15px">
 
-    <%# ROW 1 %>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="box box-lg br-black animated">
+<% content_for :nav_bar do %>
+<%= render "layouts/lion_nav" %>
+<% end %>
 
+<% content_for :left_links do %>
+<% render "left_links" %>
+<% end %>
 
-          <div class="box-content box-gallery padd-zero">
+<% content_for :right_sidebar do %>
+<%= render "layouts/lion_sidebar_right" %>
+<% end %>
 
-            <!-- Box Link -->
-            <%= link_to Image.where("image_type = ?", "非洲DM").first do %>
-              <!-- Box Link Content -->
-              <div class="box-content navigation">
-                <!-- Box Icon -->
+<div class="inner-page">
+  <div class="container">
 
-                <!-- Box Title -->
-                <span class="box-title" style="font-size: 50px">非洲同业计划</span>
-              </div>
-            <% end %>
-            <!-- Image -->
-            <img src="/images/front30_africa.jpg" class="img-responsive box-gallery-img" alt="" />
-          </div>
+    <div class="page-mainbar landing">
 
+      <div class="landing-content">
 
+        <div class="landing-logo">
 
-        </div> 
+          <%= image_tag "logoabout.png", style: "width: 160px; margin: 10px auto" %>
+        </div>
       </div>
+    </div>
 
-      <div class="col-md-6 col-sm-6">
-        <div class="row">
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <!-- Box Outer Layer [ Box 3 ] -->
-            <div class="box box-md animated" style="background-color: #e3a21a">
+    <div class="page-mainbar faq">
+      <h3>旅游攻略</h3>
+      <div class="faq-content">
 
-            </div>  
-          </div>
-
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <!-- Box Outer Layer [ Box 4 ] -->
-            <div class="box box-md animated" style="background-color: #da532c">
-
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading br-yellow">
+              <h4 class="panel-title">
+                <%= link_to Image.where("image_type = ?", "亚洲DM").first do %>           
+                  <h5 style="color: #fff"><i class="fa fa-angle-right"></i>&nbsp; 亚洲DM</h5>
+                <% end %>
+              </h4>
             </div>
           </div>
-        </div>
 
-      </div>
-    </div>
-
-    <%# ROW 2 %>
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-6">
-        <div class="row">
-          <!-- Box Outer Layer [ Box 5 ] -->
-          <div class="box box-lg br-black animated pull-up-sm">
-            <div class="box-content box-gallery padd-zero">
-            <!-- Box Link -->
-            <%= link_to Image.where("image_type = ?", "美洲DM").first do %>
-              <!-- Box Link Content -->
-              <div class="box-content navigation">
-                <!-- Box Icon -->
-
-                <!-- Box Title -->
-                <span class="box-title" style="font-size: 50px">美洲同业计划</span>
-              </div>
-            <% end %>
-            <!-- Image -->
-            <img src="/images/front30_america.jpg" class="img-responsive box-gallery-img" alt="" />
-          </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <%# ROW 3 %>
-    <div class="row">
-      <div class="col-md-3 col-sm-3">
-        <div class="row">
-          <!-- Box Outer Layer [ Box 7 ] -->
-          <div class="box box-md animated pull-up-sm" style="background-color: #99b433">
-
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-sm-3">
-        <!-- Box Outer Layer [ Box 8 ] -->
-        <div class="box box-md animated pull-up-sm" style="background-color: #e3a21a">
-
-        </div>
-      </div>
-
-    </div>
-
-    <%# ROW 4 %>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="box box-lg br-black animated">
-
-          <div class="box-content box-gallery padd-zero">
-
-            <!-- Box Link -->
-            <%= link_to Image.where("image_type = ?", "澳新DM").first do %>
-              <!-- Box Link Content -->
-              <div class="box-content navigation">
-                <!-- Box Icon -->
-
-                <!-- Box Title -->
-                <span class="box-title" style="font-size: 50px">澳新同业计划</span>
-              </div>
-            <% end %>
-            <!-- Image -->
-            <img src="/images/front30_austrilia.jpg" class="img-responsive box-gallery-img" alt="" />
-          </div>
-
-        </div> 
-      </div>
-
-      <div class="col-md-6 col-sm-6">
-        <div class="row">
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <!-- Box Outer Layer [ Box 3 ] -->
-            <div class="box box-md animated" style="background-color: #ffc40d">
-
-            </div>  
-          </div>
-
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <!-- Box Outer Layer [ Box 4 ] -->
-            <div class="box box-md animated" style="background-color: #2b5797">
-
+          <div class="panel panel-default">
+            <div class="panel-heading br-pink">
+              <h4 class="panel-title">                
+                <%= link_to Image.where("image_type = ?", "欧洲DM").first do %>           
+                  <h5 style="color: #fff"><i class="fa fa-angle-right"></i>&nbsp; 欧洲DM</h5>
+                <% end %>
+              </h4>
             </div>
           </div>
-        </div>
 
+
+     
+        </div>
       </div>
     </div>
-
-    <%# ROW 5 %>
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-6">
-        <div class="row">
-          <!-- Box Outer Layer [ Box 5 ] -->
-          <div class="box box-lg br-black animated pull-up-sm">
-
-            <div class="box-content box-gallery padd-zero">
-
-            <!-- Box Link -->
-            <%= link_to Image.where("image_type = ?", "欧洲DM").first do %>
-              <!-- Box Link Content -->
-              <div class="box-content navigation">
-                <!-- Box Icon -->
-
-                <!-- Box Title -->
-                <span class="box-title" style="font-size: 50px">欧洲同业计划</span>
-              </div>
-            <% end %>
-            <!-- Image -->
-            <img src="/images/front30_europe.jpg" class="img-responsive box-gallery-img" alt="" />
-          </div>
-
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <%# ROW 6 %>
-    <div class="row">
-      <div class="col-md-3 col-sm-3">
-        <div class="row">
-          <!-- Box Outer Layer [ Box 7 ] -->
-          <div class="box box-md animated pull-up-sm" style="background-color: #da532c">
-
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-sm-3">
-        <!-- Box Outer Layer [ Box 8 ] -->
-        <div class="box box-md animated pull-up-sm" style="background-color: #99b433">
-
-        </div>
-      </div>
-
-    </div>
-
-    <%# ROW 7 %>
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="box box-md animated" style="background-color: #ffc40d">
-
-        </div>
-
-      </div>
-
-      <div class="col-sm-6">
-        <div class="box box-lg br-black animated">
-          
-
-          <div class="box-content box-gallery padd-zero">
-
-            <!-- Box Link -->
-            <%= link_to Image.where("image_type = ?", "亚洲DM").first do %>
-              <!-- Box Link Content -->
-              <div class="box-content navigation">
-                <!-- Box Icon -->
-
-                <!-- Box Title -->
-                <span class="box-title" style="font-size: 50px">亚洲同业计划</span>
-              </div>
-            <% end %>
-            <!-- Image -->
-            <img src="/images/front30_asia.jpg" class="img-responsive box-gallery-img" alt="" />
-          </div>
-
-        </div> 
-      </div>
-
-      <div class="col-sm-3">
-        <div class="box box-md animated" style="background-color: #e3a21a">
-
-        </div>
-
-      </div>
-    </div>
-
-    <%# ROW 8 %>
-    <div class="row">
-      <div class="col-md-3 col-sm-3">
-        <div class="row">
-          <!-- Box Outer Layer [ Box 7 ] -->
-          <div class="box box-md animated pull-up-sm" style="background-color: #2b5797">
-
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-sm-3 col-sm-offset-6">
-        <!-- Box Outer Layer [ Box 8 ] -->
-        <div class="box box-md animated pull-up-sm" style="background-color: #99b433">
-
-        </div>
-      </div>
-
-    </div>
-    
-
   </div>
 </div>

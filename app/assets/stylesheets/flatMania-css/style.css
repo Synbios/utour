@@ -672,7 +672,7 @@ strong{
 }
 
 .box{
-	opacity: 0;
+	opacity: 1;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	animation-duration: 1s;
     animation-delay: 0s;
